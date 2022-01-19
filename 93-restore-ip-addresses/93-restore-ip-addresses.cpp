@@ -37,10 +37,7 @@ public:
         if(check(first) and check(second) and check(third) and check(fourth)==true)
         {
             temp.push_back("T");
-            temp.push_back(first);
-            temp.push_back(second);
-            temp.push_back(third);
-            temp.push_back(fourth);
+            temp.push_back(first + "." + second + "." + third + "." + fourth);
             return;
         }
         
@@ -63,10 +60,7 @@ public:
             vector<string>temp;
             isValid(s,i,j,k,temp);
             if(temp[0]=="T")
-            {
-                string curr = temp[1] + "." + temp[2] + "." + temp[3] + "." + temp[4];
-                ans.push_back(curr);
-            }
+                ans.push_back(temp[1]);
         } 
         
         return ans;
