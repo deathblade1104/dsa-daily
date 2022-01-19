@@ -6,9 +6,7 @@ public:
         
         if(s!="" and s.size()<4)
         {
-            if(s[0]=='0' and s.size()==1) return true;
-            
-            else if(s[0]=='0' and s.size()>1) return false;            
+            if(s[0]=='0' and s.size()>1) return false;        
             
             if (stoi(s)>=0 and stoi(s)<=255)  return true; 
             
