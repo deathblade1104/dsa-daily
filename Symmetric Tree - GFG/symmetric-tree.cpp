@@ -116,10 +116,8 @@ class Solution{
     }
     bool isSymmetric(struct Node* root)
     {
-	    // Code here
-	    
-	    if(root==NULL) return true;
-	    return get_ans(root->left,root->right);
+
+	    return get_ans(root,root);
     }
 };
 
