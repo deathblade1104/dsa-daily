@@ -107,7 +107,7 @@ class Solution{
     {
             if(r1==NULL and r2==NULL) return true;
             
-            if(r1!=NULL and r2!=NULL)
+            if(r1 and r2)
             return ((r1->data==r2->data) and get_ans(r1->left,r2->right)
             and get_ans(r1->right, r2->left));
             
@@ -119,8 +119,6 @@ class Solution{
 	    // Code here
 	    
 	    if(root==NULL) return true;
-	    
-	    
 	    return get_ans(root->left,root->right);
     }
 };
