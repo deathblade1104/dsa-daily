@@ -125,12 +125,14 @@ void get_ans(Node *root,int lvl,Node *par,int &a, int &b, pair<int,Node*>&pa,pai
     {
         pa.first=lvl;
         pa.second=par;
+        return;
     }
     
     if(root->data==b)
     {
         pb.first=lvl;
         pb.second=par;
+        return;
     }
     
     get_ans(root->left,lvl+1,root,a,b,pa,pb);
@@ -143,6 +145,10 @@ bool isCousins(Node *root, int a, int b)
 {
    //add code here.
    pair<int,Node*>pa,pb;
+   pa.first=pb.first=-1;
+   pa.second=pb.second=NULL;
+   
+   
    get_ans(root,0,NULL,a,b,pa,pb);
    
    if(pa.first==pb.first and pa.second!=pb.second)
