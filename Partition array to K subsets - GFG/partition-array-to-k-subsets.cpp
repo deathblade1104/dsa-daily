@@ -63,9 +63,7 @@ class Solution{
         int sum=0;
         for(int i=0;i<n;i++)
         sum+=a[i];
-        
-        sort(a,a+n);
-        
+
         if(k==1)
         return true;
         if(sum%k!=0 or k>n)
