@@ -48,20 +48,20 @@ class Solution
        if(root->data==n1 or root->data==n2)
        return root;
        
-       Node *left_ans= lca(root->left,n1,n2);
-       Node *right_ans = lca(root->right,n1,n2);
+       Node *l= lca(root->left,n1,n2);
+       Node *r=lca(root->right,n1,n2);
        
+       if(!l and !r)
+       return NULL;
        
-       if(left_ans and right_ans)
+       else if(l and r)
        return root;
        
-       else if(left_ans)
-       return left_ans;
+       else if(l)
+       return l;
        
-       else if(right_ans)
-       return right_ans;
-       
-       else return NULL;
+       else
+       return r;
     }
 };
 
