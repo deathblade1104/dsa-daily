@@ -113,8 +113,9 @@ class Solution
         queue<pair<Node*,int>>q;
         q.push({root,0});
         
-        map<int,int>mp;
+        unordered_map<int,int>mp;
         
+        int l=INT_MAX,r=INT_MIN;
         
         while(q.size()>0)
         {
@@ -127,6 +128,10 @@ class Solution
                 Node *curr=p.first;
                 int hd=p.second;
                 
+                l=min(l,hd);
+                r=max(r,hd);
+                
+                
                 if(mp.count(hd)==0)
                 mp[hd]=curr->data;
                 
@@ -138,8 +143,9 @@ class Solution
             }
         }
         
-        for(auto it :mp)
-        ans.push_back(it.second);
+        for(int i=l;i<=r;i++)
+            if(mp.count(i)==1)
+            ans.push_back(mp[i]);
         
         return ans;
         
