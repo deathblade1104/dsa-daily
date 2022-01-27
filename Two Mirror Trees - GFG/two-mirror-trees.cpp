@@ -94,13 +94,10 @@ class Solution
         if(a==NULL and b==NULL)
         return 1;
         
-        else if(!a and b)
-        return 0;
-        
-        else if(a and !b)
-        return 0;
-        
+        if(a and b)
         return ((a->data==b->data) and areMirror(a->left,b->right) and areMirror(a->right,b->left));
+        
+        else return 0;
     }
 
 };
