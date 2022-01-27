@@ -97,9 +97,6 @@ class Solution
     public:
     int get_sum(Node *root,bool &flag)
     {
-        if(root==NULL)
-        return 0;
-        
         if(root->left==NULL and root->right==NULL)
            return root->data;
       
