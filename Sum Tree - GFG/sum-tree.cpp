@@ -100,12 +100,9 @@ class Solution
         if(root==NULL)
         return 0;
         
-        
         if(root->left==NULL and root->right==NULL)
-        {
-            flag=true;
-            return root->data;
-        }
+           return root->data;
+      
         int l=0,r=0;
         
         if(root->left)
@@ -116,8 +113,6 @@ class Solution
         
         if((l+r)!=root->data)
         flag=false;
-        
-        else flag=true;
         
         return (root->data + l + r);
         
