@@ -111,7 +111,7 @@ int verticalWidth(Node* root)
     queue<pair<Node*,int>>q;
     q.push({root,0});
     
-    int l=INT_MAX,r=INT_MIN;
+    int l=0,r=0;
     
     while(q.size()>0)
     {
