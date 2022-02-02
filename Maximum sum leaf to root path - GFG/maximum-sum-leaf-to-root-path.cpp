@@ -93,7 +93,7 @@ class Solution{
     int maxPathSum(Node* root)
     {
         //code here
-        if(root==NULL) return 0;
+        if(!root) return 0;
         return root->data + max(maxPathSum(root->left), maxPathSum(root->right)); 
     }
 };
