@@ -90,20 +90,16 @@ Node* buildTree(string str) {
 
 class Solution{
     public:
-    int get_ans(Node *root)
+    int maxPathSum(Node* root)
     {
+        //code here
         if(root==NULL) return 0;
         
         if(!root->left and !root->right)
         return root->data;
         
         else
-        return root->data + max(get_ans(root->left), get_ans(root->right)); 
-    }
-    int maxPathSum(Node* root)
-    {
-        //code here
-        return get_ans(root);
+        return root->data + max(maxPathSum(root->left), maxPathSum(root->right)); 
     }
 };
 
