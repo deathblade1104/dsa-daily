@@ -166,9 +166,7 @@ public:
         //Your code here
         vector<int>lb,rb,leaves;
         get_ans(root,0,lb,rb,leaves);
-        
-        reverse(rb.begin(),rb.end());
-        
+
         vector<int>ans;
         
         for(int i=0;i<lb.size();i++)
@@ -178,7 +176,7 @@ public:
         for(int i=0;i<leaves.size();i++)
         ans.push_back(leaves[i]);
         
-        for(int i=0;i<rb.size();i++)
+        for(int i=rb.size()-1;i>=0;i--)
         ans.push_back(rb[i]);
         
         return ans;
