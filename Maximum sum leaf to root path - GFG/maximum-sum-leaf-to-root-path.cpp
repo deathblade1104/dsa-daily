@@ -94,11 +94,6 @@ class Solution{
     {
         //code here
         if(root==NULL) return 0;
-        
-        if(!root->left and !root->right)
-        return root->data;
-        
-        else
         return root->data + max(maxPathSum(root->left), maxPathSum(root->right)); 
     }
 };
