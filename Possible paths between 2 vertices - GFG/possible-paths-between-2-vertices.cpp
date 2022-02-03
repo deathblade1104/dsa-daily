@@ -8,14 +8,14 @@ class Solution {
     // Function to count paths between two vertices in a directed graph.
     void solve(vector<int>adj[],int &dest, vector<bool>&vis, int curr, int &count)
     {
-        if(curr==dest)
-        {
-           ++count;
-            return;
-        }
-        
         if(vis[curr] == true)
         return;
+        
+        if(curr==dest)
+        {
+           count++;
+            return;
+        }
         
         vis[curr]=true;
 
