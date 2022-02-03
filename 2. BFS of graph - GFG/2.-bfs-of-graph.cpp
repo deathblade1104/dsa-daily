@@ -12,12 +12,12 @@ class Solution {
         vector<bool>vis(V,false);
         queue<int>q;
         q.push(0);
+        vis[0]=true;
         
         while(q.size()!=0)
         {
             int curr=q.front();
             q.pop();
-            vis[curr]=true;
             ans.push_back(curr);
             
             for(auto x : adj[curr])
