@@ -123,11 +123,6 @@ class Solution
             curr->left=NULL;
             c=c->right;
         }
-        
-        c=head->right;
-        c->left=NULL;
-        delete(head);
-        
     }
 };
 
