@@ -107,7 +107,6 @@ class Solution
         Node *head= newNode(-1);
         Node *c=head;
         
-        
         while(st.size()>0)
         {
             Node* curr=st.top();
@@ -124,6 +123,10 @@ class Solution
             curr->left=NULL;
             c=c->right;
         }
+        
+        c=head->right;
+        c->left=NULL;
+        delete(head);
         
     }
 };
