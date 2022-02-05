@@ -30,14 +30,10 @@ class Solution{
     	while(i>=0 and j>0)
     	{
     	    if(A[i]==B[j])
-    	    {
-    	        j--;
-    	    }
-    	    
+    	      j--;
+    	   
     	    else
-    	    {
-    	        count++;
-    	    }
+    	      count++;
     	    
     	    i--;
     	}
