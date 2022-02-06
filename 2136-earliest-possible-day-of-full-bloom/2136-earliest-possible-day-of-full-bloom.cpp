@@ -1,14 +1,7 @@
 class Solution {
 public:
     
-    static bool mycomp(pair<int,int>a,pair<int,int>b)
-    {
-        if(a.first !=b.first)
-       return a.first>b.first;
-        
-        else 
-            return a.second<b.second;
-    }
+    
     
     int earliestFullBloom(vector<int>& pT, vector<int>& gT) {
          vector<pair<int,int>>v;
@@ -17,7 +10,7 @@ public:
             v.push_back({gT[i],pT[i]});            
         
         
-        sort(v.begin(),v.end(),mycomp);
+        sort(v.begin(),v.end(),greater<pair<int,int>>());
         
         int curr=0,ans=INT_MIN;
         
