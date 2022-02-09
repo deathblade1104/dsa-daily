@@ -31,11 +31,8 @@ public:
     {       
         mp[root->val-1]++;
         
-        if(!root->left and !root->right)
-        {
-            if(check(mp))
+        if(!root->left and !root->right and check(mp))
                 ans++;
-        }
         
        if(root->left)
         dfs(root->left,ans,mp);
