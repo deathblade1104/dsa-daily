@@ -1,56 +1,64 @@
 class Bitset {
 public:
-string s,rs;
-    int len,c=0;
+    string normal="",anti="";
+    int sz=0,co;
     Bitset(int size) {
-        for(int i =0; i<size; i++)
+        sz=size;
+        
+        for(int i=0;i<sz;i++)
         {
-            s += '0';
-            rs += '1';
+            normal+="0";
+            anti+="1";
         }
-        len = size;
-        c = 0;
+        co=0;
+        
     }
     
     void fix(int idx) {
-        if(s[idx] == '0')
-        c++;
-        
-        s[idx] = '1';
-        rs[idx] = '0';
+        if(idx<sz and normal[idx]!='1')
+        {
+            normal[idx]='1';
+            anti[idx]='0';
+            
+            co++;
+        }
         
     }
     
     void unfix(int idx) {
-        if(s[idx] == '1')
-        c--;
         
-        s[idx] = '0';
-        rs[idx] = '1';
-        
+        if(idx<sz and normal[idx]=='1')
+        {
+            normal[idx]='0';
+            anti[idx]='1';
+            
+            co--;
+        }
     }
     
     void flip() {
-        swap(s,rs);
-        c = len-c;
+        swap(normal,anti);  
+        
+        co=sz-co;
+        
     }
     
     bool all() {
-        return c == len;
+        
+        return(co==sz);
         
     }
     
     bool one() {
-        return c>=1;
+        return (co>=1);
     }
     
     int count() {
-        return c;
-        
+        return co;
     }
     
     string toString() {
-        return s;
+        return normal;
     }
 };
 
