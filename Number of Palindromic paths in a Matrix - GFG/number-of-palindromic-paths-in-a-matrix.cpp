@@ -35,9 +35,6 @@ class Solution {
         // Code here
         int n=matrix.size(),m=matrix[0].size();
         long long mod=1000000007;
-        
-        if(n==45 and m==78)
-        return 917094700;
 
         unordered_map<string,long long>mp;
         
