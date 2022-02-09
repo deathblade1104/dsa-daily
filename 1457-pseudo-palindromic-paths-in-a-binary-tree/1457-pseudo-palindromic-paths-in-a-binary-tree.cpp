@@ -19,10 +19,11 @@ public:
        for(int i=1;i<=9;i++)
        {
            if(mp[i]&1) odd++;
+           
+           if(odd>1)
+               return false;
        }
        
-       if(odd>1)
-           return false;
        return true;
    }
 
