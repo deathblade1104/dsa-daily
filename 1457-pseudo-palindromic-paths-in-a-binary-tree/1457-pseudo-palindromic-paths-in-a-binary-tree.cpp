@@ -16,7 +16,7 @@ public:
    {
        int odd=0;
        
-       for(int i=1;i<=9;i++)
+       for(int i=0;i<9;i++)
        {
            if(mp[i]&1) odd++;
            
@@ -32,7 +32,7 @@ public:
         if(!root)
             return;
         
-        mp[root->val]++;
+        mp[root->val-1]++;
         
         if(!root->left and !root->right)
         {
@@ -43,13 +43,13 @@ public:
         dfs(root->left,ans,mp);
         dfs(root->right,ans,mp);        
         
-        mp[root->val]--;
+        mp[root->val-1]--;
         return;
         
         
     }
     int pseudoPalindromicPaths (TreeNode* root) {
-        vector<int>mp(10,0);
+        vector<int>mp(9,0);
         int ans=0;
         
         dfs(root,ans,mp);
