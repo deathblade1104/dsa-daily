@@ -28,10 +28,7 @@ public:
    }
 
    void dfs(TreeNode *root, int &ans, vector<int>&mp)
-    {
-        if(!root)
-            return;
-        
+    {       
         mp[root->val-1]++;
         
         if(!root->left and !root->right)
@@ -40,7 +37,10 @@ public:
                 ans++;
         }
         
+       if(root->left)
         dfs(root->left,ans,mp);
+       
+       if(root->right)
         dfs(root->right,ans,mp);        
         
         mp[root->val-1]--;
