@@ -22,10 +22,10 @@ class Solution {
         if(mp.count(key)==1)
         return mp[key];
         
-        int op1=get_ans(r1+1,c1,r2-1,c2,n,m,mod,mat,mp);
-        int op2=get_ans(r1+1,c1,r2,c2-1,n,m,mod,mat,mp);
-        int op3=get_ans(r1,c1+1,r2-1,c2,n,m,mod,mat,mp);
-        int op4=get_ans(r1,c1+1,r2,c2-1,n,m,mod,mat,mp);
+        long long op1=get_ans(r1+1,c1,r2-1,c2,n,m,mod,mat,mp);
+        long long op2=get_ans(r1+1,c1,r2,c2-1,n,m,mod,mat,mp);
+        long long op3=get_ans(r1,c1+1,r2-1,c2,n,m,mod,mat,mp);
+        long long op4=get_ans(r1,c1+1,r2,c2-1,n,m,mod,mat,mp);
         
         mp[key]= ( (op1%mod) + (op2%mod) + (op3%mod) + (op4%mod))%mod;
         return mp[key];
