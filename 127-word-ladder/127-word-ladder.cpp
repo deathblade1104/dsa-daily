@@ -19,31 +19,27 @@ public:
                 string curr=q.front();
                 q.pop();
                 
-                for(int i=0;i<26;i++)
-                {   
-                    char x= (char)(i+97);
-                    for(int j=0;j<curr.size();j++)
+                for(int i=0;i<curr.size();i++)
+                {
+                    for(char j='a';j<='z';j++)
                     {
-                        string left = curr.substr(0,j);
-                        string right = curr.substr(j+1);
+                        string temp=curr;
+                        temp[i]=j;
                         
-                        left+=x;
-                        left+=right;
-                        
-                        if(left==endWord)
-                            return d+1;
-                        
-                        if(st.count(left)==1)
+                        if(temp.compare(curr)!=0)
                         {
-                                st.erase(left);
-                                q.push(left);
+                            if(temp==endWord)
+                                return d+1;
                             
+                            else if(st.count(temp)==1)
+                            {
+                                st.erase(temp);
+                                q.push(temp);
+                            }
                         }
-                                                
-                    }               
+                    }
                 }
-            }
-            
+            }            
             d++;
         }
         
