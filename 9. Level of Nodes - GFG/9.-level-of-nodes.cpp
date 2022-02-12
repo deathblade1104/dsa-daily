@@ -11,6 +11,8 @@ class Solution
 	//Function to find the level of node X.
 	int nodeLevel(int V, vector<int> adj[], int X) 
 	{
+	    if(X>=V)
+	    return -1;
 
 	    vector<bool>vis(V,false);
 	    queue<int>q;
