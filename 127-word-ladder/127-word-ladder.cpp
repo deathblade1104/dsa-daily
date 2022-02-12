@@ -9,8 +9,7 @@ public:
         queue<string>q;
         q.push(beginWord);
         
-        int d=1;
-        
+        int d=1;        
         while(q.size()>0)
         {
             int sz=q.size();
@@ -29,17 +28,16 @@ public:
                         string right = curr.substr(j+1);
                         
                         left+=x;
-                        left+=right;                        
+                        left+=right;
+                        
+                        if(left==endWord)
+                            return d+1;
+                        
                         if(st.count(left)==1)
                         {
-                            if(left==endWord)
-                                return d+1;
-                            
-                            else
-                            {
                                 st.erase(left);
                                 q.push(left);
-                            }
+                            
                         }
                                                 
                     }               
