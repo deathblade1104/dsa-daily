@@ -5,39 +5,32 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
 public:
-    void solve(int r, int c, int &n, int &m , int color, int newColor, vector<vector<int>>&image)
-    {
-        
-        if(r<0 or r>=n or c<0 or c>=m or image[r][c]!=color)
-        return;
-
-        // cout<<r<<" "<<c<<endl;
-        
-        image[r][c]=newColor;
-        
-        solve(r+1,c,n,m,color,newColor,image);
-        solve(r-1,c,n,m,color,newColor,image);
-        solve(r,c+1,n,m,color,newColor,image);
-        solve(r,c-1,n,m,color,newColor,image);
-
-        
-        return;
-        
-        
-    }
-    
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
-        // Code here 
+        // Code here
         
-        
-        int n=image.size(),m=image[0].size();
-        int color=image[sr][sc];
-        
-        if(color==newColor)
+        if(image[sr][sc]==newColor)
         return image;
         
+        int n=image.size(),m=image[0].size(),i=image[sr][sc];
+        queue<pair<int,int>>q;
+        q.push({sr,sc});
         
-        solve(sr,sc,n,m,color,newColor,image);
+        while(q.size()!=0)
+        {
+            pair<int,int>p=q.front();q.pop();
+            
+            int r=p.first,c=p.second;
+            
+            if(r<0 or r>=n or c<0 or c>=m or image[r][c]!=i)
+            continue;
+            
+            image[r][c]=newColor;
+            
+            q.push({r+1,c});
+            q.push({r-1,c});
+            q.push({r,c+1});
+            q.push({r,c-1});
+        }
         
         return image;
     }
