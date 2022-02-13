@@ -29,15 +29,10 @@ public:
                 ans=min(ans,removal);
                 
                 smaller_sum=p_sum;
-                p_sum+=((1LL) *nums[i]);
-                sum-=((1LL) *nums[i]);
             }
-            
-            else
-            {
-                p_sum+=((1LL) *nums[i]);
-                sum-=((1LL) *nums[i]);
-            }            
+
+            p_sum+=((1LL) *nums[i]);
+            sum-=((1LL) *nums[i]);                     
         }
         
         ans=min(ans,smaller_sum);        
