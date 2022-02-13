@@ -40,12 +40,7 @@ public:
             }            
         }
         
-
-        // cout<<nums[nums.size()-1]<<" "<<smaller_sum<<endl;
         ans=min(ans,smaller_sum);        
-        
-        if(ans==99999999999999)
-            return 0;
         
         return ans;
         
