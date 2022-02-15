@@ -6,18 +6,18 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in a directed graph.
-    bool DFS(int curr, vector<int>adj[], vector<bool>&vis, unordered_set<int>&anc)
+    bool DFS(int curr, vector<int>adj[], vector<bool>&vis, vector<bool>&anc)
     {
         if(vis[curr])
         {
-            if(anc.count(curr)==1)
+            if(anc[curr])
             return true;
             
             return false;
         }
         
         vis[curr]=true;
-        anc.insert(curr);
+        anc[curr]=true;
         
         for(auto x:adj[curr])
         {
@@ -25,13 +25,13 @@ class Solution {
             return true;
         }
         
-        anc.erase(curr);
+        anc[curr]=false;
         return false;
     }
     bool isCyclic(int V, vector<int> adj[]) {
         // code here
         vector<bool>vis(V,false);
-        unordered_set<int>anc;
+        vector<bool>anc(V,false);
         for(int i=0;i<V;i++)
         {
             if((!vis[i]) and (DFS(i,adj,vis,anc)))
