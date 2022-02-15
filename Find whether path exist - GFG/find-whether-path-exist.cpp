@@ -29,7 +29,7 @@ class Solution
     bool is_Possible(vector<vector<int>>& grid) 
     {
         //code here
-        int sr=0,sc=0,n=grid.size(),m=grid[0].size();
+        int sr=-1,sc=-1,n=grid.size(),m=grid[0].size();
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
@@ -41,6 +41,8 @@ class Solution
                     break;
                 }
             }
+            if(sr!=-1 and sc!=-1)
+            break;
         }
         
     return dfs(grid,sr,sc,n,m);
