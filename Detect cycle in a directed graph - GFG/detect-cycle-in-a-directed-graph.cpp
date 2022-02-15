@@ -34,11 +34,8 @@ class Solution {
         unordered_set<int>anc;
         for(int i=0;i<V;i++)
         {
-            if(!vis[i])
-            {
-                if(DFS(i,adj,vis,anc))
+            if((!vis[i]) and (DFS(i,adj,vis,anc)))
                 return true;
-            }
         }
         
         return false;
