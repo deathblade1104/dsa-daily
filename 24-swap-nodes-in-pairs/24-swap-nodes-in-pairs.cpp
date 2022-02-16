@@ -16,8 +16,7 @@ public:
             return head;
         
         ListNode *temp=head->next;
-        ListNode *nxt= temp->next;
-        head->next=get_ans(nxt);
+        head->next=get_ans(temp->next);
         temp->next=head;
         return temp;
     }
