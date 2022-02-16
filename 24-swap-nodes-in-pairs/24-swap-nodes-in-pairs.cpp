@@ -10,18 +10,15 @@
  */
 class Solution {
 public:
-    ListNode* get_ans(ListNode *head)
-    {
+    
+    ListNode* swapPairs(ListNode* head) {
         if(!head or !head->next)
             return head;
         
         ListNode *temp=head->next;
-        head->next=get_ans(temp->next);
+        head->next=swapPairs(temp->next);
         temp->next=head;
         return temp;
-    }
-    ListNode* swapPairs(ListNode* head) {
-        return get_ans(head);
         
     }
 };
