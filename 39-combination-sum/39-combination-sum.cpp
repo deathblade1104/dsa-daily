@@ -1,22 +1,43 @@
 class Solution {
 public:
-        std::vector<std::vector<int> > combinationSum(std::vector<int> &candidates, int target) {
-        std::sort(candidates.begin(), candidates.end());
-        std::vector<std::vector<int> > res;
-        std::vector<int> combination;
-        combinationSum(candidates, target, res, combination, 0);
-        return res;
-    }
-private:
-    void combinationSum(std::vector<int> &candidates, int target, std::vector<std::vector<int> > &res, std::vector<int> &combination, int begin) {
-        if (!target) {
-            res.push_back(combination);
+    void get_ans(int curr, int&n, int target, vector<int>&arr,vector<int>&temp,vector<vector<int>>&ans)
+    {        
+        if(curr>=n)
+        {
+            if(target==0)
+                ans.push_back(temp);
+            
             return;
         }
-        for (int i = begin; i != candidates.size() && target >= candidates[i]; ++i) {
-            combination.push_back(candidates[i]);
-            combinationSum(candidates, target - candidates[i], res, combination, i);
-            combination.pop_back();
+        
+        if(arr[curr]<=target)
+        {
+            temp.push_back(arr[curr]);
+            get_ans(curr,n,target-arr[curr],arr,temp,ans);
+            temp.pop_back();
         }
+        
+        get_ans(curr+1,n,target,arr,temp,ans);
+        
+        
+    }
+    
+    
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        int prev=INT_MAX;        
+        sort(candidates.begin(),candidates.end());
+        vector<int>arr,temp;
+        for(int i=0;i<candidates.size();i++)
+        {
+            if(candidates[i]!=prev)
+                arr.push_back(candidates[i]);
+            
+            prev=candidates[i];
+        }
+        int n=arr.size();
+        vector<vector<int>>ans;
+        get_ans(0,n,target,arr,temp,ans);
+        
+        return ans;
     }
 };
