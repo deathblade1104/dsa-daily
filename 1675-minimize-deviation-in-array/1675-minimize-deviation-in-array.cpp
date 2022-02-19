@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minimumDeviation(vector<int>& nums) {
-        multiset<int,greater<int>>st;        
+        set<int,greater<int>>st;        
         for(int i=0;i<nums.size();i++)
         {
             if(nums[i]&1)
