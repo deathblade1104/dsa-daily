@@ -1,15 +1,14 @@
 class Solution {
 public:
     int minimumDeviation(vector<int>& nums) {
-        set<int,greater<int>>st;        
         for(int i=0;i<nums.size();i++)
         {
             if(nums[i]&1)
-                st.insert(nums[i]*2);
-            
-            else
-                st.insert(nums[i]);                
+                nums[i]=nums[i]*2;
+                
         }
+        
+        multiset<int,greater<int>>st(nums.begin(),nums.end());
         
         int ans = *(st.begin()) - *(st.rbegin());
         
