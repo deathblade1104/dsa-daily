@@ -2,11 +2,7 @@ class Solution {
 public:
     
     int removeCoveredIntervals(vector<vector<int>>& intervals) {
-        sort(intervals.begin(),intervals.end(),[ ]( const auto& lhs, const auto& rhs )
-            {
-                if(lhs[0] == rhs[0]) return lhs[1] > rhs[1];
-                return lhs[0] < rhs[0];
-            });
+        sort(intervals.begin(),intervals.end());
         
         int ans=0;
         vector<int>prev=intervals[0];
