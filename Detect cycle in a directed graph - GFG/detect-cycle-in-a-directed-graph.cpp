@@ -23,7 +23,7 @@ class Solution {
             q.push(i);
         }
 
-        int ans=1;
+        int ans=q.size();
         while(!q.empty())
         {
             int curr=q.front();
@@ -39,6 +39,7 @@ class Solution {
                    }
             }
         }
+        // cout<<ans<<endl;
         return !(ans==V);
         
     }
