@@ -1,5 +1,5 @@
 class Solution {
-public:
+private :
     bool DFS(int curr, vector<vector<int>>&adj, vector<bool>&vis, vector<bool>&anc, vector<int>&ans)
     {
         if(vis[curr])
@@ -23,6 +23,9 @@ public:
         anc[curr]=false;
         return false;
     }
+    
+public:
+    
     vector<int> findOrder(int V, vector<vector<int>>&edges) {
     
         vector<int>ans;
@@ -39,8 +42,7 @@ public:
                 return {};
         }
         
-        reverse(ans.begin(),ans.end());
-        
+        reverse(ans.begin(),ans.end());        
         return ans;
     }
 };
