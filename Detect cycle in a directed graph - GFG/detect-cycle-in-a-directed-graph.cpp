@@ -39,8 +39,8 @@ class Solution {
                    }
             }
         }
-        // cout<<ans<<endl;
-        return !(ans==V);
+
+        return (ans!=V);
         
     }
 };
