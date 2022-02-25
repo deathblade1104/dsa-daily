@@ -1,5 +1,5 @@
 class Solution {
-public:
+private:
     pair<long long,int>get_num(string &s, int i)
     {
         long long ans=0;
@@ -16,6 +16,7 @@ public:
         return p;
     }
     
+public:    
     int compareVersion(string v1, string v2) {
         
         int i=0,j=0;
