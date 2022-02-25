@@ -19,10 +19,9 @@ class Solution
                 
             return (a.first>b.first);
         };
-        
         priority_queue<pair<int,int>,vector<pair<int,int>>, decltype(mycomp)>pq(mycomp);
+        
         pq.push({S,0});
-        int i=0;
         
         while(pq.size()>0)
         {
