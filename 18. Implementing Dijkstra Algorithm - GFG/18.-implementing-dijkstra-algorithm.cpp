@@ -5,9 +5,7 @@ using namespace std;
  // } Driver Code Ends
 class Solution
 {  
-	public:
-	//Function to find the shortest distance of all the vertices
-    //from the source vertex S.
+    private:
     struct mycomp
     {
         bool operator()(const pair<int,int>&a, const pair<int,int>&b)
@@ -18,18 +16,10 @@ class Solution
             return (a.first>b.first);
         }
     };
-    
+	public:
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         vector<int>cost(V,-1);
-        
-        // auto mycomp = [](pair<int,int>a,pair<int,int>b)
-        // {
-        //     if(a.second!=b.second)
-        //         return (a.second>b.second);
-                
-        //     return (a.first>b.first);
-        // };
         priority_queue<pair<int,int>,vector<pair<int,int>>, mycomp>pq;
         
         pq.push({S,0});
