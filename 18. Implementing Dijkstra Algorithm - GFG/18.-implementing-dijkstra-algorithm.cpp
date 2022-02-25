@@ -8,18 +8,29 @@ class Solution
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
-    vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    struct mycomp
     {
-        vector<int>cost(V,-1);
-        
-        auto mycomp = [](pair<int,int>a,pair<int,int>b)
+        bool operator()(const pair<int,int>&a, const pair<int,int>&b)
         {
             if(a.second!=b.second)
                 return (a.second>b.second);
                 
             return (a.first>b.first);
-        };
-        priority_queue<pair<int,int>,vector<pair<int,int>>, decltype(mycomp)>pq(mycomp);
+        }
+    };
+    
+    vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    {
+        vector<int>cost(V,-1);
+        
+        // auto mycomp = [](pair<int,int>a,pair<int,int>b)
+        // {
+        //     if(a.second!=b.second)
+        //         return (a.second>b.second);
+                
+        //     return (a.first>b.first);
+        // };
+        priority_queue<pair<int,int>,vector<pair<int,int>>, mycomp>pq;
         
         pq.push({S,0});
         
@@ -47,6 +58,7 @@ class Solution
         
     }
 };
+
 
 
 // { Driver Code Starts.
