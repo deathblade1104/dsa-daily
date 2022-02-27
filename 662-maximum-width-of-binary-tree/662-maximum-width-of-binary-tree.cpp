@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    int widthOfBinaryTree(TreeNode* root) {
+    long long widthOfBinaryTree(TreeNode* root) {
         if(!root) return 0;
         if(!root->left and !root->right) return 1;
         
