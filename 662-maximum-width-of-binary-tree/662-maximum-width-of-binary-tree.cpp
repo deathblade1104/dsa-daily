@@ -37,10 +37,10 @@ public:
                 }
                 
                 if(curr->left)
-                    q.push({curr->left, (hd*2*(1LL))});
+                    q.push({curr->left, (hd*2*(1LL))+1});
                 
                 if(curr->right)
-                    q.push({curr->right, (hd*2*(1LL))+1});
+                    q.push({curr->right, (hd*2*(1LL))+2});
             }
             
             ans=max(ans,r-l+1);
