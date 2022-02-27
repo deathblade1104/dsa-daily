@@ -13,14 +13,12 @@ class Solution {
 public:
     long long widthOfBinaryTree(TreeNode* root) {
         if(!root) return 0;
-        if(!root->left and !root->right) return 1;
-        
+        if(!root->left and !root->right) return 1;       
         
         queue<pair<TreeNode*,long long>>q;
         q.push({root,0});
         
-        long long ans=1;
-        
+        long long ans=1;        
         while(q.size()>0)
         {
             int sz=q.size();
@@ -45,8 +43,7 @@ public:
                     q.push({curr->right, (hd*2*(1LL))+1});
             }
             
-            if(sz>1)
-                ans=max(ans,r-l+1);
+            ans=max(ans,r-l+1);
         }
         
         return ans;
