@@ -32,7 +32,7 @@ public:
         {
             int source= x[0], dest= x[1], weight = x[2];
             
-            if(dist[dest] > dist[source] + weight)
+            if(dist[source] != INT_MAX and dist[dest] > dist[source] + weight)
             return 1;
         }
         
