@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // DP Approach 
+    
     int set_bits(int n,vector<int>&ans)
     {
         if(ans[n]!=-1)
