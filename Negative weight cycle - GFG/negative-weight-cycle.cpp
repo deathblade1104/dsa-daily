@@ -25,7 +25,7 @@ public:
 	            }
 	        }
 	        
-	        if(flag==false) return 0;
+
 	    }
 	    
 	    for(auto x : edges)
