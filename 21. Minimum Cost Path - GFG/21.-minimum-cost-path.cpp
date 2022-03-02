@@ -27,25 +27,23 @@ class Solution
     };
     
     public:
-    //Function to return the minimum cost to react at bottom
-	//right cell from top left cell.
     int minimumCostPath(vector<vector<int>>& grid) 
     {
         int n=grid.size(),m=grid[0].size();
         vector<vector<bool>>vis(n,vector<bool>(m,false));
+        vector<vector<int>>dim={{1,0},{-1,0},{0,1},{0,-1}};
+        
         priority_queue<Node, vector<Node>,mycomp>pq;
         Node temp(0,0,grid[0][0]);
+        pq.push(temp);
         vis[0][0]=true;
         
-        pq.push(temp);
-        vector<vector<int>>dim={{1,0},{-1,0},{0,1},{0,-1}};
         
         while(pq.size()>0)
         {
             Node t=pq.top();
             pq.pop();
-            // cout<<t.r<<" "<<t.c<<"->"<<t.cost<<endl;
-            
+
             for(int i=0;i<4;i++)
             {
                 int a=dim[i][0]+t.r,b=dim[i][1]+t.c;
