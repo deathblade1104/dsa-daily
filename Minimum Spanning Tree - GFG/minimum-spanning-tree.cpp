@@ -23,8 +23,9 @@ class Solution
         vector<bool>vis(V,false);
         priority_queue<pair<int,int>,vector<pair<int,int>>,mycomp>pq;
         pq.push({0,0});
-        int ans=0;
-        while(pq.size()>0)
+        int count=0,ans=0;
+        
+        while(pq.size()>0 and count<=V)
         {
             auto p=pq.top();
             pq.pop();
@@ -32,6 +33,7 @@ class Solution
             if(!vis[p.first])
             {
                 vis[p.first]=true;
+                count++;
                 ans+=p.second;
                 
                 for(auto x : adj[p.first])
