@@ -37,7 +37,8 @@ class Solution
                 ans+=p.second;
                 
                 for(auto x : adj[p.first])
-                pq.push({x[0],x[1]});
+                    if(!vis[x[0]])
+                        pq.push({x[0],x[1]});
             }
         }
         
