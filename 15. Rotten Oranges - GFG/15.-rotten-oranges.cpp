@@ -34,7 +34,7 @@ class Solution
                     q.push(temp);
                 }
                 
-                if(grid[i][j]==1)
+                else if(grid[i][j]==1)
                 count++;
             }
         }
@@ -66,7 +66,6 @@ class Solution
             q.push(t2);
             q.push(t3);
             q.push(t4);
-            
         }
         
         if(count!=0)
