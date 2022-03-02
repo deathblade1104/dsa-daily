@@ -31,7 +31,7 @@ class Solution
     {
         int n=grid.size(),m=grid[0].size();
         vector<vector<bool>>vis(n,vector<bool>(m,false));
-        vector<vector<int>>dim={{1,0},{-1,0},{0,1},{0,-1}};
+        vector<int>dim={0,1,0,-1,0};
         
         priority_queue<Node, vector<Node>,mycomp>pq;
         Node temp(0,0,grid[0][0]);
@@ -44,9 +44,9 @@ class Solution
             Node t=pq.top();
             pq.pop();
 
-            for(int i=0;i<4;i++)
+            for(int i=1;i<5;i++)
             {
-                int a=dim[i][0]+t.r,b=dim[i][1]+t.c;
+                int a=dim[i-1]+t.r,b=dim[i]+t.c;
                 if(a>=0 and a<n and b>=0 and b<m and vis[a][b]==false)
                 {   
                     if(a==n-1 and b==m-1)
