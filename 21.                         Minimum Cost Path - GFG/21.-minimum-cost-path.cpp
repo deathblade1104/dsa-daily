@@ -7,57 +7,60 @@ using namespace std;
 
 class Solution
 {
-    public :
-    bool isValid(int i,int j,int n)
-	{
-	    if(i>=n || i<0 || j<0 || j>=n)
-	        return false;
-	   return true;
-	}
+    private:
+    struct Node{
+        int r, c,cost;
+        
+        Node(int x, int y, int z)
+        {
+            r=x;
+            c=y;
+            cost=z;
+        }
+    };
+    
+    struct mycomp{
+        bool operator()(const Node&a, const Node&b)
+        {
+            return a.cost>b.cost;
+        }
+    };
+    
+    public:
     int minimumCostPath(vector<vector<int>>& grid) 
     {
-        // Code here
-        int n=grid.size();
-        vector<vector<int>> v(n,vector<int> (n,INT_MAX));
-        v[0][0]=grid[0][0];
-
-        priority_queue<pair<int,pair<int,int>> , vector<pair<int,pair<int,int>>> , greater<pair<int,pair<int,int>>>> pq;
-        pq.push({v[0][0],{0,0}});
-        while(!pq.empty())
+        int n=grid.size(),m=grid[0].size();
+        vector<vector<bool>>vis(n,vector<bool>(m,false));
+        vector<vector<int>>dim={{1,0},{-1,0},{0,1},{0,-1}};
+        
+        priority_queue<Node, vector<Node>,mycomp>pq;
+        Node temp(0,0,grid[0][0]);
+        pq.push(temp);
+        vis[0][0]=true;
+        
+        
+        while(pq.size()>0)
         {
-            int i=pq.top().second.first;
-            int j=pq.top().second.second;
-            if(isValid(i,j-1,n))
+            Node t=pq.top();
+            pq.pop();
+
+            for(int i=0;i<4;i++)
             {
-                if(v[i][j-1] > (v[i][j] + grid[i][j-1])){
-                v[i][j-1] = min(v[i][j-1],v[i][j] + grid[i][j-1]);
-                pq.push({v[i][j-1],{i,j-1}});
+                int a=dim[i][0]+t.r,b=dim[i][1]+t.c;
+                if(a>=0 and a<n and b>=0 and b<m and vis[a][b]==false)
+                {   
+                    if(a==n-1 and b==m-1)
+                    return t.cost+grid[a][b];
+                    
+                    vis[a][b]=true;
+                    
+                    Node temp(a,b,t.cost+grid[a][b]);
+                    pq.push(temp);
                 }
             }
-            if(isValid(i,j+1,n))
-            {
-                if(v[i][j+1] > (v[i][j] + grid[i][j+1]) ){
-                v[i][j+1] = min(v[i][j+1],v[i][j] + grid[i][j+1]);
-                pq.push({v[i][j+1],{i,j+1}});
-                }
-            }
-            if(isValid(i-1,j,n))
-            {
-                if(v[i-1][j] > (v[i][j] + grid[i-1][j]) ){
-                v[i-1][j] = min(v[i-1][j],v[i][j] + grid[i-1][j]);
-                pq.push({v[i-1][j],{i-1,j}});
-                }
-            }
-            if(isValid(i+1,j,n))
-            {
-                if(v[i+1][j] > (v[i][j] + grid[i+1][j]) ){
-                v[i+1][j] = min(v[i+1][j],v[i][j] + grid[i+1][j]);
-                pq.push({v[i+1][j],{i+1,j}});
-                }
-            }
-           pq.pop(); 
         }
-        return v[n-1][n-1];
+        
+        return -1;
     }
 };
 
