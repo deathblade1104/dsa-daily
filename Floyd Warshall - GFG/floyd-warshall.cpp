@@ -9,20 +9,16 @@ using namespace std;
 
 class Solution {
   public:
-	void shortest_distance(vector<vector<int>>&matrix){
+	void shortest_distance(vector<vector<int>>&costs){
 	    // Code here
-	    int v= matrix.size();
-	    vector<vector<int>>costs=matrix;
-	    
+	    int v= costs.size();
+
 	    for(int i=0;i<v;i++)
 	    {
 	        for(int j=0;j<v;j++)
             {
                if(costs[i][j]==-1)
                 costs[i][j]=INT_MAX/2;
-            
-                if(i==j)
-                costs[i][j]=0;
             }
 	    }
 	    
@@ -43,9 +39,6 @@ class Solution {
 	            if(costs[i][j]==INT_MAX/2)
 	             costs[i][j]=-1;
 	    }
-	    
-	    matrix=costs;
-	    
 	    
 	}
 };
