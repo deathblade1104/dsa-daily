@@ -44,11 +44,7 @@ class Solution {
 	             costs[i][j]=-1;
 	    }
 	    
-	    for(int i=0;i<v;i++)
-	    {
-	        for(int j=0;j<v;j++)
-	            matrix[i][j]=costs[i][j];
-	    }
+	    matrix=costs;
 	    
 	    
 	}
