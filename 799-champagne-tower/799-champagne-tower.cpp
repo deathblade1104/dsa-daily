@@ -4,8 +4,7 @@ public:
         
         if(poured==0)
             return 0;        
-        
-        vector<vector<double>>dp(query_row+2,vector<double>(101,0.0));        
+        double dp[101][101]={0.0};        
         dp[0][0]= poured + 0.0;        
         for(int i=0;i<=query_row;i++)
         {
