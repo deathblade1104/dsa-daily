@@ -5,18 +5,18 @@ public:
         if(poured==0)
             return 0;        
         
-        vector<vector<double>>dp;
-        
-        for(int i=0;i<=100;i++)
+        vector<vector<double>>dp;        
+        for(int i=0;i<=query_row+1;i++)
         {
             vector<double>temp(i+1,0.0);
             dp.push_back(temp);
         }
+    
         
         dp[0][0]= poured + 0.0;        
         for(int i=0;i<=query_row;i++)
         {
-            for(int j=0;j<=i and j<=query_glass;j++)
+            for(int j=0;j<=i and j<=query_glass+1;j++)
             {
                 if(dp[i][j]>1.0)
                 {
