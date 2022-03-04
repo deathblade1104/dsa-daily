@@ -5,13 +5,7 @@ public:
         if(poured==0)
             return 0;        
         
-        vector<vector<double>>dp;        
-        for(int i=0;i<=query_row+1;i++)
-        {
-            vector<double>temp(i+1,0.0);
-            dp.push_back(temp);
-        }
-    
+        double dp[101][101]={0.0};    
         
         dp[0][0]= poured + 0.0;        
         for(int i=0;i<=query_row;i++)
