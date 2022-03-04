@@ -16,7 +16,7 @@ public:
         dp[0][0]= poured + 0.0;        
         for(int i=0;i<=query_row;i++)
         {
-            for(int j=0;j<=i and j<=query_glass+1;j++)
+            for(int j=0;j<=i and j<=query_glass;j++)
             {
                 if(dp[i][j]>1.0)
                 {
