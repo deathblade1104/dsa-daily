@@ -8,8 +8,7 @@ private:
         if(dp[curr]!=-1)
         return dp[curr];
         
-        int steal=freq[curr]*curr + get_ans(curr+2,sz,freq,dp);
-        
+        int steal=freq[curr]*curr + get_ans(curr+2,sz,freq,dp);        
         int dont_steal= get_ans(curr+1,sz,freq,dp);
         
         dp[curr]=max(steal,dont_steal);
