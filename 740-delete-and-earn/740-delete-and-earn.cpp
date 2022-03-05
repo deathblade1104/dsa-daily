@@ -1,6 +1,6 @@
 class Solution {
 private:
-    int get_ans(int curr, int &sz, vector<int>&freq, vector<int>&dp)
+    int get_ans(int curr, int &sz, int freq[], vector<int>&dp)
     {
         if(curr>sz)
         return 0;
@@ -20,7 +20,8 @@ public:
     int deleteAndEarn(vector<int>& nums) {
         
         int m=-1;
-        vector<int>freq(10001,0);        
+        int freq[10001]={0};
+                
         for(int i=0;i<nums.size();i++)
         {
             freq[nums[i]]++;
