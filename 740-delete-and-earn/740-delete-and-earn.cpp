@@ -8,10 +8,10 @@ private:
         if(dp[curr]!=-1)
         return dp[curr];
         
-        int steal=freq[curr]*curr + get_ans(curr+2,sz,freq,dp);        
-        int dont_steal= get_ans(curr+1,sz,freq,dp);
+        int consider=freq[curr]*curr + get_ans(curr+2,sz,freq,dp);        
+        int dont_consider= get_ans(curr+1,sz,freq,dp);
         
-        dp[curr]=max(steal,dont_steal);
+        dp[curr]=max(consider,dont_consider);
         
         return dp[curr];
     }
@@ -20,7 +20,7 @@ public:
     int deleteAndEarn(vector<int>& nums) {
         
         int m=-1;
-        vector<int>freq(10001);        
+        vector<int>freq(10001,0);        
         for(int i=0;i<nums.size();i++)
         {
             freq[nums[i]]++;
