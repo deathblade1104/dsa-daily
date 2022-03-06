@@ -21,7 +21,7 @@ class Solution{
         if(x==1)
         return 1;
         
-        long long int l=1,h=(x/2),ans=1;
+        long long int l=1,h=x,ans=1;
         while(l<=h)
         {
             long long int mid =  l + ((h-l)/2);
