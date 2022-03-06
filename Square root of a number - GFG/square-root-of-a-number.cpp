@@ -22,11 +22,9 @@ class Solution{
         return 1;
         
         long long int l=1,h=(x/2),ans=1;
-        
-        
         while(l<=h)
         {
-            long long int mid = (l+h)/2;
+            long long int mid =  l + ((h-l)/2);
             
             if(isGood(mid,x))
             {
@@ -37,7 +35,6 @@ class Solution{
             else
             h=mid-1;
         }
-        
         
         return ans;
         
