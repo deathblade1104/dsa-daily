@@ -73,17 +73,19 @@ void DSU_union(int s,int d, vector<int>&par, vector<int>&rank)
     
     if(p1 == p2)
     return;
-
-    if(rank[p1] < rank[p2])
-    par[p1] = p2;
     
-    else if (rank[p2] < rank[p1])
-    par[p2] = p1;
+    int r1=rank[p1],r2=rank[p2];
+    
+    if(r1>r2)
+    par[p2]=p1;
+    
+    else if (r1<r2)
+    par[p1]=p2;
     
     else
     {
-        par[p1] = p2;
-        rank[p2]++;
+        par[p2]=s;
+        rank[p1]++;
     }
 }
 
