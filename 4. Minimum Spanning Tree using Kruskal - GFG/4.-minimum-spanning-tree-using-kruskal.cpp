@@ -106,12 +106,12 @@ long long int kruskalDSU(vector<pair<int, long long int>> adj[], int n, int m)
         
         else
         {
-            
-            // cout<<s<<"->"<<d<<"==="<<w<<endl;
             ans+=w;
             count++;
             DSU_union(s,d,par,rank);
         }
+        if(count>=n)
+        break;
     }
     
     return ans;
