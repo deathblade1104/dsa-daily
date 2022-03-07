@@ -60,8 +60,11 @@ int find_par(int v, vector<int>&par)
 {
     if(par[v]==v)
     return v;
-    par[v] = find_par(par[v],par);
-    return par[v];
+    
+    int result = find_par(par[v],par);
+    par[v]=result;
+    return result;
+    
 }
 void DSU_union(int s,int d, vector<int>&par, vector<int>&rank)
 {
