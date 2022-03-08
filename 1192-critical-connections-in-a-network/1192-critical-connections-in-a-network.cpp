@@ -22,7 +22,13 @@ class Solution {
           low_time[curr] = min(low_time[curr],low_time[neigh]);
           
           if(disc[curr]<low_time[neigh])
-          ans.push_back({curr,neigh});
+          {
+              if(curr<neigh)
+              ans.push_back({curr,neigh});
+              
+              else
+              ans.push_back({neigh,curr});
+          }
       }
       return;
   }
