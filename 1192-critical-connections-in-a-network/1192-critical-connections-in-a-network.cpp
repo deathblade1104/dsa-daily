@@ -39,7 +39,7 @@ class Solution {
 public:
     vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
         
-        vector<int>adj[n+1];
+        vector<int>adj[n];
         for(auto temp : connections)
         {   
             adj[temp[0]].push_back(temp[1]);
