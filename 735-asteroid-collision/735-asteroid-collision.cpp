@@ -1,52 +1,32 @@
 class Solution {
 public:
     vector<int> asteroidCollision(vector<int>& arr) {
-        stack<pair<int,int>>st;
+        vector<int>ans;
         
-        for(int i=0;i<arr.size();i++)
+        for(int i: arr)
         {
-            int nv=abs(arr[i]),s=0;            
-            if(arr[i]>0)
-                s=+1;
+            int ele=i;
             
-            if(arr[i]<0)
-                s-=1;
-            
-            
-            while(st.size() and s==-1 and s!=st.top().first)
+            while(ele<0 and ans.size()>0 and ans.back()>0)
             {
-                pair<int,int>p=st.top();
-                st.pop();
+                int top= ans.back();
+                ans.pop_back();
                 
-                if(abs(nv)!=abs(p.second))
+                if(top==abs(ele))
                 {
-                    nv=max(abs(nv),abs(p.second));
-                    
-                    if(abs(nv)!=abs(arr[i]))
-                     s=p.first;
+                    ele=0;
+                    break;
                 }
                 
-                else
-                {
-                    nv=0;
-                    break;
-                }                 
+                else if(top>abs(ele))
+                    ele=top;               
+                
             }
             
-            if(nv!=0)
-                st.push({s,nv});
+            if(ele!=0)
+                ans.push_back(ele);
         }
         
-        vector<int>ans;
-        while(st.size())
-        {
-            pair<int,int>p=st.top();
-            st.pop();
-            
-            ans.push_back(p.first*p.second);            
-        }
-        
-        reverse(ans.begin(),ans.end());        
         return ans;
         
     }
