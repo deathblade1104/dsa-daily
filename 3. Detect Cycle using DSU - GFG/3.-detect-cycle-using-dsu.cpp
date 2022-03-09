@@ -50,7 +50,7 @@ class Solution
 	    {
 	        for(int j : adj[i])
 	        {
-	            if(vis[i][j]==true)
+	            if(vis[i][j])
 	            continue;
 	            
 	            vis[i][j]=vis[j][i]=true;
