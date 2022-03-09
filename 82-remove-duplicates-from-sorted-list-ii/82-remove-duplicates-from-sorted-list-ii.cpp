@@ -24,8 +24,13 @@ public:
             {
                 
                 while(second!=NULL and second->val==first->val)                    
-                second=second->next;
+                {
+                    ListNode *temp=second;
+                    second=second->next;
+                    delete(temp);
+                }
                 
+                delete(first);
                 prev->next=second;                               
             }
             
