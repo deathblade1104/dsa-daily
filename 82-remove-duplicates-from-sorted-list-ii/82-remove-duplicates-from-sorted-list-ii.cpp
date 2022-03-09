@@ -27,12 +27,11 @@ public:
                 second=second->next;
                 
                 prev->next=second;
+                first=second;
                 
                 if(second!=NULL)
-                {
-                    first=second;
-                    second=second->next;
-                }               
+                second=second->next;
+                               
             }
             
             else
