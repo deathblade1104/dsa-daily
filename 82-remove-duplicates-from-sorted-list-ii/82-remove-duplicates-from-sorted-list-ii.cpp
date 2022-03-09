@@ -44,6 +44,10 @@ public:
             second=second->next;
         }
         
-        return p->next;
+        
+        prev= p->next;
+        delete p;
+        
+        return prev;
     }
 };
