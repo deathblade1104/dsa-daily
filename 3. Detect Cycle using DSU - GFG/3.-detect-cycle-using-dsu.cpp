@@ -53,8 +53,7 @@ class Solution
 	            if(vis[i][j]==true)
 	            continue;
 	            
-	            vis[i][j]=true;
-	            vis[j][i]=true;
+	            vis[i][j]=vis[j][i]=true;
 	            
 	            if(find_par(i,par)==find_par(j,par))
 	            return true;
