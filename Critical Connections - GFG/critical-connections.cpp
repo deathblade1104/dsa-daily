@@ -56,6 +56,7 @@ public:
 	    
 	    vector<vector<int>>ans=critical_edges(V,adj);
 	    sort(ans.begin(),ans.end());
+	    
 	    return ans;
 	    
 	}
