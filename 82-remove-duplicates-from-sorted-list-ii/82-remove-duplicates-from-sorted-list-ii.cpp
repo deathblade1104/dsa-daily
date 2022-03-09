@@ -14,10 +14,9 @@ public:
         if(head==NULL or head->next==NULL)
             return head;
         
-        ListNode *p= new ListNode(-1);
-        p->next=head;
+        ListNode *p= new ListNode(-1);p->next=head;
         
-        ListNode *prev=p,*first=head,*second=head->next;
+        ListNode *prev=p,*first=head,*second=head->next;        
         
         while(second!=NULL)
         {
