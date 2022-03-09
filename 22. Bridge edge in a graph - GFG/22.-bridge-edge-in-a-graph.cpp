@@ -14,6 +14,9 @@ class Solution
         
         vis[curr]=true;
         
+        if(curr==d)
+        return;
+        
         for(int neigh : adj[curr])
         {
             if(neigh==par or  vis[neigh] or (curr==c and neigh==d))
