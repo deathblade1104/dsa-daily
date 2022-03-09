@@ -5,8 +5,7 @@ using namespace std;
  // } Driver Code Ends
 class Solution
 {
-    public:
-    //Function to detect cycle using DSU in an undirected graph.
+    private:
     int find_par(int x, vector<int>&par)
     {
         if(par[x]==x)
@@ -35,6 +34,9 @@ class Solution
         }
         return;
     }
+    
+    public:
+    //Function to detect cycle using DSU in an undirected graph.
     
 	int detectCycle(int V, vector<int>adj[])
 	{
