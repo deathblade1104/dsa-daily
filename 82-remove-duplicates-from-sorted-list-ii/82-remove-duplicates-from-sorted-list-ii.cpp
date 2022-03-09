@@ -23,23 +23,21 @@ public:
         {
             if(first->val==second->val)
             {
-                while(second!=NULL and second->val==first->val)
+                
+                while(second!=NULL and second->val==first->val)                    
                 second=second->next;
                 
-                prev->next=second;
-                first=second;
-                
-                if(second!=NULL)
-                second=second->next;
-                               
+                prev->next=second;                               
             }
             
             else
-            {
                 prev=first;
-                first=second;
-                second=second->next;
-            }
+                
+            
+            first=second;
+            
+            if(second)
+            second=second->next;
         }
         
         return p->next;
