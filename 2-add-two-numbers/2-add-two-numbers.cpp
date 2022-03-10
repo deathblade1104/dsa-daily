@@ -17,64 +17,39 @@ public:
         ListNode *curr=ans;
         
         int carry=0;
-        while(curr1!=NULL and curr2!=NULL)
+        while(curr1!=NULL or curr2!=NULL or carry==1)
         {
-            int sum= curr1->val + curr2->val + carry;
+            int sum=0;
+            
+            if(curr1)
+            {
+                sum+=curr1->val;
+                curr1=curr1->next;
+            }
+            
+            if(curr2)
+            {
+                sum+=curr2->val;
+                curr2=curr2->next;
+            }
+            
+            if(carry)
+            {
+                sum+=carry;
+                carry=0;
+            }
             
             if(sum>=10)
             {
                 carry=1;
                 sum-=10;
             }
-            else
-                carry=0;
             
             curr->next=new ListNode(sum);
             
-            curr1=curr1->next,curr2=curr2->next,curr=curr->next;            
+            curr=curr->next;            
         }
-        
-        while(curr1!=NULL)
-        {
-            
-            int sum= curr1->val + carry;
-            
-            if(sum>=10)
-            {
-                carry=1;
-                sum-=10;
-            } 
-            
-            else
-                carry=0;
-            curr->next=new ListNode(sum);
-            
-            curr1=curr1->next,curr=curr->next;    
-            
-        }
-        
-        while(curr2!=NULL)
-        {
-            
-            int sum= curr2->val + carry;
-            
-            if(sum>=10)
-            {
-                carry=1;
-                sum-=10;
-            }  
-            else
-                carry=0;
-            
-            curr->next=new ListNode(sum);
-            
-            curr2=curr2->next,curr=curr->next;    
-        }
-        
-        if(carry==1)
-        {
-            curr->next=new ListNode(1);
-        }
+    
         
         return ans->next;
     }
