@@ -29,7 +29,7 @@ public:
 	    
 	    for(int i=0;i<V;i++)
 	    {
-	        if((vis[i]==-1) and ( DFS(i,1,vis,adj) == false))
+	        if(vis[i]==-1 and !DFS(i,1,vis,adj))
 	        return false;
 	    }
 	    
