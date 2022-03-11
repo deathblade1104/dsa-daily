@@ -8,18 +8,17 @@ using namespace std;
 class Solution
 {
     private:
-    void DFS(int r,int c, int&n, int&m, vector<vector<bool>>&vis,vector<vector<char>>&grid)
+    void DFS(int r,int c, int&n, int&m,vector<vector<char>>&grid)
     {
-        if(r<0 or c<0 or r>=n or c>=m or vis[r][c]==true or grid[r][c]=='O')
+        if(r<0 or c<0 or r>=n or c>=m or grid[r][c]=='O')
         return;
         
-        vis[r][c]=true;
         grid[r][c]='O';
         
-        DFS(r+1,c,n,m,vis,grid);
-        DFS(r-1,c,n,m,vis,grid);
-        DFS(r,c+1,n,m,vis,grid);
-        DFS(r,c-1,n,m,vis,grid);
+        DFS(r+1,c,n,m,grid);
+        DFS(r-1,c,n,m,grid);
+        DFS(r,c+1,n,m,grid);
+        DFS(r,c-1,n,m,grid);
     }
     public:
     //Function to find the number of 'X' total shapes.
@@ -27,15 +26,14 @@ class Solution
     {
         // Code here
         int n =grid.size(),m=grid[0].size(),ans=0;
-        vector<vector<bool>>vis(n,vector<bool>(m,false));
         
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                if(grid[i][j]=='X' and vis[i][j]==false)
+                if(grid[i][j]=='X')
                 {
-                    DFS(i,j,n,m,vis,grid);
+                    DFS(i,j,n,m,grid);
                     ans++;
                 }
             }
