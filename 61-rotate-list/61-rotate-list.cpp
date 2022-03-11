@@ -51,8 +51,7 @@ public:
         else if(k>n and k%n!=0)
             return kthfromend(head,k%n);
         
-        else return kthfromend(head,k);
-        
+        else return kthfromend(head,k);     
     
 
         
