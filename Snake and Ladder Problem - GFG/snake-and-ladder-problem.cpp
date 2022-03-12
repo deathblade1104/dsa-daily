@@ -28,7 +28,7 @@ public:
        queue<int>q;
        q.push(1);
        bool found=false;
-       while(!q.empty()&&found==false)
+       while(!q.empty())
        {
            int p=q.size();
            while(p--)
