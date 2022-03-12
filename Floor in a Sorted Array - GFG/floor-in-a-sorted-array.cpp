@@ -31,6 +31,13 @@ class Solution{
     // n: size of vector
     // x: element whose floor is to find
     long long findFloor(vector<long long> v, long long n, long long x){
+        
+        if(v[0]>x)
+        return -1;
+        
+        if(v[n-1]<=x)
+        return n-1;
+        
         return bs(v,n,x);
     }
 };
