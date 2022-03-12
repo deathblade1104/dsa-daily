@@ -25,10 +25,8 @@ public:
         // code here
         create_graph(N,arr);
          int moves=0;
-       vector<int>visited(31,0);
        queue<int>q;
        q.push(1);
-       visited[1]=1;
        bool found=false;
        while(!q.empty()&&found==false)
        {
@@ -41,16 +39,14 @@ public:
                {
                    if(t+die==30)
                    found=true;
-                   if(t+die<=30&&mp[t+die]&&!visited[t+die])
+                   if(t+die<=30&&mp[t+die])
                    {
-                       visited[mp[t+die]]=1;
                        if(t+die==30)
                        found=true;
                        q.push(mp[t+die]);
                    }
-                   else if(t+die<=30&&!visited[t+die])
+                   else if(t+die<=30)
                    {
-                       visited[t+die]=1;
                        q.push(t+die);
                    }
                }
@@ -59,6 +55,7 @@ public:
        }
        if(found)
        return moves;
+       
        return -1;
         
     }
