@@ -52,9 +52,11 @@ public:
                }
            }
            moves++;
+           
+           if(found)
+           return moves;
        }
-       if(found)
-       return moves;
+
        
        return -1;
         
