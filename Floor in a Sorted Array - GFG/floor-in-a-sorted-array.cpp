@@ -19,7 +19,7 @@ class Solution{
           
           else if(v[mid]<=x)
           {
-              ans=max(ans,mid);
+              ans=mid;
               l=mid+1;
           }
       }
