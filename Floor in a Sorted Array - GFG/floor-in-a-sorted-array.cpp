@@ -8,7 +8,7 @@ class Solution{
   private:
   long long bs(vector<long long>v, long long n,long long x)
   {
-      long long ans=INT_MIN,l=0,h=n-1;
+      long long ans=-1,l=0,h=n-1;
       
       while(l<=h)
       {
@@ -37,10 +37,6 @@ class Solution{
         return -1;
         
         return bs(v,n,x);
-        
-        
-        
-        
     }
 };
 
