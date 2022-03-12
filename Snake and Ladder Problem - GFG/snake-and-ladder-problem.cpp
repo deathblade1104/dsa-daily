@@ -35,13 +35,13 @@ public:
            {
                int t=q.front();
                q.pop();
-               for(int die=1;die<=6;die++)
+               for(int die=0;die<=6;die++)
                {
                    if(t+die==30)
                    found=true;
                    if(t+die<=30&&mp[t+die])
                    {
-                       if(t+die==30)
+                       if(mp[t+die]==30)
                        found=true;
                        q.push(mp[t+die]);
                    }
