@@ -2,9 +2,6 @@ class Solution {
     vector<int>dim={1,0,-1,0,1};
     void DFS(int r,int c,int&n,int&m,vector<vector<int>>&grid,bool&ans)
     {
-        if(r<0 or c<0 or r>=n or c>=m or grid[r][c]==1)
-            return;
-        
         if(r==0 or c==0 or r==n-1 or c==m-1)
             ans=false;
         
@@ -12,7 +9,13 @@ class Solution {
         
         
         for(int i=1;i<=4;i++)
+        {
+            if(r+dim[i-1]<0 or r+dim[i-1]>=n or c+dim[i]<0 or c+dim[i]>=m or grid[r+dim[i-1]][c+dim[i]]==1)
+            continue;
+            
+            else
             DFS(r+dim[i-1],c+dim[i],n,m,grid,ans);
+        }
         
         return;
     }
