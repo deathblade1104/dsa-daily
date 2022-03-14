@@ -23,6 +23,7 @@ public:
                         if(r<0 or c<0 or r>=n or c>=m or grid2[r][c]==0)
                             continue;
                         
+                        
                         if(grid1[r][c]==0 and grid2[r][c]==1)
                             ans=false;
                         
