@@ -38,7 +38,6 @@ public:
                 }
             }
         }
-        
         return count;
     }
 };
