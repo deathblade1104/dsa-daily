@@ -1,6 +1,6 @@
 class Solution {
 private :
-    vector<int>dim={1,0,-1,0,1};
+    int dim[5]={1,0,-1,0,1};
     void DFS(int r, int c, int&n ,int&m, vector<vector<int>>&grid1, vector<vector<int>>&grid2, bool&ans)
     {
         if(r<0 or c<0 or r>=n or c>=m or grid2[r][c]==0)
