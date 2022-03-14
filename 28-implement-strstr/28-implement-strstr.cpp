@@ -4,12 +4,12 @@ public:
         
         if(haystack==needle)
             return 0;
+        
         int sz=needle.size();
         string temp="";
         
         for(int i=0;i<sz;i++)
-            temp+=haystack[i];
-        
+            temp+=haystack[i];        
         
         if(temp==needle)
             return 0;
