@@ -2,8 +2,7 @@ class Solution {
 public:
     int countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2) {
         int dim[5]={1,0,-1,0,1};
-        int n=grid2.size(),m=grid2[0].size(),count=0;
-        
+        int n=grid2.size(),m=grid2[0].size(),count=0;        
         
         for(int i=0;i<n;i++)
         {
@@ -30,7 +29,12 @@ public:
                         grid2[r][c]=0;
                         
                         for(int k=1;k<=4;k++)
-                            q.push({r+dim[k-1],c+dim[k]});
+                        {
+                            int x = r + dim[k-1], y = c + dim[k];
+                            
+                            if(x>=0 and x<n and y>=0 and y<m )
+                                q.push({x,y});
+                        }
                     }
                     
                     if(ans)
