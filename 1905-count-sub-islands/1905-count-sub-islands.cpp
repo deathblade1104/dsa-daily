@@ -21,10 +21,9 @@ public:
                         int r =p.first,c=p.second;
                         
                         if(r<0 or c<0 or r>=n or c>=m or grid2[r][c]==0)
-                            continue;
+                            continue;                        
                         
-                        
-                        if(grid1[r][c]==0 and grid2[r][c]==1)
+                        if(grid1[r][c]==0)
                             ans=false;
                         
                         grid2[r][c]=0;
