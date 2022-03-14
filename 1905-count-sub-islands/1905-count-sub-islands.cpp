@@ -32,7 +32,7 @@ public:
                         {
                             int x = r + dim[k-1], y = c + dim[k];
                             
-                            if(x>=0 and x<n and y>=0 and y<m )
+                            if(x>=0 and x<n and y>=0 and y<m and grid2[x][y]==1 )
                                 q.push({x,y});
                         }
                     }
