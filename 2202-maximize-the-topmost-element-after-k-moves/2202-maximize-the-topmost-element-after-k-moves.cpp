@@ -12,35 +12,15 @@ public:
             else return -1;
         }
         
-        int m=INT_MIN;
-        stack<int>st;
         
-        for(int i= nu.size()-1;i>=0;i--)
-            st.push(nu[i]);        
-        
-        while(k>1)
-        {
-            m=max(m,st.top());
-            st.pop();
-            k--;
-            
-            if(st.size()==0)
-                break;
+        int n=nu.size(),mx=INT_MIN;
+        for(int i=0;i<n && i<k-1;i++){
+            mx=max(mx,nu[i]);
         }
-        
-        if(st.size()==0)
-        return m;
-        
-        else if(k==1 and st.size()>=2)
-        {
-            st.pop();
-            m=max(m,st.top());
-            st.pop();
+        if(k<n){
+            mx=max(mx,nu[k]);
         }
-            
-        
-        return m;
-        
+        return mx;
         
     }
 };
