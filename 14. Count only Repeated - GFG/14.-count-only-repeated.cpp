@@ -17,26 +17,33 @@ class Solution
         //code here
         pair<int,int>p=make_pair(-1,-1);
         int count = n-1 - (arr[n-1] - arr[0]);
+        
         if(count ==0)
         return p;
         
         count+=1;
         int ele=-1,l=0,h=n-1;
-        while(l<h)
+        while(l<=h)
         {
             int m = l + ((h-l)/2);
             
-            if(arr[m]==(arr[0]+m))
-            l=m+1;
+            if((m==0 and arr[m]==arr[m+1]) or (m==n-1 and arr[m-1]==arr[m])
+            or(arr[m-1]==arr[m]) or(arr[m]==arr[m+1]))
+            {
+                p.first=arr[m];
+                p.second=count;
+                break;
+            }
             
             else
-            h=m-1;
+            {
+                if(arr[m]-arr[l]==m-l)
+                l=m+1;
+                
+                else
+                h=m-1;
+            }
         }
-        
-        ele=arr[l];
-        
-        p.first=ele;
-        p.second=count;
         
         return p;
     }
