@@ -16,19 +16,13 @@ class Solution
     pair<int, int> findRepeating(int *arr, int n){
         //code here
         pair<int,int>p=make_pair(-1,-1);
-        int count = n-1 - (arr[n-1] - arr[0]);
+        int count = n-1 - (arr[n-1] - arr[0]) +1,l=0,h=n-1;
         
-        if(count ==0)
-        return p;
-        
-        count+=1;
-        int ele=-1,l=0,h=n-1;
-        while(l<=h)
+        while(count >1 and l<=h)
         {
             int m = l + ((h-l)/2);
             
-            if((m==0 and arr[m]==arr[m+1]) or (m==n-1 and arr[m-1]==arr[m])
-            or(arr[m-1]==arr[m]) or(arr[m]==arr[m+1]))
+            if((arr[m-1]==arr[m]) or(arr[m]==arr[m+1]))
             {
                 p.first=arr[m];
                 p.second=count;
