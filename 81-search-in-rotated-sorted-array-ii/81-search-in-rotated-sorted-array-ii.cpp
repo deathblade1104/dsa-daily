@@ -12,10 +12,7 @@ public:
             if(nums[mid]==target)
                 return true;
             
-            if(nums[l]==nums[mid] and nums[h]==nums[mid])
-            ++l,--h;
-            
-            else if(nums[l]<=nums[mid])
+            if(nums[l]<nums[mid])
             {
                 if(nums[l]<=target and target<nums[mid])
                     h=mid-1;
@@ -24,13 +21,23 @@ public:
                     l=mid+1;
             }
             
-            else
+            else if(nums[h]>nums[mid])
             {
                 if(target<=nums[h] and target>nums[mid])
                     l=mid+1;
                 
                 else
                     h=mid-1;
+            }
+            
+            else
+            {
+                 if(nums[l]==nums[mid])
+                     l++;
+                
+                  if(nums[h]==nums[mid])
+                     h--;
+            
             }
         }
         
