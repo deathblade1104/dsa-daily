@@ -13,7 +13,7 @@ public:
                 int p = st.top();
                 st.pop();
                 
-                int val= max(1,2*p);
+                int val= max(1,p<<1);
                 
                 if(st.size()==0)
                     ans+=val;
