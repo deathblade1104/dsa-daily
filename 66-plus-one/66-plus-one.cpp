@@ -9,7 +9,7 @@ public:
             int x = digits[i] + c;
             if(x>=10)
             {
-                digits[i]=x%10;
+                digits[i]=x-10;
                 c=1;
             }
             else
