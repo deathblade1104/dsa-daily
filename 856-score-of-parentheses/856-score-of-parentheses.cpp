@@ -3,9 +3,9 @@ public:
     int scoreOfParentheses(string s) {
         stack<int>st;
         int ans=0;
-        for(int i=0;i<s.size();i++)
+        for(char ch : s)
         {
-            if(s[i]=='(')
+            if(ch=='(')
                 st.push(0);
             
             else
@@ -13,10 +13,7 @@ public:
                 int p = st.top();
                 st.pop();
                 
-                int val;
-                
-                if(p==0)val=1;
-                else val=(2*p);
+                int val= max(1,2*p);
                 
                 if(st.size()==0)
                     ans+=val;
