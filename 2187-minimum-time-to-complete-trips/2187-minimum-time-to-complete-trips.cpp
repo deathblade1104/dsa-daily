@@ -18,7 +18,7 @@ public:
     long long minimumTime(vector<int>& time, long long trips) {
         
         sort(time.begin(),time.end());
-        long long low=time[0],high=100000000000000,ans=-1;
+        long long low=time[0],high=(time[time.size()-1]*trips),ans=-1;
         
         while(low<=high)
         {
