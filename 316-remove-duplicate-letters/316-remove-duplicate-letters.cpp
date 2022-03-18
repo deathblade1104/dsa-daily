@@ -15,8 +15,7 @@ public:
         string ans="";
         for(int i=0;i<s.size();i++)
         {
-            char ch = s[i];
-            
+            char ch = s[i];            
             if(pre[ch-'a']==false)
             {
             
