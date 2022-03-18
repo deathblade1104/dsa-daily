@@ -1,17 +1,18 @@
 class Solution {
     private:
-    bool DFS(int curr,int sz,unordered_set<int>&st,vector<vector<int>>&adj)
+    bool DFS(int curr,int sz,int &count,vector<bool>&vis,vector<vector<int>>&adj)
     {
-        st.insert(curr);
-        if(st.size()==sz)
+        count++;
+        if(count==sz)
             return true;
         
         bool ans=false;
+        vis[curr]=true;
         for(int x : adj[curr])
         {
-            if(st.count(x)==0)
+            if(!vis[x])
             {
-                ans= (ans | DFS(x,sz,st,adj));
+                ans= (ans | DFS(x,sz,count,vis,adj));
                 if(ans)
                     return true;
             }
@@ -22,10 +23,10 @@ class Solution {
     
     public:
     bool canVisitAllRooms(vector<vector<int>>& adj) {
-        unordered_set<int>st;
-        int curr=0,sz=adj.size();
+        int curr=0,sz=adj.size(),count=0;
+        vector<bool>vis(sz,false);
         
-        return DFS(curr,sz,st,adj);
+        return DFS(curr,sz,count,vis,adj);
         
     }
 };
