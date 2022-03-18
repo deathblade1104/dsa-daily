@@ -17,12 +17,8 @@ class Solution {
 public:
     long long minimumTime(vector<int>& time, long long trips) {
         
-        if(time.size()==1 and time[0]==10000000 and trips==10000000)
-            return 100000000000000;
-        
         sort(time.begin(),time.end());
-        long long low=time[0],high=
-100000000000,ans=-1;
+        long long low=time[0],high=100000000000000,ans=-1;
         
         while(low<=high)
         {
