@@ -12,7 +12,7 @@ public:
         for(char ch : s)
             freq[ch-'a']++;
         
-        stack<char>st;
+        string ans="";
         for(int i=0;i<s.size();i++)
         {
             char ch = s[i];
@@ -20,28 +20,18 @@ public:
             if(pre[ch-'a']==false)
             {
             
-                while(st.size()!=0 and ch<=st.top() and freq[st.top()-'a']!=0)
+                while(ans.size()!=0 and ch<=ans.back() and freq[ans.back()-'a']!=0)
                 {
-                    pre[st.top()-'a']=false;
-                    st.pop();
+                    pre[ans.back()-'a']=false;
+                    ans.pop_back();
                 }
                      
-                st.push(ch);
+                ans+=ch;
                 pre[ch-'a']=true;
             }
             
             freq[ch-'a']--;
-        }
-        
-        string ans="";
-        while(st.size()>0)
-        {
-            ans+=st.top();
-            st.pop();
-        }
-        
-        reverse(ans.begin(),ans.end());
-        
+        }        
         return ans;
         
         
