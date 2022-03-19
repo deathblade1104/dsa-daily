@@ -1,13 +1,13 @@
 class Solution {
 private:
-    void DFS(int curr,int par,vector<bool>&vis,vector<vector<int>>&adj)
+    void DFS(int curr,vector<bool>&vis,vector<vector<int>>&adj)
     {
         vis[curr]=true;
         
         for(int x : adj[curr])
         {
-            if(!vis[x] and x!=par)
-                DFS(x,par,vis,adj);
+            if(!vis[x])
+                DFS(x,vis,adj);
         }
         return;
     }
@@ -38,7 +38,7 @@ public:
             if(!vis[i])
             {
                 count++;
-                DFS(i,-1,vis,adj);
+                DFS(i,vis,adj);
             }            
         }
         
