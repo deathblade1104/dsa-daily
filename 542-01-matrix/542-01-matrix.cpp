@@ -11,7 +11,7 @@ public:
     };
     
     vector<vector<int>> updateMatrix(vector<vector<int>>&grid) {
-      int n=grid.size(),m=grid[0].size();
+      int n=grid.size(),m=grid[0].size(),cells=0;
       queue<Node>q;
       int dim[5]={1,0,-1,0,1};
       vector<vector<int>>ans(n,vector<int>(m,-1));
@@ -26,7 +26,7 @@ public:
         }
         
         
-        while(q.size()>0)
+        while(q.size()>0 and cells<(n*m))
         {
             auto p = q.front();
             q.pop();
@@ -37,6 +37,8 @@ public:
                 continue;
             
             ans[row][col]=d;
+            cells++;
+            
             
             for(int i=1;i<=4;i++)
             {
