@@ -3,10 +3,8 @@ public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
         int n=graph.size();
         queue<int>q;
-        vector<int>ans,adj[n];
-        vector<int>indegree(n,0);
-        
-        
+        vector<int>ans,adj[n],indegree(n,0);
+                
         for(int i=0;i<n;i++)
         {
             if(graph[i].size()==0)
@@ -15,15 +13,12 @@ public:
             else
             {
                 for(int x : graph[i])
+                {
                     adj[x].push_back(i);
+                    indegree[i]++;
+                }
             }
-        }
-        
-        for(int i=0;i<n;i++)
-        {
-            for(int x : adj[i])
-                indegree[x]++;
-        }
+        }        
         
         
     
@@ -32,9 +27,7 @@ public:
             int curr=q.front();
             q.pop();
             
-            ans.push_back(curr);
-            
-            
+            ans.push_back(curr);    
             for(int x : adj[curr])
             {
                 indegree[x]--;
