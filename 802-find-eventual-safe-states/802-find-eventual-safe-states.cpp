@@ -18,10 +18,8 @@ public:
                     indegree[i]++;
                 }
             }
-        }        
+        }     
         
-        
-    
         while(q.size()>0)
         {
             int curr=q.front();
