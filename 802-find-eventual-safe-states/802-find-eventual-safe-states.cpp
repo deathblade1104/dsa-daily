@@ -9,8 +9,14 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            for(int x : graph[i])
-                adj[x].push_back(i);
+            if(graph[i].size()==0)
+                q.push(i);
+            
+            else
+            {
+                for(int x : graph[i])
+                    adj[x].push_back(i);
+            }
         }
         
         for(int i=0;i<n;i++)
@@ -19,10 +25,7 @@ public:
                 indegree[x]++;
         }
         
-        for(int i=0;i<n;i++)
-        {   if(indegree[i]==0)
-                q.push(i);
-        }
+        
     
         while(q.size()>0)
         {
