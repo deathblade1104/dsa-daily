@@ -3,15 +3,11 @@ private:
     void DFS(int curr,int prevTime, int &ans,vector<int>adj[],vector<int>&inform)
     {
         int currTime = prevTime + inform[curr];
-        inform[curr]=-1;
-        
         ans=max(ans,currTime);
         
-        for(int x : adj[curr])
-        {            
-            if(inform[x]!=-1)
-                DFS(x,currTime,ans,adj,inform);
-        }
+        for(int x : adj[curr])            
+            DFS(x,currTime,ans,adj,inform);
+        
         return;
         
     }
