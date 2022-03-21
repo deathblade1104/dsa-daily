@@ -1,36 +1,25 @@
 class Solution {
 public:
-    struct Node
-    {
-        int dest,color;
-        
-        Node(int d, int c)
-        {
-            dest=d;
-            color=c;
-        }
-    };
-    
     vector<int> shortestAlternatingPaths(int n, vector<vector<int>>& redEdges, vector<vector<int>>& blueEdges) {
     
-        vector<Node>adj[n];
+        vector<pair<int,int>>adj[n];
         vector<int>ans(n,INT_MAX);
         vector<vector<bool>>vis(n,vector<bool>(3,false));
         
         for(int i=0;i<redEdges.size();i++)
         {
             auto p=redEdges[i];
-            adj[p[0]].push_back(Node(p[1],1));            
+            adj[p[0]].push_back({p[1],1});            
         }
         
         for(int i=0;i<blueEdges.size();i++)
         {
             auto p=blueEdges[i];
-            adj[p[0]].push_back(Node(p[1],2));            
+            adj[p[0]].push_back({p[1],2});            
         }
         
-        queue<Node>q;
-        q.push(Node(0,0));
+        queue<pair<int,int>>q;
+        q.push({0,0});
         int steps=0;
         
         while(q.size()>0)
@@ -41,13 +30,13 @@ public:
                 auto p=q.front();
                 q.pop();
                 
-                int v=p.dest, c=p.color;
+                int v=p.first, c=p.second;
                 ans[v]= min(ans[v],steps);
                 vis[v][c]=true;
                 
                 for(auto neigh : adj[v])
                 {
-                    if(neigh.color!=c and vis[neigh.dest][neigh.color]==false)
+                    if(neigh.second!=c and vis[neigh.first][neigh.second]==false)
                         q.push(neigh);
                 }                
             }
