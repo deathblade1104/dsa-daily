@@ -1,40 +1,77 @@
 class Solution {
 public:
     int maxDistance(vector<vector<int>>& grid) {
+        int n=grid.size(),l=0,w=0;
         queue<pair<int,int>>q;
-        int steps=0,r=grid.size(),c=grid[0].size();
-        for(int i=0;i<r;i++)
+        vector<vector<int>>ans(n,vector<int>(n,-2));
+        int dim[5]={1,0,-1,0,1};
+        for(int i=0;i<n;i++)
         {
-            for(int j=0;j<c;j++)
+            for(int j=0;j<n;j++)
             {
                 if(grid[i][j]==1)
                 {
-                    q.push({i-1,j});
-                    q.push({i+1,j});
-                    q.push({i,j-1});
-                    q.push({i,j+1});
+                    l++;
+                    ans[i][j]=0;
+                    
+                    for(int k=1;k<=4;k++)
+                    {
+                        int x=i+dim[k-1], y=j+dim[k];
+                        
+                        if(x<0 or y<0 or x>=n or y>=n or grid[x][y]==1 or ans[x][y]!=-2)
+                            continue;
+                        
+                        ans[x][y]=-1;
+                        q.push({x,y});
+                    }
                 }
+                
+                else 
+                    w++;
             }
         }
-        while(!q.empty())
+        
+        if(l==0 or w==0)
+            return -1;
+        
+        int steps=1;
+        while(q.size()>0)
         {
-            int size=q.size();
-            steps++;
-            for(int k=0;k<size;k++)
+            int sz=q.size();
+            for(int i=0;i<sz;i++)
             {
-                int i=q.front().first,j=q.front().second;
-                q.pop();
-                if(i>=0&&j>=0&&i<r&&j<c&&grid[i][j]==0)
+                auto p=q.front(); q.pop();
+                
+                int r=p.first,c=p.second;
+                
+                if(ans[r][c]>=0)
+                    continue;
+                
+                ans[r][c]=steps;
+                for(int k=1;k<=4;k++)
                 {
-                    grid[i][j]=steps;
-                    q.push({i-1,j});
-                    q.push({i+1,j});
-                    q.push({i,j-1});
-                    q.push({i,j+1});
+                    int x=r+dim[k-1], y=c+dim[k];
+
+                    if(x<0 or y<0 or x>=n or y>=n or grid[x][y]==1 or ans[x][y]!=-2)
+                        continue;
+
+                    ans[x][y]=-1;
+                    q.push({x,y});
                 }
+                
             }
+            steps++;
         }
-        return steps==1?-1:steps-1;
+        
+        
+        int res=-1;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+             res=max(res,ans[i][j]);
+        }
+        
+        return res;
         
     }
 };
