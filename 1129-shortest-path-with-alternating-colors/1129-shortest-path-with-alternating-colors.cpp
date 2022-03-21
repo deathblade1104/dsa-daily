@@ -6,20 +6,16 @@ public:
         vector<int>ans(n,INT_MAX);
         vector<vector<bool>>vis(n,vector<bool>(2,false));
         
-        for(int i=0;i<redEdges.size();i++)
-        {
-            auto p=redEdges[i];
+        for(auto p : redEdges)
             adj[p[0]].push_back({p[1],0});            
-        }
         
-        for(int i=0;i<blueEdges.size();i++)
-        {
-            auto p=blueEdges[i];
+        for( auto p : blueEdges)
             adj[p[0]].push_back({p[1],1});            
-        }
+        
         
         queue<pair<int,int>>q;
-        q.push({0,-1});
+        q.push({0,0});
+        q.push({0,1});
         int steps=0;
         
         while(q.size()>0)
@@ -32,9 +28,7 @@ public:
                 
                 int v=p.first, c=p.second;
                 ans[v]= min(ans[v],steps);
-                
-                if(c!=-1)
-                    vis[v][c]=true;
+                vis[v][c]=true;
                 
                 for(auto neigh : adj[v])
                 {
