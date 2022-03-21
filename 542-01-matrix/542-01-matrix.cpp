@@ -2,7 +2,7 @@ class Solution {
 public:
   
     vector<vector<int>> updateMatrix(vector<vector<int>>&grid) {
-      int n=grid.size(),m=grid[0].size(),cells=0;
+      int n=grid.size(),m=grid[0].size();
       queue<pair<int,int>>q;
       int dim[5]={1,0,-1,0,1};
       vector<vector<int>>ans(n,vector<int>(m,-2));
