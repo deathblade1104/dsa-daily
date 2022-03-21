@@ -4,22 +4,22 @@ public:
     
         vector<pair<int,int>>adj[n];
         vector<int>ans(n,INT_MAX);
-        vector<vector<bool>>vis(n,vector<bool>(3,false));
+        vector<vector<bool>>vis(n,vector<bool>(2,false));
         
         for(int i=0;i<redEdges.size();i++)
         {
             auto p=redEdges[i];
-            adj[p[0]].push_back({p[1],1});            
+            adj[p[0]].push_back({p[1],0});            
         }
         
         for(int i=0;i<blueEdges.size();i++)
         {
             auto p=blueEdges[i];
-            adj[p[0]].push_back({p[1],2});            
+            adj[p[0]].push_back({p[1],1});            
         }
         
         queue<pair<int,int>>q;
-        q.push({0,0});
+        q.push({0,-1});
         int steps=0;
         
         while(q.size()>0)
@@ -32,7 +32,9 @@ public:
                 
                 int v=p.first, c=p.second;
                 ans[v]= min(ans[v],steps);
-                vis[v][c]=true;
+                
+                if(c!=-1)
+                    vis[v][c]=true;
                 
                 for(auto neigh : adj[v])
                 {
