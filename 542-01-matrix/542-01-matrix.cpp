@@ -48,7 +48,7 @@ public:
                 {
                     int x=row+dim[i-1],y=col+dim[i];
 
-                    if(x<0 or y<0 or x>=n or y>=m or ans[x][y]>=0)
+                    if(x<0 or y<0 or x>=n or y>=m or ans[x][y]!=-2)
                         continue;
 
                     else
