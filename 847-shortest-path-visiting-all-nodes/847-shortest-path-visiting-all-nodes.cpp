@@ -1,44 +1,43 @@
 class Solution {
 public:
-   int shortestPathLength(vector<vector<int>>& graph) {
-        int n = graph.size();
-        if(n == 1)
-            return 0;
-        queue<pair<int,int>>bfsQueue;
-		//2^n - 1 (all bits 1)
-        int finalState = (1 << n) - 1;
-        for(int i = 0 ; i < n ; i++){
-		    //mark corresponding bit as 1 in the map and push the state vertex pair
-            bfsQueue.push({i,1 << i});
+    int shortestPathLength(vector<vector<int>>& adj) {
+        int n=adj.size(),target=(1<<n)-1;
+        vector<vector<bool>>vis(n,vector<bool>(target+1,false));
+        
+        queue<pair<int,int>>q;
+        
+        for(int i=0;i<n;i++)
+        {
+            q.push({i,(1<<i)});
+            vis[i][1<<i]=true;
         }
-		//array to mark the states
-        vector<vector<bool>>visitedStates(n,vector<bool>(finalState + 1,false));
-		//result
-        int ans = 0;
-        while(!bfsQueue.empty()){
-            int s = bfsQueue.size();
-            ans++;
-            for(int i = 0 ; i < s ; i++){
-                pair<int,int>fr = bfsQueue.front();
-                bfsQueue.pop();
-                int nodeNumber = fr.first;
-                int visitedState = fr.second;
-                for(auto v : graph[nodeNumber]){
-				//or with the new state (i.e the bit state of the next vertex)
-                    int newVisitedState = visitedState | (1 << v);
-					//if we encounter the final state, return the path length
-                    if(newVisitedState == finalState)
-                        return ans;
-						//unvisited?
-                    if(!visitedStates[v][newVisitedState]){
-					//push in queue
-                        bfsQueue.push({v,newVisitedState});
-						//mark as visited
-                        visitedStates[v][newVisitedState] = 1;
+        int steps=0;
+        while(q.size()>0)
+        {
+            int sz=q.size();
+            for(int i=0;i<sz;i++)
+            {
+                auto [curr,edge] = q.front();
+                q.pop();
+                
+                if(edge==target)
+                    return steps;
+                
+                for(auto neigh : adj[curr])
+                {
+                    int new_edge = (1<<neigh)|edge;
+                    
+                    if(vis[neigh][new_edge]==false)
+                    {
+                        q.push({neigh,new_edge});
+                        vis[neigh][new_edge]=true;
                     }
                 }
             }
+            steps++;
         }
-        return ans;
+        return -1;
+        
+        
     }
 };
