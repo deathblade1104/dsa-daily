@@ -1,13 +1,12 @@
 class Solution {
 private :
-    void DFS(int curr, int par, int &ans,vector<bool>&vis, set<pair<int,int>>&edges, vector<int>adj[])
+    void DFS(int curr, int par, int &ans,vector<bool>&vis,unordered_map<int, unordered_set<int>>&edges,vector<int>adj[])
     {
         for(auto neigh : adj[curr])
         {
             if(!vis[neigh])
             {
-                pair<int,int>p=make_pair(neigh,curr);
-                if(edges.count(p)==0)
+                if(edges[neigh].count(curr)==0)
                     ans++;
                 
                 vis[neigh]=true;
@@ -20,7 +19,7 @@ private :
 public:
     int minReorder(int n, vector<vector<int>>& connections) {
         vector<int>adj[n];
-        set<pair<int,int>>edges;       
+        unordered_map<int, unordered_set<int>>edges;    
         vector<bool>vis(n,false);
         
         for(int i =0;i<connections.size();i++)
@@ -29,7 +28,7 @@ public:
             int u=p[0],v=p[1];
             
             adj[u].push_back(v);
-            edges.insert(make_pair(u,v));        
+            edges[u].insert(v);      
             
             adj[v].push_back(u);
         }
