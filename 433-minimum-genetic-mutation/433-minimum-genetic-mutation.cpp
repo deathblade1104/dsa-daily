@@ -2,7 +2,6 @@ class Solution {
     public:
     int minMutation(string start, string end, vector<string>& bank) {
         unordered_set<string>st(bank.begin(),bank.end());
-        unordered_set<string>vis;
         vector<char>v={'A','C','G','T'};
         
         if(st.count(end)==0)
