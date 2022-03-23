@@ -4,19 +4,10 @@ public:
         int steps=0;
         while(target!=start)
         {
-            if(target<start)
+            if(target<start or (target&1))
                 target++;            
             
-            if(target>start)               
-            {
-                
-                if(target&1)
-                    target++;
-                
-                else
-                    target/=2;
-                
-            }
+            else target/=2;
             
             steps++;
         }
