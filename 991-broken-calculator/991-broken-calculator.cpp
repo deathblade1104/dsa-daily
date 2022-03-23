@@ -1,6 +1,7 @@
 class Solution {
 public:
     int brokenCalc(long long start, long long target) {
+        
         int steps=0;
         while(target!=start)
         {
