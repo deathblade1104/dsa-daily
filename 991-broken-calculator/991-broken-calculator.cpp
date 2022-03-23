@@ -13,7 +13,7 @@ public:
             steps++;
         }
         
-        steps+=abs(target - start);
+        steps+=(start - target);
         return steps;
     }
 };
