@@ -1,48 +1,53 @@
 class Solution {
 public:
-    
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-      unordered_set<string>st(wordList.begin(),wordList.end());
+        unordered_set<string>st(wordList.begin(),wordList.end());
+        
         if(st.count(endWord)==0)
-            return 0;
+            return 0;        
         
         queue<string>q;
         q.push(beginWord);
         
-        int d=1;        
+        int steps=1;
         while(q.size()>0)
         {
             int sz=q.size();
-            
             for(int i=0;i<sz;i++)
-            {
+            { 
                 string curr=q.front();
                 q.pop();
                 
-                for(int i=0;i<curr.size();i++)
+                if(curr==endWord) return steps;
+                
+                
+                for(int j=0;j<curr.size();j++)
                 {
-                    for(char j='a';j<='z';j++)
+                    char x= curr[j];
+                    
+                    for(char k = 'a'; k<='z';k++)
                     {
-                        string temp=curr;
-                        temp[i]=j;
-                        
-                        if(temp.compare(curr)!=0)
+                        if(k!=x)
                         {
-                            if(temp==endWord)
-                                return d+1;
+                            string left = curr.substr(0,j) , right = curr.substr(j+1);
+                            string temp=left;
+                            temp+=k;
+                            temp+=right;                            
                             
-                            else if(st.count(temp)==1)
+                            if(st.count(temp)==1)
                             {
-                                st.erase(temp);
                                 q.push(temp);
+                                st.erase(temp);
                             }
                         }
                     }
                 }
-            }            
-            d++;
+            }
+            steps++;
         }
         
-        return 0;
+        return 0;       
+        
+        
     }
 };
