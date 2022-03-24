@@ -17,6 +17,7 @@ public:
         }        
         return dp[curr]=0;
     }
+    
     bool canJump(vector<int>& nums) {
         int sz=nums.size();
         memset(dp,-1,sizeof(dp));
