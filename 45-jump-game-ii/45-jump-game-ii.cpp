@@ -11,6 +11,9 @@ public:
         
         int ans=(INT_MAX/2);
         
+        if(nums[curr]==0)
+            return dp[curr]=ans;
+        
         for(int i=nums[curr];i>=1;i--)
         {
             int temp = 1 + get_ans(curr+i,sz,nums);
