@@ -3,19 +3,6 @@ private:
     void DFS(int curr, int &ans, vector<bool>&vis,vector<pair<int,bool>>adj[])
     {
         
-        for(auto neigh : adj[curr])
-        {
-            if(!vis[neigh.first])
-            {
-                if(neigh.second==true)  
-                    ans++;
-
-                vis[neigh.first]=true;
-                DFS(neigh.first,ans,vis,adj);
-            }
-         }
-            
-        return;
     }
 
 public:
@@ -34,7 +21,29 @@ public:
         
         vis[0]=true;
         int ans=0;
-        DFS(0,ans,vis,adj);
+        
+        queue<int>q;
+        q.push(0);
+        
+        while(q.size()>0)
+        {
+            
+            auto curr= q.front();
+            q.pop();
+            
+             for(auto neigh : adj[curr])
+             {
+                if(!vis[neigh.first])
+                {
+                    if(neigh.second==true)  
+                        ans++;
+
+                    vis[neigh.first]=true;
+                    q.push(neigh.first);
+                }
+             }
+        }
+        
         return ans;
         
     }
