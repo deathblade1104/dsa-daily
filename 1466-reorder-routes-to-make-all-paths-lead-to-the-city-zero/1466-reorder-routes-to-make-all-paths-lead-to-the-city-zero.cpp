@@ -26,22 +26,17 @@ public:
             auto curr= q.front();
             q.pop();
             
-            // cout<<curr<<" : ";
              for(auto neigh : adj[curr])
              {
                 if(!vis[neigh.first])
                 {
                     if(neigh.second==true)  
-                    {
                         ans++;
-                        // cout<<"Counting  --> "<<neigh.first<<endl;
-                    }
 
                     vis[neigh.first]=true;
                     q.push(neigh.first);
                 }
              }
-            // cout<<endl;
         }
         
         return ans;
