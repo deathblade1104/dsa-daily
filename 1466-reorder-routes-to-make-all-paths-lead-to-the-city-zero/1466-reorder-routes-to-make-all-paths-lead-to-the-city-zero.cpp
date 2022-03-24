@@ -2,8 +2,7 @@ class Solution {
 
 public:
     int minReorder(int n, vector<vector<int>>& connections) {
-        vector<int>adj[n];
-        unordered_map<int, unordered_set<int>>edges;    
+        vector<pair<int,bool>>adj[n];
         vector<bool>vis(n,false);
         
         for(int i =0;i<connections.size();i++)
@@ -11,10 +10,8 @@ public:
             auto p = connections[i];
             int u=p[0],v=p[1];
             
-            adj[u].push_back(v);
-            edges[u].insert(v);      
-            
-            adj[v].push_back(u);
+            adj[u].push_back({v,true});
+            adj[v].push_back({u,false});
         }
         
         vis[0]=true;
@@ -25,20 +22,26 @@ public:
         
         while(q.size()>0)
         {
+            
             auto [curr, p]= q.front();
             q.pop();
             
-            for(auto neigh : adj[curr])
+            // cout<<curr<<" : ";
+             for(auto neigh : adj[curr])
              {
-                if(!vis[neigh])
+                if(!vis[neigh.first])
                 {
-                    if(edges[neigh].count(curr)==0)
+                    if(neigh.second==true)  
+                    {
                         ans++;
+                        // cout<<"Counting  --> "<<neigh.first<<endl;
+                    }
 
-                    vis[neigh]=true;
-                    q.push({neigh,curr});
+                    vis[neigh.first]=true;
+                    q.push({neigh.first,curr});
                 }
              }
+            // cout<<endl;
         }
         
         return ans;
