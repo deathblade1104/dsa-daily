@@ -9,13 +9,12 @@ public:
         if(dp[curr]!=-1)
             return dp[curr];
         
-        for(int i=1;i<=nums[curr];i++)
+        for(int i=nums[curr];i>=1;i--)
         {
             bool temp = get_ans(curr+i,sz,nums);
             if(temp)
                 return dp[curr]=1;    
-        }
-        
+        }        
         return dp[curr]=0;
     }
     bool canJump(vector<int>& nums) {
