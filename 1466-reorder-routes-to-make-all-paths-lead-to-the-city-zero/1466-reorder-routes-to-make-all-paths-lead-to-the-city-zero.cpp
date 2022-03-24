@@ -15,15 +15,15 @@ public:
         }
         
         vis[0]=true;
-        
         int ans=0;
-        queue<pair<int,int>>q;
-        q.push({0,-1});
+        
+        queue<int>q;
+        q.push(0);
         
         while(q.size()>0)
         {
             
-            auto [curr, p]= q.front();
+            auto curr= q.front();
             q.pop();
             
             // cout<<curr<<" : ";
@@ -38,7 +38,7 @@ public:
                     }
 
                     vis[neigh.first]=true;
-                    q.push({neigh.first,curr});
+                    q.push(neigh.first);
                 }
              }
             // cout<<endl;
