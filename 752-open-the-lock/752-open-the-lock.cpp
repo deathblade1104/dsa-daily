@@ -1,15 +1,20 @@
 class Solution {
 public:
     int openLock(vector<string>& deadends, string target) {
-        unordered_set<string>st(deadends.begin(),deadends.end());
-        unordered_set<string>vis;
+        vector<bool>vis(10000,false);
         
-        if(st.count("0000")==1 or st.count(target)==1)
+        for(int i=0;i<deadends.size();i++)
+        {
+            int num=stoi(deadends[i]);
+            vis[num]=true;
+        }
+        
+        if(vis[0] or vis[stoi(target)])
             return -1;
         
         queue<string>q;
         q.push("0000");
-        vis.insert("0000");
+        vis[0]=true;
         int steps=0;
         
         while(q.size()>0)
@@ -59,15 +64,17 @@ public:
                     temp2+=ch2;
                     temp2+=right;
                     
-                    if(st.count(temp1)==0 and vis.count(temp1)==0)
+                    int num1=stoi(temp1),num2=stoi(temp2);
+                    
+                    if(vis[num1]==false)
                     {
-                        vis.insert(temp1);
+                        vis[num1]=true;
                         q.push(temp1);
                     }
                     
-                    if(st.count(temp2)==0 and vis.count(temp2)==0)
+                    if(vis[num2]==false)
                     {
-                        vis.insert(temp2);
+                        vis[num2]=true;
                         q.push(temp2);
                     }
                 }
