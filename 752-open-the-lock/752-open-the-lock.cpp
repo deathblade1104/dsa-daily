@@ -46,6 +46,7 @@ public:
                         n1=num-1;
                         n2=num+1;
                     }
+                    
                     char ch1 = (char)(n1+ '0');
                     
                     string temp1 = left;
