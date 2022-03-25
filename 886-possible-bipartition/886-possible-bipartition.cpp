@@ -32,7 +32,6 @@ public:
             adj[edge[0]].push_back(edge[1]);
             adj[edge[1]].push_back(edge[0]);
         }
-        
             
         for(int i=1;i<=n;i++)
             if((vis[i]==-1) and (DFS(i,1,vis,adj)==false))   
