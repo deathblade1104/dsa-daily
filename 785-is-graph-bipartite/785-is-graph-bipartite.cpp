@@ -7,21 +7,19 @@ private :
         bool ans=true;
         for(int neigh : adj[curr])
         {
-            if(vis[neigh]!=-1)
-            {
-                if(vis[neigh]==color)
+            if(vis[neigh]!=-1 and vis[neigh]==color)
                     return false;
-            }
             
-            else
+            else if(vis[neigh]==-1)
                 ans = ans & DFS(neigh, !color, vis,adj);
             
             if(ans==false)
                 return false;
         }
         
-        return ans;
+        return true;
     }
+    
 public:
     bool isBipartite(vector<vector<int>>& adj) {
         int n= adj.size();
