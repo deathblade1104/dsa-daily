@@ -3,20 +3,20 @@ private:
     int dp[101];
     int get_ans(int curr, int sz, vector<int>&nums)
     {
-        if(curr>=sz)
-            return 0;
-        
         if(dp[curr]!=-1)
             return dp[curr];
         
-        int rob = nums[curr] + get_ans(curr+2,sz,nums); 
-        int dont_rob = get_ans(curr+1,sz, nums);
+        int rob = nums[curr] ,dont_rob =0;
         
-    
-        dp[curr]= max(rob,dont_rob);
+        if(curr+2<sz)
+            rob += get_ans(curr+2,sz,nums);
         
-        return dp[curr];
+        if(curr+1<sz)
+            dont_rob += get_ans(curr+1,sz,nums);
+        
+        return dp[curr]= max(rob,dont_rob);
     }
+    
 public:
     int rob(vector<int>& nums) {
         int sz=nums.size();
