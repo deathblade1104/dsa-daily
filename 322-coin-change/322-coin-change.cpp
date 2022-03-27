@@ -1,39 +1,44 @@
 class Solution {
 public:
     int dp[10001];
-    int solve(int amt,int&n,vector<int>&coins)
-    {
-        if(amt==0)
-            return 0;
+    int coinChange(vector<int>& coins, int amt) {
+        memset(dp,10000,10001*sizeof(int));
+        dp[0]=0;
         
-        if(dp[amt]!=-1)
-        return dp[amt];
-        
-        int temp = 100000;
-        
-        for(int i=0;i<n;i++)
-        {
-            if(coins[i]>amt)
-            break;
-            
-            else
-            temp = min(temp,solve(amt-coins[i],n,coins));
-        }
-        
-        return dp[amt]=temp+1;
-        
-    }
-    int coinChange(vector<int>& coins, int amount) {
-        int n = coins.size();        
+        int n=coins.size();
         
         sort(coins.begin(),coins.end());
         
-        memset(dp,-1,10001*sizeof(int));
-        int ans=solve(amount,n,coins);
+        for(int i=0;i<n;i++)
+        {
+            if(coins[i]<=10000)
+                dp[coins[i]]=1;
+        }
         
-        if(ans >= 100000)
+        dp[0]=0;
+        
+        
+        for(int i=1;i<=amt;i++)
+        {
+            if(dp[i]!=10001)
+            {
+                int temp =10001;
+                for(int j=0; j<n;j++)
+                {
+                    if(coins[j]<=i)
+                    temp = min(temp,dp[i-coins[j]]);
+                    
+                    else
+                    break;
+                }
+                
+                dp[i] = temp + 1;
+            }
+        }
+        
+        if(dp[amt]>=10000)
             return -1;
-        else
-            return ans;
+        
+        return dp[amt];
     }
 };
