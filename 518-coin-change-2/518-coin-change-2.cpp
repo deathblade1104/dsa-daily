@@ -29,9 +29,7 @@ public:
         
         int n=coins.size();
         
-        for(int i=0;i<n;i++)
-            for(int j=0;j<=amount;j++)
-                dp[i][j]=-1;
+        memset(dp,-1,sizeof(dp));
         
         
         int ans=getans(coins,0,amount,n);
