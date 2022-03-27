@@ -11,9 +11,12 @@ public:
         
         int temp = 100000;
         
-        for(int i=n-1;i>=0;i--)
+        for(int i=0;i<n;i++)
         {
-            if(coins[i]<=amt)
+            if(coins[i]>amt)
+            break;
+            
+            else
             temp = min(temp,solve(amt-coins[i],n,coins));
         }
         
@@ -21,9 +24,10 @@ public:
         
     }
     int coinChange(vector<int>& coins, int amount) {
-        int n = coins.size();
+        int n = coins.size();        
         
-        sort(coins.begin(),coins.end());        
+        sort(coins.begin(),coins.end());
+        
         memset(dp,-1,10001*sizeof(int));
         int ans=solve(amount,n,coins);
         
