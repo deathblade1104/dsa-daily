@@ -11,13 +11,13 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            if(coins[i]<=10000)
+            if(coins[i]<=amt)
                 dp[coins[i]]=1;
+            
+            else break;
         }
         
-        dp[0]=0;
-        
-        
+        dp[0]=0;       
         for(int i=1;i<=amt;i++)
         {
             if(dp[i]!=10001)
