@@ -2,12 +2,15 @@ class Solution {
 public:
     int dp[10001];
     int coinChange(vector<int>& coins, int amt) {
-        memset(dp,10000,10001*sizeof(int));
-        dp[0]=0;
-        
+        memset(dp,10000,10001*sizeof(int));        
         int n=coins.size();
-        
         sort(coins.begin(),coins.end());
+        
+        if(amt == 0 )
+            return 0;
+        
+        if(coins[0]>amt)
+            return -1;
         
         for(int i=0;i<n;i++)
         {
