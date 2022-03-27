@@ -13,10 +13,10 @@ public:
         for(int i=n-1;i>=0;i--)
         {
             if(coins[i]<=amt)
-            temp = min(temp, 1 + solve(amt-coins[i],n,coins));
+            temp = min(temp,solve(amt-coins[i],n,coins));
         }
         
-        return dp[amt]=temp;
+        return dp[amt]=temp+1;
         
     }
     int coinChange(vector<int>& coins, int amount) {
