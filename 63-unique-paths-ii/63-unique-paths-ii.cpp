@@ -1,33 +1,39 @@
 class Solution {
 public:
-    int dp[101][101];
-    int ans(vector<vector<int>>OG,int &m,int &n,int curr_r,int curr_c)
-    {
-        if(curr_r>=m || curr_c>=n || OG[curr_r][curr_c]==1)
+    int uniquePathsWithObstacles(vector<vector<int>>& grid) {
+       
+        int m=grid.size(), n=grid[0].size();
+       
+        if(grid[m-1][n-1]==1 or grid[0][0]==1)
             return 0;
         
-        if( curr_r==m-1 && curr_c==n-1)
-            return 1;
-           
-        if(dp[curr_r][curr_c]!=-1)
-            return dp[curr_r][curr_c];
+       vector<vector<long long>>dp(m,vector<long long>(n,0));
         
-        int down=ans(OG,m,n,curr_r+1,curr_c);
-        int right=ans(OG,m,n,curr_r,curr_c+1);
-        
-        dp[curr_r][curr_c]= down + right;
-        
-        return dp[curr_r][curr_c];
-        
-    }
-    
-    int uniquePathsWithObstacles(vector<vector<int>>& OG) {
-        int m=OG.size();
-        int n=OG[0].size();
-        
-        memset(dp,-1,sizeof(dp));
-        
-        return ans(OG,m,n,0,0);
-         
+        dp[m-1][n-1]=1;        
+        for(int i=m-1;i>=0;i--)
+        {
+            for(int j=n-1;j>=0;j--)
+            {
+                if(i==m-1 and j==n-1)
+                    continue;
+                
+                else if(grid[i][j]==1)
+                    dp[i][j]=0;
+                
+                else
+                {
+                    if(i==m-1)
+                        dp[i][j]= dp[i][j+1];
+
+                        
+                    if(j==n-1)
+                        dp[i][j] = dp[i+1][j];
+                        
+                    if(i!=m-1 and j!=n-1)
+                        dp[i][j] = dp[i+1][j] + dp[i][j+1];
+                }
+            }
+        }        
+        return dp[0][0];
     }
 };
