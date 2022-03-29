@@ -9,7 +9,6 @@ class Solution{
     int get_ans(int i,int j, int n, int m, string &s1, string &s2,vector<vector<int>>&dp)
     {
         if((i>=n) or (j>=m)) return 0;
-        
         if(dp[i][j]!=-1) return dp[i][j];
         
         int ans=0;
@@ -27,6 +26,7 @@ class Solution{
     {
         vector<vector<int>>dp(n,vector<int>(m,-1));
         int x = get_ans(0,0,n,m,S1,S2,dp),ans=-1;
+        
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
