@@ -43,8 +43,7 @@ public:
         int n=s.size();
         memset(dp,-1,1001*1001*sizeof(int));
         
-        int xyz= get_ans(0,n-1,s),ans = 1;
-        
+        int xyz= get_ans(0,n-1,s),ans = 1;      
         string temp="";
         temp+=s[0];
         
