@@ -12,8 +12,8 @@ class Solution{
         if(i>j)
         return dp[i][j]=0;
         
-        else if(i==j)
-        return dp[i][j]= arr[i];
+        // else if(i==j)
+        // return dp[i][j]= arr[i];
         
         else if((i+1)==j)
         return dp[i][j]=max(arr[i],arr[j]);
