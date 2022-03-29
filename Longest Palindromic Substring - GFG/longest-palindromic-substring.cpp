@@ -9,30 +9,51 @@ using namespace std;
 
 class Solution{   
 public:
-    string longestPalindrome(string s){
+
+    int get_ans(int i, int j, string &s,vector<vector<int>>&dp)
+    {
+        if(i>j) return 0;       
         
-        int n=s.size();
-        vector<vector<int>>dp(n,vector<int>(n,0));
+        if(i==j)
+        return dp[i][j]=1;
         
-        for(int i=0;i<n;i++)
-            dp[i][i] = true;                   
-        
-        
-        for(int sz=2;sz<=n;sz++)
+        if(j==i+1)
         {
-            for(int i=0;i+sz-1<n;i++)
-            {
-                int start=i,end=i+sz-1;                       
-                
-                if(sz==2)
-                dp[start][end]=(s[start]==s[end]);
-        
-                else
-                dp[start][end]=(s[start]==s[end])&&(dp[start+1][end-1]);
-            }    
+            if(s[i]==s[j]) return dp[i][j]=1;
+            
+            else dp[i][j]=0;
         }
         
-        int ans = 1;
+        if(dp[i][j]!=-1)
+        return dp[i][j];
+        
+        bool ans;
+        
+        if(s[i]==s[j])
+        {
+            ans=true;
+            ans = (ans & get_ans(i+1,j-1,s,dp));
+        }
+        
+        else
+        {
+            ans=false;       
+            bool call3 = get_ans(i+1,j-1,s,dp);
+        }
+        
+        bool call1 = get_ans(i+1,j,s,dp);
+        bool call2 = get_ans(i,j-1,s,dp);
+            
+        return dp[i][j]=(int)ans;
+        
+    }
+    
+    string longestPalindrome(string s){
+        // code here 
+        int n=s.size();
+        vector<vector<int>>dp(n,vector<int>(n,-1));
+        
+        int xyz= get_ans(0,n-1,s,dp),ans = 1;      
         string temp="";
         temp+=s[0];
         
@@ -40,7 +61,7 @@ public:
         {
             for(int j=i+1;j<n;j++)
             {
-                if(dp[i][j] and j-i+1>ans)
+                if(dp[i][j] == 1 and j-i+1>ans)
                 {
                     ans=j-i+1;
                     temp=s.substr(i,j-i+1);
