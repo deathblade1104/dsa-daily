@@ -9,13 +9,10 @@ class Solution{
     public:
     long long get_ans(int i,int j, int arr[],vector<vector<long long>>&dp)
     {
-        // if(i>j)
-        // return dp[i][j]=0;
+        if(i==j)
+        return dp[i][j]= arr[i];
         
-        // else if(i==j)
-        // return dp[i][j]= arr[i];
-        
-        if((i+1)==j)
+        else if((i+1)==j)
         return dp[i][j]=max(arr[i],arr[j]);
         
         if(dp[i][j]!=-1)
