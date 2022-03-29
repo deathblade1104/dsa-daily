@@ -13,11 +13,9 @@ class Solution{
         if(dp[i][j]!=-1) return dp[i][j];
         
         int ans=0;
+        
         if(s1[i]==s2[j])
         ans = 1 + get_ans(i+1,j+1,n,m,s1,s2,dp);
-        
-        else
-        ans= 0;
         
         int x = get_ans(i+1,j,n,m,s1,s2,dp);
         int y = get_ans(i,j+1,n,m,s1,s2,dp);
