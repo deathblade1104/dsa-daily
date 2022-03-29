@@ -2,7 +2,7 @@ class Solution {
 public:
     int trap(vector<int>& arr) {
         int n= arr.size();
-        vector<int>left(n),right(n);
+        int left[20001],right[200001];
         left[0]=arr[0],right[n-1]=arr[n-1];
         
         for(int i=1;i<n;i++)
