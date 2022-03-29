@@ -26,8 +26,7 @@ class Solution{
     int longestCommonSubstr (string S1, string S2, int n, int m)
     {
         vector<vector<int>>dp(n,vector<int>(m,-1));
-        int x = get_ans(0,0,n,m,S1,S2,dp);
-        int ans=-1;
+        int x = get_ans(0,0,n,m,S1,S2,dp),ans=-1;
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
