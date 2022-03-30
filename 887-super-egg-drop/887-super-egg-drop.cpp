@@ -7,7 +7,8 @@ public:
         else if (floor==1 and eggs>0) return dp[floor][eggs]=1;
         else if(eggs==0) return dp[floor][eggs]=INT_MAX/2;    
         else if(eggs==1 and floor>0) return dp[floor][eggs]=floor;
-        else if(dp[floor][eggs]!=-1) return dp[floor][eggs];
+        
+        if(dp[floor][eggs]!=-1) return dp[floor][eggs];
         
         int res =INT_MAX,low=1,high=floor;
         
