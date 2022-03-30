@@ -2,7 +2,7 @@ class Solution {
 public:
     int maxScoreSightseeingPair(vector<int>& arr) {
         int n=arr.size();
-        vector<int>temp(n);
+        int temp[50001];
         
         temp[n-1]=arr[n-1]-n+1;
                
