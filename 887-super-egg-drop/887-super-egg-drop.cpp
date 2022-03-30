@@ -10,7 +10,7 @@ public:
         
         if(dp[floor][eggs]!=-1) return dp[floor][eggs];
         
-        int res =INT_MAX,low=0,high=floor;
+        int res =INT_MAX,low=1,high=floor;
         
         while(low<=high)
         {
