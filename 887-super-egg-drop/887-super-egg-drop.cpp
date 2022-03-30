@@ -14,12 +14,7 @@ public:
         
         while(low<=high)
         {
-            int mid = (low+high)/2;
-            
-            int left = get_ans(mid-1,eggs-1);
-            int right = get_ans(floor-mid,eggs);
-            
-            int temp =  1 + max(left,right);
+            int mid = (low+high)/2,left = get_ans(mid-1,eggs-1),right = get_ans(floor-mid,eggs),temp =  1 + max(left,right);
             
             if(left<right)
                 low=mid+1;
