@@ -5,8 +5,7 @@ public:
         vector<int>temp(n);
         
         temp[n-1]=arr[n-1]-n+1;
-        
-        
+               
         for(int i=n-2;i>0;i--)
         temp[i] = max(temp[i+1],(arr[i]-i));
         
