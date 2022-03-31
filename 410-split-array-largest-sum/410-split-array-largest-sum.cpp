@@ -27,9 +27,6 @@ public:
             high+=i;
         }
         
-        // if(m==nums.size())
-        //     return low;
-        
         int ans=high;
         while(low<=high)
         {
