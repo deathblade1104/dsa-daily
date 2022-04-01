@@ -22,7 +22,6 @@ public:
     }
     int numRollsToTarget(int n, int k, int target) {
         memset(dp,-1,31*1001*sizeof(int));
-        
         return get_ans(n,target,k);
     }
 };
