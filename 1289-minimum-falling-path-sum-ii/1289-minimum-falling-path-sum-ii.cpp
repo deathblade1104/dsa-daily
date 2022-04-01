@@ -15,11 +15,11 @@ public:
             if(c==i)
                 continue;
             
-            int curr = grid[r][c] + get_ans(r+1,i,n,grid);
+            int curr = get_ans(r+1,i,n,grid);
             ans=min(curr,ans);
         }
         
-        return dp[r][c] = ans;
+        return dp[r][c] = ans +  grid[r][c];
     }
     
     int minFallingPathSum(vector<vector<int>>& grid) {
