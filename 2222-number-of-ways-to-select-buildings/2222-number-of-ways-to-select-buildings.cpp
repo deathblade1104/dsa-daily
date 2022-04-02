@@ -1,25 +1,14 @@
 class Solution {
 public:
     long long numberOfWays(string s) {
-        
-       unordered_map<string,long long>dp;        
-        for(char x : s)
-        {
-            if(x=='0')
-            {
-                dp["0"] += 1;
-                dp["10"] += dp["1"];
-                dp["010"] += dp["01"];
-            }
-            else
-            {
-                dp["1"] += 1;
-                dp["01"] += dp["0"];
-                dp["101"] += dp["10"];
+      long long dp[4][2] = {};
+        dp[0][0] = dp[0][1] = 1;
+        for (int i = 0; i < s.size(); ++i) {
+            for (int len = 1; len <= 3; ++len) {
+                dp[len][s[i] - '0'] += dp[len - 1][1 - (s[i] - '0')];
             }
         }
-        
-        return dp["010"] + dp["101"];
+        return dp[3][0] + dp[3][1];
         
     }
 };
