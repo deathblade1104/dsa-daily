@@ -3,9 +3,7 @@ public:
     int dp[501][501];
     
     int get_ans(int i,int j, string &s1, string &s2)
-    {
-        if(i==s1.size() and j==s2.size()) return 0;
-        
+    {      
         if(i==s1.size())
             return s2.size()-j;
         
