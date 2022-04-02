@@ -13,24 +13,20 @@ class Solution{
         
         if(r==M-1 && c==N-1)
         {
-            if(grid[r][c]<0)
-            return grid[r][c];
-            
-            else
-            return 0;
+            if(grid[r][c]<0) return grid[r][c];
+            else return 0;
         }
         
         if(dp[r][c]!=1)
         return dp[r][c];
         
-        int op1,op2;
-        op1=op2=grid[r][c];
-        
+        int op1=grid[r][c],op2=grid[r][c];
         op1+=get_ans(r+1,c,M,N,grid,dp);
         op2+=get_ans(r,c+1,M,N,grid,dp);
         
         if(op1>=0)op1=0;
         if(op2>=0)op2=0;
+        
         dp[r][c]=max(op1,op2);
 	}
 	int minPoints(vector<vector<int>> points, int M, int N) 
