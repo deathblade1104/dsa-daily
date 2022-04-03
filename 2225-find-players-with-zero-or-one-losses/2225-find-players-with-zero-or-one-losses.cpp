@@ -23,11 +23,7 @@ public:
         vector<vector<int>>ans(2);
         
         for(int i=1;i<=lim;i++)
-        {
-            
-            if(mp[i]<0)
-                continue;
-            
+        {           
             if(mp[i]==0)
                 ans[0].push_back(i);
             
