@@ -15,6 +15,7 @@ public:
             if(mp[v[1]]<0)
                 mp[v[1]]=0;
             
+            mp[v[0]]+=0;
             mp[v[1]]+=1;
             lim=max({lim,v[0],v[1]});
         }
