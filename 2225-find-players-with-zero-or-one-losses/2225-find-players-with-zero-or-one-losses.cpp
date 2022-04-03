@@ -5,8 +5,7 @@ public:
         int mp[100001];
         memset(mp,-1,sizeof(mp));
         
-        int lim=-1;
-        
+        int lim=-1;        
         for(auto v : matches)
         {
             if(mp[v[0]]<0)
@@ -15,7 +14,6 @@ public:
             if(mp[v[1]]<0)
                 mp[v[1]]=0;
             
-            mp[v[0]]+=0;
             mp[v[1]]+=1;
             lim=max({lim,v[0],v[1]});
         }
