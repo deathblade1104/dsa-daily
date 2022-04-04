@@ -3,22 +3,12 @@ public:
     int dp[1001][1001];
     int get_ans(int i, int j, string &s)
     {
-        if(i>j) return 0;       
-        
-        if(i==j)
-        return dp[i][j]=1;
-        
-        if(j==i+1)
-        {
-            if(s[i]==s[j]) return dp[i][j]=1;
-            
-            else dp[i][j]=0;
-        }
-        
+        if(i>j) return 1;     
+               
         if(dp[i][j]!=-1)
         return dp[i][j];
         
-        bool ans = get_ans(i+1,j-1,s);
+        bool ans;
         
         if(s[i]==s[j])
         {
@@ -27,9 +17,7 @@ public:
         }
         
         else
-        {
-            ans=false;       
-        }
+        ans=false;       
         
         bool call1 = get_ans(i+1,j,s);
         bool call2 = get_ans(i,j-1,s);
@@ -42,7 +30,17 @@ public:
         int n=s.size();
         memset(dp,-1,1001*1001*sizeof(int));
         
-        int xyz= get_ans(0,n-1,s),ans = 1;      
+        int xyz= get_ans(0,n-1,s),ans = 1;
+        
+//         for(int i=0;i<n;i++)
+//         {
+//             for(int j=0;j<n;j++)
+//                 cout<<dp[i][j]<<" ";
+            
+            
+//             cout<<endl;
+//         }
+        
         string temp="";
         temp+=s[0];
         
