@@ -35,11 +35,11 @@ public:
         for(int i=0;i<n;i++)
             dp[i][i]=1;
         
-        int xyz= get_ans(0,n-1,s),ans = 0;     
+        int xyz= get_ans(0,n-1,s),ans = n;    
                 
         for(int i=0;i<n;i++)
         {
-            for(int j=0;j<n;j++)
+            for(int j=i+1;j<n;j++)
             {
                 if(dp[i][j]==1)
                     ans++;
