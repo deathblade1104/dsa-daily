@@ -1,14 +1,30 @@
 class Solution {
 public:
+        int dp[100001][2];
+    
+    int get_ans(int curr,int can_buy, int n , vector<int>&prices)
+    {
+        if(curr>=n )
+            return 0;
+        
+        if(dp[curr][can_buy]!=-1)
+            return dp[curr][can_buy];
+        
+        int idle = get_ans(curr+1,can_buy,n,prices),buy=0,sell=0;
+        
+        if(can_buy)
+            buy =  get_ans(curr+1,0,n,prices) - prices[curr];
+        
+        else
+            sell = prices[curr] + get_ans(curr+1,1,n,prices);
+        
+        return dp[curr][can_buy] = max({idle,buy,sell});
+        
+    }
     int maxProfit(vector<int>& prices) {
-         int profit=0;
+        memset(dp,-1,100001*2*sizeof(int));
+        int n=prices.size();
         
-        for(int i=1;i<prices.size();i++)
-        {
-            if(prices[i]>prices[i-1])
-                profit+=(prices[i]-prices[i-1]);
-        }
-        
-        return profit;
+        return get_ans(0,1,n,prices);
     }
 };
