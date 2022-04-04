@@ -3,7 +3,13 @@ public:
     int dp[1001][1001];
     int get_ans(int i, int j, string &s)
     {
-        if(i>j) return 1;      
+        if(i>j) return 1;
+        
+        if(i+1==j)
+        {
+            if(s[i]==s[j]) return dp[i][j]=1;
+            else return dp[i][j]=0;
+        }
         
         if(dp[i][j]!=-1)
         return dp[i][j];        
