@@ -1,38 +1,33 @@
 class Solution {
 public:
+    int dp[100001][2];
     
-   int earnedProfit(vector<int>& prices,int &sz,int curr,int can_buy,int transaction,int bal, int dp[100001][2])
+    int get_ans(int curr,int can_buy, int tc, int n , vector<int>&prices)
     {
-        if(curr>=sz || transaction<=0)
-        return 0;
-            
+        if(curr>=n or tc <=0)
+            return 0;
+        
         if(dp[curr][can_buy]!=-1)
             return dp[curr][can_buy];
-       
-       int idle= earnedProfit(prices,sz,curr+1,can_buy,transaction,bal,dp);
-       int buy=0,sell=0;
-            
+        
+        int idle = get_ans(curr+1,can_buy,tc,n,prices),buy=0,sell=0;
+        
         if(can_buy)
-            buy=-prices[curr] + earnedProfit(prices,sz,curr+1,0,transaction,prices[curr],dp);
-
+            buy =  get_ans(curr+1,0,tc,n,prices) - prices[curr];
+        
         else
-        {       
-          if(prices[curr]>=bal)  
-          sell=prices[curr] + earnedProfit(prices,sz,curr+1,1,transaction-1,0,dp);
-        }
-        dp[curr][can_buy]=max(idle,max(buy,sell));
-       
-        return dp[curr][can_buy];
+            sell = prices[curr] + get_ans(curr+1,1,tc-1,n,prices);
+        
+        return dp[curr][can_buy] = max({idle,buy,sell});
+        
     }
-
-         
     int maxProfit(vector<int>& prices) {
+        memset(dp,-1,100001*2*sizeof(int));
+        int n=prices.size();
         
-        int sz=prices.size();
+        return get_ans(0,1,1,n,prices);
         
-        int dp[100001][2];
-        memset(dp,-1,sizeof(dp));
         
-        return earnedProfit(prices,sz,0,1,1,0,dp);
+        
     }
 };
