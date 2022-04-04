@@ -2,9 +2,7 @@ class Solution {
 public:
     int dp[1001][1001];
     int get_ans(int i, int j, string &s)
-    {
-        if(i>j) return 0;       
-        
+    {     
         if(j==i+1)
         {
             if(s[i]==s[j]) return dp[i][j]=1;
