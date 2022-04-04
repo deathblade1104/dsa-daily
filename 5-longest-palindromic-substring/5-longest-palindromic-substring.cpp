@@ -3,8 +3,18 @@ public:
     int dp[1001][1001];
     int get_ans(int i, int j, string &s)
     {
-        if(i>j) return 1;     
-               
+        if(i>j) return 0;       
+        
+        if(i==j)
+        return dp[i][j]=1;
+        
+        if(j==i+1)
+        {
+            if(s[i]==s[j]) return dp[i][j]=1;
+            
+            else dp[i][j]=0;
+        }
+        
         if(dp[i][j]!=-1)
         return dp[i][j];
         
