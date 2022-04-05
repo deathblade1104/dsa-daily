@@ -1,13 +1,5 @@
 class Solution {
 public:
-    
-    struct mycomp{
-        bool operator()(const string&a, const string&b)
-        {
-            return a[1]>b[1];
-        }
-    };
-    
     int find_par(int x, vector<int>&par)
     {
         if(par[x]==x)
@@ -39,22 +31,25 @@ public:
     
     bool equationsPossible(vector<string>& equations){
         
-        vector<int>par(26),rank(26,0);        
-        sort(equations.begin(),equations.end(),mycomp());
-        
+        vector<int>par(26),rank(26,0);               
         for(int i=0;i<26;i++)
             par[i]=i;
         
         for(auto itr : equations)
         {
-            int n1=(int)(itr[0]-'a'),n2=(int)(itr[3]-'a'),p1= find_par(n1,par), p2 = find_par(n2,par);
+            int n1=(int)(itr[0]-'a'),n2=(int)(itr[3]-'a');
                     
             if(itr[1]=='=')
-                DSUnion(n1,n2,par,rank);
-            
+                DSUnion(n1,n2,par,rank);     
+           
+        }
+        
+        for(auto itr : equations)
+        {
+            int n1=(int)(itr[0]-'a'),n2=(int)(itr[3]-'a'),p1= find_par(n1,par), p2 = find_par(n2,par);
+                                
             if(itr[1]=='!' and p1==p2)
                 return false;            
-           
         }
         
         return true;
