@@ -2,25 +2,30 @@ class Solution {
 public:
     bool get_ans(string s, unordered_set<string>&st, unordered_map<string,bool>&mp)
     {
-        if(s.size()==0 or st.count(s)==1) return mp[s]=true;
-        if(mp.count(s)==1) return mp[s];
+        if(s.size()==0)
+        return true;
         
+        if(mp.find(s)!=mp.end())
+        return mp[s];
         
-        string temp="";
-        int i=0;
-
-        while(i<s.size())
-        {                
-            temp+=s[i++];                
-            if(st.count(temp)==1)
-            { 
-                string str = s.substr(i);
-                if(get_ans(str,st,mp))
-                    return mp[s]=mp[temp]=true;
-            }               
+        for(int i=0;i<s.size();i++)
+        {
+            string temp = s.substr(0, 1 + i);
+            if(st.find(temp)!=st.end())
+            {
+                string left=s.substr(i+1);
+                
+                if(get_ans(left,st,mp)==true)
+                {
+                    mp[s]=true;
+                    return mp[s];
+                }
+            }
         }
-
-        return mp[s]=false;
+        
+        mp[s]=false;
+        
+        return mp[s];
         
             
     }
