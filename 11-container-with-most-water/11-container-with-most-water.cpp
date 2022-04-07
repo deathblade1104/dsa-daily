@@ -2,8 +2,7 @@ class Solution {
 public:
     int maxArea(vector<int>& arr) {
         int ans=0,l=0,h=arr.size()-1;
-        
-        
+                
         while(l<h)
         {
             int curr = (min(arr[l],arr[h]) * (h-l));
@@ -18,6 +17,5 @@ public:
         }
         
         return ans;
-        
     }
 };
