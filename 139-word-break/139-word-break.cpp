@@ -19,7 +19,8 @@ public:
                 
                 else
                     mp[str]=false;
-            }               
+            }
+            else mp[temp]=false;
         }
 
         return mp[s]=false;       
