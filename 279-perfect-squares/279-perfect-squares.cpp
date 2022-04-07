@@ -1,6 +1,7 @@
 class Solution {
 public:
-    int get_ans(int curr, vector<int>&arr, vector<int>&dp)
+    int dp[10001];
+    int get_ans(int curr, vector<int>&arr)
     {
         if(curr<=2)
             return dp[curr]=curr;
@@ -13,7 +14,7 @@ public:
         {
             int temp=INT_MAX;
             if(arr[i]<=curr)
-                temp = 1 + get_ans(curr-arr[i],arr,dp);
+                temp = 1 + get_ans(curr-arr[i],arr);
             
             ans=min(temp,ans);
             
@@ -25,14 +26,13 @@ public:
     }
     
     
-    int numSquares(int n) {
-        vector<int>arr;
-        
+    int numSquares(int n)
+    {
+        memset(dp,-1,sizeof(dp));
+        vector<int>arr;        
         for(int i=1;i*i<=n;i++)
             arr.push_back(i*i);
         
-        vector<int>dp(n+1,-1);
-        
-        return get_ans(n,arr,dp);
+        return get_ans(n,arr);
     }
 };
