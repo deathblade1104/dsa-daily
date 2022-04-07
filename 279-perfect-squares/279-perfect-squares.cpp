@@ -3,7 +3,7 @@ public:
     int dp[10001];
     int get_ans(int curr)
     {
-        if(curr<=2)
+        if(curr<=3)
             return dp[curr]=curr;
         
         if(dp[curr]!=-1)
