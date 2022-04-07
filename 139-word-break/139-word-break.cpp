@@ -15,7 +15,7 @@ public:
             { 
                 string str = s.substr(i);
                 if(get_ans(str,st,mp))
-                    return mp[s]=mp[temp]=true;
+                    return mp[s]=mp[temp]=mp[str]=true;
                 
                 else
                     mp[str]=false;
