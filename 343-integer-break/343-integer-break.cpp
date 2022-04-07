@@ -9,14 +9,14 @@ public:
         if(dp[n]!=-1)
             return dp[n];
         
-        int ans=1,temp=1;
+        int ans=n,temp=1;
         for(int i=1;i<n;i++)
         {
             temp= get_ans(n-i) * get_ans(i);
             ans=max(temp,ans);            
         }
         
-        return dp[n]=max(ans,n);
+        return dp[n]=ans;
     }
     int integerBreak(int n) {
         memset(dp,-1,sizeof(dp));
