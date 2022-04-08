@@ -1,37 +1,40 @@
 class Solution {
 public:
+    int dp[101][101];
     vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int k) {
+        int n=mat.size(),m=mat[0].size();
+        memset(dp,0,101*101*sizeof(int));
         
-   int n = mat.size(), m = mat[0].size();
-        vector<vector<int>> prefix(n, vector<int>(m, 0));
-        
-        for (int i = 0 ; i < n ; i++){
-            for (int j = 0 ; j < m ; j++){
-                prefix[i][j] = (j > 0 ? prefix[i][j-1] + mat[i][j] : mat[i][j]);
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=m;j++)
+            {
+                dp[i][j] = dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1] + mat[i-1][j-1]; 
             }
         }
         
-        vector<vector<int>>dp(n, vector<int>(m, 0));
-        
-        for (int i = 0 ; i < n ; i++){
-            for (int j = 0 ; j < m ; j++){
-                dp[i][j] = (i > 0 ? dp[i-1][j] : 0) + prefix[i][j];
-            }
-        }
-        
-        vector<vector<int>> ans(n, vector<int>(m, 0));
-        
-        for (int i = 0 ; i < n ; i++){
-            for (int j = 0 ; j < m ; j++){
-                int top_row = min(i + k, n - 1), top_col = min(j + k, m - 1);
-                int down_row_top_col = (i - k - 1 < 0 ? 0 : dp[i-k-1][top_col]);
-                int top_row_down_col = ( j -k - 1 < 0 ? 0 : dp[top_row][j-k-1]);
-                int down_row_down_col = ( i- k - 1 < 0 || j - k -1 < 0 ? 0 : dp[i-k-1][j-k-1]);
+        vector<vector<int>>ans(n,vector<int>(m,0));
+    
+        for(int i =0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                int start_r,start_c,end_r,end_c;
+                start_r = max(0,i-k);
+                start_c = max(0,j-k);
                 
-                ans[i][j] = dp[top_row][top_col] - down_row_top_col - top_row_down_col + down_row_down_col;
+                end_r = min(n,i+k+1);
+                end_c = min(m,j+k+1);
+                
+                ans[i][j] = dp[end_r][end_c] - dp[end_r][start_c] - dp[start_r][end_c] + dp[start_r][start_c];
             }
         }
+        
         return ans;
+        
+        
+        
+        
         
     }
 };
