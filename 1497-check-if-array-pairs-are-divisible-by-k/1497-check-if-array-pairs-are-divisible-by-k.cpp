@@ -1,40 +1,28 @@
 class Solution {
 public:
     bool canArrange(vector<int>& arr, int k) {
-        int count=0;
-        unordered_map<int,int>mp;
+        int ans=0;
+        vector<int>mp(k,0);
         
         for(int i=0;i<arr.size();i++)
         {
             int rem = ((arr[i]%k)+k)%k;
             
-            if(rem==0)
+            if(rem==0 and mp[0]>0)
             {
-                if(mp.count(0)==1 and mp[0]>=1)
-                {
-                    mp[0]--;
-                    count++;
-                }
-                
-                else
-                    mp[0]++;
-                
+                ans++;
+                mp[0]--;
             }
             
-            else
+            else if (rem>0 and mp[k-rem]>0)
             {
-                if(mp.count(k-rem)==1 and mp[k-rem]>=1)
-                {    
-                        count++;
-                        mp[k-rem]--;
-                    
-                }
-                
-                else
-                    mp[rem]++;
+                ans++;
+                mp[k-rem]--;
             }
+            else
+                mp[rem]++;
         }
         
-        return (count==arr.size()/2);
+        return (ans==arr.size()/2);
     }
 };
