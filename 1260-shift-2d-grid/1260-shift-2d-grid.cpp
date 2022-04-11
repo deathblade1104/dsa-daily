@@ -17,8 +17,6 @@ public:
     vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k) {
         
         int r= grid.size(), c= grid[0].size();
-        
-        if(k>=(r*c))
         k = k%(r*c);
         
         if(k==0)return grid;      
