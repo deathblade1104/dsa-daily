@@ -13,7 +13,10 @@ public:
             return dp[curr][val];
         
         bool op1 = get_ans(curr+1, val+nums[curr],target, nums);
-           
+        
+        if(op1)
+            return dp[curr][val] = true;
+            
         bool op2 = get_ans(curr+1, val,target, nums);
         
         return dp[curr][val] = op1 | op2;
