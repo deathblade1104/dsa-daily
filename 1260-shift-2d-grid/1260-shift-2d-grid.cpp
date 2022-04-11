@@ -3,12 +3,8 @@ public:
     pair<int,int> get_dimension(int ele , int&n, int&m)
     {
         int r=ele/m, c=ele%m;
-        
-        if(m==1)
-            r=ele;
-        
-        if(n==1)
-            c=ele;
+        if(m==1) r=ele;
+        if(n==1) c=ele;
         
         pair<int,int>p=make_pair(r,c);
         return p;
