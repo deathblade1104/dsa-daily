@@ -8,6 +8,9 @@ class Solution{
   public:
 	int getans(int arr[],int curr,int curr_sum,int sum,int sz,vector<vector<int>>&dp)
     {
+        if(curr_sum==sum)
+        return 0;
+        
         if(curr>=sz)
         {
             return abs(curr_sum - sum);
