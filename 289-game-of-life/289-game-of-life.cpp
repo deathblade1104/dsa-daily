@@ -17,10 +17,7 @@ public:
                     
                     if(x>=0 and y>=0 and x<r and y<c and board[x][y]==1)
                         count++;
-                    
-                }
-        
-                
+                }                
                 if((board[i][j] == 1 and count>=2 and count<=3) or count ==3)
                     ans[i][j]=1;    
             }
