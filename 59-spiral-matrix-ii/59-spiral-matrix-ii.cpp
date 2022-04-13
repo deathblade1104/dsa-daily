@@ -11,7 +11,7 @@ public:
             return;
         }
         
-        for(int i=r1;i<=c2;i++)
+        for(int i=c1;i<=c2;i++)
             ans[r1][i]=val++;
         
         for(int i=r1+1;i<=r2;i++)
