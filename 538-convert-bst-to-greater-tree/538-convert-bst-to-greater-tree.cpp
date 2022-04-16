@@ -16,9 +16,6 @@ public:
         if(!root)
             return 0;
         
-        if(!root->left and !root->right)
-            return root->val;
-        
         return root->val + get_sum(root->left) + get_sum(root->right);
     }
     void DFS(TreeNode *root, int &sum)
