@@ -13,29 +13,23 @@ class Solution {
 public:
     void inorder(TreeNode *root, vector<int>&v)
     {
-        if(!root)
-            return;
+        if(!root) return;
         
         inorder(root->left,v);
         v.push_back(root->val);
         inorder(root->right,v);
-        
     }
-        
     TreeNode* increasingBST(TreeNode* root) {
-        
         vector<int>v;
         inorder(root,v);
-        
-        TreeNode *dummy = new TreeNode(-1);
-        TreeNode *curr=dummy;
+        TreeNode *temp = new TreeNode(-1), *curr=temp;
         for(int i=0;i<v.size();i++)
         {
-            TreeNode* temp= new TreeNode(v[i]);
-            curr->right=temp;
+            curr->right = new TreeNode(v[i]);
             curr=curr->right;
         }
         
-        return dummy->right;
+        temp=temp->right;
+        return temp;
     }
 };
