@@ -11,23 +11,26 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode *root, stack<int>&st,int &k)
+    void inorder(TreeNode *root, int&count, int&ans ,int &k)
     {
-        if(!root or st.size()>=k)
+        if(!root or count>=k)
             return;
         
-        inorder(root->left,st,k);
+        inorder(root->left,count,ans,k);
         
-        if(st.size()<k)
-            st.push(root->val);
+        if(count<k)
+        {
+            ans=root->val;
+            count++;
+        }
         
-        inorder(root->right,st,k);
+        inorder(root->right,count,ans,k);
         
     }
     
     int kthSmallest(TreeNode* root, int k) {
-        stack<int>v;
-        inorder(root,v,k);        
-        return v.top();
+        int count=0,ans=0;
+        inorder(root,count,ans,k);        
+        return ans;
     }
 };
