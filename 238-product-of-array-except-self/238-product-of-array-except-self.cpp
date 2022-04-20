@@ -11,8 +11,7 @@ public:
             else p*=i;
         }
         
-        vector<int>ans(nums.size(),0);
-        
+        vector<int>ans(nums.size(),0);        
         if(cz<=1)
         {
             if(cz==1)
