@@ -9,8 +9,7 @@ public:
             if(st.count(i-1)==1)
                 continue;
             
-            int curr=1;
-            
+            int curr=1;            
             while(st.count(i+curr)==1)
                 curr++;
             
