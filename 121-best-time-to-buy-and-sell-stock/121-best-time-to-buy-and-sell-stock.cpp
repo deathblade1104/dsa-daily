@@ -4,10 +4,8 @@ public:
         vector<int>dp(prices.size());
         dp[prices.size()-1]=INT_MIN/2;
         
-        
         for(int i=prices.size()-2;i>=0;i--)
-        dp[i]= max(prices[i+1], dp[i+1]);
-        
+        dp[i]= max(prices[i+1], dp[i+1]);        
         
         int ans=0;
         
