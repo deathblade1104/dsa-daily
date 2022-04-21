@@ -28,8 +28,7 @@ public:
         
         string str= get_string(s);
         int i=0,j=str.size()-1;
-        
-        cout<<str<<endl;
+
         while(i<=j)
         {
             if(str[i]!=str[j])
