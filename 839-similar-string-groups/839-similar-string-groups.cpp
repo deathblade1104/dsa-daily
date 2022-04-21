@@ -50,7 +50,7 @@ public:
         
         unordered_map<string,string>par;
         unordered_map<string,int>rank;
-        
+        unordered_set<string>st;
         
         for(int i=0;i<strs.size();i++)
         {
@@ -58,20 +58,12 @@ public:
             for(int j=0;j<i;j++)
             {
                 if(isSimilar(strs[i],strs[j]))
-                {
-                    
                     DSUnion(strs[i],strs[j],par,rank);
-                }
             }
-        }
-        
-        unordered_set<string>st;
-        
+        }        
+
         for(string s : strs)
-        {
-            string p = get_par(s,par);
-            st.insert(p);
-        }
+            st.insert(get_par(s,par));
         
         return st.size();
         
