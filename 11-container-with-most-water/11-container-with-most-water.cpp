@@ -3,7 +3,7 @@ public:
     int maxArea(vector<int>& height) {
         int l=0,h=height.size()-1,ans=0;
         
-        while(l<=h)
+        while(l<h)
         {
             int diff = h - l, curr = min(height[l],height[h]) * diff;
            
