@@ -8,14 +8,15 @@ public:
         for(auto v : nums)
         {
             for(auto i : v)
-            {
                 count[i]++;
-                if(count[i]==nums.size())
-                    ans.push_back(i);
-            }
         }
-            
-        sort(ans.begin(),ans.end());
+        
+        
+        
+        for(int i=1;i<=1000;i++)
+            if(count[i]==nums.size())
+                ans.push_back(i);
+        
         return ans;
     }
 };
