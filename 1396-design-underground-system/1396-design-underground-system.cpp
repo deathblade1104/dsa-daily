@@ -1,7 +1,7 @@
 class UndergroundSystem {
 public:
     unordered_map<int,pair<string,int>>c_in;
-    unordered_map<string,vector<int>>ans;
+    unordered_map<string,pair<int,int>>ans;
     UndergroundSystem() {
         
     }
@@ -15,18 +15,14 @@ public:
         auto p = c_in[id];
         string key =  p.first + "_"  + stationName;
         
-        ans[key].push_back(t-p.second);        
+        ans[key].first+=(t-p.second);
+        ans[key].second++;
     }
     
     double getAverageTime(string startStation, string endStation) {
-        double sum =0.0;
         string key = startStation + "_" + endStation;
-        auto v = ans[key];
         
-        for(int i : v)
-            sum+=i+0.0;
-        
-       return sum/v.size();
+        return (double)((ans[key].first*1.0)/ans[key].second);
     }
 };
 
