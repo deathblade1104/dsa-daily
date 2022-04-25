@@ -2,8 +2,7 @@ class Solution {
 public:
     int ub(vector<int>&keys,int&ele)
     {
-        int l=0,h=keys.size()-1;
-        
+        int l=0,h=keys.size()-1;        
         if(ele<keys[l])
             return -1;
 
