@@ -1,33 +1,65 @@
 class Solution {
 public:
-    
-    vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& persons) 
+    int ub(vector<int>&keys,int&ele)
     {
-        vector<pair<int,int>>v;
-        for(auto& f : flowers)
+        int l=0,h=keys.size()-1;
+        
+        if(ele<keys[l])
+            return -1;
+
+        if(ele>=keys[h])
+            return h;
+        
+        int ans=0;
+        while(l<=h)
         {
-            v.push_back({f[0],1});
-            v.push_back({f[1]+1,-1});
+            int mid = l + ((h-l)/2);
+            
+            if(keys[mid]<=ele)
+            {
+                ans=mid;
+                
+                if(mid==keys.size()-1 or keys[mid+1]>ele)
+                    break;
+                
+                l=mid+1;
+            }
+               
+            else
+             h=mid-1;
         }
         
-        sort(v.begin(),v.end());
-        int ps =0;
-        vector<int>time,val;
-        
-        for(auto& p : v)
+        return ans;
+    }
+    vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& persons) 
+    {
+         map<int,int>mp;
+        for(auto& f : flowers)
         {
-            ps+=p.second;
-            time.push_back(p.first);
-            val.push_back(ps);
-        }        
+            mp[f[0]]++;
+            mp[f[1]+1]--;
+        }
+
+        int ps =0;
+        vector<int>keys;
+        for (auto i = mp.begin(); i != mp.end(); i++)
+        {
+            int x=i->first, y = i->second;  
+            ps+=y;
+            keys.push_back(x);
+            mp[x]=ps;
+        }
 
         vector<int>ans;
         for(auto& i: persons)
         {
-            auto it = upper_bound(time.begin(), time.end(), i); 
-            if (it == time.begin()) ans.push_back(0); 
-            else ans.push_back(val[it - time.begin() - 1]);
-                
+            int k = ub(keys,i);
+
+            if(k==-1)
+                ans.push_back(0);
+            
+            else 
+                ans.push_back(mp[keys[k]]);
         }
 
         return ans;
