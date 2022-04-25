@@ -2,8 +2,8 @@ class Solution {
 public:
     int ub(vector<pair<int,int>>&v,int&ele,int&n)
     {
-        int l=0,h=n-1;       
-        int ans=0;
+        int l=0,h=n-1,ans=0;
+        
         while(l<=h)
         {
             int mid = l + ((h-l)/2);
