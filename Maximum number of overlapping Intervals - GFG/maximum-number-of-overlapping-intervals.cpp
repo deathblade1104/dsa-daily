@@ -11,20 +11,21 @@ class Solution{
     int overlap(vector<pair<int,int>>intervals, int n){
         //Write your code here
         
-
         int count[10000];
     	memset(count,0,sizeof(count));
+    	int sz=0;
     	
     	for(auto p : intervals)
     	{
     	    count[p.first]++;
     	    count[p.second+1]--;
+    	    sz=max({sz,p.first,p.second});
     	}
     	
 
     	int ans=count[0];
     	
-    	for(int i=1;i<10000;i++)
+    	for(int i=1;i<=sz;i++)
     	{
     	    count[i]+=count[i-1];
     	    ans=max(ans,count[i]);
