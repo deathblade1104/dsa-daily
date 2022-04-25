@@ -15,7 +15,7 @@ public:
             temp.pop_back();
         }
         
-        if(op>cl and cl<sz/2)
+        if(op>cl)
         {
             temp+=')';
             get_ans(temp,sz,op,cl+1,ans);
