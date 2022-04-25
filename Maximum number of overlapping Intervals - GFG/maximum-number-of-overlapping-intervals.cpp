@@ -11,36 +11,24 @@ class Solution{
     int overlap(vector<pair<int,int>>intervals, int n){
         //Write your code heresort(intervals.begin(),intervals.end());
        
-       vector<int>arr,dep;
-       for(auto p: intervals)
-       {
-           arr.push_back(p.first);
-           dep.push_back(p.second);
-       }
-       
-       sort(arr.begin(),arr.end());
-       sort(dep.begin(),dep.end());
-       
-       int plat=1,ans=1,prev=0,curr=1;
-        
-        while(curr<n)
-        {
-            if(arr[curr]<=dep[prev])
-            {
-                plat++;
-                curr++;
-            }
-            
-            else
-            {
-                prev++;
-                plat--;
-            }
-            
-            ans=max(ans,plat);
-        }
-        
-        return ans;
+        int count[10000];
+    	memset(count,0,sizeof(count));
+    	int sz=0;
+    	for(auto p : intervals)
+    	{
+    	    count[p.first]++;
+    	    count[p.second+1]--;
+    	    sz=max({sz,p.first,p.second});
+    	}
+    	
+    	int ans=count[0];
+    	
+    	for(int i=1;i<=sz;i++)
+    	{
+    	    count[i]+=count[i-1];
+    	    ans=max(ans,count[i]);
+    	}
+    	return ans;
     }
 };
 
