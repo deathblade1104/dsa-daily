@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int ub(vector<int>&keys,int ele)
+    int ub(vector<int>&keys,int&ele)
     {
         int l=0,h=keys.size()-1;        
         if(ele>=keys[h])
@@ -52,15 +52,18 @@ public:
         vector<int>ans;
         for(auto& i: persons)
         {          
-            if(i < m1)
+            if(i<m1)
             ans.push_back(0);
+            
+            else if(i>=m2)
+            ans.push_back(mp[m2]);
                               
             else if(mp.count(i)==1)
             ans.push_back(mp[i]);
             
             else
             {
-                int k = ub(keys,min(m2,i));   
+                int k = ub(keys,i);   
                 ans.push_back(mp[keys[k]]);
             }                
         }
