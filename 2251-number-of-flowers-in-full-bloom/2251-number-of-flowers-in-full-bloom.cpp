@@ -2,7 +2,8 @@ class Solution {
 public:
     int ub(vector<int>&keys,int&ele)
     {
-        int l=0,h=keys.size()-1;        
+        int l=0,h=keys.size()-1;
+        
         if(ele<keys[l])
             return -1;
 
@@ -32,33 +33,34 @@ public:
     }
     vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& persons) 
     {
-         map<int,int>mp;
+        vector<pair<int,int>>v;
         for(auto& f : flowers)
         {
-            mp[f[0]]++;
-            mp[f[1]+1]--;
+            v.push_back({f[0],1});
+            v.push_back({f[1]+1,-1});
         }
-
+        
+        sort(v.begin(),v.end());
         int ps =0;
-        vector<int>keys;
-        for (auto i = mp.begin(); i != mp.end(); i++)
+        vector<int>time,val;
+        
+        for(auto& p : v)
         {
-            int x=i->first, y = i->second;  
-            ps+=y;
-            keys.push_back(x);
-            mp[x]=ps;
-        }
+            ps+=p.second;
+            time.push_back(p.first);
+            val.push_back(ps);
+        }        
 
         vector<int>ans;
         for(auto& i: persons)
         {
-            int k = ub(keys,i);
-
+            int k = ub(time,i);
+            
             if(k==-1)
                 ans.push_back(0);
             
-            else 
-                ans.push_back(mp[keys[k]]);
+            else ans.push_back(val[k]);
+                
         }
 
         return ans;
