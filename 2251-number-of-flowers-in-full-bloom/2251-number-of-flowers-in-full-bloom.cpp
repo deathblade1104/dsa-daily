@@ -1,11 +1,8 @@
 class Solution {
 public:
-    int ub(vector<int>&keys,int&ele)
+    int ub(vector<int>&keys,int ele)
     {
         int l=0,h=keys.size()-1;        
-        if(ele<keys[l])
-            return -1;
-
         if(ele>=keys[h])
             return h;
         
@@ -30,6 +27,7 @@ public:
         
         return ans;
     }
+    
     vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& persons) 
     {
          map<int,int>mp;
@@ -39,11 +37,13 @@ public:
             mp[f[1]+1]--;
         }
 
-        int ps =0;
+        int ps =0,m1 = INT_MAX,m2 = INT_MIN;
         vector<int>keys;
         for (auto&i : mp)
         {
             int x=i.first, y = i.second;  
+            m1 = min(m1,x);
+            m2 = max(m2,x); 
             ps+=y;
             keys.push_back(x);
             mp[x]=ps;
@@ -51,14 +51,15 @@ public:
 
         vector<int>ans;
         for(auto& i: persons)
-        {
-            int k = ub(keys,i);
-
-            if(k==-1)
+        {          
+            if(i < m1)
+            {
                 ans.push_back(0);
+                continue;                
+            }                
             
-            else 
-                ans.push_back(mp[keys[k]]);
+            int k = ub(keys,min(m2,i));   
+            ans.push_back(mp[keys[k]]);
         }
 
         return ans;
