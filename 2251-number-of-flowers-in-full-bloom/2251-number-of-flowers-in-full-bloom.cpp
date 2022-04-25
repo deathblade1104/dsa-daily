@@ -41,7 +41,7 @@ public:
 
         int ps =0;
         vector<int>keys;
-        for (auto i : mp)
+        for (auto&i : mp)
         {
             int x=i.first, y = i.second;  
             ps+=y;
