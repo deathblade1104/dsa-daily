@@ -53,13 +53,16 @@ public:
         for(auto& i: persons)
         {          
             if(i < m1)
-            {
-                ans.push_back(0);
-                continue;                
-            }                
+            ans.push_back(0);
+                              
+            else if(mp.count(i)==1)
+            ans.push_back(mp[i]);
             
-            int k = ub(keys,min(m2,i));   
-            ans.push_back(mp[keys[k]]);
+            else
+            {
+                int k = ub(keys,min(m2,i));   
+                ans.push_back(mp[keys[k]]);
+            }                
         }
 
         return ans;
