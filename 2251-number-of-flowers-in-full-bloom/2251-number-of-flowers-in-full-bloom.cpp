@@ -30,7 +30,7 @@ public:
     
     vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& persons) 
     {
-         map<int,int>mp;
+        map<int,int>mp;
         for(auto& f : flowers)
         {
             mp[f[0]]++;
