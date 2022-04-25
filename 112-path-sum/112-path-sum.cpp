@@ -11,23 +11,26 @@
  */
 class Solution {
 public:
-    bool get_ans(TreeNode *root,  int sum, int target)
+    bool get_ans(TreeNode *root, int ts)
     {
+        if(!root->left and !root->right)
+            return (root->val == ts);
+        
+        bool l = false, r = false;
+        
+        if(root->left)
+            l = get_ans(root->left, ts - root->val);
+        
+        if(root->right)
+            r = get_ans(root->right, ts - root->val);
+        
+        return l | r;   
+    }
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        
         if(!root)
             return false;
         
-        if(!root->left and !root->right)
-        {
-            if(target==(sum + root->val))
-                return true;
-            
-            return false;
-        }
-        
-        return get_ans(root->left,sum+root->val,target) 
-            or get_ans(root->right,sum+root->val,target);
-    }
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        return get_ans(root,0,targetSum);
+        return get_ans(root,targetSum);
     }
 };
