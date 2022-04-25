@@ -41,9 +41,9 @@ public:
 
         int ps =0;
         vector<int>keys;
-        for (auto i = mp.begin(); i != mp.end(); i++)
+        for (auto i : mp)
         {
-            int x=i->first, y = i->second;  
+            int x=i.first, y = i.second;  
             ps+=y;
             keys.push_back(x);
             mp[x]=ps;
