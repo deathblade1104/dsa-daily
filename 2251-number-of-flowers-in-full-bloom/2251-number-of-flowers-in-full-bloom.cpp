@@ -1,21 +1,18 @@
 class Solution {
 public:
-    int ub(vector<int>&keys,int&ele)
+    int ub(vector<pair<int,int>>&v,int&ele,int&n)
     {
-        int l=0,h=keys.size()-1;        
-        if(ele>=keys[h])
-            return h;
-        
+        int l=0,h=n-1;       
         int ans=0;
         while(l<=h)
         {
             int mid = l + ((h-l)/2);
             
-            if(keys[mid]<=ele)
+            if(v[mid].first<=ele)
             {
                 ans=mid;
                 
-                if(mid==keys.size()-1 or keys[mid+1]>ele)
+                if(mid==n-1 or v[mid+1].first>ele)
                     break;
                 
                 l=mid+1;
@@ -30,42 +27,36 @@ public:
     
     vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& persons) 
     {
-        map<int,int>mp;
+        vector<pair<int,int>>v;
         for(auto& f : flowers)
         {
-            mp[f[0]]++;
-            mp[f[1]+1]--;
+            v.push_back({f[0],1});
+            v.push_back({f[1]+1,-1});
         }
-
-        int ps =0,m1 = INT_MAX,m2 = INT_MIN;
-        vector<int>keys;
-        for (auto&i : mp)
+        
+        sort(v.begin(),v.end());
+        int ps =0,n=v.size();
+                
+        for(auto& p : v)
         {
-            int x=i.first, y = i.second;  
-            m1 = min(m1,x);
-            m2 = max(m2,x); 
-            ps+=y;
-            keys.push_back(x);
-            mp[x]=ps;
-        }
+            ps+=p.second;
+            p.second=ps;
+        }        
 
         vector<int>ans;
         for(auto& i: persons)
-        {          
-            if(i<m1)
-            ans.push_back(0);
+        {
+            if(i<v[0].first)
+                ans.push_back(0);
             
-            else if(i>=m2)
-            ans.push_back(mp[m2]);
-                              
-            else if(mp.count(i)==1)
-            ans.push_back(mp[i]);
+            else if(i>=v[n-1].first)
+                ans.push_back(v[n-1].second);
             
             else
             {
-                int k = ub(keys,i);   
-                ans.push_back(mp[keys[k]]);
-            }                
+                int k = ub(v,i,n);
+                ans.push_back(v[k].second);                
+            }                  
         }
 
         return ans;
