@@ -11,7 +11,7 @@ public:
         if(op<sz/2)
         get_ans(temp+"(",sz,op+1,cl,ans);
         
-        if(op>cl)
+        if(op>cl and cl<sz/2)
         get_ans(temp+")",sz,op,cl+1,ans);
         
         return;
