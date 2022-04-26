@@ -10,13 +10,12 @@ public:
         
     };
     
-    vector<long long> dijkstra(vector<vector<pair<int,long long>>>adj,int&n, int s1)
+    vector<long long> dijkstra(vector<pair<int,long long>>adj[],int&n, int s1)
     {
         vector<long long>dist(n,LLONG_MAX/3);
-        dist.reserve(n);
         
         priority_queue<pair<int,long>,vector<pair<int,long>>,mycomp>pq;
-        pq.emplace(s1,0);
+        pq.push({s1,0});
                 
         while(pq.size()>0)
         {
@@ -27,10 +26,11 @@ public:
                 continue;
             
             dist[p.first]=p.second;
+            
             for(auto neigh : adj[p.first])
             {
                 if(dist[neigh.first]==LLONG_MAX/3)
-                    pq.emplace(neigh.first,neigh.second+p.second);
+                    pq.push({neigh.first,neigh.second+p.second});
             }
         }
         
@@ -39,14 +39,12 @@ public:
     }
     
     long long minimumWeight(int n, vector<vector<int>>& edges, int s1, int s2, int dest) {
-        vector<vector<pair<int,long long>>>adj(n),rev_adj(n);
-        adj.reserve(n);
-        rev_adj.reserve(n);
+        vector<pair<int,long long>>adj[n],rev_adj[n];
         
         for(auto e : edges)
         {
-            adj[e[0]].emplace_back(e[1],e[2]);
-            rev_adj[e[1]].emplace_back(e[0],e[2]);
+            adj[e[0]].push_back({e[1],e[2]});
+            rev_adj[e[1]].push_back({e[0],e[2]});
         }
         
         vector<long long>a1=dijkstra(adj,n,s1);
