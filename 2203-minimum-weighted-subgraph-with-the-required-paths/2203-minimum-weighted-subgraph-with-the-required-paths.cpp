@@ -13,6 +13,7 @@ public:
     vector<long long> dijkstra(vector<vector<pair<int,long long>>>adj,int&n, int s1)
     {
         vector<long long>dist(n,LLONG_MAX/3);
+        dist.reserve(n);
         
         priority_queue<pair<int,long>,vector<pair<int,long>>,mycomp>pq;
         pq.emplace(s1,0);
