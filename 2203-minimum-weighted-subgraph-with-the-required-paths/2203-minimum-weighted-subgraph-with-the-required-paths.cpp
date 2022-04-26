@@ -36,6 +36,27 @@ public:
         }
         
         return dist;
+        pq.push({s1,0});
+                
+        while(pq.size()>0)
+        {
+            auto p = pq.top();
+            pq.pop();
+            
+            if(p.second > dist[p.first])
+                continue;
+            
+            for(auto &neigh : adj[p.first])
+            {
+                if(dist[neigh.first] > dist[p.first] + neigh.second)
+                {
+                    dist[neigh.first] = dist[p.first] + neigh.second;
+                    pq.push({neigh.first,dist[neigh.first]});
+                }
+            }
+        }
+        
+        return dist;
         
     }
     
