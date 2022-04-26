@@ -13,23 +13,17 @@ public:
             
             if(s[n] != s[i])
             {                
-                if(m1==0)
-                    m1=x;
-                
-                else if(m1!=0 and m2==0)
+                if(x>m2)
                     m2=x;
                 
-                if(m1!=0 and m2!=0)
-                {
-                    ans = max(ans, (m1+m2+1));
-                    m1=max(m1,m2);
-                    m2=0;
-                }
+                if(m2>m1)
+                    swap(m1,m2);
             }
             
-            ans = max({ans,x,m1+1});
-        }        
-        return max(m1,m2)+1;
+            
+        }
+        ans=max(ans,m1+m2+1);
+        return m1+1;
         
     }
     
