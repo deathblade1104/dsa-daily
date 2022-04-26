@@ -5,34 +5,31 @@ public:
         if(adj[i].size()==0)
             return 1;
         
-        int curr=1,m1=-1,m2=-1;
+        int m1=0,m2=0;
             
         for(int n : adj[i])
         {
             int x = DFS(n,adj,ans,s);
             
             if(s[n] != s[i])
-            {
-                curr = max(curr,x+1);
-                 
-                if(m1==-1)
+            {                
+                if(m1==0)
                     m1=x;
                 
-                else if(m1!=-1 and m2==-1)
+                else if(m1!=0 and m2==0)
                     m2=x;
                 
-                if(m1!=-1 and m2!=-1)
+                if(m1!=0 and m2!=0)
                 {
                     ans = max(ans, (m1+m2+1));
                     m1=max(m1,m2);
-                    m2=-1;
+                    m2=0;
                 }
             }
             
-            ans = max({ans,curr,x});
-        }
-        
-        return curr;
+            ans = max({ans,x,max(m1,m2)+1});
+        }        
+        return max(m1,m2)+1;
         
     }
     
