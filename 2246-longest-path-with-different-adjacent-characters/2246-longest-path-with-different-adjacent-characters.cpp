@@ -27,7 +27,7 @@ public:
                 }
             }
             
-            ans = max({ans,x,max(m1,m2)+1});
+            ans = max({ans,x,m1+1});
         }        
         return max(m1,m2)+1;
         
