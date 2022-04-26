@@ -10,7 +10,7 @@ public:
         
     };
     
-    vector<long long> dijkstra(vector<pair<int,long long>>adj[],int&n, int s1)
+    vector<long long> dijkstra(vector<vector<pair<int,long long>>>adj,int&n, int s1)
     {
         vector<long long>dist(n,LLONG_MAX/3);
         
@@ -26,7 +26,6 @@ public:
                 continue;
             
             dist[p.first]=p.second;
-            
             for(auto neigh : adj[p.first])
             {
                 if(dist[neigh.first]==LLONG_MAX/3)
@@ -39,7 +38,7 @@ public:
     }
     
     long long minimumWeight(int n, vector<vector<int>>& edges, int s1, int s2, int dest) {
-        vector<pair<int,long long>>adj[n],rev_adj[n];
+        vector<vector<pair<int,long long>>>adj(n),rev_adj(n);
         
         for(auto e : edges)
         {
