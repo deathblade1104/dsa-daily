@@ -39,6 +39,8 @@ public:
     
     long long minimumWeight(int n, vector<vector<int>>& edges, int s1, int s2, int dest) {
         vector<vector<pair<int,long long>>>adj(n),rev_adj(n);
+        adj.reserve(n);
+        rev_adj.reserve(n);
         
         for(auto e : edges)
         {
