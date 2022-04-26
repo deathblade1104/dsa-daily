@@ -37,16 +37,13 @@ public:
     }
     
     int longestPath(vector<int>& parent, string s) {
-        int n=s.size();        
-        if(n==1)
-            return n;
-        
+        int n=s.size();                
         vector<int>adj[n];
         
         for(int i=1;i<n;i++)
         adj[parent[i]].push_back(i);
         
-        int ans=0;        
+        int ans=1;        
         int x= DFS(0,adj,ans,s);
         return ans;
         
