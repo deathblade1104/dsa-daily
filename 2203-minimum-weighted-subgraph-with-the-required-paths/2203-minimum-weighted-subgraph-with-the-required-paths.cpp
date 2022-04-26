@@ -13,8 +13,8 @@ public:
     vector<long> dijkstra(vector<pair<int,long long>>adj[],int&n, int s1)
     {
         vector<long>dist(n,LLONG_MAX/3);
-        
         priority_queue<pair<int,long>,vector<pair<int,long>>,mycomp>pq;
+        dist[s1] = 0;
         pq.push({s1,0});
                 
         while(pq.size()>0)
@@ -22,15 +22,16 @@ public:
             auto p = pq.top();
             pq.pop();
             
-            if(dist[p.first]!=LLONG_MAX/3)
+            if(p.second > dist[p.first])
                 continue;
             
-            dist[p.first]=p.second;
-            
-            for(auto neigh : adj[p.first])
+            for(auto &neigh : adj[p.first])
             {
-                if(dist[neigh.first]==LLONG_MAX/3)
-                    pq.push({neigh.first,neigh.second+p.second});
+                if(dist[neigh.first] > dist[p.first] + neigh.second)
+                {
+                    dist[neigh.first] = dist[p.first] + neigh.second;
+                    pq.push({neigh.first,dist[neigh.first]});
+                }
             }
         }
         
