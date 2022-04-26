@@ -10,9 +10,9 @@ public:
         
     };
     
-    vector<long long> dijkstra(vector<pair<int,long long>>adj[],int&n, int s1)
+    vector<long> dijkstra(vector<pair<int,long long>>adj[],int&n, int s1)
     {
-        vector<long long>dist(n,LLONG_MAX/3);
+        vector<long>dist(n,LLONG_MAX/3);
         
         priority_queue<pair<int,long>,vector<pair<int,long>>,mycomp>pq;
         pq.push({s1,0});
@@ -47,12 +47,12 @@ public:
             rev_adj[e[1]].push_back({e[0],e[2]});
         }
         
-        vector<long long>a1=dijkstra(adj,n,s1);
-        vector<long long>a2=dijkstra(adj,n,s2);
-        vector<long long>a3=dijkstra(rev_adj,n,dest);
+        vector<long>a1=dijkstra(adj,n,s1);
+        vector<long>a2=dijkstra(adj,n,s2);
+        vector<long>a3=dijkstra(rev_adj,n,dest);
         
         
-        long long ans= LLONG_MAX;
+        long ans= LLONG_MAX;
         
         for(int i=0;i<n;i++)
             ans = min(ans,(a1[i]+a2[i]+a3[i]));
