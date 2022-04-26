@@ -21,8 +21,8 @@ class Solution
     {
         vector<int>cost(V,-1);
         priority_queue<pair<int,int>,vector<pair<int,int>>, mycomp>pq;
-        
         pq.push({S,0});
+
         
         while(pq.size()>0)
         {
@@ -32,16 +32,17 @@ class Solution
             if(cost[p.first]==-1)
             {
                 cost[p.first]=p.second;
-                vector<vector<int>>neighbours=adj[p.first];
-                
-                for(int i=0;i<neighbours.size();i++)
+                for(auto neighbours : adj[p.first])
                 {
-                    int nv=neighbours[i][0],nc=neighbours[i][1]+p.second;
+                    int nv=neighbours[0],nc=neighbours[1]+p.second;
                     if(cost[nv]==-1)
-                    pq.push({nv,nc});
+                        pq.push({nv,nc});
+                    
                 }
             }
         }
+        
+      
         
         return cost;
         
