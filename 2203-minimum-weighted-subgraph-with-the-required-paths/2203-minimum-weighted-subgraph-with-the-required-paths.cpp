@@ -1,68 +1,38 @@
 class Solution {
+    typedef pair<long, long> ipair;
 public:
-    struct mycomp
-    {
-      
-        bool operator()(const pair<int,long long>&a, const pair<int,long long>&b)
-        {
-            return a.second>b.second;
+    long long minimumWeight(int n, vector<vector<int>>& E, int a, int b, int dest) {
+        vector<vector<ipair>> G(n), R(n); // `G` is the original graph. `R` is the reversed graph
+        for (auto &e : E) {
+            long u = e[0], v = e[1], w = e[2];
+            G[u].emplace_back(v, w);
+            R[v].emplace_back(u, w);
         }
-        
-    };
-    
-    vector<long long> dijkstra(vector<vector<pair<int,long long>>>adj,int&n, int s1)
-    {
-        vector<long long>dist(n,LLONG_MAX/3);
-        
-        priority_queue<pair<int,long>,vector<pair<int,long>>,mycomp>pq;
-        pq.push({s1,0});
-                
-        while(pq.size()>0)
-        {
-            auto p = pq.top();
-            pq.pop();
-            
-            if(dist[p.first]!=LLONG_MAX/3)
-                continue;
-            
-            dist[p.first]=p.second;
-            for(auto neigh : adj[p.first])
-            {
-                if(dist[neigh.first]==LLONG_MAX/3)
-                    pq.push({neigh.first,neigh.second+p.second});
+        vector<long> da(n, LONG_MAX), db(n, LONG_MAX), dd(n, LONG_MAX);
+        auto solve = [&](vector<vector<ipair>> &G, int a, vector<long> &dist) {
+            priority_queue<ipair, vector<ipair>, greater<ipair>> pq;
+            dist[a] = 0;
+            pq.emplace(0, a);
+            while (pq.size()) {
+                auto [cost, u] = pq.top();
+                pq.pop();
+                if (cost > dist[u]) continue;
+                for (auto &[v, c] : G[u]) {
+                    if (dist[v] > dist[u] + c) {
+                        dist[v] = dist[u] + c;
+                        pq.emplace(dist[v], v);
+                    }
+                }
             }
+        };
+        solve(G, a, da);
+        solve(G, b, db);
+        solve(R, dest, dd);
+        long ans = LONG_MAX;
+        for (int i = 0; i < n; ++i) {
+            if (da[i] == LONG_MAX || db[i] == LONG_MAX || dd[i] == LONG_MAX) continue;
+            ans = min(ans, da[i] + db[i] + dd[i]);
         }
-        
-        return dist;
-        
-    }
-    
-    long long minimumWeight(int n, vector<vector<int>>& edges, int s1, int s2, int dest) {
-        vector<vector<pair<int,long long>>>adj(n),rev_adj(n);
-        adj.reserve(n);
-        rev_adj.reserve(n);
-        
-        for(auto e : edges)
-        {
-            adj[e[0]].push_back({e[1],e[2]});
-            rev_adj[e[1]].push_back({e[0],e[2]});
-        }
-        
-        vector<long long>a1=dijkstra(adj,n,s1);
-        vector<long long>a2=dijkstra(adj,n,s2);
-        vector<long long>a3=dijkstra(rev_adj,n,dest);
-        
-        
-        long long ans= LLONG_MAX;
-        
-        for(int i=0;i<n;i++)
-            ans = min(ans,(a1[i]+a2[i]+a3[i]));
-        
-        if(ans>=LLONG_MAX/3)
-            return -1;
-        
-        return ans;
-        
-        
+        return ans == LONG_MAX ? -1 : ans;
     }
 };
