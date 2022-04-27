@@ -2,11 +2,11 @@ class Solution {
 public:
 
     int carFleet(int target, vector<int>& pos, vector<int>& speed) {       
-        vector<pair<int,double>>v;
-        
         int n=pos.size();
+        vector<pair<int,double>>v(n);        
+        
         for(int i=0;i<n;i++)
-        v.push_back({pos[i],((target-pos[i])*1.0/speed[i])});    
+            v[i]={pos[i],((target-pos[i])*1.0/speed[i])};    
         
         sort(v.begin(),v.end());
              
