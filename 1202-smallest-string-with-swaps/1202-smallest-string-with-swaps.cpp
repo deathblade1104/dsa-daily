@@ -1,37 +1,41 @@
 class Solution {
 public:
-    int find_par(int x, vector<int>&par)
+    int get_par(int p, vector<int>&par)
     {
-        if(x==par[x])
-            return x;
+        if(p== par[p])
+            return p;
         
-        return par[x] =  find_par(par[x],par);        
+        return par[p] = get_par(par[p],par);
     }
     
-    void DSUnion( int n1, int n2, vector<int>&par, vector<int>&rank)
+    void DSUnion (int n1, int n2, vector<int>&par, vector<int>&rank)
     {
-        int p1 = find_par(n1,par) , p2= find_par(n2,par);
+        int p1= get_par(n1,par) , p2 = get_par(n2,par);
         
-        if(p1==p2) return;
+        if(p1==p2)
+            return;
         
         if(rank[p1]>=rank[p2])
         {
-            par[p2]=p1;
             rank[p1]++;
+            par[p2]=p1;
         }
         
         else
         {
-            par[p1]=p2;
             rank[p2]++;
+            par[p1]=p2;
         }
+        
         return;
     }
     
     string smallestStringWithSwaps(string s, vector<vector<int>>& pairs) {
-        vector<int>par(s.size()),rank(s.size(),0);
         
-        for(int i=0;i<s.size();i++)
+        int n=s.size();
+        vector<int>par(n),rank(n,0);
+        
+        for(int i=0;i<n;i++)
             par[i]=i;
         
         for(auto p : pairs)
@@ -40,7 +44,7 @@ public:
         vector<vector<int>>mp(s.size());
         
         for(int i=0;i<s.size();i++)
-        mp[find_par(i,par)].push_back(i);
+        mp[get_par(i,par)].push_back(i);
         
         
         
@@ -58,7 +62,10 @@ public:
         }
         
         
+        
         return s;
+        
+        
         
         
     }
