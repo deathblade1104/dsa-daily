@@ -16,6 +16,7 @@ public:
         priority_queue<vector<int>,vector<vector<int>>,mycomp>pq;
         
         pq.push({0,0,0});
+//         effort[0][0]=0;
         
         while(pq.size()>0)
         {
