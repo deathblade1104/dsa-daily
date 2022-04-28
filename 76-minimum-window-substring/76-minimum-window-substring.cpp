@@ -1,8 +1,5 @@
 class Solution {
 public:
-    
-
-
     string minWindow(string s1, string s2) {
         
         if(s1.size()<s2.size())
@@ -33,8 +30,7 @@ public:
                 if(ans.size()==0 or temp.size()<ans.size())
                     ans=temp;
                    
-                int rel_idx = s1[release];
-                
+                int rel_idx = s1[release];               
                 
                 if(mp2[rel_idx]>0 and mp1[rel_idx]-1<mp2[rel_idx])
                     matchcount--;
