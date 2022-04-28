@@ -1,7 +1,5 @@
 class Solution {
 public:
-    vector<int>dir={1,0,-1,0,1};
-    
     struct mycomp{
         bool operator()(const vector<int>&a, const vector<int>&b)
         {
@@ -12,6 +10,7 @@ public:
     int minimumEffortPath(vector<vector<int>>& heights) {
         int n=heights.size(), m=heights[0].size();
         vector<vector<int>>effort(n,vector<int>(m,INT_MAX));
+        vector<int>dir={1,0,-1,0,1};
         
         priority_queue<vector<int>,vector<vector<int>>,mycomp>pq;
         
