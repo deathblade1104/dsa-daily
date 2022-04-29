@@ -11,29 +11,22 @@
  */
 class Solution {
 public:
-    int get_ans(TreeNode *root, int &ans)
+    int get_ans(TreeNode* root,int&ans)
     {
         if(!root)
             return 0;
         
-        if(!root->left and !root->right)
-        {
-            ans=max(ans,1);
-            return 1;
-        }
-        
-        
-        int l = get_ans(root->left, ans);
+        int l = get_ans(root->left,ans);
         int r = get_ans(root->right,ans);
         
-        ans= max(ans,1+l+r);
+        ans= max(ans,l+r);
+        return max(l,r)+1;
         
-        return 1 + max(l,r);
     }
     int diameterOfBinaryTree(TreeNode* root) {
         int ans=0;
+
         int x = get_ans(root,ans);
-        return ans-1;
-        
+        return ans;
     }
 };
