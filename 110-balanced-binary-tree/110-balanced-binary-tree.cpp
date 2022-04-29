@@ -10,26 +10,25 @@
  * };
  */
 class Solution {
-    int DFS(TreeNode *root,bool&ans)
+public:
+    int get_ans(TreeNode *root, bool&ans)
     {
         if(!root)
             return 0;
         
-        if(root->left==NULL and root->right==NULL)
-            return 1;
+        int l = get_ans(root->left,ans);
+        int r = get_ans(root->right,ans);
         
-        int d1=DFS(root->left,ans),d2=DFS(root->right,ans);
-        
-        if(abs(d1-d2)>1)
+        if(abs(l-r)>1)
             ans=false;
         
-        return max(d1,d2)+1;
+        return max(l,r)+1;
     }
-public:
+    
     bool isBalanced(TreeNode* root) {
-        bool ans=true;
-        int x=DFS(root,ans);
         
+        bool ans=true;
+        int x = get_ans(root,ans);
         return ans;
     }
 };
