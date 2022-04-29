@@ -1,41 +1,34 @@
 class Solution {
-private :
-    bool DFS(int curr, int color, vector<int>&vis, vector<vector<int>>&adj)
+public:
+    bool DFS(int curr,int col, vector<int>&color, vector<vector<int>>&adj)
     {
-        vis[curr]=color;
-        
+        color[curr]=col;
         bool ans=true;
-        for(int neigh : adj[curr])
+        for(int i : adj[curr])
         {
-            if(vis[neigh]!=-1 and vis[neigh]==color)
-                    return false;
-            
-            else if(vis[neigh]==-1)
-                ans = ans & DFS(neigh, !color, vis,adj);
-            
-            if(ans==false)
+            if(color[i]!=-1 and color[i]==col)
                 return false;
+            
+            else if(color[i]==-1)
+                ans =  DFS(i,!col,color,adj);
         }
         
-        return true;
+        return  ans;
+        
     }
     
-public:
-    bool isBipartite(vector<vector<int>>& adj) {
-        int n= adj.size();
-        vector<int>vis(n,-1);
+    bool isBipartite(vector<vector<int>>& graph) {
+        int n=graph.size();
+        vector<int>color(n,-1);
         
         for(int i=0;i<n;i++)
         {
-            if(vis[i]==-1)
-            {
-                bool temp = DFS(i,1,vis,adj);
-                
-                if(!temp)
-                    return false;
-            }
+            if(color[i]==-1 and DFS(i,0,color,graph)==false)
+                return false;
         }
         
-        return true;
+        return true;      
+        
+        
     }
 };
