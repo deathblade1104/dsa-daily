@@ -19,7 +19,7 @@ public:
         
         for(int i=k;i<nums.size();i++)
         {
-            while(dq.front()<=(i-k))
+            while(dq.size()>0 and dq.front()<=(i-k))
                 dq.pop_front();
             
              while(dq.size()>0 and nums[dq.back()]<=nums[i])
