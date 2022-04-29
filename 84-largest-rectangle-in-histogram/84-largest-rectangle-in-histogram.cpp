@@ -2,6 +2,9 @@ class Solution {
 public:
     int largestRectangleArea(vector<int>& nums) {
         int n= nums.size();
+        if(n==1)
+            return nums[0];
+        
         stack<int>st;
         vector<int>lb(n,0),rb(n,0);
         
