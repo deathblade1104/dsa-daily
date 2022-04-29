@@ -7,13 +7,16 @@ public:
         for(int i : adj[curr])
         {
             if(color[i]!=-1 and color[i]==col)
-                return false;
+                ans= ans & false;
             
             else if(color[i]==-1)
-                ans =  DFS(i,!col,color,adj);
+                ans =  ans &  DFS(i,!col,color,adj);
+            
+            if(!ans)
+                return false;
         }
         
-        return  ans;
+        return  true;
         
     }
     
