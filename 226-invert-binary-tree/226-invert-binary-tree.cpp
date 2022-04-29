@@ -11,23 +11,21 @@
  */
 class Solution {
 public:
-    
     void get_ans(TreeNode *root)
     {
-        if(root==NULL) return;
-        
-        TreeNode *temp=root->left;
-        root->left=root->right;
-        root->right=temp;
+        if(!root)
+            return ;
         
         get_ans(root->left);
         get_ans(root->right);
         
-        return;
+        TreeNode *temp = root->left;
+        root->left=root->right;
+        root->right = temp;
     }
     TreeNode* invertTree(TreeNode* root) {
         get_ans(root);
+        return root;
         
-        return root;           
     }
 };
