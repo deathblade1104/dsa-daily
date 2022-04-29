@@ -12,9 +12,9 @@
 
 class Solution {
 public:
-    int ans=0;
     
-    void get_ans(TreeNode *root, unordered_map<long long,int>&mp, long long&p_sum, long long&k)
+    
+    void get_ans(TreeNode *root, unordered_map<long long,int>&mp, long long&p_sum, long long&k, int &ans)
     {
         if(!root)
             return;
@@ -30,8 +30,8 @@ public:
 
         mp[p_sum]++;
         
-        get_ans(root->left,mp,p_sum,k);
-        get_ans(root->right,mp,p_sum,k);
+        get_ans(root->left,mp,p_sum,k,ans);
+        get_ans(root->right,mp,p_sum,k,ans);
         
         if(mp[p_sum]==1)
             mp.erase(p_sum);
@@ -46,10 +46,10 @@ public:
         
         if(!root)
             return 0;
-        
+        int ans=0;
         long long ps=0;
         unordered_map<long long,int>mp;
-        get_ans(root,mp,ps,targetSum);
+        get_ans(root,mp,ps,targetSum,ans);
         return ans;
         
     }
