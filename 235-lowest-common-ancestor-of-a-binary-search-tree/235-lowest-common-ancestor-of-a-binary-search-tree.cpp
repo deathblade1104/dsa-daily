@@ -12,9 +12,7 @@ class Solution {
 public:
     TreeNode *get_ans(TreeNode *root, TreeNode *p, TreeNode*q)
     {
-        if(!root)
-            return NULL;
-             
+            
         if(root->val>p->val and root->val>q->val)
         return get_ans(root->left,p,q);
         
