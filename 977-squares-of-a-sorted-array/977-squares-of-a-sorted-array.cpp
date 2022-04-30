@@ -1,44 +1,49 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        queue<int>pos;
-        stack<int>neg;
+        vector<int>ans;
+        int pos,neg;
         
-        for(int i : nums)
+        pos=nums.size(),neg-1;
+        
+        for(int i=0;i<nums.size();i++)
         {
-            if(i<0)
-                neg.push(i);
-            
-            else pos.push(i);
+            if(nums[i]>=0)
+            {
+                pos = i;
+                break;
+            }
+            neg=i;
         }
         
-        vector<int>ans;
+        if(pos!= nums.size())
+        neg = pos - 1;
         
-        while(pos.size()>0 and neg.size()>0)
+        while(neg>=0 and pos<nums.size())
         {
-            if(abs(neg.top())<=pos.front())
+            if(abs(nums[neg])<=nums[pos])
             {
-                ans.push_back(neg.top()*neg.top());
-                neg.pop();
+                ans.push_back(nums[neg]* nums[neg]);
+                neg--;
             }
             
             else
-            {
-                ans.push_back(pos.front()*pos.front());
-                pos.pop();
+            {                
+                ans.push_back(nums[pos]* nums[pos]);
+                pos++;
             }
         }
         
-        while(neg.size()>0)
-        {           
-            ans.push_back(neg.top()*neg.top());
-            neg.pop();
+        while(neg>=0)
+        {
+            ans.push_back(nums[neg]* nums[neg]);
+            neg--;
         }
         
-        while(pos.size()>0)
+        while(pos<nums.size())
         {
-            ans.push_back(pos.front()*pos.front());
-            pos.pop();
+             ans.push_back(nums[pos]* nums[pos]);
+             pos++;
         }
         
         return ans;
