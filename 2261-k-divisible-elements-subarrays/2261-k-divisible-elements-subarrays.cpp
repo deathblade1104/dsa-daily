@@ -1,23 +1,26 @@
 class Solution {
 public:
     int countDistinct(vector<int>& nums, int k, int p) {
-        set<vector<int>>ans;
+        unordered_set<string>st;
         
         for(int i=0;i<nums.size();i++)
         {
-            int ct=0;
-            vector<int>tt;
+            int count=0;
+            string temp="";
             for(int j=i;j<nums.size();j++)
-            {               
+            {
                 if(nums[j]%p==0)
-                    ++ct;
-                if(ct>k)
+                    count++;
+                
+                if(count>k)
                     break;
-                tt.push_back(nums[j]);
-                ans.insert(tt);
+                
+                temp += to_string(nums[j]) + "_";
+                st.insert(temp);
             }
         }
         
-        return ans.size();
+        return st.size();
+        
     }
 };
