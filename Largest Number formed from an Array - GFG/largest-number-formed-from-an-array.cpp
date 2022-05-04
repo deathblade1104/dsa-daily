@@ -19,10 +19,7 @@ public:
 	        string ab = a + b;
 	        string ba = b + a;
 	        
-	        if(ab>ba)
-	            return 1;
-	            
-	       else return 0;
+	        return ab>ba;
 	        
 	    }
 	};
