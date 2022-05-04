@@ -1,5 +1,5 @@
 # Largest Number formed from an Array
-##  Medium 
+## Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a list&nbsp;of non negative integers, arrange them in such a manner&nbsp;that they form the largest number possible.The result is going to be very large, hence return the result in the form of a string.</span></p>
 
