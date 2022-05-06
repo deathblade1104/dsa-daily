@@ -13,6 +13,7 @@ public:
             prev = next = NULL;
         }
     };
+    
     int cap;
     unordered_map<int,Node*>mp;
     
@@ -29,8 +30,7 @@ public:
     int get(int key) {
         
         if(mp.count(key)==0)
-            return -1;
-        
+            return -1;        
         
         Node *temp = mp[key];
         delete_node(temp);
