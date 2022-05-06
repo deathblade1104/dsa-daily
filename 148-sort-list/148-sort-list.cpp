@@ -10,22 +10,7 @@
  */
 class Solution {
 public:
-    ListNode *get_mid(ListNode *head)
-    {
-        if(!head or !head->next)
-            return head;
-        
-        ListNode *slow=head, *fast=head;
-        
-        while(fast->next and fast->next->next)
-        {
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-        
-        return slow;
-    }
-    
+     
     ListNode *merge(ListNode *h1, ListNode *h2)
     {
         
@@ -57,9 +42,16 @@ public:
         if(!head or !head->next)
             return head;
         
-        ListNode *mid = get_mid(head);
-        ListNode *head2 = mid->next;        
-        mid->next = NULL;
+        ListNode *slow=head, *fast=head;
+        
+        while(fast->next and fast->next->next)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        ListNode *head2 = slow->next;        
+        slow->next = NULL;
         
         ListNode *h1 = sortList(head), *h2 = sortList(head2);
         
