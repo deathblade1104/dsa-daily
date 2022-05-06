@@ -25,10 +25,9 @@ public:
 
             while(necessary_chars==p.size() and start<=end)
             {               
-                string temp = s.substr(start, (end - start + 1));
-                
-                if(ans.size()==0 or temp.size()<ans.size())
-                    ans=temp;
+              
+                if(ans.size()==0 or end-start+1<ans.size())
+                    ans= s.substr(start, (end - start + 1));;
 
                 if(mp1[s[start]]>0 and mp2[s[start]]-1 <mp1[s[start]])
                 necessary_chars --;
