@@ -13,17 +13,9 @@ public:
      
     ListNode *merge(ListNode *h1, ListNode *h2)
     {
-        
-        if(!h1 and !h2)
-            return NULL;
-        
-        else if(!h1)
-            return h2;
-        
-        else if (!h2)
-            return h1;
-        
-        
+       if(h1==NULL) return h2;
+       if(h2==NULL) return h1;
+               
         if(h1->val <= h2->val)
         {
             h1->next = merge(h1->next,h2);
