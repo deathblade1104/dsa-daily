@@ -38,6 +38,19 @@ public:
         return temp->val;
     }
     
+    void delete_at_head()
+    {
+        Node *curr = head->next;
+
+        head->next = curr->next;
+        curr->next->prev = head;
+
+        mp.erase(curr->key);
+        delete(curr);
+        
+        return;
+    }
+    
     void delete_node(Node *temp)
     {
         Node *p = temp->prev, *n = temp->next , *temp2 = tail->prev;
@@ -61,8 +74,7 @@ public:
     void put(int key, int value) {
         
         if(mp.count(key)==1)
-        delete_node(mp[key]);
-        
+        delete_node(mp[key]);        
         
         Node *temp = new Node(key,value);           
         mp[key] = temp;
@@ -70,15 +82,7 @@ public:
         add_at_tail(temp);
 
         if(mp.size()>cap)
-        {
-            Node *curr = head->next;
-
-            head->next = curr->next;
-            curr->next->prev = head;
-
-            mp.erase(curr->key);
-            delete(curr);
-        }
+        delete_at_head();
 
         return;
 
