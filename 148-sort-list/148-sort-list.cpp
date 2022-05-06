@@ -10,32 +10,60 @@
  */
 class Solution {
 public:
-    struct mycomp
+    ListNode *get_mid(ListNode *head)
     {
-        bool operator()(ListNode *a, ListNode *b)
+        if(!head or !head->next)
+            return head;
+        
+        ListNode *slow=head, *fast=head;
+        
+        while(fast->next and fast->next->next)
         {
-            return a->val>b->val;
+            slow = slow->next;
+            fast = fast->next->next;
         }
-    };
+        
+        return slow;
+    }
+    
+    ListNode *merge(ListNode *h1, ListNode *h2)
+    {
+        
+        if(!h1 and !h2)
+            return NULL;
+        
+        else if(!h1)
+            return h2;
+        
+        else if (!h2)
+            return h1;
+        
+        
+        if(h1->val <= h2->val)
+        {
+            h1->next = merge(h1->next,h2);
+            return h1;
+        }
+        
+        else
+        {
+            h2->next = merge(h1,h2->next);
+            return h2;
+        }
+    }
     
     ListNode* sortList(ListNode* head) {
-        ListNode *ans = new ListNode(-1),*curr=ans;
-        priority_queue<ListNode*,vector<ListNode*>, mycomp>pq;        
         
-        for(ListNode  *temp = head; temp!=NULL; temp=temp->next)
-        pq.push(temp);
+        if(!head or !head->next)
+            return head;
         
-         while(pq.size()>0)
-        {
-            auto p = pq.top();
-            pq.pop();
-                    
-            curr->next=p;
-            p->next = NULL;
-            curr=curr->next;          
-        }
+        ListNode *mid = get_mid(head);
+        ListNode *head2 = mid->next;        
+        mid->next = NULL;
         
-        return ans->next;
+        ListNode *h1 = sortList(head), *h2 = sortList(head2);
+        
+        return merge(h1,h2);       
         
         
     }
