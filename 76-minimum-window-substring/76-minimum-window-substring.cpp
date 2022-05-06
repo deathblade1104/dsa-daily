@@ -13,8 +13,7 @@ public:
 	    mp1[ch]++;
 
 	    int necessary_chars=0, start=0;
-        string ans="";
-        
+        string ans="";        
 
         for(int end =0;end<s.size();end++)
         {
@@ -25,7 +24,6 @@ public:
 
             while(necessary_chars==p.size() and start<=end)
             {               
-              
                 if(ans.size()==0 or end-start+1<ans.size())
                     ans= s.substr(start, (end - start + 1));;
 
