@@ -15,7 +15,7 @@ class Solution
     vector <int> max_of_subarrays(int *arr, int n, int k)
     {
         // your code here
-        deque<int>dq;
+        list<int>dq;
         vector<int>ans;
         
         for(int i =0; i<k; i++)
