@@ -23,7 +23,7 @@ class Solution
             while(dq.size()>0 and arr[i]>=arr[dq.back()])
             dq.pop_back();
             
-            dq.push_back(i);
+            dq.emplace_back(i);
         }
         
         ans.push_back(arr[dq.front()]);
@@ -36,8 +36,8 @@ class Solution
             while(dq.size()>0 and arr[i]>=arr[dq.back()])
             dq.pop_back();
             
-            dq.push_back(i);
-            ans.push_back(arr[dq.front()]);
+            dq.emplace_back(i);
+            ans.emplace_back(arr[dq.front()]);
         }
         
         return ans;
