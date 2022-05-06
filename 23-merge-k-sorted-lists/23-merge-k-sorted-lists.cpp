@@ -10,47 +10,38 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        
-        if(list1==NULL && list2!=NULL)
-            return list2;
-        
-        if(list2==NULL && list1!=NULL)
-            return list1;       
-        if(list1==NULL && list2==NULL)
-            return NULL;
-        
-        if(list1->val<list2->val){
-            list1->next=mergeTwoLists(list1->next,list2);
-            return list1;
-        }
-        
-        else
-        {
-            list2->next=mergeTwoLists(list1,list2->next);
-            return list2;
-        }
-    }
     
-    ListNode* mergeKLists(vector<ListNode*>& arr) {
-        
-        int K=arr.size();
-        
-        if(K==0)
-            return NULL;
-        
-        if(K==1)
-        return arr[0];
-        
-        else
+    struct mycomp
+    {
+        bool operator()(ListNode *a, ListNode *b)
         {
-            ListNode *res=mergeTwoLists(arr[0],arr[1]);
-            
-            for(int i=2;i<K;i++)
-            res=mergeTwoLists(res,arr[i]);
-            
-            return res;
+            return a->val>b->val;
         }
+    };
+    
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        
+        ListNode *ans = new ListNode(-1),*curr=ans;
+        
+        priority_queue<ListNode*,vector<ListNode*>, mycomp>pq;        
+        for(auto i : lists)
+            if(i!=NULL)
+                pq.push(i);
+        
+
+        while(pq.size()>0)
+        {
+            auto p = pq.top();
+            pq.pop();
+                    
+            curr->next=p;
+            curr=curr->next;
+            
+            if(p->next)
+                pq.push(p->next);            
+        }
+        
+        return ans->next;
         
     }
 };
