@@ -9,48 +9,33 @@
  * };
  */
 class Solution {
-private:
-    ListNode *merge(ListNode *h1, ListNode*h2)
-    {
-        if(h1==NULL) return h2;
-        if(h2==NULL) return h1;
-        
-        if(h1->val<=h2->val)
-        {
-            h1->next=merge(h1->next,h2);
-            return h1;
-        }
-        
-        else
-        {
-            h2->next=merge(h1,h2->next);
-                return h2;
-        }
-    }
-    
 public:
-    
-
-    ListNode *sortList(ListNode *head) {
-        
-        if(head==NULL or  head->next==NULL)
-            return head;
-        
-        ListNode* slow=head, *fast=head;
-        
-        while(fast->next and fast->next->next)
+    struct mycomp
+    {
+        bool operator()(ListNode *a, ListNode *b)
         {
-            slow=slow->next;
-            fast=fast->next->next;
+            return a->val>b->val;
+        }
+    };
+    
+    ListNode* sortList(ListNode* head) {
+        ListNode *ans = new ListNode(-1),*curr=ans;
+        priority_queue<ListNode*,vector<ListNode*>, mycomp>pq;        
+        
+        for(ListNode  *temp = head; temp!=NULL; temp=temp->next)
+        pq.push(temp);
+        
+         while(pq.size()>0)
+        {
+            auto p = pq.top();
+            pq.pop();
+                    
+            curr->next=p;
+            p->next = NULL;
+            curr=curr->next;          
         }
         
-        ListNode  *mid2=slow->next;
-        slow->next=NULL;
-        
-        ListNode *h1=sortList(head);
-        ListNode *h2=sortList(mid2);
-        
-        return merge(h1,h2);        
+        return ans->next;
         
         
     }
