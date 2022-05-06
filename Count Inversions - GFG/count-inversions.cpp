@@ -18,11 +18,11 @@ class Solution{
         if(b.size()==0)
         return a;
         
-        if(a[a.size()-1]<=b[0])
-        {
-            a.insert(a.end(),b.begin(),b.end());
-            return a;
-        }
+        // if(a[a.size()-1]<=b[0])
+        // {
+        //     a.insert(a.end(),b.begin(),b.end());
+        //     return a;
+        // }
         
         vector<long long>ans(a.size()+b.size());
         int i= 0, j = 0, k=0;
