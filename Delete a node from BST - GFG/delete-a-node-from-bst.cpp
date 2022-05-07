@@ -108,48 +108,47 @@ int main() {
 
 
 // Function to delete a node from BST.
-Node *get_left(Node *root)
+
+Node* get_left(Node *root)
 {
     while(root->left!=NULL)
     root=root->left;
     
     return root;
 }
-Node *deleteNode(Node *root, int X) {
+
+Node *deleteNode(Node *root, int key) {
     // your code goes here
-    if(root==NULL)
-    return NULL;
     
-    if(X<root->data)
-     root->left=deleteNode(root->left,X);
-     
-    else if(X>root->data)
-        root->right=deleteNode(root->right,X);
-        
+    if(!root)
+        return root;
+            
+    if(root->data>key)
+        root->left = deleteNode(root->left,key);          
+    
+    else if(root->data<key)
+        root->right = deleteNode(root->right,key);           
+    
     else
     {
         if(!root->left and !root->right)
             root=NULL;
-
         
-        else if(!root->left)
-            root=root->right;
-
+        else if(root->left and !root->right)
+            root= root->left;
         
-        else if(!root->right)
-            root=root->left;
-
-        
+        else if(root->right and !root->left)
+            root = root->right;
+            
         else
         {
             Node *temp = get_left(root->right);
             swap(root->data,temp->data);
             
-            root->right= deleteNode(root->right,temp->data);
+            root->right = deleteNode(root->right,temp->data);
 
         }
-        
-        return root;
-        
     }
+    
+    return root;  
 }
