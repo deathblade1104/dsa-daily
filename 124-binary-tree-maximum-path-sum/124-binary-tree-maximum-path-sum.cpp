@@ -11,29 +11,31 @@
  */
 class Solution {
 public:
+    
     int get_ans(TreeNode *root, int&ans)
     {
-        if(!root)
+        if(root==NULL)
             return 0;
         
-        if(!root->left and !root->right)
-        {
-            ans=max(ans,root->val);
-            return root->val;
-        }
+        int l ,r;
         
-        int l = max(0, get_ans(root->left,ans));
-        int r = max(0,get_ans(root->right,ans));
+        l = get_ans(root->left,ans);
         
-        ans=max(ans, root->val + l + r);
+        r = get_ans(root->right,ans);
         
-        return root->val + max(l,r);
+        l=max(l,0);
+        r=max(r,0);
         
+        ans= max(ans,(root->val+l+r));
         
+        return max(l,r) + root->val;
     }
+    
     int maxPathSum(TreeNode* root) {
         int ans=INT_MIN;
-        int x= get_ans(root,ans);
+        
+        int x = get_ans(root,ans);
+        
         return ans;
         
     }
