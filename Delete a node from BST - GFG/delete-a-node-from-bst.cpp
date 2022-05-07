@@ -145,8 +145,6 @@ Node *deleteNode(Node *root, int key) {
             Node *temp = get_left(root->right);
             swap(root->data,temp->data);
             
-            // temp=NULL;
-            
             root->right = deleteNode(root->right,temp->data);
 
         }
