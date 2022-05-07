@@ -5,10 +5,7 @@ public:
         if(numRows==1)
             return s;
         
-        vector<string>res;
-        
-        for(int i=0;i<numRows;i++)
-            res.push_back("");
+        vector<string>res(numRows,"");
                 
         int i=0, n = numRows;
         while(i<s.size())
@@ -25,7 +22,7 @@ public:
         
         string ans="";
         
-        for(string str : res)          
+        for(string &str : res)          
             ans+=str;   
         
         return ans;
