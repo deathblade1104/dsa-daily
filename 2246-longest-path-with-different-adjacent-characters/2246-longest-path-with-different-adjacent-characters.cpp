@@ -18,9 +18,7 @@ public:
                 
                 if(m2>m1)
                     swap(m1,m2);
-            }
-            
-            
+            }            
         }
         ans=max(ans,m1+m2+1);
         return m1+1;
