@@ -14,7 +14,7 @@ public:
     
     int get_inorder_index(vector<int>&inorder,int l, int r, int&target)
     {
-        for(int i=l;i<=r and i<inorder.size();i++)
+        for(int i=l;i<=r;i++)
         {
             if(inorder[i]==target)
                 return i;
