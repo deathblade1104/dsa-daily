@@ -24,17 +24,16 @@ public:
     }
     
     TreeNode *get_ans(vector<int>&preorder, int&pre_itr, vector<int>&inorder, int l, int r)
-    {
-        
-        if(l>r)
-            return NULL;
-        
+    {       
         TreeNode *root= new TreeNode(preorder[pre_itr]);
         
         int idx = get_inorder_index(inorder,l,r,preorder[pre_itr]);
         pre_itr++;
         
+        if(l<=idx-1)        
         root->left = get_ans(preorder,pre_itr,inorder,l,idx-1);
+        
+        if(idx+1<=r)
         root->right = get_ans(preorder,pre_itr,inorder,idx+1,r);
         
         return root;
