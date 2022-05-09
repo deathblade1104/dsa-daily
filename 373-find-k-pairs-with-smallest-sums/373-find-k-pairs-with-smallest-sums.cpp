@@ -4,7 +4,7 @@ public:
     {
         bool operator()(const vector<int>&a,const vector<int>&b)
         {
-            return a[2]<b[2];
+            return a[0]+a[1]<b[0]+b[1];
         }
     };
     
@@ -16,12 +16,11 @@ public:
         {
             for(int j=0;j<nums2.size();j++)
             {
-                int curr_sum=nums1[i] + nums2[j];
                 
-                if(pq.size()==k and curr_sum>pq.top()[2])  
+                if(pq.size()==k and nums1[i]+nums2[j]>pq.top()[0]+pq.top()[1])  
                            break;
                 
-                pq.push({nums1[i],nums2[j],curr_sum});
+                pq.push({nums1[i],nums2[j]});
                 
                 if(pq.size()>k)
                     pq.pop();
