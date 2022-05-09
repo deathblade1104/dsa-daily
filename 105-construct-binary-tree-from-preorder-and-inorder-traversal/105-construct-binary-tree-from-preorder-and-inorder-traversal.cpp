@@ -11,30 +11,19 @@
  */
 class Solution {
 public:
+
     
-    int get_inorder_index(vector<int>&inorder,int l, int r, int&target)
-    {
-        for(int i=l;i<=r;i++)
-        {
-            if(inorder[i]==target)
-                return i;
-        }
-        
-        return -1;
-    }
-    
-    TreeNode *get_ans(vector<int>&preorder, int&pre_itr, vector<int>&inorder, int l, int r)
+    TreeNode *get_ans(vector<int>&preorder, int&pre_itr, vector<int>&inorder, unordered_map<int,int>&mp, int l, int r)
     {       
         TreeNode *root= new TreeNode(preorder[pre_itr]);
         
-        int idx = get_inorder_index(inorder,l,r,preorder[pre_itr]);
-        pre_itr++;
+        int idx = mp[preorder[pre_itr++]];
         
         if(l<=idx-1)        
-        root->left = get_ans(preorder,pre_itr,inorder,l,idx-1);
+        root->left = get_ans(preorder,pre_itr,inorder,mp,l,idx-1);
         
         if(idx+1<=r)
-        root->right = get_ans(preorder,pre_itr,inorder,idx+1,r);
+        root->right = get_ans(preorder,pre_itr,inorder,mp,idx+1,r);
         
         return root;
     }
@@ -43,7 +32,11 @@ public:
         
         int pre_itr=0,l=0,r=inorder.size()-1;
         
-        return get_ans(preorder,pre_itr,inorder,l,r);
+        unordered_map<int,int>mp;
+        for(int i=l;i<=r;i++)
+            mp[inorder[i]]=i;
+                    
+        return get_ans(preorder,pre_itr,inorder,mp,l,r);
         
     }
 };
