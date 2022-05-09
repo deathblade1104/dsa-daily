@@ -10,7 +10,7 @@ public:
 
     int timer;
     unordered_set<int>followdir[500];
-    unordered_map<int,vector<vector<int>>>tweetdir;
+    vector<vector<int>>tweetdir[500];
     
     Twitter(){
         timer=0;
