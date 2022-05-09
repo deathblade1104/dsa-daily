@@ -2,15 +2,15 @@ class Twitter {
 public:    
     struct mycomp
     {
-        bool operator()(const vector<int>&a, const vector<int>&b)
+        bool operator()(const pair<int,int>&a, const pair<int,int>&b)
         {
-            return a[1]>b[1];
+            return a.second>b.second;
         }
     };
 
     int timer;
     unordered_set<int>followdir[500];
-    vector<vector<int>>tweetdir[500];
+    vector<pair<int,int>>tweetdir[500];
     
     Twitter(){
         timer=0;
@@ -26,7 +26,7 @@ public:
         followdir[userId].insert(userId);
         
         vector<int>ans;  
-        priority_queue<vector<int>, vector<vector<int>> , mycomp>pq;
+        priority_queue<pair<int,int>, vector<pair<int,int>> , mycomp>pq;
         
         
         for(auto&itr : followdir[userId])
@@ -54,7 +54,7 @@ public:
             auto p = pq.top();
             pq.pop();
             
-            ans.push_back(p[0]);
+            ans.push_back(p.first);
         }
         
         reverse(ans.begin(),ans.end());
