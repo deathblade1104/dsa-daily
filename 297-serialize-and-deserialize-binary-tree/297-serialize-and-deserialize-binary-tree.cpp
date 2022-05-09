@@ -44,10 +44,7 @@ public:
     }
     
     TreeNode *constructTree(string&data, int&itr)
-    {
-        if(itr>=data.size())
-            return NULL;
-        
+    {        
         if(data[itr]=='N')
         {
             itr+=2;
