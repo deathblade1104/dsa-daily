@@ -18,8 +18,8 @@ public:
             {
                 int curr_sum=nums1[i] + nums2[j];
                 
-                if(pq.size()==k and curr_sum>=pq.top()[2])
-                   break;
+                if(pq.size()==k and curr_sum>pq.top()[2])  
+                           break;
                 
                 pq.push({nums1[i],nums2[j],curr_sum});
                 
@@ -34,7 +34,7 @@ public:
             pq.pop();
             ans.push_back({p[0],p[1]});
         }
-        
+
         return ans;
     }
 };
