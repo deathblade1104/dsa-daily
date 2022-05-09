@@ -9,12 +9,11 @@ public:
     };
 
     int timer;
-    unordered_set<int>followdir[500];
-    vector<pair<int,int>>tweetdir[500];
+    unordered_map<int,unordered_set<int>>followdir;
+    unordered_map<int,vector<pair<int,int>>>tweetdir;
     
     Twitter(){
         timer=0;
-
     }
     
     void postTweet(int userId, int tweetId) {
