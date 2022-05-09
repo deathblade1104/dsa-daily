@@ -30,13 +30,11 @@ public:
         
         for(auto&itr : followdir[userId])
         {
-            int uid = itr ;
-            int sz = tweetdir[uid].size();
+            int uid = itr,sz = tweetdir[uid].size();
             
             if(sz>10)
                 sz=10;
             
-
             for(int i = tweetdir[uid].size()-1; i>=0 and sz>0; i--)
             {
                 pq.push(tweetdir[uid][i]);
