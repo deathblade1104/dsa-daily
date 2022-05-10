@@ -11,7 +11,7 @@ public:
     vector<int> smallestRange(vector<vector<int>>& nums) {
         
         vector<int>ans(2);
-        priority_queue<vector<int>, vector<vector<int>> , mycomp>pq;
+        priority_queue<vector<int>, vector<vector<int>> , greater<vector<int>>>pq;
         int m1=INT_MAX,m2=INT_MIN;
         
         for(int i=0;i<nums.size();i++) 
