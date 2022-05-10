@@ -24,7 +24,7 @@ public:
             if(prev[1]>=curr[0])
             {
                 prev[1]=max(curr[1],prev[1]);
-                prev[0]=min(curr[0],prev[0]);
+                // prev[0]=min(curr[0],prev[0]);
             }
             
             else
