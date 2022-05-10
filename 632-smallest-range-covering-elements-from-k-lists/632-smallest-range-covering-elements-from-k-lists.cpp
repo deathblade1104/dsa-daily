@@ -1,13 +1,5 @@
 class Solution {
 public:
-    struct mycomp
-    {
-        bool operator()(const vector<int>&a, vector<int>&b)
-        {
-            return a[0]>b[0];
-        }
-    };
-    
     vector<int> smallestRange(vector<vector<int>>& nums) {
         
         vector<int>ans(2);
