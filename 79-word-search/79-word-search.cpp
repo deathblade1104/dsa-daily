@@ -15,8 +15,8 @@ public:
         
         for(int k=1;k<=4;k++)
         {
-            bool op1 = wordsearch(i+arr[k-1],j+arr[k],curr+1,word,grid);
-            if(op1) return true;
+            if(wordsearch(i+arr[k-1],j+arr[k],curr+1,word,grid))
+                return true;
         }
             
         grid[i][j]=ch;
