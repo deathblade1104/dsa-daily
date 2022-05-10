@@ -25,8 +25,9 @@ public:
             pq.pop();
             ans.push_back({p[0],nums2[p[1]]});
             
-            if(p[1]+1<nums2.size())
-            pq.push({p[0],p[1]+1, p[0] + nums2[p[1]+1]});
+            p[1]++;
+            if(p[1]<nums2.size())
+            pq.push({p[0],p[1], p[0] + nums2[p[1]]});
                 
         }
 
