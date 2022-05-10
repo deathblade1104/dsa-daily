@@ -3,7 +3,8 @@ public:
     vector<int> smallestRange(vector<vector<int>>& nums) {
         
         vector<int>ans(2);
-        priority_queue<vector<int>, vector<vector<int>> , greater<vector<int>>>pq;
+        priority_queue<array<int,3> , vector<array<int,3>> , greater<array<int,3>>>pq;
+        
         int m1=INT_MAX,m2=INT_MIN;
         
         for(int i=0;i<nums.size();i++) 
