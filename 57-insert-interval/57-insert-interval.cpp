@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
         
-        vector<vector<int>>temp;
+        vector<vector<int>>ans;
         bool flag = false;
         
         int i=0;
@@ -13,22 +13,23 @@ public:
             
             if(p[0]<=newInterval[0] or flag)
             {
-                temp.push_back(p);
+                ans.push_back(p);
                 i++;               
             }
             
             else
             {
                 flag=true;
-                temp.push_back(newInterval);
+                ans.push_back(newInterval);
             }
         }
         
         if(!flag)
-            temp.push_back(newInterval);
+            ans.push_back(newInterval);
         
-        intervals=temp;
-        vector<vector<int>>ans;
+        intervals=ans;
+        ans.clear();
+        
         vector<int>prev = intervals[0];
         
         for(int i=1;i<intervals.size();i++)
