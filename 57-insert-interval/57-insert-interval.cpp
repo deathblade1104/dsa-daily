@@ -5,8 +5,7 @@ public:
         vector<vector<int>>ans;
         bool flag = false;
         
-        int i=0;
-        
+        int i=0;        
         while(i<intervals.size())
         {
             auto p = intervals[i];
@@ -22,8 +21,7 @@ public:
                 flag=true;
                 ans.push_back(newInterval);
             }
-        }
-        
+        }        
         if(!flag)
             ans.push_back(newInterval);
         
@@ -34,14 +32,13 @@ public:
         
         for(int i=1;i<intervals.size();i++)
         {
-            vector<int>curr = intervals[i];
-            if(prev[1]>=curr[0])
-              prev[1]=max(curr[1],prev[1]);
+            if(prev[1]>=intervals[i][0])
+              prev[1]=max(intervals[i][1],prev[1]);
             
             else
             {
                 ans.push_back(prev);
-                prev=curr;
+                prev=intervals[i];
             }
         }
         
