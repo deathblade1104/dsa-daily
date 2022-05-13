@@ -2,20 +2,24 @@ class Solution {
 public:
     void get_ans(int curr,int&n,vector<int>&t,vector<int>&arr, vector<vector<int>>&ans)
     {
-        
-        ans.push_back(t);
-            
-        
-       for(int i=curr;i<n;i++)
+        if(curr>=n)
         {
-            if(i>curr and arr[i]==arr[i-1])
-            continue;
-            
-            t.push_back(arr[i]);
-            get_ans(i+1,n,t,arr,ans);
-            t.pop_back();
+            ans.push_back(t);
+            return;
         }
-            
+        
+        int i=curr;
+        
+        while(i<=n-1 and arr[i]==arr[curr])
+            i++;
+
+        t.push_back(arr[curr]);
+        get_ans(curr+1,n,t,arr,ans);
+        t.pop_back();
+        
+        get_ans(i,n,t,arr,ans);
+    
+        
         return;        
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
