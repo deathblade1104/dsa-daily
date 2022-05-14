@@ -1,23 +1,18 @@
 class Solution {
 public:
-    void helper(int curr,vector<int>&nums, vector<int>&temp, vector<vector<int>>&ans,bool consider)
+    void helper(int curr,vector<int>&nums, vector<int>&temp, vector<vector<int>>&ans)
     {
-        if(curr>=nums.size())
+        ans.push_back(temp);
+            
+        for(int i=curr;i<nums.size();i++)
         {
-            ans.push_back(temp);
-            return;
-        }
-        
-        helper(curr+1,nums,temp,ans,false);
-        
-        if(curr>0 and nums[curr]==nums[curr-1] and consider==false)
-            return;
-        
-        temp.push_back(nums[curr]);
-        helper(curr+1,nums,temp,ans,true);
-        temp.pop_back();
-        
-       
+            if(i>curr and nums[i]==nums[i-1])
+                continue;
+
+            temp.push_back(nums[i]);
+            helper(i+1,nums,temp,ans);
+            temp.pop_back();
+        }       
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         
@@ -26,7 +21,7 @@ public:
         vector<int>temp;
         vector<vector<int>>ans;
         
-        helper(0,nums,temp,ans,false);
+        helper(0,nums,temp,ans);
         return ans;
     }
 };
