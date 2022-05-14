@@ -17,8 +17,7 @@ public:
             return NULL;
         
         
-        TreeNode *root = new TreeNode (preorder[pre_itr]);
-        pre_itr++;
+        TreeNode *root = new TreeNode (preorder[pre_itr++]);
         
         root->left = get_ans(preorder,pre_itr,root->val);
         root->right = get_ans(preorder,pre_itr,max_val);
