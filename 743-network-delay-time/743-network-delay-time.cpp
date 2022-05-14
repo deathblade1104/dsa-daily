@@ -1,70 +1,52 @@
 class Solution {
-    private:
-        
-    struct mycomp{
-        bool operator()(const pair<int,int>&a , const pair<int,int>&b)
+public:
+    struct mycomp
+    {
+        bool operator()(const array<int,2>&a, const array<int,2>&b)
         {
-            if(a.second!=b.second)
-                return a.second>b.second;
-            
-            return a.first>b.first;
+            return a[1]>b[1];
         }
-        
     };
     
-     vector<vector<pair<int,int>>>make_graph(vector<vector<int>>&times,int&n)
-     {
-         vector<vector<pair<int,int>>>adj(n+1);        
-        for(int i=0;i<times.size();i++)
-        {
-            int source = times[i][0], dest=times[i][1], weight=times[i][2];
-            adj[source].push_back({dest,weight});
-        }
-        return adj;
-     }
-    
-public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+        if(times.size()<n-1) return -1;
         
-        vector<vector<pair<int,int>>>adj=make_graph(times,n);
-        vector<int>cost(n+1,-1);
+        vector<vector<array<int,2>>>adj(n+1);
+        for(auto &v : times)
+            adj[v[0]].push_back({v[1],v[2]});        
+               
+        vector<int>vis(n+1,INT_MAX);      
+        vis[k]=0;    
         
-        priority_queue<pair<int,int>,vector<pair<int,int>>,mycomp>pq;
+        priority_queue<array<int,2>, vector<array<int,2>> , mycomp>pq;
         pq.push({k,0});
         
         while(pq.size()>0)
         {
-            pair<int,int>p=pq.top();
+            auto p = pq.top();
             pq.pop();
-            
-            if(cost[p.first]==-1)
-            {
-                cost[p.first]=p.second;
+    
+            for(auto&neigh : adj[p[0]])
+            {          
                 
-                vector<pair<int,int>>neigh=adj[p.first];
-                
-                for(auto it : neigh)
+                if(vis[neigh[0]]>p[1] + neigh[1])
                 {
-                    if(cost[it.first]==-1)
-                        pq.push({it.first, it.second + p.second});
+                    vis[neigh[0]] = p[1] + neigh[1];
+                    pq.push({neigh[0],vis[neigh[0]]});
                 }
             }
+            
         }
         
-        int ans=-1;
-        
-        for (int i=1;i<=n;i++)
+        int ans=0;
+        for(int i=1;i<vis.size();i++)
         {
-            if(cost[i]==-1)
-                return -1;
+           if(vis[i]==INT_MAX)
+               return -1;
             
-            else ans=max(ans,cost[i]);            
+            ans=max(ans,vis[i]);
         }
         
         return ans;
-        
-        
-        
-        
     }
 };
