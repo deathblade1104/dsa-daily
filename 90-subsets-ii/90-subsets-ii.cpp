@@ -1,36 +1,32 @@
 class Solution {
 public:
-    void get_ans(int curr,int&n,vector<int>&t,vector<int>&arr, vector<vector<int>>&ans)
+    void helper(int curr, int&sz, vector<int>&nums, vector<int>&temp, vector<vector<int>>&ans,bool consider)
     {
-        if(curr>=n)
+        if(curr>=sz)
         {
-            ans.push_back(t);
+            ans.emplace_back(temp);
             return;
         }
         
-        int i=curr;
+        helper(curr+1,sz,nums,temp,ans,false);
         
-        while(i<=n-1 and arr[i]==arr[curr])
-            i++;
-
-        t.push_back(arr[curr]);
-        get_ans(curr+1,n,t,arr,ans);
-        t.pop_back();
+        if(curr>0 and nums[curr]==nums[curr-1] and consider==false)
+            return;
         
-        get_ans(i,n,t,arr,ans);
-    
+        temp.push_back(nums[curr]);
+        helper(curr+1,sz,nums,temp,ans,true);
+        temp.pop_back();
         
-        return;        
+       
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-     
-        vector<vector<int>>ans;
-        vector<int>t;
+        
         sort(nums.begin(),nums.end());
-        int n= nums.size();
-        get_ans(0,n,t,nums,ans);
+        int sz=nums.size();
+        vector<int>temp;
+        vector<vector<int>>ans;
         
-        
+        helper(0,sz,nums,temp,ans,false);
         return ans;
     }
 };
