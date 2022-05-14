@@ -9,7 +9,7 @@ public:
             if(i>curr and nums[i]==nums[i-1])
                 continue;
 
-            temp.push_back(nums[i]);
+            temp.emplace_back(nums[i]);
             helper(i+1,nums,temp,ans);
             temp.pop_back();
         }       
