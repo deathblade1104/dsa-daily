@@ -7,10 +7,7 @@ void helper(int curr, int&target,vector<int>&nums, vector<int>&temp, vector<vect
             ans.push_back(temp);
             return;
         }
-        
-        if(curr>=nums.size() or target<nums[curr])
-            return;
-        
+                
         for(int i=curr;i<nums.size();i++)
         {
             if(target<nums[i])
