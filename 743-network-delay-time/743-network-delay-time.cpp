@@ -15,7 +15,7 @@ public:
         for(auto &v : times)
             adj[v[0]].push_back({v[1],v[2]});        
                
-        vector<int>vis(n+1,INT_MAX);      
+        vector<int>vis(n+1,INT_MAX);
         vis[k]=0;    
         
         priority_queue<array<int,2>, vector<array<int,2>> , mycomp>pq;
