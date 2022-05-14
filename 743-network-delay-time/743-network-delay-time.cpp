@@ -11,7 +11,7 @@ public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         if(times.size()<n-1) return -1;
         
-        vector<vector<array<int,2>>>adj(n+1);
+        array<vector<array<int,2>>,101>adj;
         for(auto &v : times)
             adj[v[0]].push_back({v[1],v[2]});        
                
