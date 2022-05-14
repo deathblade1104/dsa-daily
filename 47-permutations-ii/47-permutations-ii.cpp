@@ -8,7 +8,7 @@ public:
         } 
         else 
         {
-            for (int i = pos; i < sz; ++i) 
+            for (int i = pos; i < sz; i++) 
             {
                 if (i > pos && nums[i] == nums[pos])
                     continue;
@@ -18,7 +18,7 @@ public:
 
             }
             
-            for (int i = sz - 1; i > pos; --i) 
+            for (int i = sz - 1; i > pos; i--) 
              swap(nums[pos], nums[i]);
         
         }
