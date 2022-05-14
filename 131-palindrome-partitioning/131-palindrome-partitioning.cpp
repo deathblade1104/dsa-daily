@@ -19,16 +19,7 @@ public:
         {
             ans.push_back(temp);
             return;
-        }
-        if(start==end)
-        {
-
-            temp.push_back(string(1,s[start]));
-            ans.push_back(temp);
-            temp.pop_back();
-            return;
-        }
-        
+        }      
                 
         for(int i = start;i<=end;i++)
         {
