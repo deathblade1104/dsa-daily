@@ -1,37 +1,34 @@
 class Solution {
 public:
-    void get_ans(int curr, int&n, int target, vector<int>&arr,vector<int>&temp,vector<vector<int>>&ans)
-    {        
+    void helper(int curr, int&target,vector<int>&nums, vector<int>&temp, vector<vector<int>>&ans)
+    {
         if(target==0)
         {
             ans.push_back(temp);
             return;
         }
         
-        if(curr==n)
+        if(curr>=nums.size() or target<nums[curr])
             return;
         
-        if(arr[curr]<=target)
+        if(target>=nums[curr])
         {
-            temp.push_back(arr[curr]);
-            get_ans(curr,n,target-arr[curr],arr,temp,ans);
+            temp.push_back(nums[curr]);
+            target-=nums[curr];
+            helper(curr,target,nums,temp,ans);
+            target+=nums[curr];
             temp.pop_back();
         }
         
-        while(curr < n-1 && arr[curr] == arr[curr+1]) curr++;
-         get_ans(curr+1,n,target,arr,temp,ans);
-        
+        helper(curr+1,target,nums,temp,ans);        
         
     }
-    
-    
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {       
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         sort(candidates.begin(),candidates.end());
         vector<int>temp;
-        int n=candidates.size();
         vector<vector<int>>ans;
-        get_ans(0,n,target,candidates,temp,ans);
         
+        helper(0,target,candidates,temp,ans);
         return ans;
     }
 };
