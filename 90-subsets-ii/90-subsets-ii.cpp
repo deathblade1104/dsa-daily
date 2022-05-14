@@ -4,7 +4,7 @@ public:
     {
         if(curr>=sz)
         {
-            ans.emplace_back(temp);
+            ans.push_back(temp);
             return;
         }
         
