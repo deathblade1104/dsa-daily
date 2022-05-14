@@ -1,23 +1,34 @@
 class Solution {
-public:    
-    void permuteUniqueHelper(int i, vector<int>& nums, vector<vector<int> >& result) {
+public:
+    void helper(int pos, int&sz, vector<int>&nums, vector<vector<int>>&ans)
+    {
+         if (pos ==sz) {
+            ans.push_back(nums);
+        } 
+        else 
+        {
+            for (int i = pos; i < sz; ++i) 
+            {
+                
+                if (i > pos && nums[i] == nums[pos]) continue;
+                
+                swap(nums[pos], nums[i]);
+                helper(pos + 1,sz,nums,ans);
+
+            }
+            
+            for (int i = sz - 1; i > pos; --i) 
+             swap(nums[pos], nums[i]);
         
-        if (i == nums.size()) { result.emplace_back(nums); return; }
-        unordered_set<int> st;
-        for (int j = i; j < nums.size(); ++j) {
-            if (st.count(nums[j]) == 1) { continue; }
-            st.insert(nums[j]);
-            std::swap(nums[i], nums[j]);
-            permuteUniqueHelper(i + 1, nums, result);
-            std::swap(nums[i], nums[j]);
         }
     }
     
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-        vector<vector<int> > result;
-        permuteUniqueHelper(0, nums, result);
-        return result;
-    
+        vector<vector<int>>ans;
+        int sz=nums.size();
+        sort(nums.begin(),nums.end());
+        
+        helper(0,sz,nums,ans);
+        return ans;
     }
-    
 };
