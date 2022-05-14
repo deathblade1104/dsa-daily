@@ -2,7 +2,7 @@ class Solution {
 public:
     void helper(int curr,vector<int>&nums, vector<int>&temp, vector<vector<int>>&ans)
     {
-        ans.push_back(temp);
+        ans.emplace_back(temp);
             
         for(int i=curr;i<nums.size();i++)
         {
