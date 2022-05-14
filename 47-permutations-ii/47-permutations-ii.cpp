@@ -1,27 +1,24 @@
 class Solution {
 public:
-    void helper(int pos, int&sz, vector<int>&nums, vector<vector<int>>&ans)
+    void helper(int curr, int&sz, vector<int>&nums, vector<vector<int>>&ans)
     {
-         if (pos ==sz-1) {
-            ans.push_back(nums);
+         if(curr == sz-1)
+         {
+             ans.emplace_back(nums);
              return;
-        } 
-        else 
-        {
-            for (int i = pos; i < sz; i++) 
-            {
-                if (i > pos && nums[i] == nums[pos])
-                    continue;
-                
-                swap(nums[pos], nums[i]);
-                helper(pos + 1,sz,nums,ans);
-
-            }
-            
-            for (int i = sz - 1; i > pos; i--) 
-             swap(nums[pos], nums[i]);
+         }
         
-        }
+         unordered_set<int>st;
+         for(int i = curr; i<sz; i++)
+         {
+             if(st.count(nums[i])==1)
+                 continue;
+             
+             st.insert(nums[i]);
+             swap(nums[i],nums[curr]);
+             helper(curr+1,sz,nums,ans);
+             swap(nums[i],nums[curr]);
+         }
     }
     
     vector<vector<int>> permuteUnique(vector<int>& nums) {
