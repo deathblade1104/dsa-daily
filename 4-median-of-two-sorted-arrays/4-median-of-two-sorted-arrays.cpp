@@ -2,7 +2,7 @@ class Solution {
 public:
     double helper( vector<int>&a1, vector<int>&a2 , int&total)
     {
-         int n1 = a1.size(), n2 = a2.size() , half = (n1 + n2)/2 ;
+         int n1 = a1.size(), n2 = a2.size() , half = total/2 ;
         
         int lo = 0, hi = n1;
         while (lo <= hi) {
