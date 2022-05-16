@@ -10,10 +10,7 @@ public:
         
         double val = helper(x,n/2);
         
-        if(n%2==0)
-            return val *  val;
-        
-        return x*val*val;
+        return (n%2==0)? val*val : x*val*val;
     }
     double myPow(double x, int n) {
                 
