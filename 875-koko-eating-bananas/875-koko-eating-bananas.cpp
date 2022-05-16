@@ -1,12 +1,12 @@
 class Solution {
 public:
-    bool isPossible(long long int mid, vector<int>&piles,long long int h)
+    bool isPossible(int&mid, vector<int>&piles,int&h)
     {
-        long long int req_hours=0;
+         int req_hours=0;
         
         for(int &j: piles)
         {        
-           long long  int curr=0,i = j;
+            int curr=0,i = j;
             
             if(i<=mid)
                 curr++;
@@ -26,18 +26,16 @@ public:
         return (req_hours<=h); 
     }
     
-    int minEatingSpeed(vector<int>& piles, long long int h) {
+    int minEatingSpeed(vector<int>& piles, int h) {
         
-       long long int sum =  0;
+       int high = 0 ,ans=0,low = 1; 
         
         for(int&i : piles)
-         sum+=i;
-                
-       long long int ans=0,low = 1, high = sum;
-        
+         high = max(high,i);
+                        
         while(low<=high)
         {
-            long long int mid = low + ((high - low)/2);
+            int mid = low + ((high - low)/2);
             
             if(isPossible(mid,piles,h))
             {
