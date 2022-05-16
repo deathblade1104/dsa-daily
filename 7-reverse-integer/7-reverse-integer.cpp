@@ -3,16 +3,16 @@ public:
     
     int helper(int n)
     {
-        long long int ans=0;
+        int ans=0;
         
         while(n>0)
         {
-            if(ans*10 > INT_MAX)
+            if(ans > INT_MAX/10)
                 return 0;
             
             ans*=10;
             
-            if(ans+n%10>INT_MAX)
+            if(ans>INT_MAX-(n%10))
                 return 0;
 
             ans+=n%10;
