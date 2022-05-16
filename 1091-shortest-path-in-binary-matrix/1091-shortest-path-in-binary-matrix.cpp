@@ -1,52 +1,36 @@
 class Solution {
-private :
-    bool isValid(int r,int c, int &n,int&m,vector<vector<int>>&grid)
-    {
-        if(r<0 or c<0 or r>=n or c>=m or grid[r][c]==1)
-            return false;
-        
-        return true;
-    }
 public:
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
-        int dim[9]={1,0,-1,0,1,-1,-1,1,1};
-        int n=grid.size(),m=grid[0].size();
-        if(grid[0][0]==1 or grid[n-1][m-1]==1)
+        
+        if(grid[0][0]==1)
             return -1;
         
-        queue<pair<int,int>>q;
-        q.push({0,0});
-        grid[0][0]=1;
-        
-        int steps=1;
+        int n= grid.size();
+        array<int,9>dir= {1,0,-1,0,1,1,-1,-1,1};
+        queue<array<int,3>>q;
+        q.push({1,0,0});
+        grid[0][0] = 1;
         
         while(q.size()>0)
         {
-            int sz=q.size();
-            for(int i=0;i<sz;i++)
+            auto p = q.front();
+            q.pop();
+            
+            if(p[1]==n-1 and p[2]==n-1)
+                return p[0];
+            
+            for(int i=1;i<=8;i++)
             {
-                auto p=q.front();
-                q.pop();
+                int x = p[1] + dir[i-1] , y = p[2] + dir[i];
                 
-                int r=p.first,c=p.second;
-                
-                if(r==n-1 and c==m-1)
-                 return steps;
-                
-                
-                for(int i=1;i<9;i++)
+                if(x>=0 and y>=0 and x<n and y<n and grid[x][y]==0)
                 {
-                    if(isValid(r+dim[i-1],c+dim[i],n,m,grid))
-                    {
-                        q.push({r+dim[i-1],c+dim[i]});
-                        grid[r+dim[i-1]][c+dim[i]]=1;
-                    }
+                    q.push({p[0]+1,x,y});
+                    grid[x][y]=1;
                 }
-            }
-            steps++;
+            }   
         }
         
         return -1;
-        
     }
 };
