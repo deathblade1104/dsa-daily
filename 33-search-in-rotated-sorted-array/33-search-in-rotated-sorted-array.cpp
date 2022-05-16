@@ -1,41 +1,27 @@
 class Solution {
 public:
-    int search(vector<int>& arr, int target) {
+    int search(vector<int>& A, int target) {
+        int lo = 0;
+    int hi = A.size() - 1;
+    while (lo < hi) {
+        int mid = (lo + hi) / 2;
+        if (A[mid] == target) return mid;
         
-        int low =0, high = arr.size()-1;
-        
-        while(low<=high)
-        {
-            int mid= low  + ((high-low)/2);
-            
-            if(arr[mid]==target)
-                return mid;
-            
-            else if(arr[low]<arr[mid])
-            {
-                if(target>=arr[low] and target<arr[mid])
-                    high = mid-1;
-                
-                else low = mid +1;
+        if (A[lo] <= A[mid]) {
+            if (target >= A[lo] && target < A[mid]) {
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
             }
-            
-            else if (low==mid)
-                low=mid+1;
-            
-            else if (high==mid)
-                high=mid-1;
-            
-            else
-            {
-                if(target>arr[mid] and target<=arr[high])
-                    low = mid +1;
-                
-                else high = mid -1;
+        } else {
+            if (target > A[mid] && target <= A[hi]) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
             }
-            
         }
-        
-        return -1;
+    }
+    return A[lo] == target ? lo : -1;
         
     }
 };
