@@ -11,28 +11,30 @@
  */
 class Solution {
 public:
-    bool first=true;
-    bool get_ans(TreeNode *root, int&prev)
+    
+    bool first = true;
+    bool DFS(TreeNode *root, int&check)
     {
         if(!root)
-            return true;        
+            return true;
         
-        bool op1 = get_ans(root->left,prev);
+        bool op1 = DFS(root->left,check);
         
-        if(root->val<=prev and !first)
+        if(root->val<=check and !first)
             return false;
-        first= false;
         
-        prev = root->val;
-
-        bool op2 = get_ans(root->right,prev);
+        first = false;
         
-        return op1 && op2;
+        check = root->val;
+        
+        bool op2 = DFS(root->right,check);
+        
+        return op1&op2;
     }
-    
     bool isValidBST(TreeNode* root) {
-               
-        int prev = INT_MIN;
-        return get_ans(root,prev);
+        
+        int check = INT_MIN;
+        return DFS(root,check);
+        
     }
 };
