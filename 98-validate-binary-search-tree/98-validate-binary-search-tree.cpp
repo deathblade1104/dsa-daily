@@ -20,13 +20,11 @@ public:
         
         bool op1 = DFS(root->left,check);
         
-        if(root->val<=check and !first)
+        if(root->val<=check and !first or !op1)
             return false;
         
-        first = false;
-        
-        check = root->val;
-        
+        first = false;        
+        check = root->val;        
         bool op2 = DFS(root->right,check);
         
         return op1&op2;
