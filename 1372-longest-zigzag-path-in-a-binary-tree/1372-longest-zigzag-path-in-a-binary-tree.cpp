@@ -21,14 +21,13 @@ public:
         
         array<int,3> l = DFS(root->left);
         array<int,3> r = DFS(root->right);
-        
         array<int,3>ans={0,0,0};
-        
-        int consider_root = max(l[1],r[0]) + 1;
-        ans[2] = max({consider_root,l[2],r[2]});
         
         ans[0] = l[1] + 1;
         ans[1] = r[0] + 1;
+        
+        ans[2] = max({ans[0],ans[1],l[2],r[2]});       
+        
         
         return ans;     
         
