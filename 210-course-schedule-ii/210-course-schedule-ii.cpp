@@ -1,101 +1,47 @@
 class Solution {
-private :
-    bool DFS(int curr, vector<vector<int>>&adj, vector<bool>&vis, vector<bool>&anc, vector<int>&ans)
-    {
-        if(vis[curr])
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        
+        vector<int>inedges(numCourses,0);
+        vector<vector<int>>adj(numCourses);
+        
+        for(auto&v : prerequisites)
         {
-            if(anc[curr])
-                return true;
-            
-            return false;
+            inedges[v[0]]++;
+            adj[v[1]].push_back(v[0]);
         }
-        
-        vis[curr]=true;
-        anc[curr]=true;
-                
-        for(int x : adj[curr])
-        {
-            if(DFS(x,adj,vis,anc,ans))
-                return true;
-        }
-        
-        ans.push_back(curr);
-        anc[curr]=false;
-        return false;
-    }
-    
-    vector<int>DFS_driver(int V, vector<vector<int>>&edges)
-    {
-         vector<int>ans;
-        vector<vector<int>>adj(V);
-        
-        for(auto i : edges)
-            adj[i[1]].push_back(i[0]);
-        
-        vector<bool>vis(V,false),anc(V,false);
-        
-        for(int i=0;i<V;i++)
-        {
-            if(!vis[i] and DFS(i,adj,vis,anc,ans))
-                return {};
-        }
-        
-        reverse(ans.begin(),ans.end());        
-        return ans;
-    }
-    
-    
-    vector<int> BFS_Kahn(int V, vector<vector<int>>&edges)
-    {
-        
-        vector<int>ans;
-        vector<int>indegree(V,0);
-        vector<vector<int>>adj(V);
-        
-        for(auto i : edges)
-        {
-            adj[i[1]].push_back(i[0]);
-            indegree[i[0]]++;
-        }       
-
         
         queue<int>q;
-        for(int i=0;i<V;i++)
-            if(indegree[i]==0)
+        vector<int>ans;
+        vector<int>temp;
+        for(int i=0;i<numCourses ;i++)
+        {
+            if(inedges[i]==0)
                 q.push(i);
+        }
         
-        
-        int cnt=q.size();
+        if(q.size()==0)
+            return temp;
         
         while(q.size()>0)
         {
-            int curr=q.front();
+            auto p = q.front();
             q.pop();
             
+            ans.push_back(p);
             
-            ans.push_back(curr);
-            
-            
-            for(int x : adj[curr])
+            for(auto&neigh : adj[p])
             {
-                indegree[x]--;
-                if(indegree[x]==0)
-                {
-                    q.push(x);
-                    cnt++;
-                }
+                inedges[neigh]--;
+                
+                if(inedges[neigh]==0)
+                    q.push(neigh);
             }
         }
         
         
-        if(cnt == V)
-            return ans;
         
-        else return {};
-    }
-public:
-    
-    vector<int> findOrder(int V, vector<vector<int>>&edges) {        
-       return BFS_Kahn(V,edges);
+        return ans.size()==numCourses? ans : temp;
+        
     }
 };
