@@ -1,44 +1,45 @@
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        unordered_set<string>st(wordList.begin(),wordList.end());
+        unordered_set<string>words(wordList.begin(),wordList.end());
         
-        if(st.count(endWord)==0)
-            return 0;        
+        if(words.count(endWord)==0)
+            return 0;
+        
+        int steps =1;
         
         queue<string>q;
         q.push(beginWord);
         
-        int steps=1;
         while(q.size()>0)
         {
-            int sz=q.size();
-            for(int i=0;i<sz;i++)
-            { 
-                string curr=q.front();
+            int sz = q.size();
+            
+            while(sz--)
+            {
+                auto p = q.front();
                 q.pop();
-                
-                if(curr==endWord) return steps;
-                
-                
-                for(int j=0;j<curr.size();j++)
+                               
+                if(p==endWord)
+                    return steps;
+
+                for(int i=0;i<p.size();i++)
                 {
-                    char x= curr[j];
-                    
-                    for(char k = 'a'; k<='z';k++)
+                    string left = p.substr(0,i);
+                    string right = p.substr(i+1);
+
+                    for(int k=0;k<26;k++)
                     {
-                        if(k!=x)
+                        char ch = (char)(k+'a');
+
+                        string temp = left ;
+                        temp+=ch;
+                        temp+=right;
+
+                        if(words.count(temp)==1)
                         {
-                            string left = curr.substr(0,j) , right = curr.substr(j+1);
-                            string temp=left;
-                            temp+=k;
-                            temp+=right;                            
-                            
-                            if(st.count(temp)==1)
-                            {
-                                q.push(temp);
-                                st.erase(temp);
-                            }
+                            q.push(temp);
+                            words.erase(temp);
                         }
                     }
                 }
@@ -46,8 +47,6 @@ public:
             steps++;
         }
         
-        return 0;       
-        
-        
+        return 0;
     }
 };
