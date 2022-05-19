@@ -1,62 +1,51 @@
 class Solution {
-private:
+public:
     int find_par(int v, vector<int>&par)
     {
-        if(v == par[v])
+        if(v==par[v])
             return v;
         
         return par[v] = find_par(par[v],par);
     }
     
-    void DSUnion(int v1,int v2, vector<int>&par, vector<int>&rank)
+    void DS_Union(int n1, int n2, vector<int>&par, vector<int>&rank)
     {
-        int p1= find_par(v1,par), p2=find_par(v2,par), r1=rank[p1], r2=rank[p2];
+        int p1 = find_par(n1,par) , p2 = find_par(n2,par);
         
-        if(p1!=p2)
-        {            
-            if(r1>r2)
+        if(rank[p1]>=rank[p2])
+        {
+            rank[p1]++;
             par[p2]=p1;
-            
-            else if(r2>r1)
-            par[p1]=p2;
-            
-            else
-            {
-                rank[p1]++;
-                par[p2]=p1;
-            }
-            
         }
         
-        return;
+        else
+        {
+            par[p1]=p2;
+            rank[p2]++;
+        }
     }
     
-public:
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-        int n=edges.size();
         
-        vector<int>par(n+1),rank(n+1,0),ans;
+        int n = edges.size();
         
-        for(int i=1;i<=n;i++)
-            par[i]=i;
+        vector<int>par(n+1), rank(n+1,0);
+        iota(par.begin(),par.end(),0);
         
+        vector<int>ans;
         
-        for(auto temp : edges)
+        for(auto&v : edges)
         {
-            int v1= temp[0],v2=temp[1];
+            int n1 = v[0] , n2= v[1];
             
-            if(find_par(v1,par)==find_par(v2,par))
-            {
-                ans.push_back(v1);
-                ans.push_back(v2);
-                break;
-            }
+            if(find_par(n1,par)==find_par(n2,par))
+                ans=v;
             
             else
-                DSUnion(v1,v2,par,rank);
+            DS_Union(n1,n2,par,rank);
         }
         
-        return ans;
         
+        return ans;
     }
 };
