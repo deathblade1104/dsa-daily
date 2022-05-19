@@ -39,7 +39,7 @@ public:
             int n1 = v[0] , n2= v[1];
             
             if(find_par(n1,par)==find_par(n2,par))
-                ans=v;
+            return v;
             
             else
             DS_Union(n1,n2,par,rank);
