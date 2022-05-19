@@ -1,22 +1,26 @@
 class Solution {
-private:
-    void DFS(int i, int j, int &n, int &m, vector<vector<char>>&grid)
-    {
-        if(i<0 or j<0 or i>=n or j>=m or  grid[i][j]=='0')
+public:
+    void DFS(int i, int j, int&n, int &m , array<int,5>&dir, vector<vector<char>>&grid)
+    {        
+        if(i<0 or j<0 or i>=n or j>=m or grid[i][j]=='0')
             return;
         
         grid[i][j]='0';
         
-        DFS(i+1,j,n,m,grid);
-        DFS(i-1,j,n,m,grid);
-        DFS(i,j+1,n,m,grid);
-        DFS(i,j-1,n,m,grid);
+        for(int k=1;k<=4;k++)
+        {
+            int x = dir[k-1] + i, y = dir[k] + j;
+            
+            DFS(x,y,n,m,dir,grid);
+        }
         
         return;
+        
     }
-public:
     int numIslands(vector<vector<char>>& grid) {
-        int n=grid.size(),m=grid[0].size(),ans=0;
+        
+        int n = grid.size(), m = grid[0].size(),ans=0;
+        array<int,5>dir={1,0,-1,0,1};
         
         for(int i=0;i<n;i++)
         {
@@ -24,15 +28,13 @@ public:
             {
                 if(grid[i][j]=='1')
                 {
-                    DFS(i,j,n,m,grid);
-                    ans++;                   
+                    ans++;
+                    DFS(i,j,n,m,dir,grid);
                 }
-                    
             }
         }
         
-        return ans;      
-        
+        return ans;
         
     }
 };
