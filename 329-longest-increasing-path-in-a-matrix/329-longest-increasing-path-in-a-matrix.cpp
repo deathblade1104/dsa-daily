@@ -12,10 +12,7 @@ public:
         int ans =0;
         
         for(int k=1;k<=4;k++)
-        {
-            int curr = DFS(i+dir[k-1],j+dir[k],n,m,matrix[i][j],dir,matrix,dp);
-            ans= max(ans,curr);
-        }
+            ans= max(ans,DFS(i+dir[k-1],j+dir[k],n,m,matrix[i][j],dir,matrix,dp));
             
         
         return dp[i][j]= ans + 1;   
