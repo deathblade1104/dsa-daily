@@ -1,57 +1,53 @@
 class Solution {
 public:
-    int dp[1001][1001];
-    int get_ans(int i, int j, string &s)
+    
+    bool helper(int i, int j, string&s, vector<vector<int>>&dp)
     {
-        if(i>j) return 1;
+        if(i == j)
+            return dp[i][j]=1;
         
-        if(i+1==j)
+        if(i == j-1)
         {
-            if(s[i]==s[j]) return dp[i][j]=1;
-            else return dp[i][j]=0;
+            if(s[i]==s[j])
+                return dp[i][j]=1;
+            
+            return dp[i][j]=0;
         }
         
-        if(dp[i][j]!=-1)
-        return dp[i][j];        
         
-        bool ans = get_ans(i+1,j-1,s);
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        
+        
+        bool ans;
         
         if(s[i]==s[j])
         {
-            ans=true;
-            ans = (ans & get_ans(i+1,j-1,s));
+            ans= true;
+            ans = ans and helper(i+1, j-1,s,dp);
         }
         
-        else
-        {
-            ans=false;       
-        }
+        else ans = false;
         
-        bool call1 = get_ans(i+1,j,s);
-        bool call2 = get_ans(i,j-1,s);
-            
-        return dp[i][j]=(int)ans;
+        bool call1 = helper(i,j-1,s,dp), call2 = helper(i+1,j,s,dp);
         
+        return dp[i][j] = (int)ans;
     }
-    
     int countSubstrings(string s) {
-        int n=s.size();
-        memset(dp,-1,1001*1001*sizeof(int));
+               
+        int low = 0 , high = s.size() - 1;
+        vector<vector<int>>dp(high+1, vector<int>(high+1,-1));
+        bool call  = helper(low,high,s,dp);        
+        int ans = high + 1;
         
-        for(int i=0;i<n;i++)
-            dp[i][i]=1;
-        
-        int xyz= get_ans(0,n-1,s),ans = n;    
-                
-        for(int i=0;i<n;i++)
+        for(int i=0;i<=high;i++)
         {
-            for(int j=i+1;j<n;j++)
-            {
-                if(dp[i][j]==1)
+            for(int j =i+1;j<=high;j++)
+                if(dp[i][j])
                     ans++;
-            }
         }
         
         return ans;
+        
     }
 };
