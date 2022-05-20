@@ -1,30 +1,26 @@
 class Solution {
 public:
-    int dp[1001][1001];
     
-    int get_ans(int i, int j, string&s1,string&s2,int&n,int&m)
+    int helper(int i, int j, string&s1, string&s2, vector<vector<int>>&dp)
     {
-        if(i>=n or j>=m)
-            return dp[i][j]=0;
+        if(i>=s1.size() or j>=s2.size())
+            return 0;
         
-        if(dp[i][j]!=-1) return dp[i][j];
+        if(dp[i][j]!=-1)
+            return dp[i][j];
         
-        int ans=0;
         
-        if(s1[i]==s2[j]) 
-            ans = 1 + get_ans(i+1,j+1,s1,s2,n,m);
+        if(s1[i]==s2[j])
+        return dp[i][j] = 1 + helper(i+1,j+1,s1,s2,dp);
         
-        else 
-            ans = max(get_ans(i+1,j,s1,s2,n,m), get_ans(i,j+1,s1,s2,n,m));
+        return dp[i][j]= max(helper(i+1,j,s1,s2,dp),helper(i,j+1,s1,s2,dp));
         
-        return dp[i][j]=ans;
     }
     
     int longestCommonSubsequence(string text1, string text2) {
-        int n=text1.size(),m=text2.size();
-        memset(dp,-1,1001*1001*sizeof(int));
         
-        return get_ans(0,0,text1,text2,n,m);
+        vector<vector<int>>dp(text1.size(), vector<int>(text2.size(),-1));
+        return helper(0,0,text1,text2,dp);
         
     }
 };
