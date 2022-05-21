@@ -1,40 +1,37 @@
 class Solution {
 public:
-    int dp[10001];
-    int get_ans(int curr,vector<int>&coins)
+    int helper(int curr,int amount, vector<int>&coins,vector<vector<int>>&dp)
     {
-        if(curr==0)
+        if(amount == 0)
             return 0;
         
-        if(dp[curr]!=-1)
-            return dp[curr];
+        if(curr>=coins.size())
+            return INT_MAX/2;
         
-        int ans=INT_MAX/2;
-        for(int i=0;i<coins.size();i++)
-        {
-            int temp=INT_MAX/2;
-            if(coins[i]<=curr)
-               temp = 1 + get_ans(curr-coins[i],coins);
-            
-            
-            ans=min(ans,temp);
-            
-            if(coins[i]>curr)
-                break;
-        }
+        if(dp[curr][amount]!=-1)
+            return dp[curr][amount];
         
-        return dp[curr]=ans;
+        int consider = INT_MAX/2;
+        
+        if(coins[curr]<=amount)
+            consider = 1 + helper(curr,amount-coins[curr],coins,dp);
+            
+        int dont_consider = helper(curr+1,amount,coins,dp);
+        
+        return dp[curr][amount] = min(consider, dont_consider);
     }
     
     int coinChange(vector<int>& coins, int amount) {
+    
+        int n = coins.size();
+        vector<vector<int>>dp(n,vector<int>(amount+1,-1));
+        
         sort(coins.begin(),coins.end());
-        memset(dp,-1, sizeof(dp));
         
-        int ans = get_ans(amount,coins);
+        int ans =  helper(0,amount,coins,dp);
         
-        if(ans>=INT_MAX/2)
-            return -1;
+        return ans >= INT_MAX/2 ? -1 : ans;
         
-        return ans;
+        
     }
 };
