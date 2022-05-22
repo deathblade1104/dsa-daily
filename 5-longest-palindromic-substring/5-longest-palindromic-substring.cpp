@@ -20,10 +20,7 @@ public:
         bool ans;
         
         if(s[i]==s[j])
-        {
-            ans=true;
-            ans = (ans & get_ans(i+1,j-1,s));
-        }
+        ans=true & get_ans(i+1,j-1,s);        
         
         else
         {
