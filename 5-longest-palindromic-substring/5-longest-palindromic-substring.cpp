@@ -23,11 +23,8 @@ public:
         ans=true & get_ans(i+1,j-1,s);        
         
         else
-        {
-            ans=false;       
-            // bool call3 = get_ans(i+1,j-1,s);
-        }
-        
+        ans=false;       
+            
         bool call1 = get_ans(i+1,j,s);
         bool call2 = get_ans(i,j-1,s);
             
