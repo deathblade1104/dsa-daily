@@ -43,23 +43,30 @@ public:
         int n=s.size();
         memset(dp,-1,1001*1001*sizeof(int));
         
-        int xyz= get_ans(0,n-1,s),ans = 1;      
-        string temp="";
-        temp+=s[0];
-        
+        int xyz= get_ans(0,n-1,s),start=-1,end=-1,res=0;;      
+        string ans = "";
+                
         for(int i=0;i<n;i++)
         {
             for(int j=i+1;j<n;j++)
             {
-                if(dp[i][j] == 1 and j-i+1>ans)
+                if(dp[i][j]==1 and j - i + 1 > res)
                 {
-                    ans=j-i+1;
-                    temp=s.substr(i,j-i+1);
+                    end = j;
+                    start = i;
+                    res = j - i + 1;
                 }
                
             }
         }
         
-        return temp;
+        if(end!= -1 and start!=-1)
+            ans= s.substr(start,res);
+        
+        else
+            ans+=s[0];
+        
+        return ans;
+        
     }
 };
