@@ -25,7 +25,7 @@ public:
         else
         {
             ans=false;       
-            bool call3 = get_ans(i+1,j-1,s);
+            // bool call3 = get_ans(i+1,j-1,s);
         }
         
         bool call1 = get_ans(i+1,j,s);
