@@ -23,8 +23,7 @@ public:
         
         if(s[i]==s[j])
         {
-            ans= true;
-            ans = ans and helper(i+1, j-1,s,dp);
+           ans= true and helper(i+1, j-1,s,dp);
         }
         
         else ans = false;
