@@ -4,7 +4,7 @@ public:
         
         int n =arr.size();
         
-        stack<int>st;
+        vector<int>st;
         vector<int>nse(n),pse(n);
         
         for(int i=0;i<n;i++)
@@ -13,33 +13,31 @@ public:
             nse[i] = n - i;
         }
         
-        st.push(0);
+        st.push_back(0);
         
         for(int i=1;i<n;i++)
         {
-            while(st.size()>0 and arr[st.top()]>arr[i])
-                st.pop();
+            while(st.size()>0 and arr[st.back()]>arr[i])
+                st.pop_back();
             
             if(st.size()!=0)
-                pse[i]=i - st.top();
+                pse[i]=i - st.back();
             
-            st.push(i);
+            st.push_back(i);
         }
         
-        while(st.size()!=0)
-            st.pop();
-        
-        st.push(n-1);
+        st.clear();
+        st.push_back(n-1);
         
         for(int i=n-2;i>=0;i--)
         {
-            while(st.size()>0 and arr[st.top()]>=arr[i])
-               st.pop();
+            while(st.size()>0 and arr[st.back()]>=arr[i])
+               st.pop_back();
             
             if(st.size()!=0)
-                nse[i]=  st.top() - i;
+                nse[i]=  st.back() - i;
             
-            st.push(i);
+            st.push_back(i);
         }
         
        long long int ans = 0,mod = 1e9 + 7;
