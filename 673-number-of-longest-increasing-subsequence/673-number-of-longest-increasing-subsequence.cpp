@@ -1,8 +1,10 @@
 class Solution {
 public:
     int findNumberOfLIS(vector<int>& nums) {
-        int n=nums.size(),ans=0,x=0;
-        vector<int>dp(n,1),count(n,1);
+        int n = nums.size();
+        
+        vector<int>LIS(n,1),count(n,1);
+        int max_LIS=-1;
         
         for(int i=0;i<n;i++)
         {
@@ -10,23 +12,31 @@ public:
             {
                 if(nums[j]<nums[i])
                 {
-                    if(dp[i]<dp[j]+1)
+                    if(LIS[i] < LIS[j] + 1)
                     {
-                        dp[i]=dp[j]+1;
-                        count[i]=count[j];
+                        LIS[i] = LIS[j] + 1;
+                        count[i] = count[j];
                     }
                     
-                    else if(dp[i]==dp[j]+1)
-                        count[i]+=count[j];
+                    else if (LIS[i] == LIS[j] + 1)
+                    {
+                        count[i] += count[j];
+                    }
                 }
             }
-            ans=max(ans,dp[i]);
+            
+            max_LIS = max(max_LIS,LIS[i]);
+        }
+        
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            if(LIS[i] == max_LIS)
+                ans+= count[i];
         }
 
-        for(int i=0;i<n;i++)
-            if(dp[i]==ans)
-                x+=count[i];
-        
-        return x;
+        return ans;
     }
+    
+    
 };
