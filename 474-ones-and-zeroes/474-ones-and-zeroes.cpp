@@ -1,12 +1,12 @@
 class Solution {
 public:
-    vector<vector<vector<int>>> memo;    
+    int memo[601][101][101];    
     int OnesZerosMemo(vector<string>& strs, int i, int m, int n)
     {
         if(i == strs.size() || m < 0 || n < 0) 
             return 0;
         
-        if(memo[i][m][n] != 0) 
+        if(memo[i][m][n] != -1) 
             return memo[i][m][n];
         
         int ones = count(strs[i].begin(), strs[i].end(), '1');
@@ -24,7 +24,7 @@ public:
     }
     
     int findMaxForm(vector<string>& strs, int m, int n) {
-        memo.resize(size(strs), vector<vector<int> >(m + 1, vector<int>(n + 1)));
+        memset(memo,-1,601*101*101*sizeof(int));
         return OnesZerosMemo(strs, 0, m, n);
     }
 };
