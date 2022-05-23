@@ -37,7 +37,7 @@ public:
                st.pop();
             
             if(st.size()!=0)
-                nse[i]=  abs(i- st.top());
+                nse[i]=  st.top() - i;
             
             st.push(i);
         }
@@ -50,12 +50,9 @@ public:
             curr%=mod;
             curr*=nse[i];
             curr%=mod;
-            // cout<<arr[i]<<" _ "<<pse[i]<<"__"<<nse[i]<<"==="<<curr<<endl;
             
             ans = ans + curr;
-            ans%=mod;
-            // cout<<ans<<endl;
-            
+            ans%=mod;            
         }
         
         
