@@ -12,15 +12,16 @@ public:
             for(auto&x : flights)
 	        {
 	            int source= x[0], dest= x[1], weight = x[2];
-	            
+	            // cout<<x[0]<<"_"<<x[1]<<"_"<<x[2]<<endl;
 	            if(dist[source] != INT_MAX and temp[dest] > dist[source] + weight)
 	            {
 	                flag = true;
 	                temp[dest] = dist[source] + weight;
 	            }
             }
-            dist=temp;
             
+            dist=temp;
+                        
             if(!flag)
                 break;
         }
