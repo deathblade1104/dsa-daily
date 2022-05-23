@@ -13,15 +13,11 @@ public:
         if(arr.size()==1 or arr[low]<arr[high])
             return arr[0];
         
-        
-        int chk = arr[0];
-    
-        
         while(low<=high)
         {
             int mid = (low + high)/2;
            
-            if(check(arr[mid],chk))
+            if(check(arr[mid],arr[0]))
             {
                 ans= arr[mid];
                 high = mid -1;
