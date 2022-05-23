@@ -1,11 +1,11 @@
 class Solution {
 public:
+    array<int,1001>nse,pse;
     long long sumSubarrayMaxs(vector<int>& arr) {
         
         int n =arr.size();
         
         stack<int>st;
-        vector<int>nse(n),pse(n);
         
         for(int i=0;i<n;i++)
         {
@@ -61,9 +61,7 @@ public:
         
         int n =arr.size();
         
-        stack<int>st;
-        vector<int>nse(n),pse(n);
-        
+        stack<int>st;        
         for(int i=0;i<n;i++)
         {
             pse[i]= i+1;
