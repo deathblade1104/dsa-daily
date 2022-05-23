@@ -1,45 +1,43 @@
 class Solution {
 public:
+    vector<int>st;
     array<int,1001>nse,pse;
+    
     long long sumSubarrayMaxs(vector<int>& arr) {
         
-        int n =arr.size();
-        
-        stack<int>st;
-        
+        int n =arr.size();        
         for(int i=0;i<n;i++)
         {
             pse[i]= i+1;
             nse[i] = n - i;
         }
         
-        st.push(0);
+        st.clear();
+        st.push_back(0);
         
         for(int i=1;i<n;i++)
         {
-            while(st.size()>0 and arr[st.top()]<arr[i])
-                st.pop();
+            while(st.size()>0 and arr[st.back()]<arr[i])
+                st.pop_back();
             
             if(st.size()!=0)
-                pse[i]=i - st.top();
+                pse[i]=i - st.back();
             
-            st.push(i);
+            st.push_back(i);
         }
         
-        while(st.size()!=0)
-            st.pop();
-        
-        st.push(n-1);
+        st.clear();
+        st.push_back(n-1);
         
         for(int i=n-2;i>=0;i--)
         {
-            while(st.size()>0 and arr[st.top()]<=arr[i])
-               st.pop();
+            while(st.size()>0 and arr[st.back()]<=arr[i])
+               st.pop_back();
             
             if(st.size()!=0)
-                nse[i]=  st.top() - i;
+                nse[i]=  st.back() - i;
             
-            st.push(i);
+            st.push_back(i);
         }
         
        long long ans= 0;
@@ -59,42 +57,39 @@ public:
     
     long long sumSubarrayMins(vector<int>& arr) {
         
-        int n =arr.size();
-        
-        stack<int>st;        
+        int n =arr.size();        
         for(int i=0;i<n;i++)
         {
             pse[i]= i+1;
             nse[i] = n - i;
         }
         
-        st.push(0);
+        st.clear();
+        st.push_back(0);
         
         for(int i=1;i<n;i++)
         {
-            while(st.size()>0 and arr[st.top()]>arr[i])
-                st.pop();
+            while(st.size()>0 and arr[st.back()]>arr[i])
+                st.pop_back();
             
             if(st.size()!=0)
-                pse[i]=i - st.top();
+                pse[i]=i - st.back();
             
-            st.push(i);
+            st.push_back(i);
         }
         
-        while(st.size()!=0)
-            st.pop();
-        
-        st.push(n-1);
+        st.clear();
+        st.push_back(n-1);
         
         for(int i=n-2;i>=0;i--)
         {
-            while(st.size()>0 and arr[st.top()]>=arr[i])
-               st.pop();
+            while(st.size()>0 and arr[st.back()]>=arr[i])
+               st.pop_back();
             
             if(st.size()!=0)
-                nse[i]=  st.top() - i;
+                nse[i]=  st.back() - i;
             
-            st.push(i);
+            st.push_back(i);
         }
         
        long long ans= 0;
@@ -108,11 +103,11 @@ public:
         }
         
         
-        return ans;
-        
+        return ans; 
     }
+    
+    
     long long subArrayRanges(vector<int>& nums) {
-        
         return sumSubarrayMaxs(nums) - sumSubarrayMins(nums);
         
     }
