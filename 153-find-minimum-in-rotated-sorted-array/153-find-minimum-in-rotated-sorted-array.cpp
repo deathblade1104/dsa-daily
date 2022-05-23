@@ -1,28 +1,36 @@
 class Solution {
 public:
+    bool check(int mid, int chk)
+    {
+        return mid<chk;
+    }
+    
+    
     int findMin(vector<int>& arr) {
-        int low = 0 , high = arr.size()-1;
         
-        if(arr[low]<arr[high] or high==0)
-            return arr[low];
+        int ans=-1,low = 0, high = arr.size()-1;
+        
+        if(arr.size()==1 or arr[low]<arr[high])
+            return arr[0];
+        
+        
+        int chk = arr[0];
+    
         
         while(low<=high)
         {
-            int mid = low + ((high - low)/2);
-            
-            if(mid!=0 and arr[mid]<arr[mid-1])
-                return arr[mid];
-            
-            else if(mid!=arr.size()-1 and arr[mid]>arr[mid+1])
-                return arr[mid+1];
-            
-            if(arr[low]<arr[mid])
-                low= mid +1;
+            int mid = (low + high)/2;
+           
+            if(check(arr[mid],chk))
+            {
+                ans= arr[mid];
+                high = mid -1;
+            }
             
             else 
-                high = mid - 1;            
+                low = mid +1;
         }
         
-        return -1;
+        return ans;
     }
 };
