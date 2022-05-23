@@ -8,11 +8,7 @@ public:
     
     int findMin(vector<int>& arr) {
         
-        int ans=-1,low = 0, high = arr.size()-1;
-        
-        if(arr.size()==1 or arr[low]<arr[high])
-            return arr[0];
-        
+        int ans=INT_MAX,low = 0, high = arr.size()-1;        
         while(low<=high)
         {
             int mid = (low + high)/2;
@@ -27,6 +23,6 @@ public:
                 low = mid +1;
         }
         
-        return ans;
+        return min(ans,arr[0]);
     }
 };
