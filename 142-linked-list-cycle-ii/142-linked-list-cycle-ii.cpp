@@ -13,7 +13,7 @@ public:
         if(!head)
             return head;
         
-        ListNode *slow = head, *fast = head, *temp = head;
+        ListNode *slow = head, *fast = head;
         while(fast->next and fast->next->next)
         {
             fast = fast->next->next;
@@ -21,6 +21,7 @@ public:
             
             if(slow == fast)
             {
+                ListNode *temp = head;
                 while(slow!=temp)
                 {
                     slow= slow->next;
