@@ -105,81 +105,81 @@ struct Node
 
 class Solution {
 public:
-    void get_ans(Node *root, int flag, vector<int>&lb,vector<int>&rb,vector<int>&leaves)
+    void get_leaf(Node *root,vector<int>&arr)
     {
         if(!root)
         return;
         
         if(!root->left and !root->right)
         {
-            leaves.push_back(root->data);
+            arr.push_back(root->data);
             return;
         }
         
-        if(flag==0)
-        {
-            lb.push_back(root->data);
-            get_ans(root->left,1,lb,rb,leaves);
-            get_ans(root->right,2,lb,rb,leaves);
-        }
-        
-        else if(flag == 1)
-        {
-            lb.push_back(root->data);
-            
-            if(!root->left)
-            get_ans(root->right,1,lb,rb,leaves);
-            
-            else
-            {
-                get_ans(root->left,1,lb,rb,leaves);
-                get_ans(root->right,3,lb,rb,leaves);
-            }
-        }
-        
-        else if (flag==2)
-        {
-            rb.push_back(root->data);
-            
-            if(!root->right)
-            get_ans(root->left,2,lb,rb,leaves);
-            
-            else
-            {
-                get_ans(root->left,3,lb,rb,leaves);
-                get_ans(root->right,2,lb,rb,leaves);
-            }
-            
-        }
-        
-        else
-        {
-            get_ans(root->left,3,lb,rb,leaves);
-            get_ans(root->right,3,lb,rb,leaves);
-        }
-        
+        get_leaf(root->left,arr);
+        get_leaf(root->right,arr);
+    }
+    
+    void get_left(Node *root,vector<int>&arr)
+    {
+        if(!root)
         return;
         
+        if(!root->left and !root->right)
+        return;
+        
+        arr.push_back(root->data);
+        
+        if(root->left)
+            get_left(root->left,arr);
+        
+        else
+            get_left(root->right,arr);
     }
+    
+    void get_right(Node *root,vector<int>&arr)
+    {
+        if(!root)
+        return;
+        
+        if(!root->left and !root->right)
+        return;
+        
+        if(root->right)
+            get_right(root->right,arr);
+        
+        else
+            get_right(root->left,arr);
+        
+        arr.push_back(root->data);
+    }
+    
+    
+    
     vector <int> boundary(Node *root)
     {
         //Your code here
-        vector<int>lb,rb,leaves;
-        get_ans(root,0,lb,rb,leaves);
-
-        vector<int>ans;
         
-        for(int i=0;i<lb.size();i++)
-        ans.push_back(lb[i]);
+        vector<int>leaf,lefts,rights,ans;
+        ans.push_back(root->data);
+        
+        get_left(root->left,lefts);
+        get_leaf(root->left,leaf);
+        get_leaf(root->right,leaf);
+        get_right(root->right,rights);
         
         
-        for(int i=0;i<leaves.size();i++)
-        ans.push_back(leaves[i]);
+        for(int&i : lefts)
+        ans.push_back(i);
         
-        for(int i=rb.size()-1;i>=0;i--)
-        ans.push_back(rb[i]);
+        for(int&i : leaf)
+        ans.push_back(i);
+        
+        for(int&i : rights)
+        ans.push_back(i);
         
         return ans;
+        
     }
 };
 
