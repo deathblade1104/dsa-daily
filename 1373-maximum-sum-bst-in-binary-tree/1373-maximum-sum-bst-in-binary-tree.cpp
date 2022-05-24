@@ -1,19 +1,22 @@
-int ans;
-class prop{
-public:
-    bool bst;       //to check if tree is bst
-    int ma;         //max value in a tree
-    int mi;         //min value in an tree
-    int ms;         //current maximum sum
-    prop(){
-        bst=true;
-        ma=INT_MIN;
-        mi=INT_MAX;
-        ms=0;
-    }
-};
+
 class Solution {
 public:
+    int ans;
+    struct prop
+    {
+        bool bst;
+        int ms,mi,ma;
+        
+        prop()
+        {
+            bst = true;
+            ms=0;
+            mi=INT_MAX;
+            ma = INT_MIN;
+            
+        }
+    };
+    
     prop calcSum(TreeNode* root){
         if (root == NULL){
             return prop();
