@@ -1,47 +1,50 @@
-
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
-    int ans;
-    struct prop
-    {
-        bool bst;
-        int ms,mi,ma;
-        
-        prop()
-        {
-            bst = true;
-            ms=0;
-            mi=INT_MAX;
-            ma = INT_MIN;
-            
-        }
-    };
+    //a[0] = isBST or not
+    //a[1] = maxSum yet
+    //a[2] = minimum element in BST
+    //a[3] = maximum element in BST
     
-    prop calcSum(TreeNode* root){
-        if (root == NULL){
-            return prop();
+    array<int,4> helper(TreeNode *root, int&ans)
+    {
+        if(!root)
+        {
+            array<int,4>curr = {1,0,INT_MAX,INT_MIN};
+            return curr;
         }
-        prop p;
-        prop pl = calcSum(root->left);                        //recursive call for left sub-tree
-        prop pr = calcSum(root->right);                       //recursive call for right sub-tree
-		
-		//if sub-tree including this node is bst
-        if ( pl.bst==true && pr.bst==true && root->val>pl.ma && root->val<pr.mi ){                                //current tree is a bst
-            p.ms = pl.ms + pr.ms + root->val;          
-            p.mi  = min(root->val, pl.mi);
-            p.ma = max(root->val, pr.ma);
+        
+        auto l = helper(root->left,ans);
+        auto r = helper(root->right,ans);
+        array<int,4>curr = {0,0,INT_MAX,INT_MIN};
+        
+        
+        if(l[0] and r[0] and root->val>l[3] and root->val<r[2])
+        {
+            curr[0] = 1;
+            curr[1] = root->val + l[1] + r[1];
+            curr[2] = min(root->val,l[2]);
+            curr[3] = max(root->val,r[3]);
         }
-		//if current tree is not a bst
-        else {
-            p.bst=false;
-        }
-		
-        ans=max(ans, p.ms);
-        return p;
+        
+        ans= max(ans,curr[1]);
+        return curr;
     }
-    int maxSumBST(TreeNode* root){
-        ans=INT_MIN;
-        calcSum(root);
-        return ans>0 ? ans : 0;
+    int maxSumBST(TreeNode* root) {
+        
+        int ans=0;
+        array<int,4> temp = helper(root,ans);
+        
+        return ans;
     }
 };
