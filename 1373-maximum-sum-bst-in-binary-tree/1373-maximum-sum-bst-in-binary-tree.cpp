@@ -28,8 +28,8 @@ public:
 		//if sub-tree including this node is bst
         if ( pl.bst==true && pr.bst==true && root->val>pl.ma && root->val<pr.mi ){                                //current tree is a bst
             p.ms = pl.ms + pr.ms + root->val;          
-            p.mi  = min(root->val, min(pr.mi, pl.mi));
-            p.ma = max(root->val, max(pl.ma, pr.ma));
+            p.mi  = min(root->val, pl.mi);
+            p.ma = max(root->val, pr.ma);
         }
 		//if current tree is not a bst
         else {
