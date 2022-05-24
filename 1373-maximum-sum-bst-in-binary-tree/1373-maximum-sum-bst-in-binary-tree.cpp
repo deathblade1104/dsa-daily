@@ -23,8 +23,7 @@ public:
         prop pr = calcSum(root->right);                       //recursive call for right sub-tree
 		
 		//if sub-tree including this node is bst
-        if ( pl.bst==true && pr.bst==true && root->val>pl.ma && root->val<pr.mi ){
-            p.bst = true;                                                      //current tree is a bst
+        if ( pl.bst==true && pr.bst==true && root->val>pl.ma && root->val<pr.mi ){                                //current tree is a bst
             p.ms = pl.ms + pr.ms + root->val;          
             p.mi  = min(root->val, min(pr.mi, pl.mi));
             p.ma = max(root->val, max(pl.ma, pr.ma));
@@ -32,7 +31,6 @@ public:
 		//if current tree is not a bst
         else {
             p.bst=false;
-            p.ms=max(pl.ms, pr.ms);
         }
 		
         ans=max(ans, p.ms);
