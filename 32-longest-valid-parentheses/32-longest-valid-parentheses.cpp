@@ -17,7 +17,6 @@ public:
             {
                 if(st.size()!=1 and st.top().first=='(')
                 {
-                    auto p = st.top();
                     st.pop();
                     ans = max(ans,(i - st.top().second));
                 }
