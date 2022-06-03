@@ -12,25 +12,20 @@ public:
     void segregate0and1(int arr[], int n) {
         // code here
         
-        int l=0,h= n-1;
-        
-        while(l<h)
-        {
-            if(arr[l]==0)
-            l++;
-            
-            if(arr[h]==1)
-            h--;
-            
-            else if(arr[l]==1 and arr[h]==0)
-            {
-                swap(arr[l],arr[h]);;
-                l++;
-                h--;
-            }
-        }
-        
-        return;
+        int idx=0;
+	    for(int i=0;i<n;i++)
+	    {
+	        if(arr[i]!=1 and i!=idx and arr[idx]==1)
+	        {
+	            swap(arr[i],arr[idx]);
+	            idx++;
+	        }
+	        
+	        else if(arr[i]!=1)
+	        idx++;
+	    }
+	    
+	    return;
     }
 };
 
