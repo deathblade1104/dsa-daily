@@ -14,17 +14,14 @@ public:
         
         int ans=0;
         
-        for(int i=0;i<targetWords.size();i++)
-        {
-           string s=targetWords[i];
-            
+        for(string &s : targetWords)
+        {   
             for(int j=0;j<s.size();j++)
             {
                 string temp= s.substr(0,j) + s.substr(j+1);
                 
                 if(mp.find(temp)!=mp.end())
                 {   
-                    // cout<<s<<" "<<temp<<endl;
                     ans++;
                     break;
                 }
