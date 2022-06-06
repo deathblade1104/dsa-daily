@@ -1,6 +1,6 @@
 class Solution {
 public:    
-    void helper(string &s,int curr, string temp, int op, int cl, int del, unordered_set<string>&res,int&rem)
+    void helper(string &s,int curr, string&temp, int op, int cl, int del, unordered_set<string>&res,int&rem)
     {
         if(curr==s.size())
         {           
@@ -20,11 +20,18 @@ public:
         char ch = s[curr];
         
         if(ch!='(' and ch!=')')
-        helper(s,curr+1,temp+ch,op,cl,del,res,rem);
+        {
+            temp+=ch;
+            helper(s,curr+1,temp,op,cl,del,res,rem);
+            temp.pop_back();
+        }
         
         else if(ch =='(')
         {
-            helper(s,curr+1,temp+"(",op+1,cl,del,res,rem);
+            temp+=ch;
+            helper(s,curr+1,temp,op+1,cl,del,res,rem);
+            temp.pop_back();
+            
             helper(s,curr+1,temp,op,cl,del+1,res,rem);            
         }
         
@@ -35,7 +42,10 @@ public:
             
             else
             {
-                helper(s,curr+1,temp+")",op,cl+1,del,res,rem);
+                temp+=ch;
+                helper(s,curr+1,temp,op,cl+1,del,res,rem);
+                temp.pop_back();
+                
                 helper(s,curr+1,temp,op,cl,del+1,res,rem);       
             }
         }
