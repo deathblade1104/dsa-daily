@@ -32,6 +32,7 @@ public:
             helper(s,curr+1,temp,op+1,cl,del,res,rem);
             temp.pop_back();
             
+            if(del<rem)
             helper(s,curr+1,temp,op,cl,del+1,res,rem);            
         }
         
@@ -46,6 +47,7 @@ public:
                 helper(s,curr+1,temp,op,cl+1,del,res,rem);
                 temp.pop_back();
                 
+                if(del<rem)
                 helper(s,curr+1,temp,op,cl,del+1,res,rem);       
             }
         }
@@ -54,7 +56,7 @@ public:
     vector<string> removeInvalidParentheses(string s) {
         unordered_set<string>res;
         string temp ="";
-        int rem = s.size();
+        int rem = s.size()+1;
         helper(s,0,temp,0,0,0,res,rem);
         
         vector<string>v(res.begin(),res.end());
