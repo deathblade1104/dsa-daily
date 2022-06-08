@@ -8,8 +8,8 @@ class Solution {
         
         if(sum == target)
             return helper(0,0,k-1,unvis,target,nums,vis);
-        
-        if(unvis==nums.size() or i>=nums.size())
+           
+        if(unvis== nums.size() or i>=nums.size())
             return false;
         
         for(int j=i;j<nums.size();j++)
