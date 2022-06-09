@@ -1,11 +1,10 @@
 class Solution {
 public:
-    int dp[1001][2001];
-    
+    int dp[1001][2001];    
     int helper(int curr,int k,int&n,vector<vector<int>>&piles)
     {
-        if(curr>=n)
-            return 0;
+        if(curr>=n or k==0)
+        return 0;
         
         if(dp[curr][k]!=-1)
             return dp[curr][k];
