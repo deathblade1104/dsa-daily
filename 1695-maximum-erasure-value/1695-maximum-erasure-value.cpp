@@ -9,9 +9,9 @@ public:
             while(release<acquire and st.count(nums[acquire])==1)
             {    
                 ps-=nums[release];
-                st.erase(nums[release]);
-                release++;
+                st.erase(nums[release++]);
             }
+            
             ps+=nums[acquire];
             st.insert(nums[acquire]);
             ans = max(ans,ps);
