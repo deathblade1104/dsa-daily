@@ -6,7 +6,8 @@ public:
         {
             return w1.size()<w2.size();
         }
-    };   
+    };
+    
     int longestStrChain(vector<string>& words) {
         sort(words.begin(),words.end(),mycomp());
         unordered_map<string, int> dp;
