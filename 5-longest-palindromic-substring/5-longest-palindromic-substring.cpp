@@ -3,7 +3,6 @@ public:
     int dp[1001][1001];
     int get_ans(int i, int j, string &s)
     {  
-        
         if(i==j)
         return dp[i][j]=1;
         
@@ -11,19 +10,16 @@ public:
         {
             if(s[i]==s[j]) return dp[i][j]=1;
             
-            else dp[i][j]=0;
+            else return dp[i][j]=0;
         }
         
         if(dp[i][j]!=-1)
         return dp[i][j];
         
-        bool ans;
+        bool ans=false;
         
         if(s[i]==s[j])
-        ans=true & get_ans(i+1,j-1,s);        
-        
-        else
-        ans=false;       
+        ans=true & get_ans(i+1,j-1,s);      
             
         bool call1 = get_ans(i+1,j,s);
         bool call2 = get_ans(i,j-1,s);
