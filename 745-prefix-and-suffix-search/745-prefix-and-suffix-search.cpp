@@ -10,16 +10,15 @@ public:
                 string p = curr.substr(0,j);
                 for(int k=curr.size()-1;k>=0;k--)
                 {
-                    string s = p + "|" + curr.substr(k);             
+                    string s = p + "_" + curr.substr(k);             
                     mp[s] = i;
                 }
             }
         }
     }
     
-    int f(string prefix, string suffix) {
-        
-        string w = prefix + "|" + suffix;        
+    int f(string prefix, string suffix) {        
+        string w = prefix + "_" + suffix;        
         if(mp.count(w)==0)
             return -1;
         
