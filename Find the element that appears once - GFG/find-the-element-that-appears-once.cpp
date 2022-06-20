@@ -26,10 +26,8 @@ public:
             if(arr[mid]<arr[mid+1] && arr[mid]>arr[mid-1])
                 return arr[mid];
             
-            else if(mid%2==0 && arr[mid]==arr[mid-1])
-                r=mid-1;
-            
-            else if(mid%2==1 && arr[mid]==arr[mid+1])
+            else if((mid%2==0 && arr[mid]==arr[mid-1])
+            or (mid%2==1 && arr[mid]==arr[mid+1]))
                 r=mid-1;
             
             else
