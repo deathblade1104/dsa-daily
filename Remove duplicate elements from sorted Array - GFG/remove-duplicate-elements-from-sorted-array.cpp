@@ -13,7 +13,7 @@ public:
     int remove_duplicate(int arr[],int n){
         // code here
         
-        int del=0,idx=1,prev=arr[0];
+        int del=0,idx=1;
         for(int i=1;i<n;i++)
         {
             if(arr[i-1]==arr[i])
@@ -23,7 +23,6 @@ public:
                 arr[idx++]= arr[i];
         
         } 
-        
         return n - del;
     }
 };
