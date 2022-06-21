@@ -40,19 +40,17 @@ public:
     
     int get_num(string &str, int&idx)
     {
-        int curr=idx,num=0;
-        while(curr<str.size() and isdigit(str[curr]))
+        int num=0;
+        while(idx<str.size() and isdigit(str[idx]))
         {
             num*=10;
-            num+=str[curr] - '0';
+            num+=str[idx] - '0';
             
-            curr++;
+            idx++;
         }
-        
-        idx = curr;
-        
         return num;
     }
+    
     Node *helper(string &str, int&idx)
     {
         if(str[idx]==')')
@@ -84,7 +82,6 @@ public:
     }
     Node *treeFromString(string str)
     {
-        // code here
         int idx=0;
         return helper(str,idx);
     }
