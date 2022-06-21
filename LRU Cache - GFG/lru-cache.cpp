@@ -42,13 +42,9 @@ class LRUCache
         return -1;
         
         int res = mp[key]->v;
-        
-         mp[key]->prev->next= mp[key]->next;
-         mp[key]->next->prev = mp[key]->prev;
-         
-         insert_at_end(mp[key]);
-         
-         return res;
+        delete_node(mp[key]);
+        insert_at_end(mp[key]);
+        return res;
     }
     
     void insert_at_end(Node *curr)
@@ -59,10 +55,15 @@ class LRUCache
         curr->next = tail;
     }
     
+    void delete_node(Node *curr)
+    {
+        curr->prev->next= curr->next;
+        curr->next->prev = curr->prev;
+    }
+    
     void delete_at_head()
     {
         Node *curr = head->next;
-        
         curr->next->prev= head;
         head->next = curr->next;
     }
@@ -72,9 +73,7 @@ class LRUCache
         if(mp.count(key)==1)
         {
             mp[key]->v= value;
-            
-            mp[key]->prev->next= mp[key]->next;
-            mp[key]->next->prev = mp[key]->prev;
+            delete_node(mp[key]);
         }
         
         else
