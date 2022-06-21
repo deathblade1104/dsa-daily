@@ -17,14 +17,12 @@ class Solution{
 	    for(int i=0;i<n-2;i++)
 	    {
 	        int l = i+1, r = n-1;
-	        
 	        while(l<r)
 	        {
-	            int curr = arr[i] + arr[l] + arr[r];
+	            long long curr = arr[i] + arr[l] + arr[r];
 	            
 	            if(curr<sum)
 	            {
-	                
 	                ans+=(r-l);
 	                l++;
 	            }
@@ -35,9 +33,6 @@ class Solution{
 	    }
 	    
 	    return ans;
-	    
-	    
-	    
 	}
 		 
 
