@@ -33,34 +33,33 @@ class Solution {
 
     string longestPalin (string S) {
         // code here
-    int n = S.size(),start=-1,end=-1,res=0;
+    int n = S.size(),start=-1,end=-1,res=1;
     
     vector<vector<int>>dp(n,vector<int>(n,-1));
     bool temp = helper(S,0,n-1,dp);
     
     string ans = "";
+    ans+=S[0];
                 
-        for(int i=0;i<n;i++)
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i+1;j<n;j++)
         {
-            for(int j=i+1;j<n;j++)
+            if(dp[i][j]==1 and j - i + 1 > res)
             {
-                if(dp[i][j]==1 and j - i + 1 > res)
-                {
-                    end = j;
-                    start = i;
-                    res = j - i + 1;
-                }
-               
+                end = j;
+                start = i;
+                res = j - i + 1;
             }
+           
         }
-        
-        if(end!= -1 and start!=-1)
-            ans= S.substr(start,res);
-        
-        else
-            ans+=S[0];
-        
-        return ans;
+    }
+    
+    if(end!= -1 and start!=-1)
+        ans= S.substr(start,res);
+    
+    
+    return ans;
     
     
     }
