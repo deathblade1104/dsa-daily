@@ -3,16 +3,16 @@ public:
     int maxScore(vector<int>& nums, int k) {
         
         int sz = nums.size(), sum=0,sw_size = sz - k;
-        for(int&i : nums)
+        
+        for(int&i : nums) 
             sum+=i;
         
-        if(sz==k)
-            return sum;
+        if(sz==0) return sum;
         
-        int curr_sum =0 , res=sum;
+        int curr_sum =0 ,res=sum;
         
         for(int i=0;i<sw_size;i++)
-            curr_sum+=nums[i];
+            curr_sum+=nums[i];  
         
         res = min(res,curr_sum);
         
@@ -23,7 +23,7 @@ public:
             
             res = min(res,curr_sum);
         }
-        
+
         return sum - res;
     }
 };
