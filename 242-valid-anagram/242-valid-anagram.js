@@ -8,8 +8,7 @@ var isAnagram = function(s, t) {
     if(t.length !== s.length)
         return false;
     
-    let sMap = {};
-    let tMap = {};
+    let sMap = new Map(), tMap = new Map();
     
     
     for(let i=0;i<s.length;i++)
