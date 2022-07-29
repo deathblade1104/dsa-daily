@@ -1,42 +1,37 @@
 class Solution {
 public:
-    
-    string get_sorted(string &str)
+    string get_sorted_string(string &str)
     {
-        int count[26];
-        memset(count,0,sizeof(count));
-        
-        for(char c : str)
-            count[c-'a']++;
-        
+        vector<int>arr(26,0);
         string ans="";
+        for(char ch : str)
+            arr[ch - 'a']++;
+               
         for(int i=0;i<26;i++)
         {
-            while(count[i]>0)
-            {
-                ans+=(char)(i+'a');
-                count[i]--;
-            }
+            while(arr[i]--)
+                ans+= (char)(i + 'a');
         }
         
         return ans;
+        
     }
     
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        vector<vector<string>>ans;
-        unordered_map<string,vector<string>>mp;
-    
-        for(auto it : strs)
-        {
-            string s = get_sorted(it);
-            mp[s].push_back(it);           
-        }        
         
-        for(auto it : mp)
+        unordered_map<string, vector<string>>mp;
+        vector<vector<string>>ans;
+        
+        for(auto&str : strs)
         {
-            vector<string>v= it.second;
-            ans.push_back(v);           
+            string ans = get_sorted_string(str);
+            
+            mp[ans].push_back(str);
         }
+        
+        for(auto itr : mp)
+            ans.push_back(itr.second);
+        
         
         return ans;
         
