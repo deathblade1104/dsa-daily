@@ -1,24 +1,23 @@
 class Solution {
 public:
-     int count[26];
-    
     bool isAnagram(string s, string t) {
+        
         if(s.size() != t.size())
             return false;
-        memset(count,0,sizeof(count));
+        
+        vector<int>v(26,0);
         
         for(int i=0;i<s.size();i++)
         {
-            count[s[i]-'a']++;
-            count[t[i]-'a']--;
+            v[s[i]- 'a']++;
+            v[t[i] - 'a']--;
         }
         
         for(int i=0;i<26;i++)
-            if(count[i]>0)
+            if(v[i]!=0)
                 return false;
         
         return true;
-        
-        
+              
     }
 };
