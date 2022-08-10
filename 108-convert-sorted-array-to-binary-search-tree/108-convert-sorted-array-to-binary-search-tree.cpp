@@ -11,30 +11,20 @@
  */
 class Solution {
 public:
-    
     TreeNode* get_ans(vector<int>&nums, int start, int end)
     {
         if(start>end)
             return NULL;
         
-        int mid = (start + end)/2;
-        
+        int mid = (start+end)/2; 
         TreeNode *root = new TreeNode(nums[mid]);
-        
-        if(start<end)
-        {   
-            root->left = get_ans(nums,start,mid-1);
-            root->right = get_ans(nums,mid+1,end);
-        }
+        root->left = get_ans(nums,start,mid-1);
+        root->right = get_ans(nums,mid+1,end);
         
         return root;
     }
-    
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        
-        int sz= nums.size()-1;
-        
-        return get_ans(nums,0,sz);
-        
+        int start = 0 , end = nums.size()-1;
+        return get_ans(nums,start,end);
     }
 };
