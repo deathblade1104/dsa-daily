@@ -1,7 +1,6 @@
 class TreeAncestor {
 public:
-    int par[50001][20];
-    
+    vector<vector<int>>par;
     void fill_table(int n){
         for(int i=1;i<20;i++){
             for(int node = 0; node <n; node ++){
@@ -11,8 +10,9 @@ public:
             }
         }
     }
+    
     TreeAncestor(int n, vector<int>& parent) {
-        memset(par,-1,50001 * 20 *sizeof(int));
+        par.resize(n,vector<int>(20,-1));
         
         for(int i=0;i<n;i++)
             par[i][0] = parent[i];
