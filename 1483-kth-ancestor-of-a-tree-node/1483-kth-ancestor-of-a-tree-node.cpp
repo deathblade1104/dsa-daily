@@ -4,9 +4,9 @@ public:
     void fill_table(int n){
         for(int i=1;i<20;i++){
             for(int node = 0; node <n; node ++){
-                int nodep = par[node][i-1];
-                if(nodep != -1) 
-                    par[node][i] = par[nodep][i-1];
+                int curr = par[node][i-1];
+                if(curr != -1) 
+                    par[node][i] = par[curr][i-1];
             }
         }
     }
@@ -21,12 +21,13 @@ public:
     }
     
     int getKthAncestor(int node, int k) {
-        for(int i = 19; i >= 0; i--){ // remember to check the bit from TOP!!!!!!!!
-            int num = pow(2, i); // we don't think bit, just see if we can jump to [num th] ancestor
-            if(k >= num){        // if we can
+        for(int i = 19; i >= 0; i--){ 
+            int num = pow(2, i);
+            if(k >= num){       
                 node = par[node][i];
-                k -= num;         // we jump back, so the rest step is [k - num]
-                if(node == -1) return -1;				
+                k -= num;       
+                if(node == -1) 
+                    return -1;				
             }
         }
         return node;
