@@ -24,7 +24,6 @@ public:
             auto p = pq.top();
             pq.pop();
             
-            
             required-= p[1];
         }
         
