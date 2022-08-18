@@ -15,7 +15,7 @@ public:
             
         priority_queue<array<int,2>,vector<array<int,2>>,mycomp>pq;
         
-        for(auto it : mp)
+        for(auto&it : mp)
             pq.push({it.first,it.second});
         
         
