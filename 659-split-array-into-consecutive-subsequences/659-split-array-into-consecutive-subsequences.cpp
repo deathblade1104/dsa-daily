@@ -10,14 +10,14 @@ public:
         for(int i=0;i<=1998;i++){
             
            while (cnt[i]) {
-                int c = 0;
-                while (cnt[i+c] <= cnt[i+c+1]) {
-                    cnt[i+c]--;
+                int c = 1;
+                while (cnt[i+c-1] <= cnt[i+c]) {
+                    cnt[i+c-1]--;
                     c++;
                 }
             
-                cnt[i+c]--;
-                c++;
+                cnt[i+c-1]--;
+                // c++;
                
                 if (c < 3) return false;
             }
