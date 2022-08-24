@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-     int ans , mod;
+     int ans;
  
     void helper(TreeNode* root,int &curr)
     {
