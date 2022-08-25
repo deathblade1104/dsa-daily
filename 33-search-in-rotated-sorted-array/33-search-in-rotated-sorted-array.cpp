@@ -1,31 +1,44 @@
 class Solution {
 public:
-    int search(vector<int>& A, int target) {
-        int lo = 0,hi = A.size() - 1;
-        while (lo < hi) {
-            int mid = (lo + hi) / 2;
-            if (A[mid] == target) return mid;
-
-            if (A[lo] <= A[mid])
-            {
-                if (target >= A[lo] && target < A[mid])
-                    hi = mid - 1;
+    int get_ans(vector<int>&A, int target){
+        
+        
+        
+        int low =0, end = A.size()-1;
+        
+        while(low<=end){
+           
+            int mid = low + ((end - low)/2);
+            
+            if(A[mid] == target)
+                return mid;
+            
+            
+            if(A[low]<=A[mid]){
                 
-                else 
-                    lo = mid + 1;
+                if(A[low]<=target and target<=A[mid])
+                    end = mid;
                 
-            } 
-            else 
-            {
-                if (target > A[mid] && target <= A[hi]) 
-                    lo = mid + 1;
+                else
+                    low = mid +1;
+            }
+            
+            else{
                 
-                else 
-                    hi = mid - 1;
+                if(A[mid]<=target and target<=A[end])
+                    low = mid + 1;
+                    
+                else
+                    end = mid;
             }
         }
         
-        return A[lo] == target ? lo : -1;
+        return -1;
+    }
+            
+    
+    int search(vector<int>& A, int target) {
+        return get_ans(A,target);
         
     }
 };
