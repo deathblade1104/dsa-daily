@@ -1,8 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>>ans; 
-        
+        vector<vector<int>>ans;         
         sort(nums.begin(),nums.end());
         
         for(int i=0;i<nums.size();i++)
@@ -21,7 +20,7 @@ public:
                 {
                     ans.push_back({nums[i],nums[j],nums[k]});
                     
-                    int l = nums[j], r= nums[k];
+                    int l = nums[j], r = nums[k];
                     
                     while(j<nums.size() and nums[j]==l)
                         j++;
