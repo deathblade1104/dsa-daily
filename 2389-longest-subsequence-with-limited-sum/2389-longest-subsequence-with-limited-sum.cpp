@@ -5,21 +5,19 @@ public:
         if(q<nums[0])
             return 0;
         
-        if(q>=nums.back())
-            return nums.size();
-        
         int start=0,end=nums.size()-1,ans=-1;
         
-        while(start<end){
+        while(start<=end){
             int mid = start + ((end-start)/2);
             
-            if(nums[mid]<=q)
-            {
-                ans=mid;
-                start = mid+1;
-            }
+            if(nums[mid]>q)
+            end = mid -1;
+            
             else
-            end = mid;
+            {
+                start = mid +1;
+                ans = mid;
+            }
         }
         
         return ans+1;
