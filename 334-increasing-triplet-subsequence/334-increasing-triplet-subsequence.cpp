@@ -9,18 +9,14 @@ public:
         for(int i=n-2;i>=0;i--)
         suffix[i] = max(nums[i],suffix[i+1]);
         
-        set<int>st;
-        st.insert(nums[0]);
+        priority_queue<int,vector<int>,greater<int>>pq;
+        pq.push(nums[0]);
         
         for(int i=1;i<n-1;i++){
-            st.insert(nums[i]);
             
-            auto it = st.find(nums[i]);
+            pq.push(nums[i]);
             
-            if(it == st.begin())
-                continue;
-            
-            int op1 = *--it, op2=suffix[i];
+            int op1 = pq.top(), op2=suffix[i];
             
             if(op1<nums[i] and nums[i]<op2)
             {
