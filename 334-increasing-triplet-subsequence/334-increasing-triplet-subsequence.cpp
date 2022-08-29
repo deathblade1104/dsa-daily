@@ -19,10 +19,8 @@ public:
             int op1 = pq.top(), op2=suffix[i];
             
             if(op1<nums[i] and nums[i]<op2)
-            {
-                // cout<<op1<<" "<<nums[i]<<" "<<op2<<endl;
                 return true;
-            }
+            
         }
         
         return false;
