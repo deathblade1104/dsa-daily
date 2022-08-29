@@ -1,22 +1,57 @@
 class Solution {
 public:
     vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
-        vector<int> k;
-        int m = mat.size() , n = mat[0].size();
-        for (int r=0; r<m; r++)        // r-> row
+        
+        for(int i=mat[0].size()-1;i>=0;i--)
         {
-            k.clear();
-            for (int j=0,i=r; j<n && i<m ; j++,i++) k.push_back(mat[i][j]);    // add to vector
-            sort(k.begin(),k.end());
-            for (int j=0,i=r; j<n && i<m ; j++,i++) mat[i][j]=k[j];            // replace
+            vector<int>curr;
+            int k=i,j=0;
+            
+            while(j<mat.size() and k<mat[0].size())
+            {
+                curr.push_back(mat[j][k]);
+                j++;
+                k++;
+            }
+            sort(curr.begin(),curr.end());
+            k=i;
+            j=0;
+            int itr =0;
+            
+            while(j<mat.size() and k<mat[0].size())
+            {
+                mat[j][k]=curr[itr++];
+                j++;
+                k++;
+            }           
         }
-        for (int c=1; c<n; c++)       // c->column
+        
+        for(int i=1;i<mat.size();i++)
         {
-            k.clear();
-            for (int i=0, j=c; j<n && i<m; i++, j++) k.push_back(mat[i][j]);   // add to vector
-            sort(k.begin(),k.end());
-            for (int i=0, j=c; j<n && i<m; i++, j++) mat[i][j] = k[i];         //replace
+            vector<int>curr;
+            int k=0,j=i;
+            
+            while(j<mat.size() and k<mat[0].size())
+            {
+                curr.push_back(mat[j][k]);
+                j++;
+                k++;
+            }
+            
+            sort(curr.begin(),curr.end());
+            
+            k=0;
+            j=i;
+            int itr=0;
+            
+            while(j<mat.size() and k<mat[0].size())
+            {
+                mat[j][k]=curr[itr++];
+                j++;
+                k++;
+            }     
         }
+        
         return mat;
     }
 };
