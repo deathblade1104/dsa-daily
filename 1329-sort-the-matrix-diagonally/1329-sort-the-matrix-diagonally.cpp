@@ -39,7 +39,6 @@ public:
             }
             
             sort(curr.begin(),curr.end());
-            
             k=0;
             j=i;
             int itr=0;
