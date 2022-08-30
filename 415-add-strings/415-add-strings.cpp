@@ -9,21 +9,11 @@ public:
         
         while(i<num1.size() or j<num2.size() or carry==1)
         {
-            int sum=0;
+            int sum=carry;
             
-            if(i<num1.size())
-            {
-                sum+=num1[i]-'0';
-                i++;
-            }
+            sum+=(i == num1.size()) ? 0 : num1[i++]-'0';
+            sum+=(j == num2.size()) ? 0 : num2[j++] -'0';
             
-            if(j<num2.size())
-            {
-                sum+=num2[j]-'0';
-                j++;
-            }
-            
-            sum+=carry;
             if(sum>=10)
                 carry=1;
             
