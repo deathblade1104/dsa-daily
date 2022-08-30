@@ -1,8 +1,7 @@
 class Solution {
 public:
-    priority_queue<int>pq;
+
     int k;
-    
     int kadanesAlgo(vector<int>&arr,int C){
         
         set<int> cum_set;
