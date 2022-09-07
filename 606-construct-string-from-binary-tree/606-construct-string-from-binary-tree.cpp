@@ -25,8 +25,6 @@ public:
             ans+= "(" + tree2str(root->right) + ")";
         }
         
-        
-        
         return ans;
         
     }
