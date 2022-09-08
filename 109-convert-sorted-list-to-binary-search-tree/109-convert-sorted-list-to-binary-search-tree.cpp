@@ -21,15 +21,16 @@
  */
 class Solution {
 public:
-    unordered_map<int,ListNode*>mp;
+    unordered_map<int,int>mp;
+    int itr=0;
     
     TreeNode *getAns(int start, int end){
-        
         if(start > end)
             return NULL;
+        
         int mid = (start + end)/2;
         
-        TreeNode *curr = new TreeNode(mp[mid]->val);
+        TreeNode *curr = new TreeNode(mp[mid]);
         curr->left = getAns(start,mid-1);
         curr->right = getAns(mid+1,end);
         
@@ -42,12 +43,10 @@ public:
         
         while(curr)
         {
-            
-            mp[i] = curr;
+            mp[i] = curr->val;
             curr = curr->next;
             i++;
         }
-        
         int n = mp.size();
         return getAns(0,n-1);
     }
