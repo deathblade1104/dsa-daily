@@ -17,9 +17,9 @@ class Solution
 
         sort(prop.begin(),prop.end(),mycomp());
         
-        int maxTillNow = INT_MIN,ans=0;
+        int maxTillNow = prop.back()[1],ans=0;
         
-        for(int i=prop.size()-1;i>=0;i--){
+        for(int i=prop.size()-2;i>=0;i--){
             if(prop[i][1]<maxTillNow){
                 ans++;
             }
