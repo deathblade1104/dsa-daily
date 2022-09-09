@@ -1,6 +1,7 @@
 class Solution {
 public:
-    int dp[33][2][2];
+    int dp[32][2][2];
+    
     string decimalToBinary(int n){
         string ans = "";
         int i = 0;
