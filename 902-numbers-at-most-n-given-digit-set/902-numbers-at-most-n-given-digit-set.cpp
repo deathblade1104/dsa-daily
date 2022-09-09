@@ -32,11 +32,12 @@ public:
         string s= to_string(n);
         
         st.insert(0);
+        low = stoi(digits.front());
+        high = stoi(digits.back());
+        
         for(string&str : digits){
             int curr = stoi(str);
             st.insert(curr);
-            low = min(low,curr);
-            high = max(high,curr);
         }
         
         return helper(0,true,false,s);
