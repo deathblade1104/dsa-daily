@@ -19,10 +19,9 @@ public:
         int lb = leadingZeroes ? low : 0;
         
         for(int i=lb;i<=ub;i++){
-            if(st.count(i)){
-                // cout<<pos<<" _ "<<tight<<" _ "<<leadingZeroes<<" ## "<<i<<endl;
+            if(st.count(i))
                 res+=helper(pos+1,tight&&(i==ub),leadingZeroes||(i>0),s); 
-            }
+            
         }
         
         return dp[pos][tight][leadingZeroes] = res;
