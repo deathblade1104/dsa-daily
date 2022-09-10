@@ -11,7 +11,6 @@ public:
             i++;
             ans+=(char)(curr + '0');
         }
-        
         reverse(ans.begin(),ans.end());
         return ans;
     }
@@ -43,8 +42,7 @@ public:
     int findIntegers(int n) {
         
         string s = decimalToBinary(n);
-        
-        // cout<<s<<endl;
+
         memset(dp,-1,sizeof dp);
         
         return helper(0,false,true,s);
