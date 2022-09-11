@@ -1,6 +1,7 @@
 class Solution {
 public:
-    vector<int>segTree;
+    
+    int segTree[400005];
     
     int query(int start,int end, int currIdx, int left, int right){
         
@@ -44,23 +45,18 @@ public:
 
     int lengthOfLIS(vector<int>& nums, int k) {
         
-        int m = INT_MIN;
-        for(int&i : nums)
-            m = max(m, i);
-        
-        m++;
-        segTree.resize(4*m,0);
+        memset(segTree,0,sizeof segTree);
         
         int ans = -1;
         
         for(int&i : nums){
             int low = max(0, i-k), high = i-1;
             
-            int q = query(0,m-1,0,low,high) + 1;
+            int q = query(0,100001,0,low,high) + 1;
             
             ans = max(ans,q);
             
-            update(0,m-1,0,i,q);
+            update(0,100001,0,i,q);
         }
         
         return ans;
