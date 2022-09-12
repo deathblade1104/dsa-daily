@@ -11,7 +11,7 @@ public:
             
             bool change= false;
             
-            if(power>=tokens[i]){
+            while(i<tokens.size() and power>=tokens[i]){
                 power-=tokens[i];
                 change=true;
                 score++;
