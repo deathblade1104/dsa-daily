@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[11][2][11];
+    int dp[10][2][10];
     string s;
     
     int helper(int pos, bool tight, int count){
@@ -16,15 +16,12 @@ public:
         int upperBound = tight ? s[pos] - '0' : 9;
         
         for(int i=0;i<=upperBound;i++){
-            int curr;
             
             if(i==1)
-            curr = helper(pos+1,tight&(i==upperBound),count+1);
+             ans+= helper(pos+1,tight&(i==upperBound),count+1);
             
             else
-            curr = helper(pos+1,tight&(i==upperBound),count);
-            
-            ans+=curr;
+            ans+= helper(pos+1,tight&(i==upperBound),count);
         }
         
         return dp[pos][tight][count] = ans;
