@@ -1,28 +1,28 @@
 class Solution {
 public:
-    int dp[10][2][2][1025];
+    int dp[10][2][1025];
     string s;
     
    
-    int helper(int pos,bool tight,int st,int mask){
+    int helper(int pos,bool tight,int mask){
         
         if(pos == s.size())
-            return st;
+            return mask>0;
         
-        if(dp[pos][tight][st][mask]!=-1)
-            return dp[pos][tight][st][mask];
+        if(dp[pos][tight][mask]!=-1)
+            return dp[pos][tight][mask];
         
         int upperBound  = tight ? s[pos]-'0' : 9,ans =0;
     
-        if(!st){
+        if(mask==0){
             
             for(int i=0;i<=upperBound;i++){
                 
                 if(i==0)
-                    ans+=helper(pos+1,tight&(i==upperBound),0,0);
+                    ans+=helper(pos+1,tight&(i==upperBound),0);
                 
                 else
-                    ans+=helper(pos+1,tight&(i==upperBound),1,mask|(1<<i));
+                    ans+=helper(pos+1,tight&(i==upperBound),mask|(1<<i));
             }
         }
         else {
@@ -32,17 +32,17 @@ public:
                 if(mask&(1<<i))
                     continue;
                 
-                ans+=helper(pos+1,tight&(i==upperBound),1,mask|(1<<i));
+                ans+=helper(pos+1,tight&(i==upperBound),mask|(1<<i));
             }
         }
         
-        return dp[pos][tight][st][mask] = ans;
+        return dp[pos][tight][mask] = ans;
     }
     
     int numDupDigitsAtMostN(int n) {
         memset(dp,-1,sizeof dp);
         s = to_string(n);
         
-        return n - helper(0,1,0,0);      
+        return n - helper(0,1,0);      
     }
 };
