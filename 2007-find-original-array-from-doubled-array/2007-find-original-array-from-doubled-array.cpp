@@ -38,8 +38,6 @@ public:
                 ans.push_back(changed[i]);
                 req--;
             }
-            
-            
         }
         
      if(req ==0)
