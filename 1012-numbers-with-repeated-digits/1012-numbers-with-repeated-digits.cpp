@@ -19,10 +19,10 @@ public:
             for(int i=0;i<=upperBound;i++){
                 
                 if(i==0)
-                    ans+=helper(pos+1,tight&(i==upperBound),st,0);
+                    ans+=helper(pos+1,tight&(i==upperBound),0,0);
                 
                 else
-                    ans+=helper(pos+1,tight&(i==upperBound),st|i>0,mask|(1<<i));
+                    ans+=helper(pos+1,tight&(i==upperBound),1,mask|(1<<i));
             }
         }
         else {
@@ -32,7 +32,7 @@ public:
                 if(mask&(1<<i))
                     continue;
                 
-                ans+=helper(pos+1,tight&(i==upperBound),st|i>0,mask|(1<<i));
+                ans+=helper(pos+1,tight&(i==upperBound),1,mask|(1<<i));
             }
         }
         
