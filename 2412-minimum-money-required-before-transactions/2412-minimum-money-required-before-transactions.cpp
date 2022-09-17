@@ -2,13 +2,8 @@ class Solution {
 public:
 
     
-    bool isPossible(vector<vector<int>>& transactions, long long m){
-       long long d = 0;
-        for(int i=0; i<transactions.size(); i++)
-        {
-            if(transactions[i][0] >= transactions[i][1])
-                d += transactions[i][0] - transactions[i][1];
-        }
+    bool isPossible(vector<vector<int>>& transactions, long long m,long long&d){
+        
         for(int i = 0; i<transactions.size(); i++)
         {
             if(transactions[i][0] >= transactions[i][1])
@@ -25,18 +20,23 @@ public:
     }
     
     long long minimumMoney(vector<vector<int>>& transactions) {  
-        long long low =0, high =0LL,ans=-1;
+        long long low =0, high =0LL,ans=-1,d=0;
         
         for(auto&i : transactions){
             high+=(i[0]*1LL);
             low = max(low,i[0]*1LL);
+            
+            if(i[0] >= i[1])
+                d +=i[0] - i[1];
+            
+            
         }
        
         
         while(low<=high){
             long long mid = low + ((high - low)/2);
             
-            if(isPossible(transactions,mid)){
+            if(isPossible(transactions,mid,d)){
                 ans = mid;
                 high = mid-1;
             }
