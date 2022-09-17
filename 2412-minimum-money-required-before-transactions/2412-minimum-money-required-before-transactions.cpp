@@ -9,18 +9,18 @@ public:
             if(transactions[i][0] >= transactions[i][1])
             {
                 long long  d1 = transactions[i][0] - transactions[i][1];
+                
                 if(m - (d - d1) < transactions[i][0])
                     return false;
             }
              else if(m - d < transactions[i][0])
                     return false;
-            
         }
         return true;
     }
     
     long long minimumMoney(vector<vector<int>>& transactions) {  
-        long long low =0, high =0LL,ans=-1,d=0;
+        long long low =0, high =0LL,ans=-1,d=0LL;
         
         for(auto&i : transactions){
             high+=(i[0]*1LL);
@@ -28,8 +28,6 @@ public:
             
             if(i[0] >= i[1])
                 d +=i[0] - i[1];
-            
-            
         }
        
         
