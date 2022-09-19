@@ -1,6 +1,6 @@
 class Solution
 {
-    public:
+    private:
 
     struct TrieNode{
         
@@ -33,6 +33,7 @@ class Solution
         return;
     }
     
+   public :  
    string search(string&word){
         
         TrieNode *curr = root;
