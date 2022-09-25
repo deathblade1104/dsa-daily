@@ -55,6 +55,8 @@ public:
         head->next = temp->next;
         temp->next->prev = head;
         
+        delete(temp);
+        
         return true;
         
     }
