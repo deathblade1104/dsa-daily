@@ -1,10 +1,12 @@
 class Solution
 {
     public:
+        int prefix[100001],suffix[100001];
         string pushDominoes(string dominoes)
         {
             int n = dominoes.size();
-            vector<int> prefix(n, 0), suffix(n, 0);
+            memset(prefix,0,sizeof prefix);
+            memset(suffix,0,sizeof suffix);
 
             int i = 0;
             while (i < n)
