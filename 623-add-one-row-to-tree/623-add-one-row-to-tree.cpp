@@ -18,14 +18,12 @@ class Solution
             if (givenDepth == currDepth)
             {
 
-                TreeNode *curr = new TreeNode(val);
-                //cout<<curr->val<<" "<<currDepth<<endl;
+                TreeNode *curr;
                 
                 if(isLeft)
-                curr->left =  helper(root,val,givenDepth,currDepth+1,1);
-                
+                    curr = new TreeNode(val,root,NULL);
                 else
-                curr->right = helper(root,val,givenDepth,currDepth+1,0);
+                 curr = new TreeNode(val,NULL,root);
                 
                 return curr;
             }
