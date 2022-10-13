@@ -1,66 +1,51 @@
 class Solution {
 public:
+    int cost[101][101];
     int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
-        vector<vector<int>>costs(n,vector<int>(n));
-          int minReach=101;
-            int maxAns=0;
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<n;j++)
-            {
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                
                 if(i==j)
-                    costs[i][j]=0;
+                    cost[i][j] = 0;
+                
                 else 
-                    costs[i][j]=INT_MAX;
+                    cost[i][j] = 9999999;
             }
         }
-        
-        for(auto eachEdges:edges)
-        {
-            int src=eachEdges[0];
-            int dest=eachEdges[1];
-            int weight=eachEdges[2];
-          
+
+        for(int i=0;i<edges.size();i++){
             
-            costs[src][dest]=weight;
-            costs[dest][src]=weight;
+            int u = edges[i][0], v = edges[i][1], w = edges[i][2];
+            
+            cost[u][v] = w;
+            cost[v][u] = w;
         }
         
-        for(int i=0;i<n;i++)
-        {
-            for(int src=0;src<n;src++)
-            {
-                for(int dest=0;dest<n;dest++)
-                    
-                {
-                    if(costs[src][i]!=INT_MAX && costs[i][dest]!=INT_MAX)
-                    costs[src][dest]=min(costs[src][dest] , costs[src][i]+costs[i][dest]);
+        
+        for(int i=0;i<n;i++){
+            for(int src=0;src<n;src++){
+                for(int dest=0;dest<n;dest++){
+                 if(cost[src][i]!=9999999 && cost[i][dest]!=9999999)
+                    cost[src][dest]=min(cost[src][dest] , cost[src][i]+cost[i][dest]);   
                 }
             }
         }
         
+        int res = INT_MAX, ans =-1;
         
-        for(int i=0;i<n;i++)
-        {
-           int reach=0;
-            vector<int>tempReach=costs[i];
-            for(auto k:tempReach)
-            {
-               if(k >0 && k<=distanceThreshold)
-                   reach++;
-            }
-            // cout<<reach<<"   <- "<<i<<endl;
-            
-            if(reach <= minReach)
-            {
-                minReach=reach;
-                maxAns=i;
-                
+        for(int i=0;i<n;i++){
+            int curr =0;
+            for(int j=0;j<n;j++){
+                if(j!=i and cost[i][j]<=distanceThreshold)
+                    curr++;
             }
             
+            if(curr<=res){
+                res = curr;
+                ans=i;
+            }
             
         }
-        
-        return maxAns;
+        return ans;
     }
 };
