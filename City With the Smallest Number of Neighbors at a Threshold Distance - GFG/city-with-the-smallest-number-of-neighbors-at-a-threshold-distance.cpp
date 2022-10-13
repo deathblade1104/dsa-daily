@@ -33,11 +33,6 @@ class Solution {
             pq.pop();
             
             int cn = curr[0],cc = curr[1];
-            if(cost[cn]<=cc)
-            continue;
-            
-            if(cc>k)
-            continue;
             
             cost[cn] = cc;
             vis.insert(cn);
