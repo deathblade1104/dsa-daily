@@ -24,8 +24,10 @@ public:
     }
     ListNode* deleteMiddle(ListNode* head) {
         
-        if(!head->next)
+        if(!head->next){
+            delete(head);
             return NULL;
+        }
         
         
         ListNode *midPrev = getMiddlePrev(head);
