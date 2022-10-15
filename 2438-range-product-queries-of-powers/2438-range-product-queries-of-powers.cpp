@@ -3,22 +3,20 @@ public:
     
     
     int mod = 1e9 + 7;
-    vector<long long int>getArray(int&n){
-        
-        
-        vector<long long int>arr;
-        
+    long long int arr[32];
+    void getArray(int&n){
+    
+        int itr=0;
         for(int i=0;i<=31 and (int)(pow(2,i))<=n;i++){
             if(n& (1<<i)){
-                arr.push_back(1LL *(long long int)pow(2,i));
+                arr[itr++] =1LL *(long long int)pow(2,i);
             }
         }
-            
-        return arr;
     }
     vector<int> productQueries(int n, vector<vector<int>>& queries) {
         
-        vector<long long int>arr=getArray(n);
+        memset(arr,0LL,sizeof arr);
+        getArray(n);
         vector<int>ans;
         
         for(int i=0;i<queries.size();i++){
