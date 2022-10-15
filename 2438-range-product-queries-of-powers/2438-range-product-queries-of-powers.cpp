@@ -3,22 +3,23 @@ public:
     
     
     int mod = 1e9 + 7;
-    vector<int>getArray(int&n){
+    vector<long long int>getArray(int&n){
         
         
-        vector<int>arr;
+        vector<long long int>arr;
         
         for(int i=0;i<=31 and (int)(pow(2,i))<=n;i++){
             if(n& (1<<i)){
-                arr.push_back((int)pow(2,i));
+                arr.push_back(1LL *(long long int)pow(2,i));
             }
         }
-        
+            
         return arr;
     }
     vector<int> productQueries(int n, vector<vector<int>>& queries) {
         
-        vector<int>arr=getArray(n),ans;
+        vector<long long int>arr=getArray(n);
+        vector<int>ans;
         
 //         for(int&i:arr)
 //             cout<<i<<" ";
