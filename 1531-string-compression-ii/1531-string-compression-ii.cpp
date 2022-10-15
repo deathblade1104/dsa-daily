@@ -26,7 +26,6 @@ public:
         else
             keep+= 1+ helper(s,pos+1,k,1,s[pos]-'a');
         
-        
         return dp[pos][k][prevCount][prev] = min(del,keep);
     }
     
