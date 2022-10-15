@@ -7,8 +7,7 @@ public:
         if(pos == s.size())
             return 0;
         
-        if(prevCount>=10)
-            prevCount=10;
+        prevCount=min(prevCount,10);
         
         if(dp[pos][k][prevCount][prev]!=-1)
             return dp[pos][k][prevCount][prev];
