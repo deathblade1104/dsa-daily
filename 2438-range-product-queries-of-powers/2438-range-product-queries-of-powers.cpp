@@ -21,11 +21,6 @@ public:
         vector<long long int>arr=getArray(n);
         vector<int>ans;
         
-//         for(int&i:arr)
-//             cout<<i<<" ";
-        
-//         cout<<endl;
-        
         for(int i=0;i<queries.size();i++){
             
             int start = queries[i][0],end = queries[i][1];
