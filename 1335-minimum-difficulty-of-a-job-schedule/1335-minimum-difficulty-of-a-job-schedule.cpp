@@ -6,16 +6,14 @@ public:
         if(day<0)
             return INT_MAX/2;
         
-        if(curr == nums.size()){
+        if(curr == nums.size())
             return day==0 ? prev : INT_MAX/2;
-        }
         
         if(dp[curr][prev][day]!=-1)
             return dp[curr][prev][day];
         
         int take = prev + helper(curr+1,nums[curr],day-1,nums);
         int dontTake = helper(curr+1,max(prev,nums[curr]),day,nums);
-        
         
         return dp[curr][prev][day] = min(take,dontTake);
         
