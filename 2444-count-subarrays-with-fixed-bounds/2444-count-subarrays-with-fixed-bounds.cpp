@@ -13,6 +13,7 @@ public:
                 start = i+1;
                 minFound = maxFound = false;
             }
+            
             if(curr == minK){
                 minFound = true;
                 minKIndex = i;
