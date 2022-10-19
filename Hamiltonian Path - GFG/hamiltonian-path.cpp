@@ -39,10 +39,10 @@ class Solution
         }
         
         unordered_set<int>vis;
-        for(int i=1;i<=N;i++){
+        for(int i=1;i<=N;i++)
             if(DFS(i,adj,vis,N))
                 return true;
-        }
+        
         
         return false;
     }
