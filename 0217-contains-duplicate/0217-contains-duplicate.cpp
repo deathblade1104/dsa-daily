@@ -9,6 +9,7 @@ public:
             if(st.count(i)==1)
                 return true;
             
+            else
             st.insert(i);
         }
         
