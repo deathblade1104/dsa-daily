@@ -2,10 +2,6 @@ class Solution {
 public:
     bool containsNearbyAlmostDuplicate(vector<int>& nums, int indexDiff, int valueDiff) {
         
-        if(indexDiff==0)
-            return false;
-        
-        
         vector<array<int,2>>v;
         
         for(int i=0;i<nums.size();i++)
