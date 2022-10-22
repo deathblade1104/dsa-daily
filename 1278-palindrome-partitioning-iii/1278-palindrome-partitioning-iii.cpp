@@ -22,7 +22,7 @@ public:
     int helper(int curr,int k,string&s){
         
         if(curr==s.size())
-            return k!=0;
+            return k==0? 0 : 102;
         
         if(dp[curr][k]!=-1)
             return dp[curr][k];
