@@ -17,9 +17,7 @@ public:
         if(dp[pos][tight][hasStarted][prev]!=-1)
             return dp[pos][tight][hasStarted][prev];
             
-        int upperBound  = tight ? s[pos]-'0' : 9;
-        
-        int ans =0;
+        int upperBound  = tight ? s[pos]-'0' : 9,ans =0;
         
         if(!hasStarted){
             for(int i=0;i<=upperBound;i++){
@@ -28,7 +26,7 @@ public:
         }
         
         else{
-            for(int i=0;i<=upperBound;i++)
+            for(int i=max(0,prev-1);i<=min(prev+1,upperBound);i++)
                 if(abs(i-prev)==1){
                     ans+=helper(pos+1,tight && (i==upperBound),1,i,s);
                 }
@@ -39,8 +37,6 @@ public:
     }
     int steppingNumbers(int n, int m)
     {
-        // Code Here
-        
         s2 = to_string(m);
 
         memset(dp,-1,sizeof dp);
