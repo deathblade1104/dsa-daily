@@ -5,8 +5,6 @@ public:
     
     int isPalinHelper(int i,int j, string &s){
         
-        if(j<0 or i>s.size())
-            return false;
         if(i==j)
             return palinDP[i][j] = true;
         if(i == j-1)
