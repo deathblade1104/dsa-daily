@@ -2,9 +2,7 @@ class Solution {
 public:
     
     vector<vector<string>>ans;
-    bool isPalindrome(string&s){
-        
-        int i=0,j=s.size()-1;
+    bool isPalindrome(int i, int j,string&s){
         
         while(i<j){
             if(s[i]!=s[j])
@@ -27,11 +25,9 @@ public:
         
         
         for(int i=curr;i<s.size();i++){
-            
-            string t = s.substr(curr,i-curr+1);
-            
-            if(isPalindrome(t)){
-                temp.push_back(t);
+
+            if(isPalindrome(curr,i,s)){
+                temp.push_back(s.substr(curr,i-curr+1));
                 helper(i+1,s,temp);
                 temp.pop_back();
             }
