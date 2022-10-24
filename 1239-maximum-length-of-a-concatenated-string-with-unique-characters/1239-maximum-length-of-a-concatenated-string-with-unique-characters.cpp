@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool checker[26];
-    bool checkUnique(string s){
+    bool check_unique(string s){
         memset(checker,false,sizeof checker);
         
         for(char ch : s){
@@ -16,6 +16,8 @@ public:
     }
     
     bool isPossible(unordered_map<char,int>&mp,string s){
+        
+        
         for(char ch : s){
             if(mp.count(ch))
                 return false;
@@ -23,20 +25,21 @@ public:
         
         return true;
     }
-    
-    void helper(int curr,vector<string>&arr,vector<bool>hasUnique,unordered_map<char,int>&mp,int&ans){
+    void helper(int curr,vector<string>&arr,unordered_map<char,int>&mp,int&ans){
         
         if(curr == arr.size()){
             ans = max(ans,(int)mp.size());
             return;
         }
         
-        if(hasUnique[curr] and isPossible(mp,arr[curr])){
+        
+        
+        if(check_unique(arr[curr]) and isPossible(mp,arr[curr])){
             
             for(char&ch : arr[curr])
             mp[ch]++;
         
-            helper(curr+1,arr,hasUnique,mp,ans);
+            helper(curr+1,arr,mp,ans);
 
             for(char&ch : arr[curr]){
 
@@ -48,18 +51,14 @@ public:
             }
         }
         
-        helper(curr+1,arr,hasUnique,mp,ans);
+        helper(curr+1,arr,mp,ans);
         
     }
     int maxLength(vector<string>& arr) {
-        int ans = 0,n= arr.size();
+        int ans = 0;
         unordered_map<char,int>mp;
-        vector<bool>hasUnique(n);
         
-        for(int i=0;i<n;i++)
-            hasUnique[i] = checkUnique(arr[i]);
-        
-        helper(0,arr,hasUnique,mp,ans);
+        helper(0,arr,mp,ans);
         
         return ans;
         
