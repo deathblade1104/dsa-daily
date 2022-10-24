@@ -5,6 +5,9 @@ public:
         
         int total=0;
         
+        if(dp.count(curr))
+            return dp[curr];
+        
         for(int j : mp[curr])
             total+=helper(j,mp,dp);
         
