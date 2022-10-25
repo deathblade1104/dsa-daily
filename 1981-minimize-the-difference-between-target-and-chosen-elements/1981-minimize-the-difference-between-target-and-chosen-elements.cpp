@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[72][5001];
+    int dp[71][5001];
     int helper(int r,int&n,int&m,vector<vector<int>>&mat,int&target,int prev){
        
         if(r>=n)
