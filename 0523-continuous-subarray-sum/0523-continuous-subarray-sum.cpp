@@ -5,7 +5,7 @@ class Solution
         bool checkSubarraySum(vector<int> &arr, int k)
         {
             unordered_map<int, int> mp;
-            int p_sum = 0, mod,ans=0;
+            int p_sum = 0, mod;
             mp[0] = -1;
             for (int i = 0; i < arr.size(); i++)
             {
@@ -15,10 +15,10 @@ class Solution
 
                 if (mp.count(mod) == 1)
                 {
-                    ans = max(ans, i - mp[mod]);
-                    if (ans >= 2)
+                    if (i - mp[mod] >= 2)
                         return true;
                 }
+                
                 else
                     mp[mod] = i;
             }
