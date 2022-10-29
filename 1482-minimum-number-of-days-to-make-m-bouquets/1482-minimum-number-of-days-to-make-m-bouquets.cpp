@@ -27,8 +27,15 @@ public:
         if(total > (n *1LL))
             return -1;
         
-        int low = 1, high = 1e9,ans=-1;
+        int low = INT_MAX, high = 0,ans=-1;
         
+        for(int&i : bloomDay){
+            
+            low =min(low,i);
+            high = max(high,i);
+        }
+        
+
         while(low<=high){
             
             int mid = low + ((high - low)/2);
