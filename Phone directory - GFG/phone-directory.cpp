@@ -66,8 +66,7 @@ public:
         set<string>str(contact,contact+n);
         root = new TrieNode();
         
-        set<string>::iterator itr;
-        for (itr = str.begin();itr != str.end(); itr++)
+        for (auto itr = str.begin();itr != str.end(); itr++)
             insert(root,*itr);
 
         vector<vector<string>>ans;
