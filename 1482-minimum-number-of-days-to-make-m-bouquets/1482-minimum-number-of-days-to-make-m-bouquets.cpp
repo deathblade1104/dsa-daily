@@ -12,10 +12,12 @@ public:
                 count++;
                 start = i+1;
             }
+            
+            if(count>=m)
+                return true;
         }
         
-        
-        return (count>=m) ? true : false;
+        return false;
     }
     
     int minDays(vector<int>& bloomDay, int m, int k) {
