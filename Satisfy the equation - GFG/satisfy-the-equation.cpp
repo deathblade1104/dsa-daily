@@ -34,7 +34,6 @@ class Solution {
                     
                     int c = itr.second[j][0],d= itr.second[j][1];
                     
-                    
                     if(a!=c and a!=d and b!=c and b!=d){
                         
                         vector<int>curr={a,b,c,d};
