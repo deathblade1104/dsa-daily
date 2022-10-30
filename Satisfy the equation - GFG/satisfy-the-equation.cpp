@@ -39,7 +39,6 @@ class Solution {
                         
                         vector<int>curr={a,b,c,d};
                         
-                        
                         if(ans.size() ==0)
                             ans = curr;
                             
