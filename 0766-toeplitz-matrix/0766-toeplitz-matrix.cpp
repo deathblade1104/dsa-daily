@@ -15,6 +15,8 @@ public:
                 if(curr!=prev)
                     return false;
                 
+                prev = curr;
+                
                 r++;
                 c++;
             }
@@ -30,6 +32,8 @@ public:
                 
                 if(curr!=prev)
                     return false;
+                
+                prev = curr;
                 
                 r++;
                 c++;
