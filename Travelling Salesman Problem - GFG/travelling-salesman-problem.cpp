@@ -8,7 +8,7 @@ using namespace std;
 class Solution {
 public:
 
-int dp[1025][11];
+int dp[1024][10];
 
 int travellingSalesman(int mask,int pos,int&n,vector<vector<int>>&cost,int&visitedAll){
     
