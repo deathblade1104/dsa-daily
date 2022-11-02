@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minMutation(string start, string end, vector<string>& bank) {
-        vector<char>validChars={'A','C','G','T'};
+        char validChars[4]={'A','C','G','T'};
         unordered_set<string>st(bank.begin(),bank.end());
         
         queue<string>q;
