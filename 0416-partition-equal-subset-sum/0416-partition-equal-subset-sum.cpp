@@ -24,6 +24,7 @@ public:
         
         return dp[curr][target] = op1 | op2;
     }
+    
     bool canPartition(vector<int>& nums) {
         memset(dp,-1,sizeof dp);
         int sum=0;
