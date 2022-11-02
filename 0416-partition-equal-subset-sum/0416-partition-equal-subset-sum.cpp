@@ -6,7 +6,7 @@ public:
     {
         if(target==0) return true;
         
-        if(curr>=nums.size())
+        if(curr<0)
             return false;
         
         if(dp[curr][target]!=-1)
@@ -15,12 +15,12 @@ public:
         bool op1 = false;
         
         if(nums[curr]<=target)
-        op1 =get_ans(curr+1, target - nums[curr], nums);
+        op1 =get_ans(curr-1, target - nums[curr], nums);
         
         if(op1)
             return dp[curr][target] = true;
             
-        bool op2 = get_ans(curr+1, target, nums);
+        bool op2 = get_ans(curr-1, target, nums);
         
         return dp[curr][target] = op1 | op2;
     }
@@ -35,7 +35,7 @@ public:
             return false;
         
         sort(nums.begin(),nums.end());
-        return get_ans(0,sum/2,nums);
+        return get_ans((int)nums.size()-1,sum/2,nums);
         
     }
 };
