@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[201][10002];
+    int dp[201][10001];
     
     bool get_ans(int curr, int target, vector<int>&nums)
     {
