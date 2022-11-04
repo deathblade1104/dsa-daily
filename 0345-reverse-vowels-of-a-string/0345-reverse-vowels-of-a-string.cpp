@@ -22,7 +22,7 @@ public:
         return false;
 
     }
-    string reverseVowels(string s) {
+    string reverseVowels(string&s) {
         
         
         stack<char>st;
@@ -32,21 +32,14 @@ public:
                 st.push(ch);
         }
         
-        string ans ="";
-        
-        
-        for(char&ch : s){
-            
-            if(isalpha(ch) and isVowel(ch)){
-                ans+=st.top();
+        for(int i=0;i<s.size();i++){
+            if(isVowel(s[i])){
+                s[i] = st.top();
                 st.pop();
             }
-            
-            else
-                ans+=ch;
         }
         
-        return ans;
+        return s;
         
     }
 };
