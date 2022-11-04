@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    bool isVowel(char ch){
+    bool isVowel(char&ch){
         
         if(ch =='A' or ch =='a')
             return true;
