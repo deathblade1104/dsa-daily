@@ -1,7 +1,7 @@
 class Solution {
 public:
     struct TrieNode{
-        TrieNode* child[26];
+        array<TrieNode*,26>child;
         bool isEnd;
         TrieNode(){
             for(int i=0;i<26;i++)
