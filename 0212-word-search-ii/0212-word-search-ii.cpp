@@ -27,18 +27,26 @@ public:
         curr->isEnd = true;
     }
     
-    
-    void DFS(int r, int c, TrieNode *curr, int&n,int&m, vector<vector<char>>&board,string&word,unordered_set<string>&st){
+    bool isLastNode(TrieNode* curr){
+        
+        for(int i=0;i<26;i++)
+            if(curr->child[i])
+                return false;
+        
+        
+        return true;
+    }
+    void DFS(int r, int c, TrieNode *curr2, int&n,int&m, vector<vector<char>>&board,string&word,unordered_set<string>&st){
         
         if(r<0 or r>=n or c<0 or c>=m or board[r][c]=='.')
             return;
         
         char ch = board[r][c];
-        if(!curr->child[ch -'a'])
+        if(!curr2->child[ch -'a'])
             return;
         
         word+=ch;
-        curr = curr->child[ch - 'a'];
+        TrieNode *curr = curr2->child[ch - 'a'];
         
         board[r][c] = '.';
         
@@ -52,6 +60,12 @@ public:
         
         word.pop_back();
         board[r][c]= ch;
+        
+        
+        if(isLastNode(curr)){
+            curr2->child[ch-'a'] = NULL;
+            delete(curr);
+        }
         
         return;
     }
