@@ -24,10 +24,8 @@ public:
             
             curr = curr->child[idx];
         }
-        
         curr->isEnd = true;
     }
-    
     
     
     void DFS(int r, int c, TrieNode *curr, int&n,int&m, vector<vector<char>>&board,string&word,unordered_set<string>&st){
