@@ -2,7 +2,7 @@ class Solution {
 public:
     
     int arr1[26],arr2[26];
-    int minSteps(string s, string t) {
+    int minSteps(string&s, string&t) {
         
         
         memset(arr1,0,sizeof arr1);
