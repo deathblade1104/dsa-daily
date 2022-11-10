@@ -7,27 +7,25 @@ using namespace std;
 // User function Template for C++
 class Solution {
 public:
-    string isSumOfTwo(int n){
+    string isSumOfTwo(int N){
         // code here
         
-        bool prime[n + 1];
-        memset(prime, true, sizeof(prime));
-        prime[0]=prime[1] = false;
- 
-        for (int p = 2; p * p <= n; p++) {
-            if (prime[p] == true) {
-                // Update all multiples of p greater than or
-                // equal to the square of it numbers which are
-                // multiple of p and are less than p^2 are
-                // already been marked.
-                for (int i = p * p; i <= n; i += p)
-                    prime[i] = false;
-            }
+        bool flag;
+        
+        vector<bool>seive(N+1,true);
+        seive[0]=seive[1]=false;
+        
+        
+        for(int i=2;i*i<=N;i++){
+            if(!seive[i])
+                continue;
+                
+            for(int p=i*i;p<=N;p+=i)
+                seive[p] = false;
         }
         
-        
-        for(int i=2;i<n;i++)
-            if(prime[i] and prime[n-i])
+        for(int i=2;i<N;i++)
+            if(seive[i] and seive[N-i])
                 return "Yes";
                 
         return "No";
