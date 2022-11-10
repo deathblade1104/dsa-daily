@@ -24,7 +24,7 @@ public:
                 seive[p] = false;
         }
         
-        for(int i=2;i<N;i++)
+        for(int i=2;i<=N/2;i++)
             if(seive[i] and seive[N-i])
                 return "Yes";
                 
