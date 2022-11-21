@@ -35,8 +35,7 @@ public:
         }
         
         ans = 0LL;
-        
-        long long curr  = DFS(0,seats,-1,adj);
+        int curr  = DFS(0,seats,-1,adj);
     
         
         return ans;
