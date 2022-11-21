@@ -11,12 +11,9 @@ public:
                 currPeople+=DFS(neigh,size,curr,adj);
         }
         
-        
-        
         if(curr!=0){
-            int rem = currPeople%size;
             
-            if(rem)
+            if(currPeople%size)
                 ans++;
             
             ans+=(1LL *(currPeople/size));
