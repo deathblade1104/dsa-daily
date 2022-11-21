@@ -7,14 +7,15 @@ public:
         long long currPeople = 1;
         
         for(int&neigh : adj[curr]){
-            
             if(neigh != prev)
                 currPeople+=DFS(neigh,size,curr,adj);
         }
         
-        int rem = currPeople%size;
+        
         
         if(curr!=0){
+            int rem = currPeople%size;
+            
             if(rem)
                 ans++;
             
