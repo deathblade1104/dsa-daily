@@ -15,7 +15,7 @@ public:
         if(dp[val][curr]!=-1)
             return dp[val][curr];
         
-        int op1 = 102,op2=102;
+        int op1 = 102,op2;
         
         if(arr[curr]<=val){
             op1= 1+ getAns(curr,val-arr[curr],sz,arr);
