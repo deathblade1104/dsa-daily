@@ -1,9 +1,11 @@
 class Solution {
 public:
+    
+    bool row[9][10],col[9][10],box[9][10];
     bool isValidSudoku(vector<vector<char>>& board) {
-        vector<vector<bool>>row(9,vector<bool>(10,false));
-        vector<vector<bool>>col(9,vector<bool>(10,false));
-        vector<vector<bool>>box(9,vector<bool>(10,false));
+        memset(row,0,sizeof row);
+        memset(col,0,sizeof col);
+        memset(box,0,sizeof box);
         
         for(int i=0;i<9;i++)
         {
