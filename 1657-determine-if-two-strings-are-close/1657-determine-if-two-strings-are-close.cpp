@@ -7,15 +7,23 @@ public:
             return false;
         
         vector<int>w1(26,0),w2(26,0);
-        vector<bool>w3(26,0),w4(26,0);
+
         for(char c:word1)
-            w1[c-'a']++,w3[c-'a'] = 1;
+            w1[c-'a']++;
     
         for(char c:word2)
-            w2[c-'a']++,w4[c-'a'] = 1;
+            w2[c-'a']++;
+        
+        for(int i=0;i<26;i++){
+            
+            if((w1[i] and w2[i]) or (!w1[i] and !w2[i]))
+                continue;
+            
+            else return false;
+        }
         
         sort(begin(w1),end(w1));
         sort(begin(w2),end(w2));
-        return w1==w2&&w3==w4;
+        return w1==w2;
     }
 };
