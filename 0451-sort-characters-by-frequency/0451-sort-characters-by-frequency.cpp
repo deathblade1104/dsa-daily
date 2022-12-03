@@ -20,9 +20,9 @@ public:
         
         string ans="";
         for(auto it : st){
-            
-            while(it.first--){
-                
+            int i=0;
+            while(i!=it.first){
+                i++;
                 ans+=it.second;
             }
         }
