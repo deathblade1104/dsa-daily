@@ -19,10 +19,10 @@ public:
         }
         
         string ans="";
-        for(auto&it : st){
-            int i=0;
-            while(i!=it.first){
-                i++;
+        for(auto it : st){
+            
+            while(it.first--){
+                
                 ans+=it.second;
             }
         }
