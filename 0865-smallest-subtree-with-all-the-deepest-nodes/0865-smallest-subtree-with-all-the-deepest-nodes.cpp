@@ -13,7 +13,7 @@ class Solution {
 public:
     int level,count;
     pair<TreeNode*,int>dummy;
-    TreeNode *prev;
+    TreeNode *prev ;
     
     void getLevelAndCount(TreeNode *root,int lvl){
         
