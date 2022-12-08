@@ -12,20 +12,11 @@
 class Solution {
 public:
     
-    TreeNode *getTree(int curr,unordered_map<int,array<int,2>>&mp){
-        if(curr == -1)
-            return NULL;
-        
-        TreeNode *root =  new TreeNode(curr);
-        root->left = getTree(mp[curr][0],mp);
-        root->right = getTree(mp[curr][1],mp);
-        
-        return root;
-    }
+    
     
     TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
         
-        unordered_map<int,array<int,2>>mp;
+        unordered_map<int,TreeNode*>mp;
         unordered_set<int>childSet;
         int rootVal = -1;
         
@@ -35,15 +26,15 @@ public:
             childSet.insert(child);
             
             if(mp.count(par) == 0 )
-                mp[par] = {-1,-1};
+                mp[par] = new TreeNode(par);
             
             if(mp.count(child) == 0)
-                mp[child] = {-1,-1};
+                mp[child] = new TreeNode(child);
             
             if(v[2] == 1)
-                mp[par][0] = child;
+                mp[par]->left = mp[child];
             else
-                mp[par][1] = child;
+                mp[par]->right = mp[child];
         }
         
         for(auto&v : descriptions){
@@ -53,6 +44,6 @@ public:
             }
         }
         
-        return getTree(rootVal,mp);
+        return mp[rootVal];
     }
 };
