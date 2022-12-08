@@ -47,7 +47,6 @@ public:
         }
         
         for(auto&v : descriptions){
-            
             if(childSet.count(v[0]) ==0){
                 rootVal = v[0];
                 break;
