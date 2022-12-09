@@ -59,13 +59,7 @@ public:
         
         int op2 = countNodes(XNode->left), op3 = countNodes(XNode->right),rem = n - 1 - op2 - op3;
         
-        if(rem > 1 + op2 + op3)
-            return true;
-        
-        if(op2 > rem + 1 + op3)
-            return true;
-        
-        if(op3 > rem + 1 + op2)
+        if((rem > 1 + op2 + op3) or(op2 > rem + 1 + op3) or (op3 > rem + 1 + op2))
             return true;
         
         return false;
