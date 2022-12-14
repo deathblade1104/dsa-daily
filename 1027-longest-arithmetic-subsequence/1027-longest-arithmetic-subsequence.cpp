@@ -17,7 +17,7 @@ public:
                 }
                 
                 else {
-                    diff = diff * -1;
+                    diff = abs(diff);
                     dp2[i][diff] = max(dp2[i][diff], dp2[j][diff] + 1);
                     ans = max(ans,dp2[i][diff]);
                 }
