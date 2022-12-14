@@ -1,10 +1,15 @@
 class Solution {
 public:
      
+    unordered_map<long long,int>dp[1001];
+    unordered_map<long long,int>mp;
+    
     int numberOfArithmeticSlices(vector<int>& nums) {
         int n= nums.size(), ans = 0;
-        vector<unordered_map<long long,int>>dp(n);
         
+        for(int i=0;i<n;i++)
+            dp[i] = mp;
+            
         for(int i=1;i<n;i++){
             //cout<<nums[i]<<" :-->  "<<endl;
             for(int j=0;j<i;j++){
