@@ -2,8 +2,6 @@ class Solution {
 public:
     
     int mp[60];
-    
-    
     int numPairsDivisibleBy60(vector<int>& time) {
         
         memset(mp,0,sizeof mp);
