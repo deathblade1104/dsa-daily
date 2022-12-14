@@ -14,10 +14,7 @@ public:
                 if(diff <= INT_MIN or diff>=INT_MAX)
                     continue;
                 
-                if(dp[j].count(diff) == 0)
-                    dp[i][diff]++;
-                
-                else dp[i][diff] += dp[j][diff] + 1;
+                dp[i][diff] += dp[j][diff] + 1;
                 
                 ans+=dp[j][diff];
                 
