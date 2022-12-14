@@ -8,15 +8,10 @@ public:
         for(int i=l;i<=r;i++)
             temp[i-l] = nums[i];
         
-        sort(temp.begin(),temp.end());
-        
-        int prev = temp[1] - temp[0];
-        
+        sort(temp.begin(),temp.end());        
         for(int i=2;i<temp.size();i++){
             
-            int curr = temp[i] - temp[i-1] ;
-            
-            if(curr != prev)
+            if(temp[i] - temp[i-1] != temp[1] - temp[0])
                 return false;
         }
         
