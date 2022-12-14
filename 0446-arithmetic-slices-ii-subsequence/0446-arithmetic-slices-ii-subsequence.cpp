@@ -1,8 +1,8 @@
 class Solution {
 public:
      
-    unordered_map<long long,int>dp[1001];
-    unordered_map<long long,int>mp;
+    unordered_map<long,int>dp[1001];
+    unordered_map<long,int>mp;
     
     int numberOfArithmeticSlices(vector<int>& nums) {
         int n= nums.size(), ans = 0;
@@ -13,7 +13,7 @@ public:
         for(int i=1;i<n;i++){
             //cout<<nums[i]<<" :-->  "<<endl;
             for(int j=0;j<i;j++){
-                long long diff = 1LL *nums[i] - 1LL*nums[j];
+                long long diff = (long long) nums[i] - nums[j];
                 
                 if(diff <= INT_MIN or diff>=INT_MAX)
                     continue;
