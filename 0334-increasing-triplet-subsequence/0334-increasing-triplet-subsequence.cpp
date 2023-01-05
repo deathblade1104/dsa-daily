@@ -11,9 +11,12 @@ public:
             
             else
                 ans[it] = nums[i];
+            
+            if(ans.size()>=3)
+                return true;
         }
         
-        return ans.size()>=3;
+        return false;
         
     }
 };
