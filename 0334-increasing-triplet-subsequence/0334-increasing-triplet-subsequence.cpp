@@ -1,29 +1,19 @@
 class Solution {
 public:
     bool increasingTriplet(vector<int>& nums) {
-        int n = nums.size();
-        
-        vector<int>suffix(n,-1);
-        suffix[n-1] = nums.back();
-    
-        for(int i=n-2;i>=0;i--)
-        suffix[i] = max(nums[i],suffix[i+1]);
-        
-        priority_queue<int,vector<int>,greater<int>>pq;
-        pq.push(nums[0]);
-        
-        for(int i=1;i<n-1;i++){
+        vector<int>ans;
+        ans.push_back(nums[0]);
+        for(int i=1;i<nums.size();i++){
+            int it = lower_bound(ans.begin(),ans.end(),nums[i]) - ans.begin();
             
-            pq.push(nums[i]);
+            if(it == ans.size())
+                ans.push_back(nums[i]);
             
-            int op1 = pq.top(), op2=suffix[i];
-            
-            if(op1<nums[i] and nums[i]<op2)
-                return true;
-            
+            else
+                ans[it] = nums[i];
         }
         
-        return false;
+        return ans.size()>=3;
         
     }
 };
