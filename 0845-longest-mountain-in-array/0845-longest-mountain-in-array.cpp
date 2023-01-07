@@ -3,7 +3,7 @@ public:
     
     int dp1[10001],dp2[10001];
     
-    void getLIS(vector<int>&nums,int&n){
+    void getLongestIncreasingSubarray(vector<int>&nums,int&n){
         
         memset(dp1,0,sizeof dp1);
         
@@ -19,7 +19,7 @@ public:
         return;
     }
     
-    void getLDS(vector<int>&nums,int&n){
+    void getLongestDecreasingSubarray(vector<int>&nums,int&n){
         
         memset(dp2,0,sizeof dp1);
         
@@ -38,8 +38,8 @@ public:
     int longestMountain(vector<int>& arr) {
         
         int n = arr.size(),ans = 0;
-        getLIS(arr,n);
-        getLDS(arr,n);
+        getLongestIncreasingSubarray(arr,n);
+        getLongestDecreasingSubarray(arr,n);
         
         for(int i=0;i<n;i++)
             if(dp1[i]>1 and dp2[i]>1)
