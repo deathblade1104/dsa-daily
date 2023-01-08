@@ -4,11 +4,9 @@ public:
     long long nums[(int)(1e5 +1)];
     bool isPossible(long long mid,vector<int>&arr,int r,int k){
         
-        //cout<<" For Mid : "<<mid<<endl;
-        
         int n = arr.size();
         long long curr = 0LL;
-        memset(nums,0LL,sizeof nums);
+        //memset(nums,0LL,sizeof nums);
         
         for(int i=0;i<n;i++){
             
@@ -17,7 +15,6 @@ public:
             if(i<=r)
                 curr+=nums[i];
         }
-        //cout<<"Starting curr : "<<curr<<endl;
         
         for(int i=0;i<n;i++){
             
@@ -26,8 +23,6 @@ public:
             
             if(i-r-1>=0)
                 curr-=nums[i-r-1];
-            
-            //cout<<i<<" ---> "<<curr<<endl;
             
             if(curr<mid){
                 //Greedily Adding 
@@ -41,10 +36,7 @@ public:
 
                 else 
                     return false;
-            }
-            
-            //cout<<i<<" |---> "<<curr<<endl;
-                
+            }   
         }
         
         return true;
