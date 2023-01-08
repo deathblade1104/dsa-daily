@@ -1,16 +1,18 @@
 class Solution {
 public:
+    
+    long long nums[(int)(1e5 +1)];
     bool isPossible(long long mid,vector<int>&arr,int r,int k){
         
         //cout<<" For Mid : "<<mid<<endl;
         
         int n = arr.size();
         long long curr = 0LL;
-        vector<long long>nums;
+        memset(nums,0LL,sizeof nums);
         
         for(int i=0;i<n;i++){
             
-            nums.push_back(1LL * arr[i]);
+            nums[i] = (1LL * arr[i]);
             
             if(i<=r)
                 curr+=nums[i];
