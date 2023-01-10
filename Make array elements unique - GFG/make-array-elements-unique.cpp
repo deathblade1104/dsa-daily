@@ -13,25 +13,28 @@ class Solution {
         // Code here
         
         sort(arr.begin(),arr.end());
-        set<int>st;
+        unordered_set<int> st;
         long long ans = 0LL;
-        st.insert(arr[0]);
+        int last = arr[0];
+        st.insert(last);
         
         for(int i=1;i<arr.size();i++){
-            
             if(st.count(arr[i])){
-                int last = *(st.rbegin()) - arr[i] + 1;
-                ans+=(1LL * last);
-                st.insert(arr[i] + last);
+                int diff = last - arr[i] + 1;
+                ans+=(1LL * diff);
+                last = arr[i] + diff;
+                st.insert(last);
+            } else {
+                st.insert(arr[i]);
+                last = arr[i];
             }
-            
-            else 
-            st.insert(arr[i]);
         }
-        
         return ans;
     }
 };
+
+
+
 
 //{ Driver Code Starts.
 
