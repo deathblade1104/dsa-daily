@@ -2,12 +2,13 @@ class Solution {
 public:
     
     int res;
-    bool dfsHelper(int curr,int prev, vector<vector<int>>&adj,vector<bool>& hasApple){
-
+    vector<int>adj[(int)(1e5+1)];
+    
+    bool dfsHelper(int curr,int prev,vector<bool>& hasApple){
         bool ans = hasApple[curr];
         for(int&i : adj[curr]){
             if(i!=prev){
-                bool checker = dfsHelper(i,curr,adj,hasApple);
+                bool checker = dfsHelper(i,curr,hasApple);
                 if(checker)
                     res+=2;
                 
@@ -19,7 +20,8 @@ public:
     int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
         
         res = 0;
-        vector<vector<int>>adj(n);
+        for(int i=0;i<n;i++)
+            adj[i].clear();
         
         for(auto&v : edges){
             int a=v[0],b=v[1];
@@ -27,7 +29,7 @@ public:
             adj[b].push_back(a);
         }
         
-        bool temp = dfsHelper(0,-1,adj,hasApple);
+        bool temp = dfsHelper(0,-1,hasApple);
         return res;
         
         
