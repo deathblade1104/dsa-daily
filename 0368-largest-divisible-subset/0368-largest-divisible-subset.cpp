@@ -1,14 +1,12 @@
 class Solution {
 public:
-    vector<int> largestDivisibleSubset(vector<int>& nums) {
+    vector<int> largestDivisibleSubset(vector<int>&nums) {
         
         int n = nums.size();
         sort(nums.begin(),nums.end());
         array<int,2>dp[n];
         
         int ans=0,res = -1;
-        
-        memset(dp,0,sizeof dp);
         
         for(int i=0;i<n;i++){
             
