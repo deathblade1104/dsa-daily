@@ -38,7 +38,6 @@ public:
         }
         
         
-        
         for(char&ch : baseStr){
             int p = findPar(ch - 'a');
             
