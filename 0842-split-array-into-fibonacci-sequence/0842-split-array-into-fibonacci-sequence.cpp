@@ -1,6 +1,16 @@
 class Solution {
 public:
-    
+    bool check(int startIdx,long long currNum, string&s, long long lim1 = INT_MAX*1LL, long long lim2 = INT_MAX*1LL){
+        
+        if(s[startIdx] == '0' and currNum>0)
+            return false;
+        
+        if(currNum>lim1 or currNum>lim2)
+            return false;
+        
+        return true;
+        
+    }
     bool backtrack(int curr,long long prev1,long long prev2,vector<int>&ans,string&num){
         
         if(curr>=num.size()) 
@@ -11,9 +21,7 @@ public:
             temp*=10LL;
             temp+=(num[i] - '0');
             
-            if((num[curr]=='0' and temp>0)
-               or (temp > INT_MAX)
-               or(temp > (prev1 + prev2)*10LL))
+            if(!check(curr,temp,num,(10LL * (prev1 + prev2))))
                 return false;
             
             if(temp == prev1 + prev2){
@@ -36,10 +44,10 @@ public:
             prev1*=10LL;
             prev1+=(num[i] -'0');
             
-            
-            
-            if((num[0]=='0' and prev1>0) or (prev1 > INT_MAX))
+        
+            if(!check(0,prev1,num))
                 break;
+            
             //cout<<"i :"<<i<<" --> "<<prev1<<" ===> "<<endl;
             
             ans.push_back(prev1);
@@ -51,8 +59,7 @@ public:
                 prev2*=10LL;
                 prev2+=(num[j] -'0');
                 
-                
-                 if((num[i+1]=='0' and prev2>0) or (prev2 > INT_MAX))
+                if(!check(i+1,prev2,num))
                     break;
                 
                 //cout<<" j :"<<j<<" --> "<<prev2<<" : "<<endl;
