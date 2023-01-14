@@ -37,15 +37,15 @@ public:
             }
         }
         
-        string ans="";
+        
         
         for(char&ch : baseStr){
             int p = findPar(ch - 'a');
             
-            ans+=(char)(p + 'a');
+            ch=(char)(p + 'a');
         }
         
-        return ans;
+        return baseStr;
         
     }
 };
