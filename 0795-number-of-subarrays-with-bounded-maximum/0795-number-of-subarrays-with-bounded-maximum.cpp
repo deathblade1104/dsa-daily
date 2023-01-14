@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int numSubarrayBoundedMax(vector<int>& nums, int left, int right) {
+    int numSubarrayBoundedMax(vector<int>& nums, int&left, int&right) {
         int ans = 0, l = -1 ,r  = - 1;
         
         
