@@ -7,18 +7,14 @@ public:
         memset(ones,0,sizeof ones);
         
         int  n = s.size();
-        
-        
+            
         zeroes[n-1] = s[n-1] == '0'? 1 : 0;
-        
-        //cout<<"Zeroes : "<<zeroes[n-1]<<endl;
-        
+    
         for(int i=n-2;i>=0;i--){
             
             zeroes[i] = zeroes[i+1];
             zeroes[i] += s[i] == '0' ? 1 : 0; 
         }
-        
         
         ones[0] = s[0] == '1' ? 1 : 0;
         
@@ -27,7 +23,6 @@ public:
             ones[i] = ones[i-1];
             ones[i] += s[i] =='1' ? 1 : 0;
         }
-        
         
         int ans = n;
         
