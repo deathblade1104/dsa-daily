@@ -3,7 +3,7 @@ public:
     
     bool isValid(string&s){
         
-        if(s.size()>3 or !s.size())
+        if(s.size()>3)
             return false;
         
         if(s[0] == '0' and s.size()>1)
