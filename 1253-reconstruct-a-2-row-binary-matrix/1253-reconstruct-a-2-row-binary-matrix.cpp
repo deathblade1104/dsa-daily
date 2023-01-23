@@ -41,7 +41,6 @@ public:
                 return res;
         }
         
-        
         if(upper or lower)
             return res;
         
