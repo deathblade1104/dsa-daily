@@ -3,7 +3,6 @@ public:
     vector<vector<int>> restoreMatrix(vector<int>& row, vector<int>& col) {
         
         int n = row.size(),m = col.size();
-        
         vector<vector<int>>ans(n,vector<int>(m,0));
         
         for(int i=0;i<n;i++){
