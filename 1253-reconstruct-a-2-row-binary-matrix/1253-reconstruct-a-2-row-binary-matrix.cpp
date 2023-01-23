@@ -10,16 +10,13 @@ public:
         
         for(int i=0;i<m;i++){
             
-            if(colSum[i]>=2){
+            if(colSum[i]>=2 and upper and lower){
                 upper--;
                 lower--;
                 ans[0][i]++;
                 ans[1][i]++;
                 colSum[i]-=2;
             }
-            
-            if(lower<0 or upper<0)
-                return res;
         }
         
         
