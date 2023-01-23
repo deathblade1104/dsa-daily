@@ -1,8 +1,10 @@
 class Solution {
 public:
     int count[(int)(1e5) + 1];
+    priority_queue<array<long long,2>,vector<array<long long,2>>,greater<array<long long,2>>>pq;
+    set<int>st;
     
-    void insert(int x,int arr,int load,set<int>&st,priority_queue<array<long long,2>,vector<array<long long,2>>,greater<array<long long,2>>>&pq){
+    void insert(int x,int&arr,int&load){
         st.erase(x);
         count[x]++;
         
@@ -32,15 +34,12 @@ public:
     vector<int> busiestServers(int k, vector<int>& arrival, vector<int>& load) {
         memset(count,0,sizeof count);
         
-        set<int>st;
         for(int i=0;i<k;i++){
             st.insert(i);
         }
         
-        priority_queue<array<long long,2>,vector<array<long long,2>>,greater<array<long long,2>>>pq;
-        
         for(int i=0;i<arrival.size() and i<k;i++)
-            insert(i,arrival[i],load[i],st,pq);
+            insert(i,arrival[i],load[i]);
             
         
         for(int i=k;i<arrival.size();i++){
@@ -58,7 +57,7 @@ public:
             if(server == st.end())
                 server = st.begin();
 
-            insert(*server,arrival[i],load[i],st,pq);
+            insert(*server,arrival[i],load[i]);
             
         }
         
