@@ -25,13 +25,13 @@ public:
         
         for(int i=0;i<m;i++){
             
-            if(upper>0 and colSum[i]>0){
+            if(upper>0 and colSum[i]==1){
                 upper--;
                 colSum[i]--;
                 ans[0][i]++;
             }
             
-            if(lower>0 and colSum[i]>0){
+            if(lower>0 and colSum[i]==1){
                 lower--;
                 colSum[i]--;
                 ans[1][i]++;
