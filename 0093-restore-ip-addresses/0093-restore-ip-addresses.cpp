@@ -33,14 +33,13 @@ public:
                 continue;
             
             string second ="";
-            //cout<<i<<" i --> "<<first<<endl;
+            
             for(int j=i+1;j-i<=3 and j<s.size();j++){
                 second += s[j];
                 
                 if(!isValid(second))
                     continue;
                 
-                //cout<<j<<" j --> "<<second<<endl;
                 
                 string third ="";
                 for(int k=j+1;k-j<=3 and k<s.size();k++){
@@ -49,7 +48,6 @@ public:
                     if(!isValid(third))
                         continue;
                     
-                    //cout<<k<<" k --> "<<third<<endl;
                     
                     string fourth = "";
                     
@@ -63,7 +61,6 @@ public:
                         if(l==s.size()-1)
                         ans.push_back(stringMaker(first,second,third,fourth));
                         
-                        //cout<<l<<" l --> "<<fourth<<endl;
                     }
                 }
             }
