@@ -25,32 +25,37 @@ public:
         
         vector<string>ans;
         
+        string first="";
         for(int i=0;i<3;i++){
-            string first = s.substr(0,i+1);
+             first+=s[i];
             
             if(!isValid(first))
                 continue;
             
+            string second ="";
             //cout<<i<<" i --> "<<first<<endl;
             for(int j=i+1;j-i<=3 and j<s.size();j++){
-                string second = s.substr(i+1,j-i);
+                second += s[j];
                 
                 if(!isValid(second))
                     continue;
                 
                 //cout<<j<<" j --> "<<second<<endl;
                 
+                string third ="";
                 for(int k=j+1;k-j<=3 and k<s.size();k++){
-                    string third = s.substr(j+1,k-j);
+                    third += s[k];
                     
                     if(!isValid(third))
                         continue;
                     
                     //cout<<k<<" k --> "<<third<<endl;
                     
+                    string fourth = "";
+                    
                     for(int l=k+1;l-k<=3 and l<s.size();l++){
                     
-                        string fourth = s.substr(k+1,l-k);
+                        fourth+=s[l];
                         
                         if(!isValid(fourth))
                             continue;
