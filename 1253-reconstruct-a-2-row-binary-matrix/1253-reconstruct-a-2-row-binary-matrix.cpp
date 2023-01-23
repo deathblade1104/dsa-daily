@@ -22,7 +22,6 @@ public:
                 return res;
         }
         
-        //cout<<"First loop ran"<<endl;
         
         for(int i=0;i<m;i++){
             
@@ -42,7 +41,6 @@ public:
                 return res;
         }
         
-        //cout<<"second loop ran as well"<<endl;
         
         if(upper or lower)
             return res;
