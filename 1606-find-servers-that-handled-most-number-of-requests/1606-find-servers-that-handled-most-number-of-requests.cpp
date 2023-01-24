@@ -33,13 +33,11 @@ public:
     }
     vector<int> busiestServers(int k, vector<int>& arrival, vector<int>& load) {
         memset(count,0,sizeof count);
-        
-        for(int i=0;i<k;i++){
+ 
+        for(int i=0;i<arrival.size() and i<k;i++){
             st.insert(i);
-        }
-        
-        for(int i=0;i<arrival.size() and i<k;i++)
             insert(i,arrival[i],load[i]);
+        }
             
         
         for(int i=k;i<arrival.size();i++){
