@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    vector<int>BFShelper(int n, vector<int>adj[],int src){
+    vector<int>BFShelper(int&n,vector<int>&edges,int&src){
         
         vector<int>dist(n,INT_MAX);
         
@@ -11,21 +11,16 @@ public:
         q.push(src);
         
         while(q.size()){
-            
-            int sz = q.size();
-            while(sz --){
-                
-                int curr = q.front();
-                q.pop();
-                
-                for(int&neigh : adj[curr]){
-                    
-                    if(dist[neigh]==INT_MAX){
-                        dist[neigh] = dist[curr]+1;
-                        q.push(neigh);
-                    }   
-                }
-            }
+
+            int curr = q.front();
+            q.pop();
+
+            int neigh = edges[curr];
+
+            if(neigh!=-1 and dist[neigh]==INT_MAX){
+                dist[neigh] = dist[curr]+1;
+                q.push(neigh);
+            }   
         }
         
         return dist;
@@ -34,17 +29,9 @@ public:
     
     int closestMeetingNode(vector<int>& edges, int node1, int node2) {
         int n = edges.size();
-        vector<int>adj[n];
         
-        for(int i=0;i<n;i++){
-            
-            if(edges[i]!=-1){
-                adj[i].push_back(edges[i]);
-            }
-        }
-        
-        vector<int>dist1 = BFShelper(n,adj,node1);
-        vector<int>dist2 = BFShelper(n,adj,node2);
+        vector<int>dist1 = BFShelper(n,edges,node1);
+        vector<int>dist2 = BFShelper(n,edges,node2);
         
         int ans = -1,res = INT_MAX;
         
