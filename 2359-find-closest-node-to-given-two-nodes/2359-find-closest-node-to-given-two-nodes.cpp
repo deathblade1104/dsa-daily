@@ -49,15 +49,13 @@ public:
         int ans = -1,res = INT_MAX;
         
         for(int i=0;i<n;i++){
+                
+            int currRes = max(dist1[i],dist2[i]);
+
+            if(currRes<res){
+                res = currRes;
+                ans = i;
             
-            if(dist1[i]!=INT_MAX and dist2[i]!=INT_MAX){
-                
-                int currRes = max(dist1[i],dist2[i]);
-                
-                if(currRes<res){
-                    res = currRes;
-                    ans = i;
-                }
             }
             
             //cout<<i<<" -- "<<dist1[i]<<" -- "<<dist2[i]<<endl;
