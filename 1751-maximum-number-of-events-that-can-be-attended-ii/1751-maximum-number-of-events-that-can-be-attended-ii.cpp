@@ -29,10 +29,8 @@ public:
         if(dp[curr][k]!=-1)
             return dp[curr][k];
         
-        int select = events[curr][2];
-        int next = upperBound(curr+1,n-1,events[curr][1],events);
-        next = helper(next,k-1,events,n);
-        select+=next;
+        int select = events[curr][2] + helper(upperBound(curr+1,n-1,events[curr][1],events),k-1,events,n);
+        //select+=next;
         
         //cout<<curr<<" NEXT "<<next<<endl;
         
