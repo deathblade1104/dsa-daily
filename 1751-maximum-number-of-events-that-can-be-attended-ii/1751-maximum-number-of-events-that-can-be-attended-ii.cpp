@@ -4,7 +4,7 @@ public:
     vector<vector<int>>dp;
     int upperBound(int low,int high,int num,vector<vector<int>>&events){
         
-        int ans = -1;
+        int ans = high+1;
         
         while(low<=high){
             
@@ -31,12 +31,7 @@ public:
         
         int select = events[curr][2];
         int next = upperBound(curr+1,n-1,events[curr][1],events);
-        
-        if(next!=-1)
-            next = helper(next,k-1,events,n);
-        else
-            next = 0;
-        
+        next = helper(next,k-1,events,n);
         select+=next;
         
         //cout<<curr<<" NEXT "<<next<<endl;
