@@ -17,12 +17,11 @@ struct Node{
 
 class LFUCache {
 public:
-    int minFreq,maxSize,cap;
+    int minFreq,cap;
     unordered_map<int,Node*>keyMap;
     unordered_map<int,array<Node*,2>>freqMap;
     
     LFUCache(int capacity) {
-        maxSize = 0;
         minFreq = 1;
         cap = capacity;
     }
@@ -83,31 +82,12 @@ public:
         
         keyMap.erase(firstNode->key);
         
-        if(isListEmpty(firstNode->freq)){
+        if(isListEmpty(f)){
             minFreq = 1;
-            freqMap.erase(firstNode->freq);
+            freqMap.erase(f);
         }
         
         delete(firstNode);
-        
-//         cout<<"After Deleting FreqMap becomes : "<<endl;
-            
-//                 for(auto&itr : freqMap){
-
-//                     cout<<"For Freq : "<<itr.first<<endl;
-
-//                     Node *head = itr.second[0],*tail = itr.second[1];
-
-//                     Node *curr = head->next;
-
-//                     while(curr!=tail){
-
-//                         cout<<"( "<<curr->key<<" , "<<curr->value<<" ) "<<" ---> ";
-//                         curr=curr->next;
-//                     }
-//                     cout<<endl;
-//                 }
-        
         return;
     }
     
@@ -125,24 +105,6 @@ public:
         newNode->next = tail;
         tail->prev= newNode;
         
-//          cout<<"After Adding FreqMap becomes : "<<endl;
-            
-//         for(auto&itr : freqMap){
-
-//             cout<<"For Freq : "<<itr.first<<endl;
-
-//             Node *head = itr.second[0],*tail = itr.second[1];
-
-//             Node *curr = head->next;
-
-//             while(curr!=tail){
-
-//                 cout<<"( "<<curr->key<<" , "<<curr->value<<" ) "<<" ---> ";
-//                 curr=curr->next;
-//             }
-//             cout<<endl;
-//         }
-        
         return;
     }
     
@@ -151,12 +113,9 @@ public:
         if(keyMap.count(key)==0 or !cap)
             return -1;
         
-        //cout<<" Getting value for : "<<key<<endl;
-        
         increaseNodeFreq(keyMap[key]);
         addInFreqMapBack(keyMap[key]);
         
-        //cout<<endl<<endl;
         return keyMap[key]->value;
     }
     
@@ -165,36 +124,22 @@ public:
         if(cap == 0)
             return;
         
-        //cout<<" Putting "<<key<<" : "<<value<<endl;
         
         if(keyMap.count(key)==1){
-            
             keyMap[key]->value = value;
-            increaseNodeFreq(keyMap[key]);
-            addInFreqMapBack(keyMap[key]);
+            increaseNodeFreq(keyMap[key]);   
         }
-        
         else{
             
-            if(maxSize == cap){
+            if(keyMap.size() >= cap)
                 deleteInFreqMapFront(minFreq);
-                maxSize--;
-            }
             
             Node *newNode = new Node(key,value,1);
             keyMap[key] = newNode;
-            
-            //cout<<key<<" --> "<<keyMap[key]->value<<endl;
-            
-            addInFreqMapBack(newNode);
             minFreq = 1;
-            
-           
-            
-            maxSize++;
         }
         
-        //cout<<endl;
+        addInFreqMapBack(keyMap[key]);
         return;
     }
 };
