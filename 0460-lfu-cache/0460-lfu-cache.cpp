@@ -128,8 +128,6 @@ public:
             delete_node(temp);
             temp->value = value;
             temp->freq++;
-            add_at_tail(temp);
-            
         }
         
         else {
@@ -139,10 +137,10 @@ public:
             
             temp = new Node(key,value,1);
             keyMap[key] = temp;
-            add_at_tail(temp);
             //minFreq = 1;
-            
         }
+        
+        add_at_tail(temp);
         
         return;
     }
