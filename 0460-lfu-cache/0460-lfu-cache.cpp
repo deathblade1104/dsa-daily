@@ -96,7 +96,7 @@ public:
     }
     
 
-    LFUCache(int capacity) {
+    LFUCache(int&capacity) {
         cap = capacity;
         //minFreq = 1;
     }
