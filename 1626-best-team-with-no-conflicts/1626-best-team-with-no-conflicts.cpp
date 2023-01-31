@@ -14,8 +14,8 @@ public:
         for(int i=0;i<n;i++){
             dp[i] = v[i][1];
             for(int j=0;j<i;j++){
-                if(v[j][1]<=v[i][1] and dp[i]<dp[j]+v[i][1]){
-                    dp[i] = dp[j] + v[i][1];
+                if(v[j][1]<=v[i][1]){
+                    dp[i] = max(dp[i],dp[j] + v[i][1]);
                 }
             }
             ans = max(ans, dp[i]);
