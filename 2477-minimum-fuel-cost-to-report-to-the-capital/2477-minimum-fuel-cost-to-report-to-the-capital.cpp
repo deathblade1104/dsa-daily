@@ -1,42 +1,42 @@
 class Solution {
 public:
     
-    long long ans;
-    int DFS(int curr,int&size,int prev,vector<vector<int>>&adj){
+    long long DFS(int curr,int prev,int&seats,long long&ans,vector<int>adj[]){
         
-        long long currPeople = 1;
+        long long temp = 1LL;
         
         for(int&neigh : adj[curr]){
-            if(neigh != prev)
-                currPeople+=DFS(neigh,size,curr,adj);
+            
+            if(neigh != prev){
+                
+                temp+=DFS(neigh,curr,seats,ans,adj);
+            }
         }
         
         if(curr!=0){
+            ans+=(1LL *(temp/seats));
             
-            if(currPeople%size)
+            if(temp%seats)
                 ans++;
-            
-            ans+=(1LL *(currPeople/size));
         }
-        return currPeople;
-    }
+        
+        return temp;
     
+    }
     long long minimumFuelCost(vector<vector<int>>& roads, int seats) {
         
         int n = roads.size();
-        vector<vector<int>>adj(n+1);
         
-        for(auto&it : roads){
-            int u = it[0],v = it[1];
-            adj[u].push_back(v);
-            adj[v].push_back(u);
+        vector<int>adj[n + 1];
+        
+        for(auto&f : roads){
+            adj[f[0]].push_back(f[1]);
+            adj[f[1]].push_back(f[0]);
         }
         
-        ans = 0LL;
-        int curr  = DFS(0,seats,-1,adj);
-    
+        long long ans = 0LL;
+        long long temp = DFS(0,-1,seats,ans,adj);
         
         return ans;
-        
     }
 };
