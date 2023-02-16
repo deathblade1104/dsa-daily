@@ -10,9 +10,8 @@
  * };
  */
 class Solution {
-public:
     
-    
+public: 
     void mapParents(TreeNode *root, TreeNode * prev,unordered_map<TreeNode*,TreeNode*>&mp){
         
         if(!root)
