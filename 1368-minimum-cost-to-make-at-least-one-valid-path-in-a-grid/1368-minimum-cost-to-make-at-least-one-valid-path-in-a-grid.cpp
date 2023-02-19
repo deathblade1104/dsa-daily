@@ -2,12 +2,11 @@ class Solution {
 public:
     
     bool vis[101][101];
+    const pair<int,int>dir[5]={{0,1},{0,-1},{1,0},{-1,0}};
     int minCost(vector<vector<int>>& grid) {
         
         int n = grid.size(), m = grid[0].size();
         memset(vis,0,sizeof vis);
-        
-        pair<int,int>dir[5]={{0,1},{0,-1},{1,0},{-1,0}};
         
         priority_queue<array<int,3>,vector<array<int,3>>,greater<array<int,3>>>pq;
         pq.push({0,0,0});
