@@ -11,7 +11,7 @@ public:
         
         priority_queue<array<int,3>,vector<array<int,3>>,greater<array<int,3>>>pq;
         pq.push({0,0,0});
-      
+        
         while(pq.size()){
             
             array<int,3>curr = pq.top();
@@ -19,7 +19,8 @@ public:
 
             int cost = curr[0], x  = curr[1], y = curr[2];
             
-             if (vis[x][y]) continue;
+             if (vis[x][y]) 
+                 continue;
             
             vis[x][y] = 1;
            
