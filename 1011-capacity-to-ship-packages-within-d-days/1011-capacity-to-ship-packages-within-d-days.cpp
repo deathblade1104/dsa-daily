@@ -1,48 +1,58 @@
 class Solution {
 public:
-    
-    bool isPossible(vector<int>&weights,int&mid,int&days){
+    bool isPossible(vector<int>&weights,long long int&mid,int&days){
         
-        int currDays = 1, currCount = weights[0];
+        long long int countDays = 1,currCap = 0;
         
-        for(int i=1;i<weights.size();i++){
+        for(int&i : weights){
             
-            currCount+=weights[i];
-            if(currCount>mid){
-                currCount=weights[i];
-                currDays++;
+            if(currCap+i > mid){
+                countDays++;
+                currCap=0;
             }
             
-            if(currDays>days)
+            
+            currCap+=i;
+            
+            if(countDays>1LL * days)
                 return false;
+            
         }
         
         return true;
     }
     
-    int shipWithinDays(vector<int>& weights, int days) {
+    int shipWithinDays(vector<int>& weights, int&days) {
         
-        
-        int low = 1, high = 1e9,ans=-1;
+        long long int low = 0LL,high = 0LL,ans = -1 ;
         
         for(int&i : weights){
-            low = max(i,low);
+            high+=(1LL *i);
+            low = max(low,1LL * i);
         }
+        
+        high*=1LL * days;
         
         
         while(low<=high){
             
-            int mid = low + ((high - low)/2);
-            
+            long long int mid = low + ((high - low)/2);
+            //cout<<mid<<" --> ";
             if(isPossible(weights,mid,days)){
                 ans = mid;
-                high = mid-1;
+                high = mid - 1;
+                
+                //cout<<true<<endl;
             }
             
-            else 
-                low = mid +1 ;
+            else{
+                
+            low = mid + 1;
+                //cout<<false<<endl;
+            }
         }
         
         return ans;
+        
     }
 };
