@@ -18,7 +18,7 @@ public:
         
         else return dp[i][j] = 1 + min({helper(i,j+1,s1,s2), helper(i+1,j,s1,s2), helper(i+1,j+1,s1,s2)});
     }
-    int minDistance(string word1, string word2) {
+    int minDistance(string&word1, string&word2) {
         n1 = word1.size();
         n2 = word2.size();
         memset(dp,-1,sizeof dp);
