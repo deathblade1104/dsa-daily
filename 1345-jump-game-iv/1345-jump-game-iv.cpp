@@ -1,10 +1,19 @@
 class Solution {
 public:
 
+    bool vis[50001];
+    
+    void insertInQueue(queue<int>&q,int curr,int&n){
+        
+        if(curr>=0 and curr<n and !vis[curr]){
+            vis[curr] = 1;
+            q.push(curr);
+        }
+        return;
+    }
     int minJumps(vector<int>& arr) {
         unordered_map<int,vector<int>>adj;
         int n = arr.size();
-        bool vis[n];
         memset(vis,0,sizeof vis);
         
         for(int i=0;i<arr.size();i++){
@@ -18,7 +27,6 @@ public:
         
         
         while(q.size()){
-            
             int sz = q.size();
             while(sz --){
                 int curr = q.front();
@@ -28,33 +36,11 @@ public:
                     return steps;
                 
                 for(int&i : adj[arr[curr]]){
-                    
-                    if(!vis[i]){
-                        
-                        if(i == n-1)
-                            return steps+1;
-                        
-                        vis[i] = 1;
-                        q.push(i);
-                    }
-                    
+                    insertInQueue(q,i,n);
                 }
                 adj.erase(arr[curr]);
-                
-                if(!vis[curr+1]){
-                    if(curr+1 == n-1)
-                            return steps+1;
-                    vis[curr+1] = 1;
-                    q.push(curr+1);
-                }
-                
-                if(curr-1>=0 and !vis[curr-1]){
-                    
-                    if(curr-1 == n-1)
-                            return steps+1;
-                    vis[curr-1] = 1;
-                    q.push(curr-1);
-                }
+                insertInQueue(q,curr+1,n);
+                insertInQueue(q,curr-1,n);
             }
             steps++;
         }
