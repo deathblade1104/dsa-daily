@@ -21,8 +21,9 @@
  */
 class Solution {
 public:
+    unordered_map<int,int>mp;
     
-    TreeNode *helper(int start,int end, unordered_map<int,int>&mp){
+    TreeNode *helper(int start,int end){
         
         if(start>end)
             return NULL;
@@ -30,15 +31,14 @@ public:
         int mid = start + ((end - start)/2);
         
         TreeNode *curr = new TreeNode(mp[mid]);
-        curr->left = helper(start,mid-1,mp);
-        curr->right = helper(mid+1,end,mp);
+        curr->left = helper(start,mid-1);
+        curr->right = helper(mid+1,end);
         mp.erase(mid);
         
         return curr;
     }
     
     TreeNode* sortedListToBST(ListNode* head) {
-        unordered_map<int,int>mp;
         
         int sz = 0;
         ListNode *curr = head;
@@ -50,7 +50,7 @@ public:
         
         if(!sz)
             return NULL;
-        return helper(0,sz-1,mp);
+        return helper(0,sz-1);
         
     }
 };
