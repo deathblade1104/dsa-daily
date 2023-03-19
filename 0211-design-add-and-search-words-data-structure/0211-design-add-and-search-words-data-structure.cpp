@@ -1,77 +1,78 @@
 class WordDictionary {
-private: 
-    struct TrieNode{
-        
-        array<TrieNode*,26>children;
+public:
+    struct TrieNode
+    {
         bool isEnd;
+        array<TrieNode*,26>children;
         
-        TrieNode(){
+        TrieNode()
+        {
+            isEnd= false;
             
-            for(int i=0;i<26;i++){
+            for(int i=0;i<26;i++)
                 children[i] = NULL;
-            }
-            
-            isEnd = false;
         }
     };
     
-    
-public:
-    
     TrieNode *root;
     WordDictionary() {
-        
-        root = new TrieNode();
+        TrieNode *temp = new TrieNode();
+        root= temp;
     }
-
+    
     void addWord(string word) {
+        TrieNode *curr=root;
         
-        TrieNode *curr = root;
-        for(char&ch : word){
+        int i=0;
+        for(;i<word.size();i++)
+        {
+            int idx = word[i] - 'a';
             
-            int idx = ch - 'a';
-            
-            if(curr->children[idx] == NULL)
+            if(curr->children[idx]==NULL)
                 curr->children[idx] = new TrieNode();
-            
-            
+                      
             curr = curr->children[idx];
+            
         }
-        
-        curr->isEnd = true;
-        //cout<<"Word is : "<<word<<" is added."<<endl;
+        curr->isEnd=true;        
     }
     
-    
-    bool searchTrie(string&word,int idx,TrieNode *curr){
-        
-         if(!curr){
+    bool search_helper(string &word, int idx, TrieNode *curr)
+    {
+        if(!curr) {
             return false;
         }
+        if(idx==word.size())
+            return curr->isEnd;
         
-        if(idx == word.size()) 
-           return curr->isEnd;
-        
-        char ch = word[idx];
-        
-        if(!isalpha(ch)){
+        if(word[idx]=='.')
+        {
             
-            bool ans = false;
-            for(int i=0;i<26;i++){
-                ans = ans || searchTrie(word,idx+1,curr->children[i]);
+            bool ans =false;
+            
+            for(int i=0;i<26;i++)
+            {
+                ans = ans or search_helper(word,idx+1,curr->children[i]);
+                
                 if(ans)
                     return true;
             }
-            return false;
+            
+            return false;    
+            
         }
         
-        int  charIdx = ch - 'a';
-        return searchTrie(word,idx+1,curr->children[charIdx]);
+        else
+        {
+            int temp = word[idx] - 'a';
+            return search_helper(word,idx+1,curr->children[temp]);
+        }
     }
     
     bool search(string word) {
+        TrieNode *curr = root;
+        return search_helper(word,0,curr);
         
-        return searchTrie(word,0,root);
     }
 };
 
