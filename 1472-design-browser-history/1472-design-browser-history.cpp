@@ -22,6 +22,14 @@ public:
         
         ListNode *newVisit = new ListNode(url);
         
+        if(curr->next){
+            ListNode *temp = curr->next;
+            curr->next = NULL;
+            temp->prev = NULL;
+            
+            deleteList(temp);
+        }
+        
         curr->next = newVisit;
         newVisit->prev = curr;
         curr = curr->next;
@@ -45,9 +53,19 @@ public:
         }
         
         return curr->url;
+    }
+    
+    void deleteList(ListNode *curr){
         
+        while(curr){
+            
+            ListNode *temp = curr;
+            curr= curr->next;
+            
+            delete(temp);
+        }
         
-        
+        return;
     }
 };
 
