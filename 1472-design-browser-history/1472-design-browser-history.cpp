@@ -1,71 +1,31 @@
 class BrowserHistory {
-    struct ListNode{
-        
-        string url;
-        ListNode *prev, *next;
-        
-        ListNode(string str){
-            url = str;
-            prev = NULL;
-            next = NULL;
-        }
-    };
-    
 public:
-    ListNode *head,*curr;
+    int curr,sz;
+    
+    unordered_map<int,string>mp;
     BrowserHistory(string homepage) {
-        head = new ListNode(homepage);
-        curr = head;
+        curr = sz = 1;
+        mp[curr] = homepage;
     }
     
     void visit(string url) {
         
-        ListNode *newVisit = new ListNode(url);
+        curr++;
+        sz=curr;
         
-        if(curr->next){
-            ListNode *temp = curr->next;
-            curr->next = NULL;
-            temp->prev = NULL;
-            
-            deleteList(temp);
-        }
+        mp[curr] = url;
         
-        curr->next = newVisit;
-        newVisit->prev = curr;
-        curr = curr->next;
     }
     
     string back(int steps) {
         
-        while(steps-- and curr!=head){
-            
-            curr = curr->prev;
-        }
-        
-        return curr->url;
+        curr = max(1,curr - steps);
+        return mp[curr];
     }
     
     string forward(int steps) {
-        
-        while(steps-- and curr->next){
-            
-            curr = curr->next;
-        }
-        
-        return curr->url;
-    }
-    
-    void deleteList(ListNode *curr){
-        
-        while(curr){
-            
-            ListNode *temp = curr;
-            curr= curr->next;
-            
-            delete(temp);
-        }
-        
-        return;
+        curr = min(sz, curr + steps);
+        return mp[curr];
     }
 };
 
