@@ -48,16 +48,14 @@ public:
             mp[findPar(i)]++;
         }
         
-        vector<int>vec;
         long long sum = 0LL,count = 0LL;
         for(auto&it : mp){
-            vec.push_back(it.second);
             sum+=it.second;
         }
         
-        for(int&i : vec){
-            sum -=i;
-            count+=(1LL * i * sum);
+        for(auto&it : mp){
+            sum -=it.second;
+            count+=(1LL * it.second * sum);
         }
         
         return count;
