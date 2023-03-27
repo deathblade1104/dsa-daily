@@ -1,26 +1,22 @@
 class Solution {
 public:
     int dp[201][201];
-    int minsum(vector<vector<int>>& grid, int row,int col){ 
-         
-        if(row >= grid.size() or col >= grid[0].size() ) 
-            return 10000001; 
-                  
-        if(row == grid.size()-1 and col == grid[0].size()-1) 
-          return dp[row][col] = grid[row][col]; 
+    
+    int helper(int r, int c, vector<vector<int>>&grid){
         
-        if(dp[row][col]!=-1)
-            return dp[row][col];
-         
-       int hor =  grid[row][col] + minsum (grid,row + 1,col); 
-        int vert = grid[row][col] + minsum (grid,row,col+1); 
-         
-       return dp[row][col] = min(hor,vert); 
-    } 
-     
-    int minPathSum(vector<vector<int>>& grid) { 
-         
+        if(r>=grid.size() or c>=grid[0].size())
+            return 10000001;
+        
+        if(r == grid.size()-1 and c == grid[0].size()-1)
+            return dp[r][c] =  grid[r][c];
+        
+        if(dp[r][c] != -1)
+            return dp[r][c];
+        
+       return dp[r][c] = grid[r][c] +  min(helper(r+1,c,grid),helper(r,c+1,grid));
+    }
+    int minPathSum(vector<vector<int>>& grid) {
         memset(dp,-1,sizeof dp);
-        return minsum(grid,0,0); 
-    } 
+        return helper(0,0,grid);
+    }
 };
