@@ -4,12 +4,7 @@ public:
     
     int findIdx(int curr,int diff,vector<int>&days){
         
-        if(curr == days.size()-1)
-            return curr+1;
-        
-        
         int h = days.size()-1, l = curr,val = days[curr] + diff -1,ans = days.size();
-        
         
         while(l<=h){
             
