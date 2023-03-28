@@ -7,11 +7,24 @@ public:
         if(curr == days.size()-1)
             return curr+1;
         
-        int initCurr = curr;
-        while(curr<days.size() and days[curr] - days[initCurr] < diff)
-            curr++;
         
-        return curr;
+        int h = days.size()-1, l = curr,val = days[curr] + diff -1,ans = days.size();
+        
+        
+        while(l<=h){
+            
+            int mid = l + ((h - l)/2);
+            
+            if(days[mid]>val){
+                ans = mid;
+                h = mid - 1;
+            }
+            
+            else l = mid + 1;
+            
+        }
+        
+        return ans;
     }
     
     int helper(int curr,vector<int>&days,vector<int>&costs){
@@ -22,7 +35,6 @@ public:
         if(dp[curr]!=-1)
             return dp[curr];
         
-        //cout<<days[curr]<<" next -->"<<endl;
         
         int op1 = costs[0] + helper(curr+1,days,costs);
         
@@ -30,7 +42,7 @@ public:
         
         int op3 = costs[2] + helper(findIdx(curr,30,days),days,costs);
         
-        //cout<<days[curr]<<" --> "<<op1<<" : "<<op2<<" : "<<op3<<endl;
+        
         return dp[curr] = min({op1,op2,op3});
     }
     int mincostTickets(vector<int>& days, vector<int>& costs) {
