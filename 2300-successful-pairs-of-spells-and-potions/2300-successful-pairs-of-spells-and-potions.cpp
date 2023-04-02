@@ -1,9 +1,9 @@
 class Solution {
 public:
-    int upperBound(vector<int>&potions,int&currSpell,long long&success){
+    int upperBound(vector<int>&potions,int&n,int&currSpell,long long&success){
         
         
-        int low = 0,high = potions.size() -1,ans=0;
+        int low = 0,high = n - 1,ans=0;
         
         while(low<=high){
             int mid = low + ((high -low)/2);
@@ -24,9 +24,9 @@ public:
         
         sort(potions.begin(),potions.end());
         vector<int>ans;
-        
+        int n = potions.size();
         for(int&i : spells)
-            ans.push_back(potions.size() - upperBound(potions,i,success));
+            ans.push_back(n - upperBound(potions,n,i,success));
         
         
         return ans;
