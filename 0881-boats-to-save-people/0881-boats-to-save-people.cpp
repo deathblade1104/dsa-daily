@@ -8,11 +8,18 @@ public:
         
         
         while(l<=h){
-            if(people[l] + people[h] <= limit)
+            if(people[l] + people[h] <= limit){
                 l++;
-            
-            h--;
+                h--;
             ans++;
+            }
+            
+            else {
+                h--;
+                ans++;
+            }
+            
+            
         }
         
         
