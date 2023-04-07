@@ -6,7 +6,6 @@ public:
         if(curr>=satisfaction.size())
             return 0;
         
-        
         if(dp[curr][t]!=-1)
             return dp[curr][t];
         
