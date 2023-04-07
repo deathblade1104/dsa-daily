@@ -14,53 +14,31 @@ public:
         
         int ans = 0;
         
-//         for(int curr = i;curr<j;curr++){
+        for(int curr = start;curr<=end;curr++){
             
-//             int lSum = 0,rSum = 0;
-//             if(i == 0)
-//                 lSum = pref[curr];   
-//             else
-//                 lSum = pref[curr] - pref[i-1];
-            
-//             //cout<<lSum<<endl;
-//             rSum = pref[j] - pref[curr]; 
-            
-//             if(lSum > rSum){
-//                 ans = max(ans,rSum + helper(curr+1,j,arr));
-//             }
-            
-//             else if(lSum == rSum){
-//                 ans = max(ans,lSum + max(helper(curr+1,j,arr),helper(i,curr-1,arr)));
-//             }
-            
-//             else{
-//                 ans = max(ans,lSum + helper(i,curr-1,arr));
-//             }
-//         }
-        
-        for(int i=start;i<=end;i++)
-        {
-            int lSum,rSum;
-            if(start==0)
-                lSum=pref[i];
+            int lSum = 0,rSum = 0;
+            if(start == 0)
+                lSum = pref[curr];   
             else
-            lSum=pref[i]-pref[start-1];  // st to i
+                lSum = pref[curr] - pref[start-1];
             
-            rSum=pref[end]-pref[i];  // i+1 to end
             
-            if(lSum>rSum)
-            {
-                ans=max(ans,rSum+helper(i+1,end));
+            rSum = pref[end] - pref[curr]; 
+            
+            if(lSum > rSum){
+                ans = max(ans,rSum + helper(curr+1,end));
             }
-            else if(lSum==rSum)
-            {
-                ans=max(ans,lSum + max(helper(start,i),helper(i+1,end)));
+            
+            else if(lSum == rSum){
+                ans = max(ans,lSum + max(helper(curr+1,end),helper(start,curr)));
             }
-            else
-            {
-                ans=max(ans,lSum+helper(start,i));
+            
+            else{
+                ans = max(ans,lSum + helper(start,curr));
             }
         }
+        
+
         
         return dp[start][end] = ans;
         
