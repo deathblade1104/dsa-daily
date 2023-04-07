@@ -38,7 +38,7 @@ public:
 //             }
 //         }
         
-        for(int i=start;i<end;i++)
+        for(int i=start;i<=end;i++)
         {
             int lSum,rSum;
             if(start==0)
