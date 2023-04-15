@@ -2,6 +2,7 @@ class Graph {
 public:
     
     int n;
+    int vis[101];
     vector<array<int,2>>adj[101];
     Graph(int N, vector<vector<int>>& edges) {
         n = N;
@@ -18,7 +19,10 @@ public:
     int shortestPath(int S, int node2) {
         priority_queue<array<long long,2>,vector<array<long long,2>>, greater<array<long long,2>>>pq;
         pq.push({0,S});
-        vector<long long>vis(n,LLONG_MAX);
+        
+        for(int i=0;i<n;i++)
+            vis[i] = INT_MAX;
+        
         vis[S] = 0;
         
         while(pq.size()>0)
