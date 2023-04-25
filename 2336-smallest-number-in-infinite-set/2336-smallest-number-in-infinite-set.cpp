@@ -1,24 +1,29 @@
 class SmallestInfiniteSet {
 public:
-    bool added[1001];
+    priority_queue<int,vector<int>,greater<int>>pq;
+    unordered_set<int>vis;
+    int minNum;
     SmallestInfiniteSet() {
-        memset(added,1,sizeof added);
+        minNum = 1;
     }
     
     int popSmallest() {
         
-        for(int i=1;i<1001;i++){
-            if(added[i]){
-                added[i] = false;
-                return i;
-            }
+        if(pq.size()){
+            int x = pq.top();
+            pq.pop();
+            vis.erase(x);
+            return x;
         }
-        
-        return -1;
+
+        return minNum++;
     }
     
     void addBack(int num) {
-        added[num] = true;
+        if(num<minNum and !vis.count(num)){
+            pq.push(num);
+            vis.insert(num);
+        }
     }
 };
 
