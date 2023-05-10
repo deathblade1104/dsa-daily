@@ -14,7 +14,7 @@ public:
     
     void spiralTraverse(ListNode *head,vector<vector<int>>&ans){
         
-        if(!head )
+        if(!head || r1>r2 || c1>c2)
             return;
         
         for(int i=c1;i<=c2 and head;i++)
