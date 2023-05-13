@@ -49,7 +49,7 @@ public:
       int currSum =0, maxPathSum = 0, ans = 0;
         
         findMaxPathSum(0,cost,currSum,maxPathSum);
-        cout<<"Max : "<<maxPathSum<<endl;
+        //cout<<"Max : "<<maxPathSum<<endl;
         currSum=0;
         int x = DFS(0,currSum,maxPathSum,cost,ans,n);
         
