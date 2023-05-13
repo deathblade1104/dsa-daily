@@ -1,7 +1,6 @@
 class Solution {
 public:
-    
-    int dp[100001][3];
+        int dp[100001][3];
     const int mod = 1e9 + 7;
     
     int helper(int pos,int prev,int&zeroes,int&ones,int&sz){
