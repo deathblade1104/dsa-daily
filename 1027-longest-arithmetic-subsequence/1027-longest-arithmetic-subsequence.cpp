@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp1[1001][501],dp2[1001][501];
+   int dp1[1001][501],dp2[1001][501];
     int longestArithSeqLength(vector<int>& nums) {
         int ans =0,n = nums.size();
         memset(dp1,0,sizeof dp1);
