@@ -1,50 +1,77 @@
 class Solution {
 public:
-     bool isPossible(int m, int n, int t, vector<vector<int>>& cells) {
-        vector<vector<int>> grid(m + 1, vector<int>(n + 1, 0)); // Grid representation
-        vector<pair<int, int>> directions {{1, 0}, {-1, 0}, {0, 1}, {0, -1}}; // Possible directions
-
-        for (int i = 0; i < t; i++) {
-            grid[cells[i][0]][cells[i][1]] = 1; // Mark cells from the given list as blocked
-        }
-
-        queue<pair<int, int>> q;
+    const int dir[5] = {1,0,-1,0,1};
+    int n, m;
+    
+    
+    bool BFS(int mid,vector<vector<int>>&mat){
         
-        for (int i = 1; i <= n; i++) {
-            if (grid[1][i] == 0) {
-                q.push({1, i}); // Start BFS from the top row
-                grid[1][i] = 1; // Mark the cell as visited
+        queue<array<int,2>>q;
+        for(int i=0;i<m;i++){
+            if(mat[0][i] == -1 ){
+                q.push({0,i});
+                mat[0][i] = 1;
             }
         }
-        while (!q.empty()) {
-            pair<int, int> p = q.front();
-            q.pop();
-            int r = p.first, c = p.second; // Current cell coordinates
-            for (auto d : directions) {
-                int nr = r + d.first, nc = c + d.second; // Neighbor cell coordinates
-                if (nr > 0 && nc > 0 && nr <= m && nc <= n && grid[nr][nc] == 0) {
-                    grid[nr][nc] = 1; // Mark the neighbor cell as visited
-                    if (nr == m) {
-                        return true; // Found a path to the bottom row
+        
+        int steps = 0;
+        
+        while(q.size() and steps<=mid){
+            
+            while(q.size()){
+                
+                int curr_r = q.front()[0],curr_c = q.front()[1];
+                q.pop();
+                
+                if(curr_r == n-1)
+                    return true;
+                
+                for(int k=1;k<=4;k++){    
+                    int x= curr_r + dir[k-1],y = curr_c + dir[k];
+                    
+                    if(x>=0 and y>=0 and x<n and y<m and mat[x][y] == -1){
+                        q.push({x,y});
+                         mat[x][y] = 1;
                     }
-                    q.push({nr, nc}); // Add the neighbor cell to the queue for further exploration
                 }
             }
+            steps++;
         }
-        return false; // Unable to find a path to the bottom row
+        
+        return false;
     }
-
-    int latestDayToCross(int row, int col, vector<vector<int>>& cells) {
-        int left = 0, right = row * col, latestPossibleDay = 0;
-        while (left < right - 1) {
-            int mid = left + (right - left) / 2; // Calculate the mid-day
-            if (isPossible(row, col, mid, cells)) {
-                left = mid; // Update the left pointer to search in the upper half
-                latestPossibleDay = mid; // Update the latest possible day
-            } else {
-                right = mid; // Update the right pointer to search in the lower half
-            }
+    
+    bool isPossible(int mid,vector<vector<int>>& cells){
+        
+        vector<vector<int>>mat(n,vector<int>(m,-1));
+        
+        for(int i =0;i<mid;i++){
+            mat[cells[i][0]-1][cells[i][1]-1] = 0;
         }
-        return latestPossibleDay;
+        
+        return BFS(mid,mat);
+        //return false;
+        
+    }
+        
+        
+    int latestDayToCross(int row, int col, vector<vector<int>>& cells) {
+        n = row;
+        m = col;
+        
+        int low = 1, high = n*m,ans =0;
+        
+        while(low<=high){
+            
+            int mid = low + ((high - low)/2);
+            if(isPossible(mid,cells)){
+                ans = mid;
+                low = mid + 1;
+            }
+            
+            else high = mid -1 ;
+        }
+        
+        return ans;
     }
 };
