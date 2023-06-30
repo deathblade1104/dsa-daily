@@ -23,13 +23,15 @@ public:
                 int curr_r = q.front()[0],curr_c = q.front()[1];
                 q.pop();
                 
-                if(curr_r == n-1)
-                    return true;
                 
                 for(int k=1;k<=4;k++){    
                     int x= curr_r + dir[k-1],y = curr_c + dir[k];
                     
                     if(x>=0 and y>=0 and x<n and y<m and mat[x][y] == -1){
+                        
+                        if(x == n-1)
+                            return true;
+                        
                         q.push({x,y});
                          mat[x][y] = 1;
                     }
