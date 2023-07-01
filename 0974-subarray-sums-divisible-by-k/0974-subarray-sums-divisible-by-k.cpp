@@ -2,27 +2,24 @@ class Solution {
 public:
     int subarraysDivByK(vector<int>& nums, int k) {
         
-        int mp[k];
-        memset(mp,0,sizeof mp);
-        
-        
-        int prefixSum = 0,ans = 0;
-        
+        unordered_map<int,int>mp;
+        int pre = 0,ans =0;
         for(int&i : nums){
             
-            prefixSum+=i;
+            pre+=i;
+            pre%=k;
+            pre+=k;
+            pre%=k;
             
-            int currRem = ((prefixSum % k)+k)%k;
             
-            if(currRem ==0 )
+            if(pre == 0)
                 ans++;
             
-            ans+=mp[currRem];
+            ans+=mp[pre];
             
-            mp[currRem]++;
+            mp[pre]++;
         }
         
         return ans;
-        
     }
 };
