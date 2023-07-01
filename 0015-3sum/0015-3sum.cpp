@@ -45,7 +45,7 @@ public:
             }
             
             int x = nums[i];
-            while(i+1<nums.size() and nums[i+1]==x)
+            while(i+1<nums.size() and nums[i+1]==nums[i])
                 i++;
         }
         
