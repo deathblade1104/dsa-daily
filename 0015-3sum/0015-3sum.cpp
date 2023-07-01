@@ -11,12 +11,13 @@ public:
             int j=i+1,k=n-1;            
             
             while(j<k)
-            {                
-                if(nums[i] + nums[j] + nums[k] <0){
+            {     
+                int sum = nums[i] + nums[j] + nums[k];
+                if(sum <0){
                     j++;
                 }
                 
-                else if(nums[i] + nums[j] + nums[k] > 0){
+                else if(sum > 0){
                     k--;
                 }
                 
