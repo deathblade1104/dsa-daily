@@ -12,11 +12,22 @@ public:
             
             while(j<k)
             {                
-                if(nums[i] + nums[j] + nums[k] <0)
+                if(nums[i] + nums[j] + nums[k] <0){
                     j++;
+                    
+//                     int l = nums[j];
+                    
+//                     while(j<nums.size() and j<k and nums[j]==l)
+//                         j++;
+                }
                 
-                else if(nums[i] + nums[j] + nums[k] > 0)
+                else if(nums[i] + nums[j] + nums[k] > 0){
                     k--;
+                    
+                    // int  r= nums[k];
+                    //  while(k>=0 and k>j and nums[k]==r)
+                    //     k--;
+                }
                 
                 else
                 {
