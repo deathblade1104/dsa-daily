@@ -3,8 +3,7 @@
 
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        currSum=0;
-        start = 0;
+        currSum,start = 0,0;
         ans = len(nums) + 1;
         
         
