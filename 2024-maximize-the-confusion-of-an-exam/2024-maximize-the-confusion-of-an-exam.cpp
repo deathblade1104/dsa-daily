@@ -1,18 +1,31 @@
 class Solution {
 public:
-    int longestOnes(string&s, int&k,char ch) {
-       int N = s.size(), cnt = 0, i = 0, ans = 0;
-        for (int j = 0; j < N; ++j) {
-            cnt += s[j] == ch;
-            while (cnt > k) cnt -= s[i++] == ch; 
-            ans = max(ans, j - i + 1);
+    
+    int helper(string&s,int&k,char ch){
+        
+        int ans = 0,z=0,start = 0;
+        
+        for(int i=0;i<s.size();i++){
+            
+            if(s[i]!=ch)
+                z++;
+            
+            while(z>k){
+                if(s[start] != ch)
+                    z--;
+                
+                start++;
+            }
+            
+            ans = max(ans,(i - start + 1));
         }
+        
         return ans;
     }
     
+    
     int maxConsecutiveAnswers(string answerKey, int k) {
-        int op1 = longestOnes(answerKey,k,'F'), op2 = longestOnes(answerKey,k,'T');
         
-        return max(op1,op2);
+        return max(helper(answerKey,k,'F'),helper(answerKey,k,'T'));
     }
 };
