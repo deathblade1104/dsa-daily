@@ -12,11 +12,11 @@ public:
         while(i<s.size())
         {                
             temp+=s[i++];                
-            if(mp.count(temp)==1 and mp[temp] == true)
+            if( mp[temp] == true)
             { 
                 string str = s.substr(i);
                 if(get_ans(str,mp))
-                    return mp[str] =mp[temp]= true;
+                    return mp[s] = mp[str] =mp[temp]= true;
                 else
                     mp[str] = false;
             }               
