@@ -1,8 +1,8 @@
 class Solution {
 public:
-    bool get_ans(string s, unordered_set<string>&st, unordered_map<string,bool>&mp)
+    bool get_ans(string s, unordered_map<string,bool>&mp)
     {
-        if(s.size()==0 or st.count(s)==1) return mp[s]=true;
+       
         if(mp.count(s)==1) return mp[s];
         
         
@@ -12,10 +12,10 @@ public:
         while(i<s.size())
         {                
             temp+=s[i++];                
-            if(st.count(temp)==1)
+            if(mp.count(temp)==1 and mp[temp] == true)
             { 
                 string str = s.substr(i);
-                if(get_ans(str,st,mp))
+                if(get_ans(str,mp))
                     return mp[str] = mp[s]=mp[temp]=true;
                 else
                     mp[str] = false;
@@ -28,9 +28,12 @@ public:
     }
     
     bool wordBreak(string s, vector<string>& wordDict) {
-        unordered_set<string>st(wordDict.begin(),wordDict.end());
-        unordered_map<string,bool>mp;
         
-        return get_ans(s,st,mp);
+        unordered_map<string,bool>mp;
+        for(string&st : wordDict)
+            mp[st] = true;
+        
+        mp[""] = true;
+        return get_ans(s,mp);
     }
 };
