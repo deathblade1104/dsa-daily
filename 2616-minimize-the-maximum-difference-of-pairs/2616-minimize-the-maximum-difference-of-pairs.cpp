@@ -17,7 +17,6 @@ public:
                 }
             }
             
-            
             if(k>=p){
                 ans = mid;
                 high = mid - 1;
