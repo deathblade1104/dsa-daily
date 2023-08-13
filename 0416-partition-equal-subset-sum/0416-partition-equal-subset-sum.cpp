@@ -21,7 +21,7 @@ public:
         if(op1)
             return dp[curr][target] = true;
         
-        return dp[curr][target] = op1 | helper(curr-1,target,arr);
+        return dp[curr][target] = helper(curr-1,target,arr);
     }
     
     bool canPartition(vector<int>& nums) {
