@@ -2,40 +2,43 @@ class Solution {
 public:
     int dp[201][10001];
     
-    bool get_ans(int curr, int target, vector<int>&nums)
-    {
-        if(target==0) return true;
+    bool helper(int curr, int  target,vector<int>&arr){
         
-        if(curr>=nums.size())
+        if(target==0)
+            return true;
+        
+        if(curr<0)
             return false;
         
         if(dp[curr][target]!=-1)
             return dp[curr][target];
         
         bool op1 = false;
-        
-        if(nums[curr]<=target)
-        op1 =get_ans(curr+1, target - nums[curr], nums);
+        if(arr[curr]<=target){
+            op1 = helper(curr-1,target-arr[curr],arr);
+        }
         
         if(op1)
             return dp[curr][target] = true;
-            
-        bool op2 = get_ans(curr+1, target, nums);
         
-        return dp[curr][target] = op1 | op2;
+        return dp[curr][target] = op1 | helper(curr-1,target,arr);
     }
+    
     bool canPartition(vector<int>& nums) {
-        memset(dp,-1,sizeof dp);
-        int sum=0;
+        int sum  = 0;
         
         for(int&i : nums)
             sum+=i;
         
-        if(sum%2!=0)
+        if(sum&1)
             return false;
         
-        sort(nums.rbegin(),nums.rend());
-        return get_ans(0,sum/2,nums);
+        sort(nums.begin(),nums.end());
+        memset(dp,-1,sizeof dp);
+        int sz = nums.size();
+        sum/=2;
+        
+        return helper(sz-1,sum,nums);
         
     }
 };
