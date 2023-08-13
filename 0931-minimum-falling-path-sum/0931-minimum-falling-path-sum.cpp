@@ -1,32 +1,37 @@
 class Solution {
 public:
     int dp[101][101];
-    
-    int helper(int i, int j, int&n, vector<vector<int>>&matrix){
+    int m;
+    int helper(int r, int c,vector<vector<int>>& mat){
         
-        if(j<0 or j>=n)
-            return 10001;
+        if(c<0 or c>=m)
+            return INT_MAX/2;
         
-        if(i == n-1)
-            return dp[i][j] = matrix[i][j];
+        // if(r== m-1)
+        //     return mat[r][c];
         
-        if(dp[i][j]!=-1)
-            return dp[i][j];
+        if(dp[r][c]!=INT_MAX)
+            return dp[r][c];
         
-        return dp[i][j] = matrix[i][j] + min({
-            helper(i+1,j-1,n,matrix),
-            helper(i+1,j,n,matrix),
-            helper(i+1,j+1,n,matrix)
-        });
+        return dp[r][c] = mat[r][c] + min({helper(r+1,c,mat), helper(r+1,c-1,mat),helper(r+1,c+1,mat)});
     }
     
-    int minFallingPathSum(vector<vector<int>>& matrix) {
-        memset(dp,-1,sizeof dp); 
+    int minFallingPathSum(vector<vector<int>>& mat) {  
+        int ans = INT_MAX;
+        m = mat.size();
         
-        int n = matrix.size(),ans = INT_MAX;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<m;j++){
+                dp[i][j] = INT_MAX;
+            }
+        }
         
-        for(int i=0;i<n;i++)
-            ans= min(ans,helper(0,i,n,matrix));
+        for(int i=0;i<m;i++){
+            dp[m-1][i] = mat[m-1][i];
+        }
+        
+        for(int i=0;i<m;i++)
+            ans = min(ans,helper(0,i,mat));
         
         return ans;
     }
