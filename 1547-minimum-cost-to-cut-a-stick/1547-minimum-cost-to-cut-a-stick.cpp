@@ -1,21 +1,35 @@
 class Solution {
 public:
-   int dp[102][102] = {};
-int dfs(vector<int>& cuts, int i, int j) {
-    if (j - i <= 1)
-        return 0;
-    if (!dp[i][j]) {
-        dp[i][j] = INT_MAX;
-        for (auto k = i + 1; k < j; ++k)
-            dp[i][j] = min(dp[i][j], 
-                cuts[j] - cuts[i] + dfs(cuts, i, k) + dfs(cuts, k, j));
+    
+    int dp[102][102] = {};
+    
+    int helper(int i,int j,vector<int>&arr){
+        
+        //base case
+        if(i>j)
+            return 0;
+        
+        if(dp[i][j])
+            return dp[i][j];
+        
+        int mini =INT_MAX;
+        
+        for(int k=i;k<=j;k++){
+            int curr = arr[j+1] - arr[i-1] + helper(i,k-1,arr) +helper(k+1,j,arr);
+            mini = min(mini,curr);
+        }
+        
+        return dp[i][j] = mini;
+       
+        
     }
-    return dp[i][j];
-}
-int minCost(int n, vector<int>& cuts) {
-    cuts.push_back(0);
-    cuts.push_back(n);
-    sort(begin(cuts), end(cuts));
-    return dfs(cuts, 0, cuts.size() - 1);
-}
+    int minCost(int n, vector<int>& cuts) {
+        cuts.push_back(0);
+        cuts.push_back(n);
+        sort(cuts.begin(),cuts.end());
+        int sz = cuts.size();
+        
+        return helper(1,sz-2,cuts);
+        
+    }
 };
