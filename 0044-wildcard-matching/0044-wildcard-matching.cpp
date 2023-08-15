@@ -14,19 +14,19 @@ public:
         if(dp[i][j]!=-1)
             return dp[i][j];
         
-        if(p[j] == '?' || s[i]==p[j]){
-            return dp[i][j] = helper(i+1,j+1,s,p);
-        }
-        
-        if (p[j] == '*' ){
-            bool op1 = helper(i+1,j,s,p);
+        bool match = (s[i] == p[j]) || (p[j] == '?');
+
+        if (p[j] == '*') {
+            bool op1 = helper(i + 1, j, s, p); 
+            
             if(op1)
                 return dp[i][j] = true;
             
-            return dp[i][j] = helper(i,j+1,s,p);
+            return dp[i][j] = helper(i, j + 1, s, p); 
+            
         }
-        
-        return dp[i][j] = false;
+
+        return dp[i][j] = match && helper(i + 1, j + 1, s, p);
     }
     
     bool isMatch(string s, string p) {
