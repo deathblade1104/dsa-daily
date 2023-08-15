@@ -1,31 +1,25 @@
 class Solution {
 public:
-     int dp[1001][1001];
+    int dp[1001][1001];
     
-    int get_ans(int i, int j, string&s1,string&s2,int&n,int&m)
+    int get_ans(int i, int j, string&s,int&n)
     {
-        if(i>=n or j>=m)
-            return dp[i][j]=0;
+        if(i>=n or j<0)
+            return 0;
         
         if(dp[i][j]!=-1) return dp[i][j];
+                
+        if(s[i]==s[j]) 
+            return dp[i][j]=  1 + get_ans(i+1,j-1,s,n);
         
-        int ans=0;
+        return dp[i][j]= max(get_ans(i+1,j,s,n), get_ans(i,j-1,s,n));
         
-        if(s1[i]==s2[j]) 
-            ans = 1 + get_ans(i+1,j+1,s1,s2,n,m);
-        
-        else 
-            ans = max(get_ans(i+1,j,s1,s2,n,m), get_ans(i,j+1,s1,s2,n,m));
-        
-        return dp[i][j]=ans;
     }
     
     int longestPalindromeSubseq(string s) {
         int n=s.size();
-        string s2= s;
-        reverse(s2.begin(),s2.end());
-        memset(dp,-1,1001*1001*sizeof(int));
+        memset(dp,-1,sizeof dp);
         
-        return get_ans(0,0,s,s2,n,n);
+        return get_ans(0,n-1,s,n);
     }
 };
