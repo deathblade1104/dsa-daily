@@ -12,7 +12,7 @@ public:
         if(s[i]==s[j]) 
             return dp[i][j]=  1 + get_ans(i+1,j-1,s,n);
         
-        return dp[i][j]= max(get_ans(i+1,j,s,n), get_ans(i,j-1,s,n));
+        return dp[i][j]=max(get_ans(i+1,j,s,n), get_ans(i,j-1,s,n));
         
     }
     
