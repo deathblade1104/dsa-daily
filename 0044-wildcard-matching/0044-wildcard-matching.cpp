@@ -1,15 +1,21 @@
 class Solution {
 public:
     
-    int n,m,dp[2001][2001];
+    int n,m,dp[2002][2002];
     
     bool helper(int i, int j, string&s,string&p){
         
         if(j>=m)
             return i>=n;
         
-        if(i>=n)
-            return p[j]=='*' && helper(i,j+1,s,p);
+        if(i>=n){
+             while(j<m) {
+                if(p[j] != '*')
+                    return dp[i][j] = false;
+                j++;
+            }
+            return dp[i][j] = 1;
+        }
             
         if(dp[i][j]!=-1)
             return dp[i][j];
@@ -30,9 +36,11 @@ public:
     }
     
     bool isMatch(string s, string p) {
+        
         n = s.size();
         m  = p.size();
         
+         
         memset(dp,-1,sizeof dp);
         
         return helper(0,0,s,p);
