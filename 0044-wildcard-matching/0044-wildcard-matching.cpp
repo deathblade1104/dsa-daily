@@ -11,10 +11,12 @@ public:
         
         if(i>=N){
              while(j<M) {
+                 
                 if(p[j] != '*')
                     return dp[i][j] = false;
                 j++;
             }
+            
             return dp[i][j] = true;
         }
         
