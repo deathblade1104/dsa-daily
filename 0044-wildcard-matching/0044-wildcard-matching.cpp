@@ -1,48 +1,50 @@
 class Solution {
-public:
+public: 
+    int dp[2001][2001];
+    int N,M;
     
-    int n,m,dp[2002][2002];
     
-    bool helper(int i, int j, string&s,string&p){
+    bool helper(int i,int j,string&s,string&p){
         
-        if(j>=m)
-            return i>=n;
+        if(j>=M)
+            return i>=N;
         
-        if(i>=n){
-             while(j<m) {
+        if(i>=N){
+             while(j<M) {
                 if(p[j] != '*')
                     return dp[i][j] = false;
                 j++;
             }
-            return dp[i][j] = 1;
+            return dp[i][j] = true;
         }
-            
+        
         if(dp[i][j]!=-1)
             return dp[i][j];
         
-        bool match = (s[i] == p[j]) || (p[j] == '?');
-
-        if (p[j] == '*') {
+        if(s[i]==p[j] or p[j]=='?')
+            return dp[i][j] = helper(i+1,j+1,s,p);
+        
+        else if(p[j] == '*'){
+            
             bool op1 = helper(i + 1, j, s, p); 
             
             if(op1)
                 return dp[i][j] = true;
             
             return dp[i][j] = helper(i, j + 1, s, p); 
-            
         }
-
-        return dp[i][j] = match && helper(i + 1, j + 1, s, p);
+            
+        else return dp[i][j] = false;
+        
     }
-    
     bool isMatch(string s, string p) {
         
-        n = s.size();
-        m  = p.size();
+        N = s.size();
+        M = p.size();
         
-         
         memset(dp,-1,sizeof dp);
         
         return helper(0,0,s,p);
+        
     }
 };
