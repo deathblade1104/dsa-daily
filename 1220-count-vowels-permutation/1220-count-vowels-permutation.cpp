@@ -1,6 +1,6 @@
 class Solution {
 public:
-    unordered_map<char,vector<char>>mp;
+    vector<char>mp[26];
     
     int dp[20001][26];
     int N;
@@ -15,10 +15,10 @@ public:
             return dp[curr][ch];
         
         
-        char c = (char)(ch +'a');
+        
         int ans = 0;
         
-        for(char&i : mp[c]){
+        for(char&i : mp[ch]){
             ans+=helper(curr+1,i-'a');
             ans%=mod;
         }
@@ -27,12 +27,12 @@ public:
         
     }
     int countVowelPermutation(int n) {
-        mp['a'] = {'e'};
-        mp['e'] = {'a','i'};
-        mp['i'] = {'a','e','o','u'};
-        mp['o'] = {'i','u'};
-        mp['u'] = {'a'};
-        mp['z'] = {'a','e','i','o','u'};
+        mp['a' - 'a'] = {'e'};
+        mp['e' - 'a'] = {'a','i'};
+        mp['i' - 'a'] = {'a','e','o','u'};
+        mp['o' - 'a'] = {'i','u'};
+        mp['u' - 'a'] = {'a'};
+        mp['z' - 'a'] = {'a','e','i','o','u'};
         N = n;
         
         memset(dp,-1,sizeof dp);
