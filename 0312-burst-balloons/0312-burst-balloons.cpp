@@ -25,15 +25,12 @@ public:
     int maxCoins(vector<int>& nums) {
         int n = nums.size();
         
-        vector<int> list = {1};
-        for (int i = 0; i < n; i++) 
-            list.push_back(nums[i]);
-        
-        list.push_back(1);
+        nums.insert(nums.begin(),1);
+        nums.push_back(1);
         
         memset(dp,-1,sizeof dp);
         
-        return helper(1, n, list);
+        return helper(1, n, nums);
     }
     
     
