@@ -1,44 +1,31 @@
 class Solution {
 public:
-    int N;
-    int dp[303][303];
-    int helper(int first,int last,vector<int>&nums){
-        
-        if(first>last)
-            return 0;
-        
-        if(dp[first][last]!=-1)
-            return dp[first][last];
-        
-        int ans = 0;
-        for(int i=first;i<=last;i++){
-            int curr = nums[first-1]*nums[i]*nums[last+1];
-            curr+=helper(first,i-1,nums);
-            curr+=helper(i+1,last,nums);
-            ans = max(ans,curr);
-        }
-        
-        return dp[first][last] = ans;
-    }
+        vector<vector<int>> dp;
+    
     int maxCoins(vector<int>& nums) {
-        nums.insert(nums.begin(),1);
-        nums.push_back(1);
-        memset(dp,-1,sizeof dp);
+        int n = nums.size();
+        vector<int> list = {1};
+        for (int i = 0; i < n; i++) list.push_back(nums[i]);
+        list.push_back(1);
         
-        N = nums.size() - 1;
+        dp.assign(n + 2, vector<int>(n + 2, -1));
         
-        for(int i=1;i<=N-1;i++){
-            int temp = nums[i];
-            
-            if(i - 1 >= 0)  
-                temp *= nums[i - 1];
-            
-            if(i + 1 < N)
-                temp *= nums[i + 1];
-            
-            dp[i][i] =  temp;
+        return helper_max_coins(1, n, list);
+    }
+    
+    int helper_max_coins(int i, int j, vector<int>& list) {
+        if (i > j) return 0;
+        
+        if (dp[i][j] != -1) return dp[i][j];
+        
+        int maxi = INT_MIN;
+        
+        for (int ind = i; ind <= j; ind++) {
+            int costs = list[i - 1] * list[ind] * list[j + 1] 
+                          + helper_max_coins(i, ind - 1, list)   // left partition
+                          + helper_max_coins(ind + 1, j, list);  // right partition
+            maxi = max(maxi, costs);
         }
-        
-        return helper(1,N-1,nums);
+        return dp[i][j] = maxi;
     }
 };
