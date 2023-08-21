@@ -11,7 +11,7 @@ public:
         while(low<=high){
             int mid = low + ((high - low)/2);
             
-            if(1LL*mid*mid <=1LL* x){
+            if(mid <=(x/mid)){
                 ans = mid;
                 low = mid + 1;
             }
