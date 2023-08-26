@@ -1,24 +1,31 @@
 class Solution {
 public:
-    bool isInterleave(string s1, string s2, string s3) {
-        if(s3.length() != s1.length() + s2.length())
-        return false;
+    int dp[101][101];
     
-    bool table[s1.length()+1][s2.length()+1];
-    
-    for(int i=0; i<s1.length()+1; i++)
-        for(int j=0; j< s2.length()+1; j++){
-            if(i==0 && j==0)
-                table[i][j] = true;
-            else if(i == 0)
-                table[i][j] = ( table[i][j-1] && s2[j-1] == s3[i+j-1]);
-            else if(j == 0)
-                table[i][j] = ( table[i-1][j] && s1[i-1] == s3[i+j-1]);
-            else
-                table[i][j] = (table[i-1][j] && s1[i-1] == s3[i+j-1] ) || (table[i][j-1] && s2[j-1] == s3[i+j-1] );
-        }
+    bool helper(int i,int j,string&s1,string&s2,string&s3){
+        int k = i + j;
         
-    return table[s1.length()][s2.length()];
+        if(k>=s3.size() and i>=s1.size() and j>=s2.size())
+            return true;
+        
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        
+        bool op1= false,op2 = false;
+        
+        if(i<s1.size() and s1[i]==s3[k])
+            op1 = helper(i+1,j,s1,s2,s3);
+        
+         if(j<s2.size() and s2[j]==s3[k])
+            op2= helper(i,j+1,s1,s2,s3);
+        
+        return dp[i][j] = false | op1 | op2;
+    }
+    
+    bool isInterleave(string s1, string s2, string s3) {
+        memset(dp,-1,sizeof dp);
+        
+        return helper(0,0,s1,s2,s3);
         
     }
 };
