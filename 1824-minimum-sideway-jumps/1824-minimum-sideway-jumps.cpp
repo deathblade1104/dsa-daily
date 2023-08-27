@@ -13,7 +13,7 @@ public:
         if(arr[curr+1] != lane+1)
             return dp[curr][lane] = helper(curr+1, lane,arr);
       
-        int ans = 10e5;
+        int ans = INT_MAX/2;
         
         for(int i = 0 ; i < 3 ; i++)
         {
