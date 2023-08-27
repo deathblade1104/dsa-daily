@@ -3,6 +3,7 @@ public:
     int dp[2001][2001];
     unordered_map<int,int>mp;
     int n;
+    
     bool helper(int curr,int k,vector<int>&arr){
         
         if(curr>=n-1)
