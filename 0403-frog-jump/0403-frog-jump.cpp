@@ -11,27 +11,16 @@ public:
         if(dp[curr][k]!=-1)
             return dp[curr][k];
         
-        bool ans = false;
+        if(mp.count(arr[curr] + k) and helper(mp[arr[curr] + k],k,arr))
+           return dp[curr][k] = true;
         
-        if(mp.count(arr[curr] + k))
-            ans = helper(mp[arr[curr] + k],k,arr);
-        
-         if(ans)
+        if(k>1 and mp.count(arr[curr] + k - 1) and helper(mp[arr[curr] + k-1],k-1,arr))
             return dp[curr][k] = true;
         
-        if(k>1 and mp.count(arr[curr] + k - 1))
-            ans = ans | helper(mp[arr[curr] + k-1],k-1,arr);
-        
-        if(ans)
-            return dp[curr][k] = true;
-        
-        if(mp.count(arr[curr] + k+1))
-            ans = ans | helper(mp[arr[curr] + k+1],k+1,arr);
-        
-        if(ans)
-            return dp[curr][k] = true;
+        if(mp.count(arr[curr] + k+1) and helper(mp[arr[curr] + k+1],k+1,arr))
+           return dp[curr][k] = true;
             
-        return dp[curr][k] = ans;
+        return dp[curr][k] = false;
     }
     
     bool canCross(vector<int>& stones) {
