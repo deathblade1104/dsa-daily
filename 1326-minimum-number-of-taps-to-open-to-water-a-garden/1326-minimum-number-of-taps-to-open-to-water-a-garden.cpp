@@ -47,7 +47,7 @@ public:
             if(v[i][0]>0)
                 break;
             
-            else ans = min(ans,helper(i,v));
+            ans = min(ans,helper(i,v));
         }
         
         if(ans>=INT_MAX/2)
