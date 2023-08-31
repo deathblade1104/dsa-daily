@@ -9,7 +9,7 @@ public:
          int n1 = a1.size(), n2 = a2.size() , half = (n1 + n2)>>1 ;
         
         int lo = 0, hi = n1;
-        while (lo <= hi) {
+        while (lo <=hi) {
             int cut1 = (lo + hi)/2; 
             int cut2 = half - cut1;
             
