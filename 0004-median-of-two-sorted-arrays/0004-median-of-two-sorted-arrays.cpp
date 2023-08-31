@@ -6,7 +6,7 @@ public:
             return findMedianSortedArrays(a2,a1);
         
       
-         int n1 = a1.size(), n2 = a2.size() , half = (n1 + n2)/2 ;
+         int n1 = a1.size(), n2 = a2.size() , half = (n1 + n2)>>1 ;
         
         int lo = 0, hi = n1;
         while (lo <= hi) {
