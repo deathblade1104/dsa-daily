@@ -3,7 +3,7 @@ public:
     
     int n;
     unordered_map<string,int>dp;
-    int helper(string s,unordered_set<string>&st){
+    int helper(string s){
         
         if(s == "")
             return 0;        
@@ -19,8 +19,8 @@ public:
         while(i<s.size())
         {                
             temp+=s[i++];                
-            int currAns = st.count(temp) ==1 ? 0 : i;
-            currAns+=helper(s.substr(i),st);
+            int currAns = dp.count(temp) ==1 ? dp[temp] : i;
+            currAns+=helper(s.substr(i));
             ans = min(currAns,ans);
         }
 
@@ -29,9 +29,12 @@ public:
         
     }
     int minExtraChar(string s, vector<string>& d) {
-        unordered_set<string>st(d.begin(),d.end());
+        
+        for(string&st : d)
+            dp[st] = 0;
+        
         n = s.size();
         
-        return helper(s,st);
+        return helper(s);
     }
 };
