@@ -54,7 +54,7 @@ public:
         }
         
         curr->next=NULL;
-        curr2->next=NULL;
+        //curr2->next=NULL;
         
         return p;
         
