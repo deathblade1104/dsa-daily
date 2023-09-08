@@ -4,8 +4,6 @@ public:
 
     void primeFactorization(int n,int num) {
    
-
-        // Handle the special case of 1
         if(n%2== 0){
             mp[2].push_back(num);
         }
@@ -13,9 +11,16 @@ public:
         while (n % 2 == 0) {
             n /= 2;
         }
-
         
-        for (int i = 3; i * i <= n; i += 2) {
+        if(n%3== 0){
+            mp[3].push_back(num);
+        }
+
+        while (n % 3 == 0) {
+            n /= 3;
+        }
+        
+        for (int i = 5; i * i <= n; i += 6) {
             
             if(n%i== 0){
             mp[i].push_back(num);
@@ -24,7 +29,18 @@ public:
             while (n % i == 0) {
                 n /= i;
             }
+            
+            int j = i +2;
+            
+            if(n%j== 0){
+            mp[j].push_back(num);
+            }
+            
+            while (n % j == 0) {
+                n /= j;
+            }
         }
+        
         
         if(n>1)
             mp[n].push_back(num);
