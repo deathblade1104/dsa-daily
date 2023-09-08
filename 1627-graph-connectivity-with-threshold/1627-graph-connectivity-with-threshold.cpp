@@ -66,21 +66,17 @@ public:
         
         
         UnionFind DSU(n+1);
-        unordered_map<int,vector<int>>mp;
+        //unordered_map<int,vector<int>>mp;
         
-        for(int i=t+1;i<=n;i++){
-            for(int j=t+1;j<=n;j++){
-                
-                if(j%i == 0)
-                    mp[i].push_back(j);
-            }
-        }
+        for (int z = t + 1; z <= n; z++)
+            for (int x = z * 2; x <= n; x += z)
+               DSU.connect(z, x);
         
-        for(auto&it :mp){
-            for(int i=1;i<it.second.size();i++){
-                DSU.connect(it.second[i-1],it.second[i]);
-            }
-        }
+        // for(auto&it :mp){
+        //     for(int i=1;i<it.second.size();i++){
+        //         DSU.connect(it.second[i-1],it.second[i]);
+        //     }
+        // }
         
         int q = queries.size();
         vector<bool>ans(q);
