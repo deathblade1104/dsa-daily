@@ -18,9 +18,6 @@ public:
             }
         }
         
-        
         return accumulate(ans.begin(),ans.end(),0);
-        
-        
     }
 };
