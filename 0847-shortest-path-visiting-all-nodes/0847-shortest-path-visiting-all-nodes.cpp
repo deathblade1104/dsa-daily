@@ -11,6 +11,7 @@ public:
             q.push({i,(1<<i)});
             vis[i][1<<i]=true;
         }
+        
         int steps=0;
         while(q.size()>0)
         {
