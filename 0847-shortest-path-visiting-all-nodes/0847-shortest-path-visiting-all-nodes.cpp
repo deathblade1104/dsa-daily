@@ -7,6 +7,9 @@ public:
         bool vis[n][tot+1];
         memset(vis,0,sizeof vis);
         
+        if(n == 1)
+            return 0;
+        
         //cout<<tot<<endl;
         
         queue<array<int,2>>q;
@@ -30,12 +33,14 @@ public:
                 
                 int curr =  arr[0], state = arr[1];
                 
-                if(state == tot)
-                    return steps;
                 
                 for(int&neigh : adj[curr]){
                     
                     int newState = state | (1<<neigh);
+                    
+                    if(newState == tot)
+                        return steps+1;
+                    
                     if(!vis[neigh][newState]){
                         q.push({neigh,newState});
                         vis[neigh][newState] = 1;
