@@ -1,44 +1,54 @@
 class Solution {
 public:
     int shortestPathLength(vector<vector<int>>& adj) {
-        int n=adj.size(),target=(1<<n)-1;
-        vector<vector<bool>>vis(n,vector<bool>(target+1,false));
+    
+        int n = adj.size(), tot = (1<<n)-1; ;
         
-        queue<pair<int,int>>q;
+        bool vis[n][tot+1];
+        memset(vis,0,sizeof vis);
         
-        for(int i=0;i<n;i++)
-        {
-            q.push({i,(1<<i)});
-            vis[i][1<<i]=true;
+        //cout<<tot<<endl;
+        
+        queue<array<int,2>>q;
+        
+        for(int i=0;i<n;i++){
+            
+             q.push({i,1<<i});
+            
+            //cout<<(1<<i)<<endl;
+             vis[i][1<<i] = true;
         }
         
-        int steps=0;
-        while(q.size()>0)
-        {
-            int sz=q.size();
-            for(int i=0;i<sz;i++)
-            {
-                auto [curr,edge] = q.front();
+        int steps = 0;
+        while(q.size()){
+            
+            int sz = q.size();
+            while(sz --){
+                
+                array<int,2>arr = q.front();
                 q.pop();
                 
-                if(edge==target)
+                int curr =  arr[0], state = arr[1];
+                
+                if(state == tot)
                     return steps;
                 
-                for(auto neigh : adj[curr])
-                {
-                    int new_edge = (1<<neigh)|edge;
+                for(int&neigh : adj[curr]){
                     
-                    if(vis[neigh][new_edge]==false)
-                    {
-                        q.push({neigh,new_edge});
-                        vis[neigh][new_edge]=true;
+                    int newState = state | (1<<neigh);
+                    if(!vis[neigh][newState]){
+                        q.push({neigh,newState});
+                        vis[neigh][newState] = 1;
                     }
                 }
+                
             }
+            
             steps++;
         }
-        return -1;
         
+        
+        return -1;
         
     }
 };
