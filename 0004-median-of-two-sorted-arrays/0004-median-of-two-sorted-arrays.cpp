@@ -10,7 +10,7 @@ public:
         
         int lo = 0, hi = n1;
         while (lo <=hi) {
-            int cut1 = (lo + hi)/2; 
+            int cut1 = (lo + hi)>>1; 
             int cut2 = half - cut1;
             
             int l1 = cut1 == 0? INT_MIN : a1[cut1-1];
@@ -20,7 +20,7 @@ public:
             
             if (l1 > r2) hi = cut1-1;
             else if (l2 > r1) lo = cut1+1;
-            else return (n1+n2)%2? min(r1,r2) : (max(l1,l2) + min(r1,r2))/2.;
+            else return (n1+n2)&1? min(r1,r2) : (max(l1,l2) + min(r1,r2))/2.;
         
         }
         
