@@ -19,7 +19,7 @@ public:
             
             if(!pre[ch - 'a']){
                 
-                while(ans.size()!=0 and ch<=ans.back() and freq[ans.back()-'a']!=0)
+                while(ans.size() and ch<=ans.back() and freq[ans.back()-'a']!=0)
                 {
                     pre[ans.back()-'a']=false;
                     ans.pop_back();
