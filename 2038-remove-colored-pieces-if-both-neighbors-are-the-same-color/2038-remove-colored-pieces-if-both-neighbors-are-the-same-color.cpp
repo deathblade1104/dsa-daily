@@ -26,10 +26,7 @@ public:
         }
         
         
-        if(A>B)
-            return true;
-        
-        return false;
+        return A>B;
         
         
         
