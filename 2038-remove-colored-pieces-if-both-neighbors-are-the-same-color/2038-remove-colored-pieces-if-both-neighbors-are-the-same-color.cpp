@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool winnerOfGame(string s) {
+    bool winnerOfGame(string&s) {
         
         s+=".";
         char ch = '.';
