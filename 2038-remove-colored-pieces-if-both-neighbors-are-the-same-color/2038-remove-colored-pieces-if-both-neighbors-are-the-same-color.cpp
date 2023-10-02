@@ -2,26 +2,22 @@ class Solution {
 public:
     bool winnerOfGame(string s) {
         
-        bool turn = false;
         s+=".";
         char ch = '.';
-        int curr = 1;
-        priority_queue<int,vector<int>,greater<int>>A,B;
+        int curr = 1,A=0,B=0;
         
         for(char&c : s ){
             
             if(ch != c){
-                
                 if(curr>2){
                     
                     if( ch == 'A')
-                        A.push(curr);
+                        A+=(curr - 2);
                     
-                    else B.push(curr);
+                    else B+=(curr - 2);
                         
                 }
-                
-                
+            
                 ch = c;
                 curr = 1;
             }
@@ -30,42 +26,16 @@ public:
         }
         
         
-        while(true){
-            
-            if(!turn){
-                if(A.size() == 0)
-                    return turn;
-                
-                
-                int currTop = A.top();
-                A.pop();
-                
-                if(--currTop>2)
-                    A.push(currTop);
-                
-            }
-            
-            else{
-                
-                if(B.size() == 0)
-                    return turn;
-                
-                int currTop = B.top();
-                B.pop();
-                
-                if(--currTop>2)
-                    B.push(currTop);
-                
-                
-            }
-            
-            turn=!turn;
-            
-        }
-        
-        
+        if(A>B)
+            return true;
         
         return false;
+        
+        
+        
+        
+        
+       
         
         
     }
