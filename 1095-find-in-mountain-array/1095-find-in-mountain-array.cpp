@@ -19,20 +19,16 @@ public:
             
             int mid = low + ((high - low)/2);
             
-            int midEle = arr.get(mid),lowEle = arr.get(mid-1), highEle = arr.get(mid+1);
+            int midEle = arr.get(mid),highEle = arr.get(mid+1);
             
-            if(lowEle<midEle and midEle<highEle){
-                low = mid;
+            if(midEle<highEle){
+                low = mid+1;
             }
             
-            else if(lowEle>midEle and midEle>highEle){
-                high = mid;
-            }
-        
-            else return mid;    
+            else high = mid -1;  
         }
         
-        return -1;
+        return  low;
     }
     
     
