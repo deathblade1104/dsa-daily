@@ -2,7 +2,7 @@ class Solution {
 public:
     int n, steps;
     int mod = 1e9 + 7;
-    int dp[501][501];
+    int dp[501][251];
     int helper(int currSteps, int idx){
         
         if(currSteps>=steps)
