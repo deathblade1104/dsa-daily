@@ -10,6 +10,7 @@ public:
         
         if(dp[currSteps][idx]!=-1)
             return dp[currSteps][idx];
+        
         int op1=0,op2=0,op3 = 0;
         
         op1 = helper(currSteps+1,idx);
@@ -29,5 +30,7 @@ public:
         memset(dp,-1,sizeof dp);
         
         return helper(0,0);
+        
+        
     }
 };
