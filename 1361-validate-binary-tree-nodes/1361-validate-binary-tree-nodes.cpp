@@ -13,6 +13,9 @@ public:
         if(leftChild[root]!=-1)
             ans = ans & validDFS(leftChild[root],leftChild,rightChild);
         
+        if(!ans)
+            return false;
+        
         if(rightChild[root]!=-1)
             ans = ans & validDFS(rightChild[root],leftChild,rightChild);
         
@@ -38,8 +41,6 @@ public:
                 if(inEdge[rightChild[i]]>1)
                     return false;
             }
-            
-            
         }    
         
         int zIn= 0,root= -1;
