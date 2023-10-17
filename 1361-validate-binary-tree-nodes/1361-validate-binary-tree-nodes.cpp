@@ -44,6 +44,7 @@ public:
         }    
         
         int zIn= 0,root= -1;
+        
         for(int i=0;i<n;i++){
             
             if(inEdge[i] == 0){
