@@ -1,52 +1,44 @@
 class Solution {
 public:
     int inEdge[10001];
-    vector<unordered_set<int>>adj;
     bool vis[10001];
     
-    bool validDFS(int root){
-        
+    bool validDFS(int root,vector<int>& leftChild, vector<int>& rightChild){
         if(vis[root])
             return false;
-        
-        //cout<<"currNode : "<<root<<endl;
         
         vis[root]  = true;
         bool ans = true;
         
-        for(int i : adj[root]){
-            
-            ans = validDFS(i);
-            if(!ans)
-                return false;
-        }
+        if(leftChild[root]!=-1)
+            ans = ans & validDFS(leftChild[root],leftChild,rightChild);
         
-        return true;
+        if(rightChild[root]!=-1)
+            ans = ans & validDFS(rightChild[root],leftChild,rightChild);
+        
+        return ans;
     }
     
     bool validateBinaryTreeNodes(int n, vector<int>& leftChild, vector<int>& rightChild) {
         
         memset(inEdge,0,sizeof inEdge);
-        adj.resize(n);
         
         for(int i=0;i<n;i++){
-            
+    
             if(leftChild[i]!=-1){
-                if(adj[leftChild[i]].count(i))
-                    return false;
-                
                 inEdge[leftChild[i]]++;
-                adj[i].insert(leftChild[i]);
+                
+                if(inEdge[leftChild[i]]>1)
+                    return false;
             }
             
             if(rightChild[i]!=-1){
-                
-                if(adj[rightChild[i]].count(i))
-                    return false;
-                
                 inEdge[rightChild[i]]++;
-                adj[i].insert(rightChild[i]);
+                
+                if(inEdge[rightChild[i]]>1)
+                    return false;
             }
+            
             
         }    
         
@@ -61,22 +53,14 @@ public:
                 
                 root = i;
             }
-            
-            
-            if(inEdge[i]>1)
-                return false;
         }
         
         if(zIn == 0)
             return false;
         
-        if(adj[root].size() == 0 and n>1)
-            return false;
-        
         memset(vis,0,sizeof vis);
-        bool temp = validDFS(root);
         
-        if(!temp)
+        if(!validDFS(root,leftChild,rightChild))
             return false;
         
         for(int i=0;i<n;i++){
