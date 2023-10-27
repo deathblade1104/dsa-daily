@@ -19,11 +19,9 @@ public:
         helper(i,j-1,s);
         
         if(s[i]==s[j])
-            dp[i][j] = true & helper(i+1,j-1,s);
+           return dp[i][j] = true & helper(i+1,j-1,s);
         
-        else dp[i][j] = 0;
-        
-        return dp[i][j];
+        return dp[i][j]= 0;
     }
     
     string longestPalindrome(string s) {
