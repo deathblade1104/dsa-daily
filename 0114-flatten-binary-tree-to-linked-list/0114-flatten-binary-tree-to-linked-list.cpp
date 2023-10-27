@@ -1,40 +1,52 @@
 /**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
+ *Definition for a binary tree node.
+ *struct TreeNode {
+ *    int val;
+ *    TreeNode * left;
+ *    TreeNode * right;
+ *    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ *};
  */
-class Solution {
+class Solution
+{
 public:
-    TreeNode *helper(TreeNode *root){
-        
-        if(root == nullptr)
-            return root;
-        
-     TreeNode *left = root->left;
-    TreeNode *right = root->right;
+    pair<TreeNode*, TreeNode*> helper(TreeNode *root)
+    {
+        if (root == nullptr)
+            return {
+                nullptr,
+                nullptr
+            };
 
-    root->left = nullptr; // Set left child to null
+        TreeNode *leftHead, *leftTail, *rightHead, *rightTail;
+        tie(leftHead, leftTail) = helper(root->left);
+        tie(rightHead, rightTail) = helper(root->right);
 
-    root->right = helper(left); // Connect the right child to the rightmost node in the left subtree
-    TreeNode *temp = root;
-    
-    while (temp->right != nullptr) {
-        temp = temp->right;
+        root->left = nullptr;
+
+        if (leftHead)
+        {
+            root->right = leftHead;
+            leftTail->right = rightHead;
+        }
+        else
+        {
+            root->right = rightHead;
+        }
+
+        TreeNode *tail = rightTail ? rightTail : (leftTail ? leftTail : root);
+
+        return {
+            root,
+            tail
+        };
     }
-    
-    temp->right = helper(right); 
-        
-        return root;
-    }
-    
-    void flatten(TreeNode* root) {
-        
+
+    void flatten(TreeNode *root)
+    {
+
         helper(root);
         return;
     }
