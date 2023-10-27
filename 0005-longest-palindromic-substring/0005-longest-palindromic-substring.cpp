@@ -31,19 +31,17 @@ public:
         int n = s.size();
         helper(0,n-1,s);
         
-        int ans = 1;
-        string curr = "";
-        curr+=s[0];
+        int ans = 1,start=0,end=0;
         
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
                 if(dp[i][j] and j-i+1>ans){
-                    curr = s.substr(i,j-i+1);
+                    start = i, end = j;
                     ans = j - i + 1;
                 }
             }
         }
         
-        return curr;
+        return s.substr(start,end - start+1);
     }
 };
