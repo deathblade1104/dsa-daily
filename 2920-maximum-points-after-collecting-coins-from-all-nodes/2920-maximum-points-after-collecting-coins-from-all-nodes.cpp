@@ -5,26 +5,26 @@ public:
     vector<vector<int>>dp;
     int K;
 
-    int helper(int curr,int par,int flag,vector<int>&coins){
+    int helper(int curr,int par,int halfTimes,vector<int>&coins){
         
-        if(flag>=32)
+        if(halfTimes>=32)
             return 0;
         
-        if(dp[curr][flag]!=-1)
-            return dp[curr][flag];
+        if(dp[curr][halfTimes]!=-1)
+            return dp[curr][halfTimes];
         
-        int currCoins = coins[curr]>>flag;
+        int currCoins = coins[curr]>>halfTimes;
         int op1 = currCoins - K;
         int op2 = floor(currCoins/2);
         
         for(int&neigh : adj[curr]){
             if(neigh!=par){
-                op2+=helper(neigh,curr,flag+1,coins);
-                op1+=helper(neigh,curr,flag,coins);
+                op2+=helper(neigh,curr,halfTimes+1,coins);
+                op1+=helper(neigh,curr,halfTimes,coins);
             }
         }
         
-        return dp[curr][flag] =  max(op1,op2);
+        return dp[curr][halfTimes] =  max(op1,op2);
     }
     
     int maximumPoints(vector<vector<int>>& edges, vector<int>& coins, int k) {
