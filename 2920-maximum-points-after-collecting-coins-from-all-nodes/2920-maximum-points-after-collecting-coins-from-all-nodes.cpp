@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    vector<vector<int>>adj;
+    vector<int>adj[100001];
     int dp[100001][32];
     int K;
 
@@ -28,8 +28,6 @@ public:
     }
     
     int maximumPoints(vector<vector<int>>& edges, vector<int>& coins, int k) {
-        int n = edges.size() +1 ;
-        adj.assign(n+1,vector<int>());
         memset(dp,-1,sizeof dp);
         for(auto&v : edges){
             adj[v[0]].push_back(v[1]);
