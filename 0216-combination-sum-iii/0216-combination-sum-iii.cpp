@@ -3,7 +3,7 @@ public:
     typedef vector<int> vi;
     vector<vi>ans;
     
-    void helper(int curr,int n, int k,vi&temp){
+    void helper(int curr,int&n, int&k,vi&temp){
         
         if(curr>9){
             if(n== 0 and k==0){
@@ -14,7 +14,11 @@ public:
         
         if(curr<=n and k>0){
             temp.push_back(curr);
-            helper(curr+1,n-curr,k-1,temp);
+            n-=curr;
+            k--;
+            helper(curr+1,n,k,temp);
+            n+=curr;
+            k++;
             temp.pop_back();
         }
         
