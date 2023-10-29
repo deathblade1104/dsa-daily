@@ -33,8 +33,8 @@ public:
         dp.assign(n+1,vector<int>(32,-1));
     
         for(auto&v : edges){
-            adj[v[0]].push_back(v[1]);
-            adj[v[1]].push_back(v[0]);
+            adj[v[0]].emplace_back(v[1]);
+            adj[v[1]].emplace_back(v[0]);
         }
         K = k;
         return helper(0,-1,0,coins);
