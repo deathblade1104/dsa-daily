@@ -6,7 +6,6 @@ public:
         int sz = target.size();
         vector<string>ans;
         stack<int>st;
-        st.push(-1);
         int j = 0,k=0;
         
         for(int i=1;j<sz and i<=n;i++){
@@ -22,7 +21,6 @@ public:
             }
             
             st.push(i);
-           
             ans.push_back("Push");
         }
         
