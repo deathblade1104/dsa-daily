@@ -1,32 +1,36 @@
 class Solution {
 public:
-    int dp[100001][2][101];
-    int sz;
-    int helper(int curr,bool canBuy,int t,vector<int>&arr){
-        
-        if(curr>=sz || t<=0)
+    int dp[1001][2][101];
+	
+    int dp_fun(int k,vector<int>& prices,int idx,int b){
+	// if k==0 we simply return 0 as all the k transactions are done 
+        if(k==0){
             return 0;
+        }
         
-        if(dp[curr][canBuy][t]!=-1)
-            return dp[curr][canBuy][t];
+		// if we reached the end of the array then we return 0;
+		
+        if(idx==prices.size()){
+            return 0;
+        }
         
-        int idle = helper(curr+1,canBuy,t,arr),buy=INT_MIN/2,sell=INT_MIN/2;
+		//  Returning the already solved problem(overlapping subproblem)
+		
+        if(dp[idx][b][k] != -1){
+            return dp[idx][b][k];
+        }
         
-        if(canBuy)
-            buy = -arr[curr] + helper(curr+1,false,t,arr);
-        
-        else
-            sell = arr[curr] + helper(curr+1,1,t-1,arr);
-        
-        return dp[curr][canBuy][t] = max({idle,buy,sell});
+		// if buying is possible and when selling is possible
+        if(b==1){
+            return dp[idx][b][k] = max((-prices[idx]+dp_fun(k,prices,idx+1,0)), dp_fun(k,prices,idx+1,1));
+        }
+        else{
+            return dp[idx][b][k] = max((prices[idx]+dp_fun(k-1,prices,idx+1,1)), dp_fun(k,prices,idx+1,0));
+        }
     }
-    
     int maxProfit(int k, vector<int>& prices) {
         
-        sz=prices.size();
-        memset(dp,-1,sizeof dp);
-        
-       return max(0,helper(0,1,k,prices));
-        
+        memset(dp,-1,sizeof(dp));
+        return dp_fun(k,prices,0,1);
     }
 };
