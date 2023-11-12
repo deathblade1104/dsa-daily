@@ -1,6 +1,7 @@
 class Solution {
 public:
     unordered_map<int,vector<int>>adj;
+    bool vis[100001];
     int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
         
         for(int i=0;i<routes.size();i++){
@@ -9,7 +10,8 @@ public:
             }
         }
         
-        unordered_set<int>vis;
+        memset(vis,0,sizeof vis);
+        
         int steps  = 0 ;
         queue<int>q;
         q.push(source);
@@ -27,14 +29,14 @@ public:
                     return steps;
                 
                 for(int&route : adj[curr]){
-                    if(vis.count(route) == 0){
+                    if(vis[route] == 0){
                         for(auto&neigh : routes[route]){
                             if(neigh == curr)
                                 continue;
                             
                             q.push(neigh);
                         }
-                        vis.insert(route);
+                        vis[route]=1;
                     }
                 }
                 
