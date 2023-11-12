@@ -1,6 +1,6 @@
 class Solution {
 public:
-    unordered_map<int,vector<int>>adj;
+    vector<int>adj[1000001];
     bool vis[100001];
     int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
         
