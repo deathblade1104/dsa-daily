@@ -11,8 +11,8 @@ public:
                 count++;
             
             else{
-                long long curr=(1LL * count * (count +1)/2);
-                ans = (ans%mod + curr%mod)%mod;
+                long long curr=(1LL * count * (count +1)/2)%mod;
+                ans = (ans%mod + curr)%mod;
                 count = 1;
             }
         }
