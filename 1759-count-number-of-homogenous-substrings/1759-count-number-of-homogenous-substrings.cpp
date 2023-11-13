@@ -3,7 +3,6 @@ public:
     long long countHomogenous(string s) {
         
         long long ans = 0, count = 1, mod = 1e9 + 7;
-        s+='.';
         
         for(int i=1;i<s.size();i++){
             
@@ -16,6 +15,8 @@ public:
                 count = 1;
             }
         }
+        long long curr=(1LL * count * (count +1)/2)%mod;
+        ans = (ans%mod + curr)%mod;
         
         return ans;
         
