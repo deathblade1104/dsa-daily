@@ -3,21 +3,8 @@ public:
     int n,finalState;
     int dp[16385];
     
-    int getSetBits(int n){
-        
-        int count = 0;
-        
-        while(n){
-            count++;
-            n = (n & (n-1));
-        }
-        
-        return count;
-        
-    }
-    
     int helper(int mask,vector<int>& nums1, vector<int>& nums2){
-        int curr  = getSetBits(mask);
+        int curr  = __builtin_popcount(mask);
         
         if(mask>=finalState or curr>=n)
             return 0;
