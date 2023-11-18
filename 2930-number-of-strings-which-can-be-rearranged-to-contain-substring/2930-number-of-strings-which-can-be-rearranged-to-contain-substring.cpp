@@ -1,44 +1,36 @@
 class Solution {
 public:
-    const int mod = 1e9+ 7;
+    const long long int mod = 1e9+ 7;
     int finalState,n;
-    int dp[100001][16];
+    long long int dp[100001][16];
     
-    int helper(int curr,int mask){
+    long long int helper(int curr,int mask){
         
         if(curr>=n)
-            return mask == finalState;
+            return 1LL * (mask == finalState);
         
         if(dp[curr][mask]!=-1)
             return dp[curr][mask];
         
-        int ans = 0;
-        for(char ch='a';ch<='z';ch++){
-            
-          int newMask,index;
-            
-            switch(ch){
-                    
-                case 'l':
-                    newMask = (mask | (1<<0));
-                    break;
-                
-                case 't' :
-                    newMask = (mask | (1<<3));
-                    break;
-                
-                case 'e' : 
-                    index = ((mask&(1<<1)) == 0) ? 1  : 2;
-                    newMask = (mask | (1<<index));        
-                    break;
-                
-                default: 
-                    newMask = mask;
-                    break;
-            }
-            
-            ans = (ans%mod + helper(curr+1,newMask)%mod)%mod;
-        }
+        long long  int ans = 0LL,op1,op2,op3,op4;
+        int newMask,index;
+        
+        newMask = (mask | (1<<0));
+        op1 = helper(curr+1,newMask);
+        
+        index = ((mask&(1<<1)) == 0) ? 1  : 2;
+        newMask = (mask | (1<<index)); 
+        op2 = helper(curr+1,newMask);
+        
+        newMask = (mask | (1<<3));
+        op3 = helper(curr+1,newMask);
+        
+        newMask = mask;
+        op4= helper(curr+1,newMask);
+        
+        
+        ans = (ans%mod + op1%mod + op2%mod + op3%mod + (23*op4)%mod)%mod;
+        
         
         return dp[curr][mask] = ans;
     }
