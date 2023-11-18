@@ -14,16 +14,21 @@ public:
         
         int ans = 0,op1,op2,op3,op4,newMask,index;
         
+        //for l
         newMask = (mask | (1<<0));
         op1 = helper(curr+1,newMask);
         
+        
+        //for e
         index = ((mask&(1<<1)) == 0) ? 1  : 2;
         newMask = (mask | (1<<index)); 
         op2 = helper(curr+1,newMask);
         
+        //for t
         newMask = (mask | (1<<3));
         op3 = helper(curr+1,newMask);
         
+        //for all other chars
         newMask = mask;
         op4= helper(curr+1,newMask);
         
