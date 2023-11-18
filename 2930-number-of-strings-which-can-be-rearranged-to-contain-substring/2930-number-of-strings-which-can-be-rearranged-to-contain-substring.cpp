@@ -1,19 +1,18 @@
 class Solution {
 public:
-    const long long int mod = 1e9+ 7;
+    const int mod = 1e9+ 7;
     int finalState,n;
-    long long int dp[100001][16];
+    int dp[100001][16];
     
-    long long int helper(int curr,int mask){
+    int helper(int curr,int mask){
         
         if(curr>=n)
-            return 1LL * (mask == finalState);
+            return mask == finalState;
         
         if(dp[curr][mask]!=-1)
             return dp[curr][mask];
         
-        long long  int ans = 0LL,op1,op2,op3,op4;
-        int newMask,index;
+        int ans = 0,op1,op2,op3,op4,newMask,index;
         
         newMask = (mask | (1<<0));
         op1 = helper(curr+1,newMask);
@@ -29,8 +28,10 @@ public:
         op4= helper(curr+1,newMask);
         
         
-        ans = (ans%mod + op1%mod + op2%mod + op3%mod + (23*op4)%mod)%mod;
-        
+        ans = (ans%mod + op1%mod)%mod;
+        ans = (ans%mod + op2%mod)%mod;
+        ans = (ans%mod + op3%mod)%mod;
+        ans = (ans%mod + (1LL * 23 * op4)%mod)%mod;
         
         return dp[curr][mask] = ans;
     }
