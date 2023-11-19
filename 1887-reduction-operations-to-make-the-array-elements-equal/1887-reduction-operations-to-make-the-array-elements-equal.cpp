@@ -1,31 +1,13 @@
 class Solution {
 public:
-    int reductionOperations(vector<int>& nums) {
+    int reductionOperations(vector<int>& n) {
         
         
-        unordered_map<int,int>mp;
-        
-        for(int&i : nums)
-            mp[i]++;
-        
-        set<int>st(nums.begin(),nums.end());
-        
-        int ans = 0;
-        while(st.size()>1){
-            
-            auto it = prev(st.end());
-            int m1 = *it;
-            
-            auto it2 = prev(it);
-            int m2 = *it2;
-            
-            ans+=mp[m1];
-            mp[m2]+=mp[m1];
-            
-            st.erase(it);
-            mp.erase(m1);
-        }
-        
-        return ans;
+        int res = 0, sz = n.size();
+        sort(begin(n), end(n));
+        for (int j = sz - 1; j > 0; --j)
+            if (n[j - 1] != n[j])
+                res += sz - j;
+        return res;
     }
 };
