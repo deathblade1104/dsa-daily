@@ -24,18 +24,13 @@ public:
         if(i<0)
             return 0;
         
-        return travel[i] + sum;
+        return sum + ((i>=1) ? travel[i-1] : 0);
     }
     
     int garbageCollection(vector<string>& v, vector<int>& travel) {
         
         
         int n = v.size();
-        
-        reverse(travel.begin(),travel.end());
-        travel.push_back(0);
-        reverse(travel.begin(),travel.end());
-
         
         int sum1=0,sum2=0,sum3=0,i1=-1,i2=-1,i3=-1;
         
@@ -45,16 +40,13 @@ public:
             helper(v[i],'P',i2,sum2,i);
             helper(v[i],'M',i3,sum3,i);
             
-            if(i>0){
+            if(i<n-1 and i>0){
                 travel[i]+=travel[i-1];
             }
         }
         
-        int op1 = getAns(i1,sum1,travel);
-        int op2 = getAns(i2,sum2,travel);
-        int op3 = getAns(i3,sum3,travel);
-        
-        return op1+op2+op3;
+        return getAns(i1,sum1,travel) + getAns(i2,sum2,travel) + getAns(i3,sum3,travel);
+
         
     }
 };
