@@ -1,7 +1,9 @@
 class Solution {
 public:
+    static const int maxN = 1e5+1;
+    int arr1[maxN],arr2[maxN],arr3[maxN];
     
-    void helper(string&s,char ch,int&i,vector<int>&arr,int&currIndex){
+    void helper(string&s,char ch,int&i,int arr[maxN],int&currIndex){
         
         int curr=0;
         for(char&c :s){
@@ -19,7 +21,7 @@ public:
         
     }
     
-    int getAns(int i,vector<int>&arr,vector<int>&travel){
+    int getAns(int i,int arr[maxN],vector<int>&travel){
         
         if(i<0)
             return 0;
@@ -36,7 +38,10 @@ public:
         travel.push_back(0);
         reverse(travel.begin(),travel.end());
 
-        vector<int>arr1(n,0),arr2(n,0),arr3(n,0);
+        memset(arr1,0,sizeof arr1);
+        memset(arr2,0,sizeof arr2);
+        memset(arr3,0,sizeof arr3);
+        
         int i1=-1,i2=-1,i3=-1;
         
         for(int i=0;i<n;i++){
