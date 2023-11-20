@@ -19,7 +19,7 @@ public:
         
     }
     
-    int getAns(int i,int&sum,vector<int>&travel){
+    int getAns(int&i,int&sum,vector<int>&travel){
         
         if(i<0)
             return 0;
