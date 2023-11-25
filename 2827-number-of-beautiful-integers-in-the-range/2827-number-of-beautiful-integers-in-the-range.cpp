@@ -23,6 +23,10 @@ public:
             int newModK = (modK*10 + i)%k;
             int newOdd = odd+ (i&1),newEven = even + ((hasStarted||i>0) && (i%2==0));
             
+            if(abs(newOdd - newEven)>5)
+                continue;
+                
+            
             ans+=helper(curr+1,hasStarted|i>0,tight&i==upperLimit,newModK,newOdd,newEven);
         }
         return ans;
