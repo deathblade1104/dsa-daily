@@ -2,7 +2,7 @@ class Solution {
 public:
     int n,k;
     string s;
-    int dp[10][2][2][20][10][10];
+    int dp[10][2][2][20][6][6];
     
     int helper(int curr,bool hasStarted,bool tight,int modK,int odd,int even){
         
