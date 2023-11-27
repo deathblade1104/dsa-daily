@@ -5,7 +5,7 @@ public:
         {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
     }};
     int n;
-    int dp[5001][4][3];
+    int dp[5000][4][3];
     
     static const int mod = 1e9 + 7;
 
