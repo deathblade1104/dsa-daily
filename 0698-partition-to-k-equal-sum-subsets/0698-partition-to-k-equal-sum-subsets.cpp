@@ -33,14 +33,11 @@ bool helper(int mask, int parts) {
 
     ans = 0;
 
-    int currSum = getSum(mask) % avg;
+    int currSum = getSum(mask)%avg;
 
     for (int i = 0; i < n; i++) {
         if (mask & (1 << i))
             continue;
-
-        if (nums[i] > avg)
-            return ans = 0;
 
         int newMask = mask | (1 << i);
 
@@ -59,15 +56,18 @@ bool helper(int mask, int parts) {
         n=arr.size();
         nums = arr;
         
-        int sum=0;
+        int sum=0,maxi=0;
         
-        for(int&i : arr)
+        for(int&i : arr){
             sum+=i;
-        
-        if(n<k or (sum%k))
-            return false;
+            maxi= max(maxi,i);
+        }
         
         avg = sum/k;
+        
+        if(n<k or (sum%k) or maxi>avg)
+            return false;
+        
         
         memset(dp,-1,sizeof dp);
         return helper(0,k);
