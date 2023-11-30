@@ -31,6 +31,8 @@ bool helper(int mask, int parts) {
     if (ans != -1)
         return ans;
 
+    ans = 0;
+
     int currSum = getSum(mask)%avg;
 
     for (int i = 0; i < n; i++) {
@@ -39,11 +41,11 @@ bool helper(int mask, int parts) {
 
         int newMask = mask | (1 << i);
         int curP = (currSum + nums[i]== avg) ? 1 : 0;
-        if(helper(newMask, parts - curP))
-            return ans = 1;
+        ans = ans || helper(newMask, parts - curP);
+       
     }
 
-    return ans = 0;
+    return ans;
 }
 
     
