@@ -1,10 +1,34 @@
 class Solution {
 public:
     int maxProductDifference(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
+   
+        priority_queue<int>maxHeap;
+        priority_queue<int,vector<int>,greater<int>>minHeap;
         
-        int n = nums.size();
+        for(int&i : nums){
+            
+            maxHeap.push(i);
+            minHeap.push(i);
+            
+            if(maxHeap.size()>2)
+                maxHeap.pop();
+            
+            if(minHeap.size()>2)
+                minHeap.pop();
+        }
         
-        return (nums[n-1] * nums[n-2]) - (nums[0] * nums[1]);
+        int m1 = 1,m2 = 1;
+        
+        while(maxHeap.size()){
+            m1*=maxHeap.top();
+            maxHeap.pop();
+        }
+        
+         while(minHeap.size()){
+            m2*=minHeap.top();
+            minHeap.pop();
+        }
+        
+        return m2 - m1;
     }
 };
