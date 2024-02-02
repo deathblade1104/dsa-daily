@@ -4,6 +4,7 @@ public:
     
     Solution(){
         temp.clear();
+        
         for(int i=1;i<=9;i++){
             int curr = i;
             for(int j=i+1;j<=9;j++){
