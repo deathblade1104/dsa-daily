@@ -26,6 +26,9 @@ public:
             
             if(i>=low and i<=high)
                 ans.push_back(i);
+            
+            if(i>high)
+                break;
         }
         
         return ans;
