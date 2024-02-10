@@ -7,7 +7,7 @@ var timeLimit = function(fn, t) {
     
     return async function(...args) {
         
-        const timedPromise  = new Promise((resolve, reject) =>{
+        const timedPromise  = new Promise((_, reject) =>{
            setTimeout(() => reject("Time Limit Exceeded"),t); 
         });
         
