@@ -8,9 +8,9 @@ const countSubstrings = function(s) {
     const n = strArr.length;
     const dp = new Array(n).fill(null).map(() => new Array(n).fill(-1));
 
-    let count = 0;
+    let count = n;
     for (let i = 0; i < n; i++) {
-        for (let j = i; j < n; j++) {
+        for (let j = i+1; j < n; j++) {
             if (helper(i, j,strArr,dp)) {
                 count++;
             }
@@ -37,5 +37,8 @@ const helper = (i, j, strArr,dp) => {
         } else {
             dp[i][j] = (strArr[i] === strArr[j]) && helper(i + 1, j - 1,strArr,dp);
         }
+    
+        helper(i+1,j,strArr,dp);
+        helper(i,j-1,strArr,dp);
         return dp[i][j];
     };
