@@ -4,15 +4,12 @@
  * @return {Array}
  */
 var flat = function (arr, n) {
-    
-    if(n <=0 )
-        return arr;
-    
+        
     const res = [];
     
     for(const iter of arr){
         
-        if(Array.isArray(iter)){
+        if(Array.isArray(iter) && n>0){
             res.push(...flat(iter,n-1));
         }
         
