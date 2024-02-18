@@ -30,7 +30,7 @@ public:
             
             long long int currAvailableRoom, lag = 0LL;
             
-            if (roomPq.size()) {
+            if (!roomPq.empty()) {
                 currAvailableRoom = roomPq.top();
                 roomPq.pop();
             } else {
