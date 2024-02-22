@@ -6,9 +6,9 @@ class Solution {
     private boolean DFS(int node, boolean color, int[][] adj){
         
         if(arr[node] != -1)
-            return arr[node] == (color ? 1 : 0);
+            return this.arr[node] == (color ? 1 : 0);
         
-        arr[node] = color ? 1 : 0; // Convert boolean color to int
+        this.arr[node] = color ? 1 : 0; // Convert boolean color to int
         boolean ans = true;
         
         for(int neigh : adj[node]){
