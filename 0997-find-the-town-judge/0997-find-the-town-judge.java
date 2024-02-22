@@ -1,7 +1,6 @@
 class Solution {
     
-    private int[] inEdge = new int[1002];
-    private int[] outEdge = new int[1002];
+    private int[] inEdge,outEdge;
     
     
 //     Solution(){
@@ -11,6 +10,9 @@ class Solution {
     
     public int findJudge(int n, int[][] trust) {
      
+        inEdge = new int[n+2];
+        outEdge = new int[n+2];
+        
         for(int i=1;i<=n;i++){
             inEdge[i] = outEdge[i] = 0;
         }
