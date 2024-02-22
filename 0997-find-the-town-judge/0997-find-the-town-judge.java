@@ -1,13 +1,13 @@
 class Solution {
     
-    private int[] inEdge;
-    private int[] outEdge;
+    private int[] inEdge = new int[1002];
+    private int[] outEdge = new int[1002];
     
     
-    Solution(){
-        inEdge  = new int[1002];
-        outEdge = new int[1002];
-    }
+//     Solution(){
+//         inEdge  
+//         outEdge = new int[1002];
+//     }
     
     public int findJudge(int n, int[][] trust) {
      
