@@ -24,11 +24,13 @@ class Solution {
 
         }
         
+        int[] ans = new int[n];
+        int iter = 0;
         
         while(!q.isEmpty()){
             
             int curr = q.poll();
-            arr.add(curr);
+            ans[iter++] = curr;
             
             for(int neigh : adj.get(curr)){
                 
@@ -40,13 +42,8 @@ class Solution {
         }
         
         
-        if(arr.size() != n)
+        if(iter != n)
             return (new int[0]);
-        
-        int[] ans = new int[n];
-        
-        for(int i=0;i<n;i++)
-            ans[i] = arr.get(i);
         
         return ans;
 
