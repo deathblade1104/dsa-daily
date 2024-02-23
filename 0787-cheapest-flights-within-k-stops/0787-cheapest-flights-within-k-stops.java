@@ -20,7 +20,7 @@ class Solution {
             adj.get(flight[0]).add(new int[] { flight[1], flight[2] });
         }
         
-        q = new ArrayDeque<>();
+        q = new LinkedList<>();
         q.offer(new int[]{src, 0});
         int steps =0;
         while (steps<=k && !q.isEmpty()) {
