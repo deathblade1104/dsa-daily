@@ -10,11 +10,9 @@ class Solution {
         // Initialize dist with Integer.MAX_VALUE
         for (int i = 0; i < n; i++) {
             dist.add(Integer.MAX_VALUE);
-        }
-        
-        for (int i = 0; i < n; i++) {
             adj.add(new ArrayList<>());
         }
+        
         
         for (int[] flight : flights) {
             adj.get(flight[0]).add(new int[] { flight[1], flight[2] });
