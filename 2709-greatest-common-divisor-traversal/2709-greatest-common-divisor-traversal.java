@@ -40,17 +40,17 @@ class DSU {
 
 class Solution {
     
-    private HashMap<Integer, HashSet<Integer>>mp;
+    private HashMap<Integer, ArrayList<Integer>>mp;
     private static final int sz = 100001;
     
     public void getPrimeFactors(int x,int idx) {
         
         
-        HashSet<Integer>curr;
+        ArrayList<Integer>curr;
         
         if(x%2 == 0){
             
-            curr = mp.getOrDefault(2,new HashSet<>());
+            curr = mp.getOrDefault(2,new ArrayList<>());
             curr.add(idx);
             mp.put(2,curr);
             
@@ -60,7 +60,7 @@ class Solution {
         
         if(x%3 == 0){
     
-            curr = mp.getOrDefault(3,new HashSet<>());
+            curr = mp.getOrDefault(3,new ArrayList<>());
             curr.add(idx);
             mp.put(3,curr);
             
@@ -73,7 +73,7 @@ class Solution {
         for(int i=5;i*i<=x;i+=6){
             if(x%i== 0){
                 
-                curr = mp.getOrDefault(i,new HashSet<>());
+                curr = mp.getOrDefault(i,new ArrayList<>());
                 curr.add(idx);
                 mp.put(i,curr);
 
@@ -84,7 +84,7 @@ class Solution {
             int j=i+2;
             
             if(x%j== 0){    
-                curr = mp.getOrDefault(j,new HashSet<>());
+                curr = mp.getOrDefault(j,new ArrayList<>());
                 curr.add(idx);
                 mp.put(j,curr);
 
@@ -95,7 +95,7 @@ class Solution {
         
         if(x>1){
             
-            curr = mp.getOrDefault(x,new HashSet<>());
+            curr = mp.getOrDefault(x,new ArrayList<>());
             curr.add(idx);
             mp.put(x,curr);
             
@@ -123,13 +123,11 @@ class Solution {
 
         DSU object = new DSU(n);
 
-        for (Map.Entry<Integer,HashSet<Integer>> entry : mp.entrySet()) {
-
-            HashSet<Integer>st = entry.getValue();
-            Integer[] arr = st.toArray(new Integer[0]);
+        for (Map.Entry<Integer,ArrayList<Integer>> entry : mp.entrySet()) {
+            ArrayList<Integer>arr = entry.getValue();
             
-            for (int i = 1; i < arr.length; i++) {
-                object.join(arr[i - 1], arr[i]);
+            for (int i = 1; i < arr.size(); i++) {
+                object.join(arr.get(i - 1), arr.get(i));
             }
         }
 
