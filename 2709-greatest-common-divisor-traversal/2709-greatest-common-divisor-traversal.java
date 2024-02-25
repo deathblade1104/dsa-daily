@@ -43,40 +43,33 @@ class Solution {
     private HashMap<Integer, ArrayList<Integer>>mp;
     private static final int sz = 100001;
     
+    private void addInArray(int idx,int pf){
+        ArrayList<Integer>curr = mp.getOrDefault(pf,new ArrayList<>());
+        curr.add(idx);
+        mp.put(pf,curr);
+        
+        return;
+        
+    }
     public void getPrimeFactors(int x,int idx) {
         
-        
-        ArrayList<Integer>curr;
-        
         if(x%2 == 0){
-            
-            curr = mp.getOrDefault(2,new ArrayList<>());
-            curr.add(idx);
-            mp.put(2,curr);
-            
+            addInArray(idx,2);
             while(x%2 == 0)
                 x/=2;
         }
         
         if(x%3 == 0){
-    
-            curr = mp.getOrDefault(3,new ArrayList<>());
-            curr.add(idx);
-            mp.put(3,curr);
-            
+            addInArray(idx,3);
             while(x%3 == 0)
                 x/=3;
-            
         }
         
         
         for(int i=5;i*i<=x;i+=6){
             if(x%i== 0){
+               addInArray(idx,i);
                 
-                curr = mp.getOrDefault(i,new ArrayList<>());
-                curr.add(idx);
-                mp.put(i,curr);
-
                 while(x%i == 0)
                     x/=i;
             }
@@ -84,9 +77,7 @@ class Solution {
             int j=i+2;
             
             if(x%j== 0){    
-                curr = mp.getOrDefault(j,new ArrayList<>());
-                curr.add(idx);
-                mp.put(j,curr);
+                addInArray(idx,j);
 
                 while(x%j == 0)
                     x/=j;
@@ -94,16 +85,13 @@ class Solution {
         }
         
         if(x>1){
-            
-            curr = mp.getOrDefault(x,new ArrayList<>());
-            curr.add(idx);
-            mp.put(x,curr);
-            
+            addInArray(idx,x);
         }
         
     }
     
     public boolean canTraverseAllPairs(int[] nums) {
+        
         int n = nums.length;
         
         if(n == 1 )
@@ -132,7 +120,6 @@ class Solution {
         }
 
         for (int i = 1; i < n; i++) {
-
             if (!object.isConnected(i-1,i))
                 return false;
         }
