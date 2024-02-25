@@ -39,95 +39,85 @@ class DSU {
 }
 
 class Solution {
+    private static boolean[] prime;
+    private static int[] spf;
+    private final static int sz = 100001;
+    private boolean flag = false;
     
-    private HashMap<Integer, HashSet<Integer>>mp;
-    private static final int sz = 100001;
-    
-    public void getPrimeFactors(int n) {
+    public Solution(){
         
-        int x = n;
-        HashSet<Integer>curr;
-        
-        if(x%2 == 0){
-            
-            curr = mp.getOrDefault(2,new HashSet<>());
-            curr.add(n);
-            mp.put(2,curr);
-            
-            while(x%2 == 0)
-                x/=2;
+        if(!flag){
+            sieve();
         }
         
-        if(x%3 == 0){
-    
-            curr = mp.getOrDefault(3,new HashSet<>());
-            curr.add(n);
-            mp.put(3,curr);
-            
-            while(x%3 == 0)
-                x/=3;
-            
-        }
-        
-        
-        for(int i=5;i*i<=x;i+=6){
-            if(x%i== 0){
-                
-                curr = mp.getOrDefault(i,new HashSet<>());
-                curr.add(n);
-                mp.put(i,curr);
-
-                while(x%i == 0)
-                    x/=i;
-            }
-            
-            int j=i+2;
-            
-            if(x%j== 0){    
-                curr = mp.getOrDefault(j,new HashSet<>());
-                curr.add(n);
-                mp.put(j,curr);
-
-                while(x%j == 0)
-                    x/=j;
-            }   
-        }
-        
-        if(x>1){
-            
-            curr = mp.getOrDefault(x,new HashSet<>());
-            curr.add(n);
-            mp.put(x,curr);
-            
-        }
+        flag = true;
         
     }
     
+    private void sieve(){
+        prime = new boolean[sz];
+        spf = new int[sz];
+
+        for (int i = 0; i < sz; i++) {
+            prime[i] = true;
+            spf[i] = i;
+        }
+
+        prime[0] = prime[1] = false;
+
+        for (int i = 2; i < sz; i++) {
+            for (int j = i * i; j < sz; j += i) {
+                if(j<0)
+                    break;
+                
+                if (prime[j] == true) {
+                    spf[j] = i;
+                }
+                prime[j] = false;
+            }
+        }
+    }
+
+    public HashSet<Integer> getPrimeFactors(int x) {
+        HashSet<Integer> st = new HashSet<>();
+
+        while (x > 1) {
+            st.add(spf[x]);
+            x /= spf[x];
+        }
+
+        return st;
+    }
+
     public boolean canTraverseAllPairs(int[] nums) {
         int n = nums.length;
         
         if(n == 1 )
             return true;
-        
-        mp = new HashMap<>();
+        HashMap<Integer, ArrayList<Integer>> mp = new HashMap<>();
 
         for (int i : nums) {
 
             if (i == 1)
                 return false;
-            
-            getPrimeFactors(i);
+
+            HashSet<Integer> st = getPrimeFactors(i);
+
+            for (int p : st) {
+                ArrayList<Integer> curr = mp.getOrDefault(p, new ArrayList<>());
+                curr.add(i);
+                mp.put(p, curr);
+            }
         }
 
         DSU object = new DSU(sz);
 
-        for (Map.Entry<Integer,HashSet<Integer>> entry : mp.entrySet()) {
+        for (Map.Entry<Integer, ArrayList<Integer>> entry : mp.entrySet()) {
 
-            HashSet<Integer>st = entry.getValue();
-            Integer[] arr = st.toArray(new Integer[0]);
-            
-            for (int i = 1; i < arr.length; i++) {
-                object.join(arr[i - 1], arr[i]);
+            ArrayList<Integer> curr = entry.getValue();
+
+            for (int i = 1; i < curr.size(); i++) {
+                object.join(curr.get(i - 1), curr.get(i));
             }
         }
 
