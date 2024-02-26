@@ -4,7 +4,6 @@ class Solution {
         long m;
         int n;
         long[] prefixHash;
-        long[] powersOfP;
         long[] inversePowersOfP;
 
         Hashing(String s) {
@@ -15,29 +14,22 @@ class Solution {
             n = s.length();
             m = mod;
             prefixHash = new long[n];
-            powersOfP = new long[n];
             inversePowersOfP = new long[n];
-            calculatePowersAndInversePowersOfP();
             calculatePrefixHashes(s);
-        }
-
-        void calculatePowersAndInversePowersOfP() {
-            long currentPower = 1;
-            for (int i = 0; i < n; i++) {
-                powersOfP[i] = currentPower;
-                currentPower = (currentPower * p) % m;
-            }
-            inversePowersOfP[n - 1] = mminvprime(powersOfP[n - 1], m);
-            for (int i = n - 2; i >= 0; i--) {
-                inversePowersOfP[i] = (inversePowersOfP[i + 1] * p) % m;
-            }
         }
 
         void calculatePrefixHashes(String s) {
             long hashSoFar = 0;
+            long currentPower = 1;
             for (int i = 0; i < n; i++) {
-                hashSoFar = (hashSoFar + (s.charAt(i) - 'a' + 1) * powersOfP[i]) % m;
+                hashSoFar = (hashSoFar + (s.charAt(i) - 'a' + 1) * currentPower) % m;
                 prefixHash[i] = hashSoFar;
+                currentPower = (currentPower * p) % m;
+            }
+            
+            inversePowersOfP[n - 1] = mminvprime(currentPower, m);
+            for (int i = n - 2; i >= 0; i--) {
+                inversePowersOfP[i] = (inversePowersOfP[i + 1] * p) % m;
             }
         }
 
