@@ -9,7 +9,11 @@ class Solution {
         long[] powersOfP;
         long[] inversePowersOfP;
 
-        Hashing(String queryString, long mod) {
+        Hashing(String queryString) {
+            this(queryString, 1000000007); 
+        }
+
+        Hashing(String queryString, long mod ) {
             s = queryString;
             n = s.length();
             m = mod;
@@ -95,7 +99,7 @@ class Solution {
     public String longestDupSubstring(String s) {
         
         n = s.length();
-        Hashing obj1 = new Hashing(s, 1000000007);
+        Hashing obj1 = new Hashing(s);
         Hashing obj2 = new Hashing(s, 1000000005);
         
         int low = 1, high = n;
