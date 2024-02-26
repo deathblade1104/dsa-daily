@@ -1,7 +1,6 @@
 class Solution {
     
     private static class Hashing {
-        String s;
         long p = 31;
         long m;
         int n;
@@ -9,19 +8,18 @@ class Solution {
         long[] powersOfP;
         long[] inversePowersOfP;
 
-        Hashing(String queryString) {
-            this(queryString, 1000000007); 
+        Hashing(String s) {
+            this(s, 1000000007); 
         }
 
-        Hashing(String queryString, long mod ) {
-            s = queryString;
+        Hashing(String s, long mod ) {
             n = s.length();
             m = mod;
             prefixHash = new long[n];
             powersOfP = new long[n];
             inversePowersOfP = new long[n];
             calculatePowersAndInversePowersOfP();
-            calculatePrefixHashes();
+            calculatePrefixHashes(s);
         }
 
         void calculatePowersAndInversePowersOfP() {
@@ -36,7 +34,7 @@ class Solution {
             }
         }
 
-        void calculatePrefixHashes() {
+        void calculatePrefixHashes(String s) {
             long hashSoFar = 0;
             for (int i = 0; i < n; i++) {
                 hashSoFar = (hashSoFar + (s.charAt(i) - 'a' + 1) * powersOfP[i]) % m;
