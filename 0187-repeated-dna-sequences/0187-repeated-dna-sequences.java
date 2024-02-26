@@ -51,16 +51,18 @@ class Hashing {
     }
 
     long expo(long a, long b, long mod) {
-        long res = 1;
-        while (b > 0) {
-            if ((b & 1) != 0) {
-                res = (res * a) % mod;
-            }
-            a = (a * a) % mod;
-            b >>= 1;
+        if (b == 0) return 1;
+
+        long res = expo(a, b / 2, mod) % mod;
+        res = (res * res) % mod;
+
+        if (b % 2 == 1) {
+            res = (res * a) % mod;
         }
+
         return res;
     }
+
 }
 
 class Solution {
