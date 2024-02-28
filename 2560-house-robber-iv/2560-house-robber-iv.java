@@ -14,15 +14,13 @@ class Solution {
             int mid = low + ((high - low)/2);
             
             int taken= 0;
-            for(int i=0;i<n;i++){
+            for(int i=0;i<n && taken<k;i++){
 
                 if(nums[i]<=mid){
                     taken++;
                     i++;
                 }
                 
-                if(taken>=k)
-                    break;
             }
             
             if(taken>=k){
