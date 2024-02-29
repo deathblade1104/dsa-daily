@@ -3,10 +3,9 @@ import java.util.*;
 class Solution {
     public int minimumDeviation(int[] nums) {
         TreeSet<Integer> treeSet = new TreeSet<>();
-        int mini = Integer.MAX_VALUE;
-        int ans = Integer.MAX_VALUE;
+        int mini = Integer.MAX_VALUE,ans = Integer.MAX_VALUE;
 
-        // Initialize the TreeSet with all elements doubled
+      
         for (int num : nums) {
             int val = (num % 2 == 0) ? num : num * 2;
             treeSet.add(val);
@@ -14,20 +13,16 @@ class Solution {
         }
 
         while (true) {
-            int maxVal = treeSet.last(); // Get the maximum element
-            ans = Math.min(ans, maxVal - mini); // Update the minimum deviation
+            int maxVal = treeSet.last(); 
+            ans = Math.min(ans, maxVal - mini);
 
-            // Check if the maximum element is odd, if so, break the loop
-            if (maxVal % 2 != 0) {
+            if (maxVal % 2==1) {
                 break;
             }
-
-            // Remove the maximum element and add its halved value
+            
             treeSet.remove(maxVal);
             int halvedVal = maxVal / 2;
             treeSet.add(halvedVal);
-
-            // Update the minimum value if necessary
             mini = Math.min(mini, halvedVal);
         }
 
