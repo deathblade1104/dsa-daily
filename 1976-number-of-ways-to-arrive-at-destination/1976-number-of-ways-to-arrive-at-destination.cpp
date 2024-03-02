@@ -26,7 +26,7 @@ public:
             pq.pop();
             long long currNode = curr[1], currDist = curr[0];
             
-            if (currNode == n - 1) continue;
+            if (currNode == n - 1) break;
             
             for (arr& neigh : adj[currNode]) {
                 int neighNode = neigh[0];
