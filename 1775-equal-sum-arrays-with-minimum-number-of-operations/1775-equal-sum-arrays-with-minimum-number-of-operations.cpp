@@ -1,6 +1,7 @@
 class Solution {
 public:
-    int arr[6];
+    static array<int,6>arr;
+    
     int minOperations(vector<int>& nums1, vector<int>& nums2) {
         
         int sum1  = accumulate(nums1.begin(),nums1.end(),0);
@@ -17,7 +18,7 @@ public:
         if(diff == 0)
             return 0;
         
-        memset(arr,0,sizeof arr);
+        arr.fill(0);
         
         for(int&i : nums1){
            arr[i-1]++;   
@@ -47,3 +48,5 @@ public:
         
     }
 };
+
+array<int,6>Solution::arr;
