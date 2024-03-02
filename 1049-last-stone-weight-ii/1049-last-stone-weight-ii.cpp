@@ -1,9 +1,10 @@
 class Solution {
 private: 
     static int sum,n,target;
-    static array<array<int,1501>,1501>dp;
+    static array<array<int,1501>,31>dp;
     
     int helper(int curr,int currSum,vector<int>&nums){
+      
         
         if(currSum>=target || curr>=n)
             return abs(currSum - (sum - currSum));
@@ -30,7 +31,7 @@ public:
         }
         
         target = ceil(sum/2);
-        //cout<<n<<" "<<target<<endl;
+       
         
         for(int i=0;i<n;i++){
             for(int j=0;j<=target;j++){
@@ -46,4 +47,4 @@ public:
 int Solution::sum;
 int Solution::n;
 int Solution::target;
-array<array<int, 1501>, 1501> Solution::dp;
+array<array<int,1501>,31> Solution::dp;
