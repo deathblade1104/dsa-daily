@@ -1,50 +1,47 @@
+typedef array<int, 2> arr;
+typedef array<long long,2>arr2;
+
 class Solution {
-    int mod = 1e9+7;
+private:
+    static const long long mod = 1e9 + 7;
+
 public:
     int countPaths(int n, vector<vector<int>>& roads) {
-        vector<vector<pair<int,int>>> adj(n);
-        for(auto it: roads){
-            adj[it[0]].push_back({it[1], it[2]});
-            adj[it[1]].push_back({it[0], it[2]});
+        vector<long long> ways(n, 0), dist(n, LLONG_MAX);
+        vector<arr> adj[n];
+       
+        for (vector<int>& road : roads) {
+            int u = road[0], v = road[1], d = road[2];
+            adj[u].push_back({v, d});
+            adj[v].push_back({u, d});
         }
+        
+        priority_queue<arr2, vector<arr2>, greater<arr2>> pq;
+        pq.push({0, 0});
+        ways[0] = 1; 
+        dist[0] = 0;
 
-        priority_queue< pair<long long,long long> , vector<pair<long long,long long> >, greater<pair<long long,long long> >> pq;
-        pq.push({0, 0}); // dist , node
-
-        unordered_map <long long, pair<long long,long long>> mpp;
-
-        for(int i=0; i<n; i++){
-            mpp[i]={9223372036854775807, 0};
-        }
-
-        mpp[0]= {0, 1}; // node -> {dist , ways to reach}
-
-        while(!pq.empty()){
-            long long node = pq.top().second;
-            long long d = pq.top().first;
+        while (!pq.empty()) {
+            arr2 curr = pq.top();
             pq.pop();
-
-            for(auto it: adj[node]){
-                long long adjnode = it.first;
-                long long edgew = it.second;
-                if(edgew+d < mpp[adjnode].first){
-                    mpp[adjnode].first = edgew+d;
-                    mpp[adjnode].second = mpp[node].second;
-                    pq.push({edgew+d , adjnode});
-                }
-
-                else if(edgew+d == mpp[adjnode].first){
-                    mpp[adjnode].second = (mpp[adjnode].second + mpp[node].second)%mod;
+            long long currNode = curr[1], currDist = curr[0];
+            
+            if (currNode == n - 1) continue;
+            
+            for (arr& neigh : adj[currNode]) {
+                int neighNode = neigh[0];
+                long long neighDist = neigh[1]+ currDist;
+                
+                if (dist[neighNode] > neighDist) {
+                    dist[neighNode] = neighDist;
+                    ways[neighNode] = ways[currNode];
+                    pq.push({neighDist,neighNode});
+                } else if (dist[neighNode] == neighDist) {
+                    ways[neighNode] = (ways[neighNode] + ways[currNode]) % mod;
                 }
             }
         }
-
-        for(auto it: mpp){
-            cout<<it.first<<" "<<it.second.first<<" "<<it.second.second<<endl;
-        }
-
-        int ans = mpp[n-1].second;
         
-        return ans;
+        return ways[n - 1];
     }
 };
