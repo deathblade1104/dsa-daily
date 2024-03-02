@@ -4,11 +4,19 @@ typedef array<long long,2>arr2;
 class Solution {
 private:
     static const long long mod = 1e9 + 7;
+    static array<long long,200>dist;
+    static array<int,200>ways;
+    static vector<arr> adj[200];
 
 public:
     int countPaths(int n, vector<vector<int>>& roads) {
-        vector<long long> ways(n, 0), dist(n, LLONG_MAX);
-        vector<arr> adj[n];
+        
+        for(int i=0;i<n;i++){
+            adj[i].clear();
+            ways[i] = 0;
+            dist[i] = LLONG_MAX;
+        }
+       
        
         for (vector<int>& road : roads) {
             int u = road[0], v = road[1], d = road[2];
@@ -45,3 +53,6 @@ public:
         return ways[n - 1];
     }
 };
+array<int, 200> Solution::ways;
+array<long long, 200> Solution::dist;
+vector<arr> Solution::adj[200];
