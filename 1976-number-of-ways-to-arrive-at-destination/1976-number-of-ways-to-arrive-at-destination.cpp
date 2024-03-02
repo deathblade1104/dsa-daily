@@ -21,7 +21,7 @@ public:
         ways[0] = 1; 
         dist[0] = 0;
 
-        while (!pq.empty()) {
+        while (pq.size()) {
             arr2 curr = pq.top();
             pq.pop();
             long long currNode = curr[1], currDist = curr[0];
