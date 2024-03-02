@@ -18,10 +18,16 @@ public:
         vector<int>arr;
         
         for(int&i : nums1){
+            if(i == 6)
+                continue;
+            
             arr.push_back(6-i);
         }
         
         for(int&i : nums2){
+            if(i == 1)
+                continue;
+            
             arr.push_back(i-1);
         }
         
