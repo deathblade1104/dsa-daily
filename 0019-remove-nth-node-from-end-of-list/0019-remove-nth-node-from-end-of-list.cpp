@@ -36,8 +36,12 @@ public:
         
         ListNode *curr=head,*prev=nullptr,*next=nullptr;
         
-        if(n == 1)
-            return reverseLL(head->next);
+        if(n == 1){
+            ListNode *nxtHead = curr->next;
+            head->next = nullptr;
+            delete(head);
+            return reverseLL(nxtHead);
+        }
         
         for(int i=0;i<n-1;i++){
             prev = curr;
@@ -50,7 +54,7 @@ public:
             prev->next = next;
         }
         
-        //delete(curr);
+        delete(curr);
         
         return reverseLL(head);
     }
