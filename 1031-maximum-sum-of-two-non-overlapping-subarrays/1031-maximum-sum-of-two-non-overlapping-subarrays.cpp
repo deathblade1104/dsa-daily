@@ -1,53 +1,45 @@
 class Solution {
 private : 
     vector<int>start,end;
+    int n;
+    
+    void findMaxWindowSum(vector<int>&nums,int&windowSize,vector<int>&arr){
+        
+        int currSum = 0;
+        
+        for(int i=0;i<windowSize;i++){
+            currSum+=nums[i];
+        }
+        
+        arr[windowSize-1] = currSum;
+        for(int i=windowSize;i<n;i++){
+            currSum-=nums[i-windowSize];
+            currSum+=nums[i];
+            arr[i] = max(arr[i-1],currSum);
+        }
+        
+        return;
+        
+    }
 public:
     int maxSumTwoNoOverlap(vector<int>& nums, int f, int s) {
         
         if(f>s)
             swap(f,s);
         
-        int n = nums.size();
+        n = nums.size();
         start.assign(n,0);
         end.assign(n,0);
         
-        int currSum = 0;
-        
-        for(int i=0;i<f;i++){
-            currSum+=nums[i];
-        }
-        
-        end[f-1] = currSum;
-        for(int i=f;i<n;i++){
-            currSum-=nums[i-f];
-            currSum+=nums[i];
-            end[i] = max(end[i-1],currSum);
-        }
-        
-        
-        
-        currSum=0;
+        findMaxWindowSum(nums,f,end);
         reverse(nums.begin(),nums.end());
-         for(int i=0;i<f;i++){
-            currSum+=nums[i];
-        }
-        
-        start[f-1] = currSum;
-        for(int i=f;i<n;i++){
-            currSum-=nums[i-f];
-            currSum+=nums[i];
-            start[i] = max(start[i-1],currSum);
-        }
-        
+        findMaxWindowSum(nums,f,start);
         reverse(start.begin(),start.end());
         reverse(nums.begin(),nums.end());
         
 
-        currSum = 0;
-        // for(int i=0;i<n;i++){
-        //     cout<<i<<" "<<start[i]<<" "<<end[i]<<endl;
-        // }
-        
+        int currSum = 0;
+
         for(int i=0;i<s;i++){
             currSum+=nums[i];
         }
@@ -67,9 +59,5 @@ public:
         }
         
         return ans;
-        
-        
-        
-        
     }
 };
