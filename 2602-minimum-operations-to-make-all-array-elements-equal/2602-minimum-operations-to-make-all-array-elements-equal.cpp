@@ -1,34 +1,68 @@
-#define ll long long int
-
 class Solution {
 public:
-    vector<long long> minOperations(vector<int>& nums, vector<int>& queries) {
-        
-        int n = nums.size();
-        sort(nums.begin(), nums.end());
-        vector<ll> prefSum(n+1, 0);
-        
-        for(int i=0;i<n;i++){
-            prefSum[i+1] = prefSum[i] + nums[i];
-        }
-        
-        nums.insert(nums.begin(), 0);
-        n++;
-        
-        vector<ll> ans;
-        for(auto q : queries){
-            ll lidx = lower_bound(nums.begin(), nums.end(), q) - nums.begin() - 1;
-            ll uidx = upper_bound(nums.begin(), nums.end(), q) - nums.begin();
-            
-            ll val = q*lidx - (prefSum[lidx] - prefSum[0]);
-            
-            if(uidx!=n){
-                val +=  (prefSum[n-1] - prefSum[uidx-1]) - q*(n-uidx);
-            }
-            
-            ans.push_back(val);
-        }
+    long long int pref[(int)(1e5 + 1)];
+    int n;
+    vector<long long> ans;
     
+    int getLb(vector<int>& nums, int curr) {
+        int low = 0, high = n - 1, ans = -1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] < curr) {
+                ans = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return ans;
+    }
+    
+    int getHb(vector<int>& nums, int curr) {
+        int low = 0, high = n - 1, ans = n;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] > curr) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+    
+    long long int getSum(int l, int r) {
+        long long int prefSum = pref[r];
+        if (l >= 1) {
+            prefSum -= pref[l - 1];
+        }
+        return prefSum;
+    }
+    
+    vector<long long> minOperations(vector<int>& nums, vector<int>& queries) {
+        sort(nums.begin(), nums.end());
+        memset(pref, 0, sizeof pref);
+        n = nums.size();
+        for (int i = 0; i < n; i++) {
+            pref[i] += (1LL * nums[i]);
+            if (i > 0) {
+                pref[i] += pref[i - 1];
+            }
+        }
+        int q = queries.size();
+        ans.resize(q);
+        for (int i = 0; i < q; i++) {
+            int l = getLb(nums, queries[i]);
+            int r = getHb(nums, queries[i]);
+            ans[i] = 0LL;
+            if (l >= 0) {
+                ans[i] += (1LL * queries[i] * (l + 1)) - getSum(0, l);
+            }
+            if (r < n) {
+                ans[i] += getSum(r, n - 1) - (1LL * queries[i] * (n - r));
+            }
+        }
         return ans;
     }
 };
