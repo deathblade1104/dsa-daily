@@ -65,11 +65,11 @@ public:
         int maxi= INT_MIN;
         for(int i=0;i<tasks.size();i++) maxi=max(maxi,tasks[i][1]);
         int low=maxi;
-        int high=0;
+        int high=INT_MAX;
         int ans;
-        for(int i=0;i<tasks.size();i++) high+= tasks[i][1];
+        
         while(low<=high){
-             int mid=(low+high)/2;
+             int mid= low + ((high - low)/2);
             if(check(mid,tasks)) {
                 ans=mid;
                 high=mid-1;
