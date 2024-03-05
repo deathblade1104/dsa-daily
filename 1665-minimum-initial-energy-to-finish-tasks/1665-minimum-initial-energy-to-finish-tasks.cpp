@@ -62,7 +62,7 @@ public:
         sort(tasks.begin(),tasks.end(), [&](vector<int>a, vector<int>b){
            return a[1]-a[0]>b[1]-b[0];
         });
-        int maxi= INT_MIN;
+        int maxi= 0;
         for(int i=0;i<tasks.size();i++) maxi=max(maxi,tasks[i][1]);
         int low=maxi;
         int high=INT_MAX;
