@@ -9,22 +9,7 @@
 //         }
 //     };
     
-//     bool isPossible(vector<vector<int>>&tasks,int mid){
-        
-//         for(vector<int>&task : tasks){
-            
-//             if(task.size()>=2){
-//                 if(task[1]>mid)
-//                     return false;
-//             }
-            
-            
-            
-//             mid-=task[0];
-//         }
-        
-//         return true;
-//     }
+
     
 //     int minimumEffort(vector<vector<int>>& tasks) {
 //         sort(tasks.begin(),tasks.end(),myComp());
@@ -49,28 +34,32 @@
 
 class Solution {
 public:
-    bool check(int m, vector<vector<int>>&tasks){
-        int rem=m;
-        for(int i=0;i<tasks.size();i++){
-            if(rem>=tasks[i][1]) rem-=tasks[i][0];
-            else return false;
-        }
-        return true;
+    bool isPossible(vector<vector<int>>&tasks,int&mid){
         
+        int rem = mid;
+        for(vector<int>&task : tasks){
+            
+            if(rem<task[1])
+                return false;
+            
+            rem-=task[0];
+        }
+        
+        return true;
     }
+    
+    
     int minimumEffort(vector<vector<int>>& tasks) {
         sort(tasks.begin(),tasks.end(), [&](vector<int>a, vector<int>b){
            return a[1]-a[0]>b[1]-b[0];
         });
         int maxi= 0;
         for(int i=0;i<tasks.size();i++) maxi=max(maxi,tasks[i][1]);
-        int low=maxi;
-        int high=INT_MAX;
-        int ans;
+        int low=maxi,high=INT_MAX,ans=-1;
         
         while(low<=high){
              int mid= low + ((high - low)/2);
-            if(check(mid,tasks)) {
+            if(isPossible(tasks,mid)) {
                 ans=mid;
                 high=mid-1;
             }
