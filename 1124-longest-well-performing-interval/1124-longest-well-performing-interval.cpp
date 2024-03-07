@@ -25,6 +25,7 @@ public:
         for(int j=n;j>=0;j--){
             
             while(st.size() and pref[st.top()]<pref[j]){
+               
                 ans = max(ans, j - st.top());
                 st.pop();
             }
