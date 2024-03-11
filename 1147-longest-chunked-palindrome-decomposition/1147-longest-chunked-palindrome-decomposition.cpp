@@ -2,7 +2,6 @@ class RollingHash {
 private:
     long long int mod, p;
     int n;
-    string str;
     vector<long long int> pows, invPows, prefixHash;
 
     long long int binaryExp(long long int x, long long int n, long long int m) {
@@ -26,7 +25,7 @@ private:
         }
     }
 
-    void calculatePrefixHashes() {
+    void calculatePrefixHashes(string str) {
         long long int hashSoFar = 0;
         for (int i = 0; i < n; i++) {
             hashSoFar = (hashSoFar + (str[i] - 'a' + 1) * pows[i]) % mod;
@@ -35,8 +34,7 @@ private:
     }
 
 public:
-    RollingHash(string s, long long int m) {
-        str = s;
+    RollingHash(string str, long long int m) {
         n = str.size();
         mod = m;
         p = 31;
@@ -44,7 +42,7 @@ public:
         invPows.resize(n);
         prefixHash.resize(n);
         populatePowers();
-        calculatePrefixHashes();
+        calculatePrefixHashes(str);
     }
 
 
