@@ -20,19 +20,17 @@ public:
         while(i>=0){
             
             auto it = mp.lower_bound(tasks[i]);
-            int key;
-            
+
             if(it == mp.end()){
-                
                 it = mp.lower_bound(tasks[i] - str);
-        
+                
                 if(it == mp.end() || p<=0)
                     break;
                 
                  p--;
             }
             
-            key = it->first;
+            int key = it->first;
             removeFromMap(mp,key);
             i--;
         }
