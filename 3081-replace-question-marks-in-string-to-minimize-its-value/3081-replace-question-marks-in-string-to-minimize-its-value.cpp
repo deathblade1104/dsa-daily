@@ -2,17 +2,16 @@ class Solution {
 public:
     string minimizeStringValue(string s) {
         int cntBefore[26],cntAfter[26];
-        string temp ="";
         memset(cntBefore,0,sizeof cntBefore);
         memset(cntAfter,0,sizeof cntAfter);
-        
-        
+                
         for(char&ch : s){
             
             if(isalpha(ch))
                 cntAfter[ch - 'a']++;
         }
         
+        priority_queue<char,vector<char>,greater<char>>pq;
         
         for(char&ch : s){
             
@@ -32,15 +31,14 @@ public:
             }
             
             cntBefore[idx]++;
-            temp+=(char)(idx + 'a');
+            pq.push((char)(idx + 'a'));
         }
-        
-        sort(temp.rbegin(),temp.rend());
+    
         
         for(char&ch : s){
             if(ch == '?'){
-                ch = temp.back();
-                temp.pop_back();
+                ch = pq.top();
+                pq.pop();
             }
         }
         
