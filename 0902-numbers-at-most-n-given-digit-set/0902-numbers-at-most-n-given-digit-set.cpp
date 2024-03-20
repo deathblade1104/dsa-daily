@@ -5,7 +5,7 @@ public:
     vector<int>dig;
     int dp[11][2][2];
     
-    int helper(int currIdx,bool tight, bool hasStarted,int num){
+    int helper(int currIdx,bool tight, bool hasStarted){
         
         if(currIdx>=sz){
             return hasStarted == 1;
@@ -20,7 +20,7 @@ public:
         
        
         if(!hasStarted)
-            ans+=helper(currIdx+1,false,false,0);
+            ans+=helper(currIdx+1,false,false);
         
         int upper = tight ? s[currIdx] - '0' : 9;
         
@@ -29,7 +29,7 @@ public:
             if(i>upper)
                 break;
             
-            ans+=helper(currIdx+1,tight&(upper == i),true,num*10+i);
+            ans+=helper(currIdx+1,tight&(upper == i),true);
         }
         
         return ans;
@@ -47,7 +47,7 @@ public:
     
         sort(dig.begin(),dig.end());
         
-        return helper(0,1,0,0);
+        return helper(0,1,0);
         
         
         
