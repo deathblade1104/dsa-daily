@@ -3,7 +3,7 @@ public:
     int sz;
     string s;
     vector<int>dig;
-    int dp[11][2][2];
+    int dp[10][2][2];
     
     int helper(int currIdx,bool tight, bool hasStarted){
         
