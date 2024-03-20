@@ -29,33 +29,25 @@ public:
                 next = temp;
             
             swap(curr,temp);
-            if(i>=a)
+            if(i>=a){
                 temp->next = nullptr;
+                delete(temp);
+            }
             
-            //delete(temp);
+
         }
         
         
         curr = list2;
-        
-        
         while(curr->next!=nullptr){
             curr= curr->next;
         }
         
-        
         curr->next = next;
+        ListNode *head = list1;
+        prev->next = list2;
         
-        ListNode *head;
-        
-        if(prev == nullptr){
-            head = list2;
-        }
-        
-        else{
-            prev->next = list2;
-            head = list1;
-        }
+
         
         return head;
     
