@@ -23,19 +23,14 @@ public:
     BinaryTrie* remove(BinaryTrie* curr, int bit, int& num) {
         if (curr == nullptr)
             return curr;
-        if (bit == 0) {
-            int next = ((1 << bit) & num) ? 1 : 0;
-            curr->children[next] = nullptr;
-            if (curr->children[0] == nullptr && curr->children[1] == nullptr) {
-                BinaryTrie *temp = curr;
-                curr = nullptr;
-                delete(temp);
-            }
-            return curr;
-        }
         
         int next = ((1 << bit) & num) ? 1 : 0;
-        curr->children[next] = remove(curr->children[next], bit - 1, num);
+        
+        if(bit>0)
+            curr->children[next] = remove(curr->children[next], bit - 1, num);
+        else 
+            curr->children[next] = nullptr;
+        
         if (curr->children[0] == nullptr && curr->children[1] == nullptr) {
             BinaryTrie *temp = curr;
             curr = nullptr;
@@ -77,7 +72,6 @@ public:
         BinaryTrie* root = new BinaryTrie();
         sort(nums.begin(), nums.end());
         msb  = findMsb(nums.back());
-    
     
         int start = 0,ans= 0;
         for (int i = 0; i < nums.size(); i++) {
