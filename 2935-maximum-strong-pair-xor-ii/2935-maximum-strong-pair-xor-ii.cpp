@@ -21,6 +21,7 @@ public:
     }
 
     BinaryTrie* remove(BinaryTrie* curr, int bit, int& num) {
+        
         if (curr == nullptr)
             return curr;
         
@@ -76,7 +77,7 @@ public:
         int start = 0,ans= 0;
         for (int i = 0; i < nums.size(); i++) {
             insert(nums[i], root);
-            while (nums[start] * 2 < nums[i]) {
+             while (start < i && abs(nums[start] - nums[i]) > min(nums[start], nums[i])) {
                 
                 root = remove(root, msb, nums[start]);
                 start++;
