@@ -62,26 +62,24 @@ public:
         return ans;
     }
     
-    int maximumStrongPairXor(vector<int>& nums) {
-        BinaryTrie* root = new BinaryTrie();
-        sort(nums.begin(), nums.end());
+    int findMsb(int num){    
         
-        for(int i=31;i>=0;i--){
-            bool found = false;
-            for(int&j : nums){
-                if((1<<i) & j){
-                    found = true;
-                    break;
-                }
-            }
-            
-            if(found){
-                msb = i;
-                break;
+         for(int i=31;i>=0;i--){
+            if((1<<i) & num){
+                return i;
             }
         }
         
-        int start = 0, ans = 0;
+        return -1;
+    }
+    
+    int maximumStrongPairXor(vector<int>& nums) {
+        BinaryTrie* root = new BinaryTrie();
+        sort(nums.begin(), nums.end());
+        msb  = findMsb(nums.back());
+    
+    
+        int start = 0,ans= 0;
         for (int i = 0; i < nums.size(); i++) {
             insert(nums[i], root);
             while (nums[start] * 2 < nums[i]) {
