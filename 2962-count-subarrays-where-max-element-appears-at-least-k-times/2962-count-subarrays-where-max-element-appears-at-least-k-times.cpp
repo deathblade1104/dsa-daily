@@ -13,17 +13,15 @@ public:
         long long count = 0LL;
 
         while (right < n) {
-            // Expand the window and update frequency
+           
             frequency[arr[right]]++;
-
-            // Shrink the window until the count of occurrences becomes less than K
+            
             while (frequency[maxi] >= K) {
                 frequency[arr[left]]--;
                 left++;
-                count += 1LL * (n - right);  // Subarrays ending at the current position
+                count += 1LL * (n - right); 
             }
 
-            // Move to the next element in the array
             right++;
         }
 
