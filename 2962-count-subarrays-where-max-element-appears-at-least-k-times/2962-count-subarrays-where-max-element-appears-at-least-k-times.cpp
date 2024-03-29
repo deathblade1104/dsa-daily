@@ -2,30 +2,33 @@ class Solution {
 public:
     long long countSubarrays(vector<int>& arr, int K) {
         
-        int n = arr.size();
-        unordered_map<int, int> frequency;
-        int maxi = 0;
+        int n = arr.size(),counter = 0,maxi = 0;
+        
         for(int&i : arr){
             maxi = max(i,maxi);
         }
         
         int left = 0, right = 0;
-        long long count = 0LL;
+        long long ans = 0LL;
 
         while (right < n) {
            
-            frequency[arr[right]]++;
+            if(arr[right] == maxi)
+            counter++;
             
-            while (frequency[maxi] >= K) {
-                frequency[arr[left]]--;
+            while (counter>= K) {
+                
+                if(arr[left] == maxi)
+                    counter--;
+                
                 left++;
-                count += 1LL * (n - right); 
+                ans += 1LL * (n - right); 
             }
 
             right++;
         }
 
 
-        return count;
+        return ans;
     }
 };
