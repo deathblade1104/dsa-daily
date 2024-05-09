@@ -57,6 +57,10 @@ private:
 
 public:
     int networkDelayTime(vector<vector<int>>& edges, int n, int k) {
+        
+        if(edges.size()<n-1)
+            return -1;
+        
         vector<vector<arr>> adjList = createAdjList(edges, n);
         return dijkstraTraversal(adjList, k, n);
     }
