@@ -19,13 +19,12 @@ public:
         if(!root)
             return;
         
-        long long curr=root->val*(1LL);
-        p_sum+=curr;
+        p_sum+=root->val*(1LL);;
 
         if(p_sum==k)
             ans++;
 
-        if(mp.count(p_sum-k)==1)
+        if(mp.count(p_sum-k))
             ans+=mp[p_sum-k];
 
         mp[p_sum]++;
