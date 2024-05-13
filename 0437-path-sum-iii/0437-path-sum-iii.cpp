@@ -33,11 +33,11 @@ public:
         get_ans(root->left,mp,p_sum,k,ans);
         get_ans(root->right,mp,p_sum,k,ans);
         
-        if(mp[p_sum]==1)
+        mp[p_sum]--;
+        
+        if(mp[p_sum]==0)
             mp.erase(p_sum);
-        
-        else mp[p_sum]--;
-        
+
         p_sum-=root->val;
         
         return;
