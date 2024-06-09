@@ -9,7 +9,7 @@ class Solution {
             mod = (pSum % k + k)%k;
             
             if (map.containsKey(mod)) {
-                ans = Math.max(ans, i - map.get(mod));
+                ans = Math.max(ans, i - map.getOrDefault(mod,i));
             } else {
                 map.put(mod, i);
             }
