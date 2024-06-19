@@ -75,7 +75,7 @@ class Solution {
     public int minCostConnectPoints(int[][] points) {
         n = points.length;
 
-        ArrayList<ArrayList<int[]>> adj = new ArrayList<>(n);
+        ArrayList<ArrayList<int[]>> adj = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             adj.add(new ArrayList<>());
