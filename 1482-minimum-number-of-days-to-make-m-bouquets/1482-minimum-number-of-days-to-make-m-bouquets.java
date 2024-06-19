@@ -29,7 +29,13 @@ class Solution {
             return -1;
         }
 
-        int low = 0, high = (int) 1e9 + 1, ans = -1;
+        int low =  (int) 1e9 + 1, high = 0, ans = -1;
+        
+        
+        for(int i=0;i<n;i++){
+            low = Math.min(low,arr[i]);
+            high = Math.max(high,arr[i]);
+        }
 
         while (low <= high) {
             int mid = low + ((high - low) / 2);
