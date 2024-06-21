@@ -24,9 +24,9 @@ class Solution {
         int ans = sum;
         
         for (int i = m - 1; i < n; i++) {
-            int r = i, l = i - m + 1;
+            int l = i - m + 1;
             
-            int unsatisfied = preSumUnsatisfied[r];
+            int unsatisfied = preSumUnsatisfied[i];
             if (l > 0) {
                 unsatisfied -= preSumUnsatisfied[l - 1];     
             }
