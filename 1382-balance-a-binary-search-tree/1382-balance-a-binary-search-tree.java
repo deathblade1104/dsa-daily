@@ -15,7 +15,7 @@
  */
 class Solution {
     
-    private ArrayList<Integer>inOrder;
+    private ArrayList<TreeNode>inOrder;
     
     private void getInOrder(TreeNode root){
         
@@ -23,7 +23,7 @@ class Solution {
             return;
         
         getInOrder(root.left);
-        this.inOrder.add(root.val);
+        this.inOrder.add(root);
         getInOrder(root.right);
         
         return;
@@ -36,7 +36,8 @@ class Solution {
         
         int mid = l + ((h - l)/2);
         
-        TreeNode root = new TreeNode(this.inOrder.get(mid));
+        TreeNode root = this.inOrder.get(mid);
+        root.left = root.right = null;
         root.left = createBST(l,mid-1);
         root.right = createBST(mid+1,h);
         
