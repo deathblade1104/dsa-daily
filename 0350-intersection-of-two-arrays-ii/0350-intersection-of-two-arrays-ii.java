@@ -3,20 +3,20 @@ import java.util.HashMap;
 
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
-        HashMap<Integer, Integer> mp = new HashMap<>();
+        int[] mp = new int[1001];
 
         
         for (int num : nums1) {
-            mp.put(num, mp.getOrDefault(num, 0) + 1);
+            mp[num]++;
         }
 
         ArrayList<Integer> arr = new ArrayList<>();
 
 
         for (int num : nums2) {
-            if (mp.getOrDefault(num, 0) > 0) {
+            if (mp[num]>0) {
                 arr.add(num);
-                mp.put(num, mp.get(num) - 1);
+                mp[num]--;
             }
         }
 
