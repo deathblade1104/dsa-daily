@@ -33,11 +33,10 @@ public:
                 if(sz == 2)
                     continue; 
                 
-                if(sz == 0 || (sz == 1 and visitedTimes[neigh][0]!=newTime)){
-                    
-                    if(sz == 1 and neigh == n and newTime!=visitedTimes[neigh][0])
-                        return newTime;
-                    
+                 if(sz == 1 and neigh == n and newTime!=visitedTimes[neigh][0])
+                    return newTime;
+
+                if(sz == 0 || (sz == 1 and visitedTimes[neigh][0]!=newTime)){   
                     pq.push({newTime,neigh});
                     visitedTimes[neigh].push_back(newTime);
                 }
