@@ -18,11 +18,11 @@ public:
     }
 
     int numTeams(vector<int>& rating) {
-        int n=pow(10,5);
+        int n=1e5 + 1;
         vector<int> ST_1(4*n);
         vector<int> ST_2(4*n);
         vector<int> A(rating.begin(),rating.end());
-        sort(A.begin(),A.end());
+        //sort(A.begin(),A.end());
         for(int i=0;i<rating.size();i++){
             update(ST_2,1,0,n-1,rating[i]);
         }
