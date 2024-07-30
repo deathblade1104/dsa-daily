@@ -1,41 +1,45 @@
 class Solution {
 public:
-    int f(int i, string &s, bool a, vector<vector<int>>& dp) {
-        // Base case: If index is out of bounds, no deletions are needed
-        if (i < 0) {
+    int f(int i, string &s, bool bSeen, vector<vector<int>>& dp) {
+        // Base case: If we reach the end of the string, no further deletions are needed
+        if (i == s.size()) {
             return 0;
         }
         // If already computed, return the stored result
-        if (dp[i][a] != -1) {
-            return dp[i][a];
+        if (dp[i][bSeen] != -1) {
+            return dp[i][bSeen];
         }
-        // Initialize the deletion counts
+
         int take = 1e9, notTake = 1e9;
-        
-        // If the current character is 'b'
-        if (s[i] == 'b') {
-            // If no 'a' has been encountered, no deletion needed for 'b'
-            if (!a) {
-                take = f(i - 1, s, a, dp);  // Keep the 'b'
+
+        // If the current character is 'a'
+        if (s[i] == 'a') {
+            if (bSeen) {
+                // We have already seen a 'b', so we must delete this 'a'
+                notTake = 1 + f(i + 1, s, bSeen, dp);
             } else {
-                // Otherwise, delete the current 'b'
-                notTake = 1 + f(i - 1, s, a, dp);  // Delete the 'b'
+                // We have not seen a 'b', so we can keep this 'a'
+                take = f(i + 1, s, bSeen, dp);
             }
         } else {
-            // If the current character is 'a'
-            // Keep the 'a' and set 'a' to true
-            take = f(i - 1, s, true, dp);  // Keep the 'a' and mark 'a' as found
-            // Or delete the 'a'
-            notTake = 1 + f(i - 1, s, a, dp);  // Delete the 'a'
+            // If the current character is 'b'
+            if (bSeen) {
+                // We have already seen a 'b', so we can keep this 'b'
+                take = f(i + 1, s, bSeen, dp);
+            } else {
+                // We have not seen a 'b', so we can either keep this 'b' or delete it
+                take = f(i + 1, s, true, dp);  // Mark b as seen
+                notTake = 1 + f(i + 1, s, bSeen, dp);  // Delete the 'b'
+            }
         }
 
         // Store the result in dp array and return the minimum deletions
-        return dp[i][a] = min(take, notTake);
+        return dp[i][bSeen] = min(take, notTake);
     }
 
     int minimumDeletions(string s) {
         int n = s.size();
         vector<vector<int>> dp(n, vector<int>(2, -1));  // Initialize 2D dp array with -1
-        return f(n - 1, s, false, dp);  // Start the recursive function from the last character with 'a' being false initially
+        return f(0, s, false, dp);  // Start the recursive function from the first character with bSeen as false initially
     }
 };
