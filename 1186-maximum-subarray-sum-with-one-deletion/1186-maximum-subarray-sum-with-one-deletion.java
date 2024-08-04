@@ -32,7 +32,7 @@ class Solution {
             Arrays.fill(dp[i], -1);
         
         int maxSum = Integer.MIN_VALUE;
-        for (int i = 0; i < n; i++) {
+        for (int i = n-1; i>=0; i--) {
             maxSum = Math.max(maxSum, helper(i, 0, arr));
         }
         
