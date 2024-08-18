@@ -3,9 +3,7 @@
 using namespace std;
 
 class Solution {
-private:
-    static const int maxSz = 1e5 + 1;
-    long long dp[maxSz][2];
+private:   
     int n;
     
 //     long long helper(int curr, int currArr, vector<vector<int>>& arr) {
@@ -31,18 +29,20 @@ public:
         // vector<vector<int>> arr = {arr1, arr2};
         // return max(helper(0, 0, arr), helper(0, 1, arr));
         
-        memset(dp, 0, sizeof(dp)); 
-        
+        vector<long long> prev(2, 0), curr(2, 0);
+
         // Fill the DP table from the end towards the start
         for (int i = n - 1; i >= 0; i--) {
-            // If we choose arr1 at index i
-            dp[i][0] = max(arr1[i] + dp[i + 1][0], dp[i + 1][1]);
+            // Calculate current dp values
+            curr[0] = max(arr1[i] + prev[0], prev[1]);
+            curr[1] = max(arr2[i] + prev[1], prev[0]);
 
-            // If we choose arr2 at index i
-            dp[i][1] = max(arr2[i] + dp[i + 1][1], dp[i + 1][0]);
+            // Move current values to previous for the next iteration
+            prev = curr;
         }
-        
+
         // The answer is the maximum of starting with either arr1 or arr2 at index 0
-        return max(dp[0][0], dp[0][1]);
+        return max(curr[0], curr[1]);
+        
     }
 };
