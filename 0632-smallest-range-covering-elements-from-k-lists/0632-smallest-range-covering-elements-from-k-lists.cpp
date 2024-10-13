@@ -19,15 +19,12 @@ public:
         long long minRange = LLONG_MAX;
         
         // Process the heap
-        while (pq.size() == n) { // Ensure we have at least one element from each vector
-            auto p = pq.top();
+        while (pq.size() == n) {
+            
+            auto [currentMin, indexInVector, vectorIndex, vectorSize] = pq.top(); 
             pq.pop();
             
-            int currentMin = p[0];
-            int indexInVector = p[1];
-            int vectorIndex = p[2];
-            int vectorSize = p[3];
-            // Calculate the current range
+            
             if (maxi - currentMin < minRange) {
                 minRange = maxi - currentMin;
                 ans = {currentMin, maxi};
