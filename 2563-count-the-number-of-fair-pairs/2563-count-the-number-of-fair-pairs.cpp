@@ -5,28 +5,17 @@ private:
     long long helper(vector<int>&nums,int val){
         
         long long ans = 0LL;
-        for(int i=0;i<n-1;i++){
-        
-            int low = i+1,high = n-1,res = -1;
-            
-            while(low<=high){
-                int mid = low + ((high - low)/2), currSum = nums[i] + nums[mid];
-                
-                if(currSum > val)
-                    high = mid-1;
-                
-                else {
-                    low = mid+1;
-                    res = mid;
-                }
+        int left = 0, right = nums.size() - 1;
+
+        while (left < right) {
+            if (nums[left] + nums[right] > val) {
+                // If the sum exceeds the value, move the right pointer to decrease the sum
+                right--;
+            } else {
+                // All pairs (left, left+1), (left, left+2), ..., (left, right) are valid
+                ans += 1LL*(right - left);
+                left++;
             }
-            
-            
-            if(res == -1)
-                continue;
-            
-            
-            ans+=1LL*(res - i);
         }
         
         
