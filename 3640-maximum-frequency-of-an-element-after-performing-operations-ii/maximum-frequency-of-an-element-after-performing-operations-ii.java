@@ -1,30 +1,38 @@
 class Solution {
     public int maxFrequency(int[] nums, int k, int numOps) {
-        
-        Map<Integer, Integer> freq = new HashMap<>();
+        Arrays.sort(nums);
+        int ans = 0, i=0, n = nums.length, left = 0, right = 0;
 
-        for (int x : nums)
-            freq.put(x, freq.getOrDefault(x, 0) + 1);
+        while(i<n){
+            int curr = nums[i],same = 0;
 
-        Map<Integer, Integer> diff = new HashMap<>();
-        for (int x : freq.keySet()) {
-            int c = freq.get(x);
-            diff.put(x - k, diff.getOrDefault(x - k, 0) + c);
-            diff.put(x + k + 1, diff.getOrDefault(x + k + 1, 0) - c);
+            while(i<n && nums[i] == curr){
+                same++;
+                i++;
+            }
+
+            while(right<n && nums[right]<= curr +k){
+                right++;
+            }
+
+            while(left<n && nums[left] < curr - k){
+                left++;
+            }
+
+            ans = Math.max(ans,Math.min(same + numOps, right - left));
         }
-        
-        TreeSet<Integer> keys = new TreeSet<>();
-        keys.addAll(diff.keySet());
-        keys.addAll(freq.keySet());
 
-        int ans = 0;
-        long total = 0; 
+        left = 0;
+        right = 0;
 
-        for (int x : keys) {
-            total += diff.getOrDefault(x, 0); 
-            int already = freq.getOrDefault(x, 0); 
-            int canChange = (int) Math.min(numOps, total - already);
-            ans = Math.max(ans, already + canChange);
+        while(right<n){
+
+            while(right<n && (long)nums[left] + 1L * 2 * k >= nums[right]){
+                right++;
+            }
+
+            ans = Math.max(ans, Math.min(right - left, numOps));
+            left++;
         }
 
         return ans;
