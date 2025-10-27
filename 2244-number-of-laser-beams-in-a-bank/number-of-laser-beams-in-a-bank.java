@@ -7,10 +7,12 @@ class Solution {
             for(char ch : s.toCharArray()){
                 curr+= ch == '1'? 1 : 0;
             }
+
+            if(curr == 0)
+                continue;
             // System.out.println(s + " " + curr);
             ans+=(prev*curr);
-            if(curr!=0)
-                prev = curr;
+            prev = curr;
         }
 
         return ans;
