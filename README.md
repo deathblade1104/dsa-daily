@@ -1,2 +1,2 @@
-# DSA_Practice
+# DSA_Daily_Practice
 Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub](https://github.com/QasimWani/LeetHub)
