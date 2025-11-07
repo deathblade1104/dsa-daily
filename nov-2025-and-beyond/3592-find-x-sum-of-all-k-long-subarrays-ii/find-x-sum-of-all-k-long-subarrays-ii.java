@@ -19,6 +19,7 @@ class Solution {
 
     HashMap<Integer, Integer> freq;
     HashMap<Integer, Pair> mp;
+    private static final PairCmp cmp = new PairCmp();
     TreeSet<Pair> top, rest;
     long sumTop;
     int x;
@@ -37,28 +38,28 @@ class Solution {
         }
         
     
-        PairCmp cmp = new PairCmp();
+        
         while (!rest.isEmpty() && !top.isEmpty()) {
             Pair minTop = top.first();
             Pair maxRest = rest.last();
             
-            if (cmp.compare(minTop, maxRest) < 0) {
-                top.pollFirst();
-                sumTop -= 1L * minTop.freq * minTop.val;
-                rest.pollLast();
-                
-                top.add(maxRest);
-                sumTop += 1L * maxRest.freq * maxRest.val;
-                rest.add(minTop);
-            } else {
+            if (cmp.compare(minTop, maxRest)>=0) {
                 break;
-            }
+            } 
+
+            top.pollFirst();
+            sumTop -= 1L * minTop.freq * minTop.val;
+            rest.pollLast();
+    
+            top.add(maxRest);
+            sumTop += 1L * maxRest.freq * maxRest.val;
+            rest.add(minTop);
         }
     }
 
     private void update(int val, int newFreq) {
         Pair old = mp.get(val);
-        
+
         if (old != null) {
             if (top.remove(old)) {
                 sumTop -= 1L * old.freq * old.val;
