@@ -29,30 +29,23 @@ class Solution {
         sizes[idx]--;
     }
 
-    // ---------- boundary moves ---------
-    private void moveFirstToSecond() {
-        int x = maps[0].lastKey();
-        remove(0, x);
-        add(1, x);
-    }
-
-    private void moveSecondToFirst() {
-        int x = maps[1].firstKey();
-        remove(1, x);
-        add(0, x);
-    }
-
-    // ---------- rebalance by size only ----------
+    // ---------- rebalance by size as well as by order ----------
     private void rebalance() {
        // Fix size first
         while (sizes[0] > allowedSizes[0]) {
-            moveFirstToSecond();
+            int x = maps[0].lastKey();
+            remove(0, x);
+            add(1, x);
         }
         while (sizes[0] < allowedSizes[0] && sizes[1] > 0) {
-            moveSecondToFirst();
+            int x = maps[1].firstKey();
+            remove(1, x);
+            add(0, x);
         }
 
         // Fix ordering if violated
+        // Three partition has stronger boundaries. 
+        // but in 2 part boundaries are weaker. 
         while (sizes[0] > 0 && sizes[1] > 0 && maps[0].lastKey() > maps[1].firstKey()) {
             int a = maps[0].lastKey();
             int b = maps[1].firstKey();
@@ -63,7 +56,7 @@ class Solution {
         }
     }
 
-    // ---------- delete oldest ----------
+    // ---------- delete from the window ----------
     private void deleteElement(int x) {
         for (int i = 0; i < 2; i++) {
             if (maps[i].containsKey(x)) {
@@ -74,6 +67,7 @@ class Solution {
     }
 
     private void addElement(int ele){
+        // if ele is smaller than largets ele in first window insert here
         if(sizes[0] == 0|| ele <= maps[0].lastKey()){
             add(0,ele);
             return;
@@ -104,19 +98,16 @@ class Solution {
         }
 
         rebalance();
-        ans.add(getMedian());
+        int n = nums.length;
+        double[] res = new double[n-k+1];
+        res[0] = getMedian();
 
-        for(int i=k;i<nums.length;i++){
+        for(int i=k;i<n;i++){
             deleteElement(nums[i-k]);
             addElement(nums[i]);
             rebalance();
-            ans.add(getMedian());
+            res[i-k+1] = getMedian();
         }
-
-        double[] res = new double[ans.size()];
-
-        for(int i=0;i<ans.size();i++)
-            res[i] = ans.get(i);
 
         return res;
         
